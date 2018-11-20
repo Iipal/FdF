@@ -18,6 +18,15 @@
 # include <fcntl.h>
 # include <mlx.h>
 
+# define WIN_X	1920
+# define WIN_Y	1080
+
+# define _MSG(msg) ft_putendl(msg)
+# define _NOTIS_MSG(msg, ex) if (!(ex)) { _MSG(msg); return (false); }
+# define _NOTIS_V(ex) if (!(ex)) return
+# define _NOTIS_F(ex) if (!(ex)) return (false)
+# define _NOTIS_N(ex) if (!(ex)) return (NULL)
+
 enum	e_bool
 {
 	false = 0,
@@ -28,36 +37,13 @@ enum	e_bool
 
 _BOOL;
 
-# define WIN_X	1920
-# define WIN_Y	1080
 
-# define _MSG(msg) ft_putendl(msg)
-# define _NOTIS_MSG(ex, msg) if (!(ex)) { _MSG(msg); return (false); }
-# define _NOTIS_V(ex)	if (!(ex))	return
-# define _NOTIS_F(ex) 	if (!(ex))	return (false)
-# define _NOTIS_N(ex)	if (!(ex))	return (NULL)
-
-typedef struct	s_pos
+typedef struct	s_file
 {
-	size_t	y;
-	size_t	x;
-	size_t	z;
-}				t_pos;
+	string	*tab;
+	size_t	lines;
+}				t_file;
 
-typedef struct	s_map
-{
-	size_t			y;
-	size_t			x;
-	size_t			z;
-	struct s_map	*ny;
-	struct s_map	*nx;
-}				t_map;
-
-t_map			*readnvalid_map(string map_name);
-t_map			*dllist_new_empty(void);
-
-bool			init_mlx(t_map *map, string map_name);
-
-void			dllist_show_all(t_map *map);
+t_file			*readnvalid(cstring file_name);
 
 #endif

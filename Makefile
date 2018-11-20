@@ -14,9 +14,9 @@ NAME = fdf
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-MLXFLAGS = -L /usr/locale/lib -lmlx -framework OpenGL -framework AppKit
+MLXFLAGS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-SRC = srcs/main.c srcs/readnvalid.c srcs/init_mlx.c srcs/dllist.c
+SRC = srcs/main.c srcs/readnvalid.c 
 
 OBJ = $(SRC:.c=.o)
 
@@ -37,26 +37,23 @@ DEL = rm -rf
 all: $(NAME)
 
 $(OBJ): %.o: %.c
-	@echo "$LFDF:$(GREEN)\tCompiling file:$(YELLOW)" $< "$(WHITE)to$(PURPLE)" $@ "$(WHITE)"
+	@echo -n '+'
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LIBFT):
-	@echo "\t\t$LFDF$(WHITE)"
 	@$(LMAKE)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@echo "$LFDF:$(GREEN)\tCompiling FDF executable...$(WHITE)"
 	@$(CC) $(MLXFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
-	@echo "$LFDF:$(LGREEN)\tCompiled & fdf ready for use.$(WHITE)"
+	@echo "> $(GREEN)FdF$(WHITE)"
 
 clean:
 	@$(DEL) $(OBJ)
-	@echo "$LFDF:$(ORANGE)\tRemoved: *.o files...$(WHITE)"
 	@$(LMAKE) clean
 
 fclean: clean
 	@$(DEL) $(NAME)
-	@echo "$LFDF:$(RED)\tRemoved: fdf...$(WHITE)"
+	@echo "./fdf $(RED)deleted.$(WHITE)"
 	@$(LMAKE) fclean
 
 re: fclean all

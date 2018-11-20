@@ -12,14 +12,17 @@
 
 #include "../includes/fdf.h"
 
-int		main(int argc, string *argv)
+int		main(int argc, cstring argv[])
 {
-	t_map	*map;
+	t_file	*file;
 
 	argc--;
 	argv++;
-	_NOTIS_MSG(argc, "usage: ./fdf <map_name>");
-	_NOTIS_MSG(argc < 2, "usage: ./fdf <map_name>");
-	_NOTIS_MSG(map = readnvalid_map(*argv), "failure map reading.");
-	_NOTIS_MSG(init_mlx(map, *argv), "failure mlx init.");
+	file = NULL;
+	_NOTIS_MSG("Usage: ./fdf <map_name>", argc);
+	_NOTIS_MSG("Usage: ./fdf <map_name>", argc < 2);
+	_NOTIS_MSG("Error: invalid file or data in it.", (file = readnvalid(*argv)));
+	size_t	i = -1;
+	while (++i < file->lines)
+		printf("%s\n", file->tab[i]);
 }
