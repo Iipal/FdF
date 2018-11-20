@@ -19,12 +19,8 @@ CFLAGS = -Wall -Wextra -Werror -Ofast
 
 WHITE=\033[0m
 GREEN=\033[32m
-LGREEN=\033[92m
 RED=\033[31m
-ORANGE=\033[33m
-YELLOW=\033[93m
-PURPLE=\033[34m
-L=\033[36m
+
 
 DEL = rm -rf
 
