@@ -22,6 +22,6 @@
 
 # define BUFF_SIZE	42
 
-int		ft_gnl(const int fd, char **line);
+int	ft_gnl(const int fd, char **line);
 
 #endif

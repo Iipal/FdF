@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 11:57:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/11/13 11:57:09 by tmaluh           ###   ########.fr       */
+/*   Created: 2018/11/21 16:46:01 by tmaluh            #+#    #+#             */
+/*   Updated: 2018/11/21 16:46:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "../../includes/lft_str.h"
 
-# include "../libft/includes/libft.h"
-# include "defines.h"
-# include <stdio.h>
-# include <fcntl.h>
-# include <mlx.h>
-
-typedef struct	s_matrix
+int			ft_atoi_base(cstring str, int base)
 {
-	size_t	z;
-	size_t	rgb;
-}				t_matrix;
-
-typedef struct	s_file
-{
-	cstring	*tab;
-	size_t	lines;
-}				t_file;
-
-t_file			*f_read(cstring file_name);
-t_matrix		**f_savenvalid(t_file *file);
-
-#endif
+	
+}

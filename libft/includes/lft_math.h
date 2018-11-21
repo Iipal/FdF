@@ -13,7 +13,7 @@
 #ifndef LFT_MATH_H
 # define LFT_MATH_H
 
-int		ft_pow(int nb, int exp);
-int		ft_sqrt(int nb);
+int	ft_pow(int nb, int exp);
+int	ft_sqrt(int nb);
 
 #endif

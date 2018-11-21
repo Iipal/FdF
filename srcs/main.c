@@ -14,15 +14,13 @@
 
 int		main(int argc, cstring argv[])
 {
-	t_file	*file;
+	t_file		*file;
+	t_matrix	**matrix;
 
-	argc--;
-	argv++;
+	--argc;
+	++argv;
 	file = NULL;
-	_NOTIS_MSG("Usage: ./fdf <map_name>", argc);
-	_NOTIS_MSG("Usage: ./fdf <map_name>", argc < 2);
-	_NOTIS_MSG("Error: invalid file or data in it.", (file = readnvalid(*argv)));
-	size_t	i = -1;
-	while (++i < file->lines)
-		printf("%s\n", file->tab[i]);
+	_NOTIS_MSG("Usage: ./fdf <map_name>", !(!argc || argc > 1));
+	_NOTIS_MPE("Invalid file", (file = f_read(*argv)));
+	_NOTIS_MSG("Invalid map", (matrix = f_savenvalid(file)));
 }

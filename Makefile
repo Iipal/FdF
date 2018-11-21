@@ -47,9 +47,9 @@ clean:
 	@$(LMAKE) clean
 
 fclean: clean
-	@$(DEL) $(NAME)
-	@echo "./fdf $(RED)deleted.$(WHITE)"
 	@$(LMAKE) fclean
+	@$(DEL) $(NAME)
+	@echo "$(RED)deleted$(WHITE): ./fdf"
 
 re: fclean all
 
