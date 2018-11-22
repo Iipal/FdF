@@ -26,7 +26,7 @@ t_file			*f_read(cstring file_name)
 	while ((ft_gnl(fd, &temp) > ZERO) && ++(out->lines))
 		ft_strdel(&temp);
 	close(fd);
-	_NOTIS_N(out->tab = (cstring*)malloc(sizeof(cstring) * out->lines));
+	_NOTIS_N(out->tab = (string*)malloc(sizeof(string) * out->lines));
 	out->tab[out->lines] = NULL;
 	_NOTIS_N((fd = open(file_name, O_RDONLY)) > ZERO);
 	i = NEG;

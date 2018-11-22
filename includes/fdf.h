@@ -34,7 +34,7 @@ typedef struct	s_file
 size_t	g_matrix_y;
 size_t	g_matrix_x;
 
-void			free_file(t_file *file);
+void			free_file(t_file **file);
 void			free_matrix(t_matrix **matrix);
 
 t_file			*f_read(cstring file_name);

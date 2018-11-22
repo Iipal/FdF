@@ -12,15 +12,15 @@
 
 #include "../includes/fdf.h"
 
-void	free_file(t_file *file)
+void	free_file(t_file **file)
 {
 	size_t	i;
 
-	i = -1;
-	while (++i < (file->lines))
-		ft_strdel(&(file->tab[i]));
-	free(file->tab);
-	free(file);
+	i = ZERO;
+	while (i < ((*file)->lines))
+		ft_strdel(&((*file)->tab[i++]));
+	free((*file)->tab);
+	free(*file);
 	file = NULL;
 }
 
