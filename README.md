@@ -26,11 +26,13 @@ Something about maps for that project:
 ### In code:
 
 In code i have some function prefixes for better understanding:
+
 	1. `pj_*`: This is **important** functions for program work.
 	2. `add_*`: This is __additional__ functions for `pj_`.
 	3. `ft_*`: This is functions from libft.
 
 About structures:
+
 	1. `s_file`: Storage file data & how much lines in it.
 		- `tab`: Two dimension characters array with data from file.
 		- `lines`: Lines counter in file.
@@ -40,6 +42,7 @@ About structures:
 		- In code i use this struct like a two dimensional array.
 
 About `typedef`'s and `define`'s:
+
 	1. `string`: `char *`.
 	2. `cstring`: `const char *`.
 	3. `ustring`: `unsigned char *`.
