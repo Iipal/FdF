@@ -9,7 +9,7 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 - *make*: Compile all.
 - *make clean*: Delete temporal files.
 - *make fclean*: Delete executable FdF file & libft library.
-- *make re*: It's just *make fclean* and *make*.
+- *make re*: It's just rules - *make fclean* & *make*.
 
 ## Usage:
 
@@ -17,7 +17,9 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 ./fdf test_maps/<map_name>
 ```
 
-## Tips & note
+
+
+## Tips & notes
 
 ### Maps file:
 
@@ -30,14 +32,12 @@ Something about maps for that project:
 
 ### In code:
 
-In code i have some function prefixes for better understanding:
-
+#### In code i have some function prefixes for better understanding:
 - `pj_*`: This is **important** functions for program work.
 - `add_*`: This is *additional* functions for `pj_*`.
 - `ft_*`: This is functions from libft.
 
-About structures:
-
+#### About structures:
 1. `s_file`: Storage file data & how much lines in it.
 	- `tab`: Two dimension characters array with data from file.
 	- `lines`: Lines counter in file.
@@ -46,14 +46,14 @@ About structures:
 	- `rgb`: Value converted from `HEX` to `RGB Int` color of current position
 	- *In code i use this struct like a two dimensional array*.
 
-About `typedef`'s and `define`'s:	
+#### About `typedef`'s and `define`'s:	
 1. `typedef`:
 	- `typedef`'s used in `define` macros to get around the school42 norme. (Example: `_BOOL;` macros)
 	- **string**: `char *`.
 	- **cstring**: `const char *`.
 	- **ustring**: `unsigned char *`.
 	- **bool**: `enum e_bool` with only 2 value's(`true` and `false`).
-	- **pvoid**: `void *`
+	- **pvoid**: `void *`.
 2. `define`:
 	- Constant's:
 		- **WIN_X**: Width our window.
@@ -71,15 +71,17 @@ About `typedef`'s and `define`'s:
 		- **\_NOTIS_F**: (`ex`) If `ex` isn't true - just `return (false);`. Used in `bool` or `int` function's.
 		- **\_NOTIS_N**: (`ex`) If `ex` isn't true - just `return (NULL);`. Used in function's where we must return pointer to something.
 
-Global variable:
+#### Global variable's:
 
-1. `g_matrix_y`: Height our `s_matrix` two dimensional array.
-2. `g_matrix_x`: Width our `s_matrix` two dimensional array.
+1. *g_matrix_y*: Height our `s_matrix` two dimensional array.
+2. *g_matrix_x*: Width our `s_matrix` two dimensional array.
 
 ## Program usage:
 
-In this part i'll tell how you can interact with program.
+#### In this part i'll tell how you can interact with program.
 ###### dont done yet...
+
+
 
 ## Code progress & structuring program:
 
@@ -88,3 +90,4 @@ In this part i'll tell how you can interact with program.
  - [ ] Add isometric camera view.
  - [ ] Add some colored effects like a `ft_raindow()` & etc.
  - [ ] Add bonus part from subject.
+ 
