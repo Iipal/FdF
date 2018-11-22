@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-t_file			*f_read(cstring file_name)
+t_file			*pj_read(cstring file_name)
 {
 	t_file	*out;
 	string	temp;
@@ -28,6 +28,7 @@ t_file			*f_read(cstring file_name)
 	close(fd);
 	_NOTIS_N(out->tab = (string*)malloc(sizeof(string) * out->lines));
 	out->tab[out->lines] = NULL;
+	// printf("%p\n", out->tab[out->lines - 1]);
 	_NOTIS_N((fd = open(file_name, O_RDONLY)) > ZERO);
 	i = NEG;
 	while ((ft_gnl(fd, &temp) > ZERO) && (out->tab[++i] = ft_strdup(temp)))
@@ -36,7 +37,7 @@ t_file			*f_read(cstring file_name)
 	return (out);
 }
 
-static size_t	numbers_counter(cstring line)
+static size_t	pj_numbers_counter(cstring line)
 {
 	size_t	n;
 	size_t	i;
@@ -55,7 +56,7 @@ static size_t	numbers_counter(cstring line)
 	return (!n ? n : n + 1);
 }
 
-static t_matrix	*save_line(cstring line, const size_t numbers)
+static t_matrix	*pj_save_line(cstring line, const size_t numbers)
 {
 	t_matrix	*out;
 	bool		is;
@@ -84,20 +85,20 @@ static t_matrix	*save_line(cstring line, const size_t numbers)
 	return (out);
 }
 
-t_matrix		**f_savenvalid(t_file *file)
+t_matrix		**pj_savenvalid(t_file *file)
 {
 	t_matrix	**out;
 	size_t		i;
 	size_t		numbers;
 
 	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*) * file->lines));
-	_NOTIS_N(numbers = numbers_counter(file->tab[ZERO]));
+	_NOTIS_N(numbers = pj_numbers_counter(file->tab[ZERO]));
 	out[file->lines] = NULL;
 	i = NEG;
 	while (++i < file->lines)
 	{
-		_NOTIS_N(numbers_counter(file->tab[i]) == numbers);
-		_NOTIS_N(out[i] = save_line(file->tab[i], numbers));
+		_NOTIS_N(pj_numbers_counter(file->tab[i]) == numbers);
+		_NOTIS_N(out[i] = pj_save_line(file->tab[i], numbers));
 	}
 	g_matrix_y = file->lines;
 	g_matrix_x = numbers;

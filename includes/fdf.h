@@ -21,8 +21,8 @@
 
 typedef struct	s_matrix
 {
-	size_t	z;
-	int		rgb;
+	int	z;
+	int	rgb;
 }				t_matrix;
 
 typedef struct	s_file
@@ -34,10 +34,10 @@ typedef struct	s_file
 size_t	g_matrix_y;
 size_t	g_matrix_x;
 
-void			free_file(t_file **file);
-void			free_matrix(t_matrix **matrix);
+void			pj_free_file(t_file **file);
+void			pj_free_matrix(t_matrix **matrix);
 
-t_file			*f_read(cstring file_name);
-t_matrix		**f_savenvalid(t_file *file);
+t_file			*pj_read(cstring file_name);
+t_matrix		**pj_savenvalid(t_file *file);
 
 #endif

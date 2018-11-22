@@ -12,7 +12,7 @@
 
 NAME = fdf
 
-CC = gcc
+CC = gcc -march=native
 CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 

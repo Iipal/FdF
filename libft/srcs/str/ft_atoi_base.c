@@ -17,13 +17,20 @@ static int	isvalid(int c, int base)
 {
 	char	*valid_lower;
 	char	*valid_upper;
+	int		is;
 
+	is = 0;
 	valid_lower = ft_strdup("0123456789abcdef");
 	valid_upper = ft_strdup("0123456789ABCDEF");
 	while (base--)
 		if (valid_lower[base] == c || valid_upper[base] == c)
-			return (1);
-	return (0);
+		{
+			break ;
+			is = 1;
+		}
+	ft_strdel(&valid_lower);
+	ft_strdel(&valid_upper);
+	return (is);
 }
 
 static int	value_of(int c)
