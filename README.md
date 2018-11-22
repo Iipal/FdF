@@ -18,6 +18,7 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 ### Maps file:
 
 Something about maps for that project:
+
 	1. Numbers in one line means our X-position's on map.
 	2. Lines in file means our Y-position's on map.
 	3. Each numbers on map means our Z-position's on map.
@@ -42,7 +43,7 @@ About structures:
 		- In code i use this struct like a two dimensional array.
 
 About `typedef`'s and `define`'s:
-
+	
 	1. `string`: `char *`.
 	2. `cstring`: `const char *`.
 	3. `ustring`: `unsigned char *`.
