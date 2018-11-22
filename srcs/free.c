@@ -28,9 +28,9 @@ void	pj_free_matrix(t_matrix **matrix)
 {
 	size_t	i;
 
-	i = -1;
-	while (++i < g_matrix_y)
-		free(matrix[i]);
+	i = ZERO;
+	while (i < g_matrix_y)
+		free(matrix[i++]);
 	free(matrix);
 	matrix = NULL;
 }

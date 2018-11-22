@@ -37,7 +37,7 @@ t_file			*pj_read(cstring file_name)
 	return (out);
 }
 
-static size_t	pj_numbers_counter(cstring line)
+static size_t	add_numbers_counter(cstring line)
 {
 	size_t	n;
 	size_t	i;
@@ -56,7 +56,7 @@ static size_t	pj_numbers_counter(cstring line)
 	return (!n ? n : n + 1);
 }
 
-static t_matrix	*pj_save_line(cstring line, const size_t numbers)
+static t_matrix	*add_save_line(cstring line, const size_t numbers)
 {
 	t_matrix	*out;
 	bool		is;
@@ -92,13 +92,13 @@ t_matrix		**pj_savenvalid(t_file *file)
 	size_t		numbers;
 
 	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*) * file->lines));
-	_NOTIS_N(numbers = pj_numbers_counter(file->tab[ZERO]));
+	_NOTIS_N(numbers = add_numbers_counter(file->tab[ZERO]));
 	out[file->lines] = NULL;
 	i = NEG;
 	while (++i < file->lines)
 	{
 		_NOTIS_N(pj_numbers_counter(file->tab[i]) == numbers);
-		_NOTIS_N(out[i] = pj_save_line(file->tab[i], numbers));
+		_NOTIS_N(out[i] = add_save_line(file->tab[i], numbers));
 	}
 	g_matrix_y = file->lines;
 	g_matrix_x = numbers;
