@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-t_file		*f_read(cstring file_name)
+t_file			*f_read(cstring file_name)
 {
 	t_file	*out;
 	string	temp;
@@ -36,7 +36,7 @@ t_file		*f_read(cstring file_name)
 	return (out);
 }
 
-static size_t	number_counter(cstring line)
+static size_t	numbers_counter(cstring line)
 {
 	size_t	n;
 	size_t	i;
@@ -52,28 +52,54 @@ static size_t	number_counter(cstring line)
 			++n;
 		(!ft_isdigit(line[i]) && is) ? is = false : is;
 	}
-	return (n);
+	return (!n ? n : n + 1);
 }
 
-t_matrix	**f_savenvalid(t_file *file)
+static t_matrix	*save_line(cstring line, const size_t numbers)
+{
+	t_matrix	*out;
+	bool		is;
+	size_t		start;
+	size_t		x;
+	int			i;
+
+	x = ZERO;
+	i = NEG;
+	start = ZERO;
+	_NOTIS_N(out = (t_matrix*)malloc(sizeof(t_matrix) * numbers));
+	while ((++i >= 0) && x < numbers)
+		if (ft_isdigit(line[i]) && (!is ? is = true : !is))
+			start = i;
+		else if (!ft_isdigit(line[i]) && is)
+		{
+			is = false;
+			out[x].rgb = IRGB_WHITE;
+			if (line[i] == ',')
+			{
+				out[x].rgb = ft_atoi_base(line + (i + 3), HEX);
+				i += 9;
+			}
+			out[x++].z = ft_atoi(line + start);
+		}
+	return (out);
+}
+
+t_matrix		**f_savenvalid(t_file *file)
 {
 	t_matrix	**out;
 	size_t		i;
-	size_t		n;
+	size_t		numbers;
 
 	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*) * file->lines));
-	i = NEG;
-	_NOTIS_N(n = number_counter(file->tab[++i]));
+	_NOTIS_N(numbers = numbers_counter(file->tab[ZERO]));
 	out[file->lines] = NULL;
-	while (++i < file->lines)
-		if (number_counter(file->tab[i]) != n)
-			return (NULL);
-	while (++i < file->lines)
-		_NOTIS_N(out[i] = (t_matrix*)malloc(sizeof(t_matrix) * n));
 	i = NEG;
 	while (++i < file->lines)
 	{
-		
+		_NOTIS_N(numbers_counter(file->tab[i]) == numbers);
+		_NOTIS_N(out[i] = save_line(file->tab[i], numbers));
 	}
+	g_matrix_y = file->lines;
+	g_matrix_x = numbers;
 	return (out);
 }

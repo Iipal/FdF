@@ -12,6 +12,23 @@
 
 #include "../includes/fdf.h"
 
+void	ft_show_matrix(t_matrix **m)
+{
+	size_t	i;
+	size_t	j;
+
+	i = NEG;
+	while (++i < g_matrix_y)
+	{
+		j = NEG;
+		while (++j < g_matrix_x)
+		{
+			printf("%lu ", m[i][j].z);
+		}
+		printf("\n");
+	}
+}
+
 int		main(int argc, cstring argv[])
 {
 	t_file		*file;
@@ -23,4 +40,5 @@ int		main(int argc, cstring argv[])
 	_NOTIS_MSG("Usage: ./fdf <map_name>", !(!argc || argc > 1));
 	_NOTIS_MPE("Invalid file", (file = f_read(*argv)));
 	_NOTIS_MSG("Invalid map", (matrix = f_savenvalid(file)));
+	ft_show_matrix(matrix);
 }
