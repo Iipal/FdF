@@ -22,7 +22,7 @@
 typedef struct	s_matrix
 {
 	size_t	z;
-	size_t	rgb;
+	int		rgb;
 }				t_matrix;
 
 typedef struct	s_file
@@ -30,6 +30,9 @@ typedef struct	s_file
 	cstring	*tab;
 	size_t	lines;
 }				t_file;
+
+size_t	g_matrix_y;
+size_t	g_matrix_x;
 
 t_file			*f_read(cstring file_name);
 t_matrix		**f_savenvalid(t_file *file);

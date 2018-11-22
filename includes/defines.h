@@ -15,8 +15,14 @@
 
 # define WIN_X	1920
 # define WIN_Y	960
+
+# define IRGB_WHITE 16777215
+
 # define ZERO 0
 # define NEG -1
+
+# define HEX 16
+# define DEC 10
 
 # define _MSG(msg) ft_putendl(msg)
 # define _NOTIS_MSG(msg, ex) if (!(ex)) { _MSG(msg); return (false); }
@@ -32,7 +38,7 @@ enum	e_bool
 };
 
 # define _BOOL typedef enum e_bool	bool
- 
- _BOOL;
+
+_BOOL;
 
 #endif
