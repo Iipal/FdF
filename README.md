@@ -29,7 +29,7 @@ Something about maps for that project:
 In code i have some function prefixes for better understanding:
 
 - `pj_*`: This is **important** functions for program work.
-- `add_*`: This is __additional__ functions for `pj_`.
+- `add_*`: This is __additional__ functions for `pj_*`.
 - `ft_*`: This is functions from libft.
 
 About structures:
@@ -43,20 +43,20 @@ About structures:
 	- In code i use this struct like a two dimensional array.
 
 About `typedef`'s and `define`'s:	
-1. `typedef`'s:
+1. `typedef`:
 	- `typedef`'s used in `define` macros to get around the school42 norme. (Example: `_BOOL;` macros)
 	- **string**: `char *`.
 	- **cstring**: `const char *`.
 	- **ustring**: `unsigned char *`.
 	- **bool**: `enum e_bool` with only 2 value's(`true` and `false`).
 	- **pvoid**: `void *`
-2. `define`'s:
+2. `define`:
 	- Constant's:
-		- `WIN_X`: Width our window.
-		- `WIN_Y`: Height our window.
-		- `ZERO`: Just 0.
-		- `NEG`; Just -1.
-		- `HEX`: Just 16. Used for `ft_atoi_base()`.
+		- *WIN_X*: Width our window.
+		- *WIN_Y*: Height our window.
+		- *ZERO*: Just 0.
+		- *NEG*; Just -1.
+		- *HEX*: Just 16. Used for `ft_atoi_base()`.
 		- `DEC`: Just 10. Used for `ft_atoi_base()`.
 		- `IRGB_WHITE`: RGB Int white color.
 	- Macrose's:
