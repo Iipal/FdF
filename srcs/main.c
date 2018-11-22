@@ -22,9 +22,7 @@ void	ft_show_matrix(t_matrix **m)
 	{
 		j = NEG;
 		while (++j < g_matrix_x)
-		{
 			printf("%lu ", m[i][j].z);
-		}
 		printf("\n");
 	}
 }

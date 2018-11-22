@@ -27,12 +27,15 @@ typedef struct	s_matrix
 
 typedef struct	s_file
 {
-	cstring	*tab;
+	string	*tab;
 	size_t	lines;
 }				t_file;
 
 size_t	g_matrix_y;
 size_t	g_matrix_x;
+
+void			free_file(t_file *file);
+void			free_matrix(t_matrix **matrix);
 
 t_file			*f_read(cstring file_name);
 t_matrix		**f_savenvalid(t_file *file);

@@ -16,7 +16,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-SRC = srcs/main.c srcs/readnvalid.c 
+SRC = srcs/main.c srcs/readnvalid.c srcs/free.c
 
 OBJ = $(SRC:.c=.o)
 
