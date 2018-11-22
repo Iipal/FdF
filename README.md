@@ -9,7 +9,7 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 - *make*: Compile all.
 - *make clean*: Delete temporal files.
 - *make fclean*: Delete executable FdF file & libft library.
-- *make re*: It's just rules - *make fclean* & *make*.
+- *make re*: It's rules - *make fclean* & *make*.
 
 ## Usage:
 
@@ -25,9 +25,9 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 
 #### Something about maps for that project:
 
-- Numbers in one line means our X-position's on map.
-- Lines in file means our Y-position's on map.
-- Each numbers on map means our Z-position's on map.
+- Numbers in one line means our X-positions on map.
+- Lines in file means our Y-positions on map.
+- Each numbers on map means our Z-positions on map.
 - `0xFFFFFF`: HEX color code for XYZ-position.
 
 ### In code:
@@ -47,14 +47,14 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 	- *In code i use this struct like a two dimensional array*.
 
 #### About `typedef`'s and `define`'s:	
-1. `typedef`: *(used in `define` macros to get around the school42 norme. (Example: `_BOOL;` macros))*
+1. `typedef`: *(used in `define` macroses to get around the school42 norme. (Example: `_BOOL;` macros))*
 	- **string**: `char *`.
 	- **cstring**: `const char *`.
 	- **ustring**: `unsigned char *`.
-	- **bool**: `enum e_bool` with only 2 value's(`true` and `false`).
+	- **bool**: `enum e_bool` with only 2 values(`true` and `false`).
 	- **pvoid**: `void *`.
 2. `define`:
-	- Constant's:
+	- Constants:
 		- **WIN_X**: Width our window.
 		- **WIN_Y**: Height our window.
 		- **ZERO**: Just 0.
@@ -62,13 +62,13 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 		- **HEX**: Just 16. Used for `ft_atoi_base()`.
 		- **DEC**: Just 10. Used for `ft_atoi_base()`.
 		- **IRGB_WHITE**: RGB Int white color.
-	- Macrose's:
+	- Macroses:
 		- **_MSG**: (`msg`) Used for put string with newline in standart output.
 		- **\_NOTIS_MSG**: (`msg`, `ex`) If `ex` isn't true - put `msg` to standart output by **_MSG**.
 		- **\_NOTIS_MPE**: (`msg`, `ex`) If `ex` isn't true - put `msg` to error output by `perror()`.
-		- **\_NOTIS_V**: (`ex`) If `ex` isn't true - just `return;`. Used in `void` function's.
-		- **\_NOTIS_F**: (`ex`) If `ex` isn't true - just `return (false);`. Used in `bool` or `int` function's.
-		- **\_NOTIS_N**: (`ex`) If `ex` isn't true - just `return (NULL);`. Used in function's where we must return pointer to something.
+		- **\_NOTIS_V**: (`ex`) If `ex` isn't true - just `return;`. Used in `void` functions.
+		- **\_NOTIS_F**: (`ex`) If `ex` isn't true - just `return (false);`. Used in `bool` or `int` functions.
+		- **\_NOTIS_N**: (`ex`) If `ex` isn't true - just `return (NULL);`. Used in functions where we must return pointer to something.
 
 #### Global variable's:
 
