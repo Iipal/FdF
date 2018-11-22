@@ -43,17 +43,34 @@ About structures:
 	- In code i use this struct like a two dimensional array.
 
 About `typedef`'s and `define`'s:	
-1. `string`: `char *`.
-2. `cstring`: `const char *`.
-3. `ustring`: `unsigned char *`.
-4. `bool`: `enum e_bool` with only 2 value's(`true` and `false`).
-5. `pvoid`: `void *`
-6. `WIN_X`: Width our window.
-7. `WIN_Y`: Height our window.
-8. `ZERO`: Just 0.
-9. `NEG`; Just -1.
-10. `HEX`: Just 16. Used for `ft_atoi_base`.
-11. `DEC`: Just 10. Used for `ft_atoi_base`.
+1. `typedef`'s:
+	- `typedef`'s used in `define` macros to get around the school42 norme. (Example: `_BOOL;` macros)
+	- **string**: `char *`.
+	- **cstring**: `const char *`.
+	- **ustring**: `unsigned char *`.
+	- **bool**: `enum e_bool` with only 2 value's(`true` and `false`).
+	- **pvoid**: `void *`
+2. `define`'s:
+	- Constant's:
+		- `WIN_X`: Width our window.
+		- `WIN_Y`: Height our window.
+		- `ZERO`: Just 0.
+		- `NEG`; Just -1.
+		- `HEX`: Just 16. Used for `ft_atoi_base()`.
+		- `DEC`: Just 10. Used for `ft_atoi_base()`.
+		- `IRGB_WHITE`: RGB Int white color.
+	- Macrose's:
+		- `_MSG`: 1 Argument(`msg`). Used for put string with newline in standart output.
+		- `_NOTIS_MSG`: 2 Arguments(`msg`, `ex`). If `ex` isn't true - put `msg` to standart output by `_MSG`.
+		- `_NOTIS_MPE`: 2 Arguments(`msg`, `ex`). If `ex` isn't true - put `msg` to error output by `perror()`.
+		- `_NOTIS_V`: 1 argumnet(`ex`). If `ex` isn't true - just `return;`. Used in `void` function's.
+		- `_NOTIS_F`: 1 argumnet(`ex`). If `ex` isn't true - just `return (false);`. Used in `bool` or `int` function's.
+		- `_NOTIS_N`: 1 argumnet(`ex`). If `ex` isn't true - just `return (NULL);`. Used in function's where we must return pointer to something.
+
+Global variable:
+
+1. **g_matrix_y**: Height our `s_matrix` two dimensional array.
+2. **g_matrix_x**: Width our `s_matrix` two dimensional array.
 
 ## Program usage:
 
@@ -65,5 +82,5 @@ In this part i'll tell how you can interact with program.
  - [x] File reading & validating data in it.
  - [ ] Drawing all points from map.
  - [ ] Add isometric camera view.
- - [ ] Add some colored effects like a `ft_raindow` & etc.
+ - [ ] Add some colored effects like a `ft_raindow()` & etc.
  - [ ] Add bonus part from subject.
