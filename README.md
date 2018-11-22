@@ -23,7 +23,7 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 
 ### Maps file:
 
-Something about maps for that project:
+#### Something about maps for that project:
 
 - Numbers in one line means our X-position's on map.
 - Lines in file means our Y-position's on map.
@@ -39,7 +39,7 @@ Something about maps for that project:
 
 #### About structures:
 1. `s_file`: Storage file data & how much lines in it.
-	- `tab`: Two dimension characters array with data from file.
+	- `tab`: Two dimension character array with data from file.
 	- `lines`: Lines counter in file.
 2. `s_matrix`: Simple structure with two `int`'s
 	- `z`: Value of Z-position
@@ -47,8 +47,7 @@ Something about maps for that project:
 	- *In code i use this struct like a two dimensional array*.
 
 #### About `typedef`'s and `define`'s:	
-1. `typedef`:
-	- `typedef`'s used in `define` macros to get around the school42 norme. (Example: `_BOOL;` macros)
+1. `typedef`: *(used in `define` macros to get around the school42 norme. (Example: `_BOOL;` macros))*
 	- **string**: `char *`.
 	- **cstring**: `const char *`.
 	- **ustring**: `unsigned char *`.
@@ -90,4 +89,3 @@ Something about maps for that project:
  - [ ] Add isometric camera view.
  - [ ] Add some colored effects like a `ft_raindow()` & etc.
  - [ ] Add bonus part from subject.
- 
