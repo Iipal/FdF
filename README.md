@@ -19,42 +19,41 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 
 Something about maps for that project:
 
-	- Numbers in one line means our X-position's on map.
-	- Lines in file means our Y-position's on map.
-	- Each numbers on map means our Z-position's on map.
-	- 0xFFFFFF: Means HEX color code for current position.
+- Numbers in one line means our X-position's on map.
+- Lines in file means our Y-position's on map.
+- Each numbers on map means our Z-position's on map.
+- `0xFFFFFF`: Means HEX color code for current position.
 
 ### In code:
 
 In code i have some function prefixes for better understanding:
 
-	- `pj_*`: This is **important** functions for program work.
-	- `add_*`: This is __additional__ functions for `pj_`.
-	- `ft_*`: This is functions from libft.
+- `pj_*`: This is **important** functions for program work.
+- `add_*`: This is __additional__ functions for `pj_`.
+- `ft_*`: This is functions from libft.
 
 About structures:
 
-	- `s_file`: Storage file data & how much lines in it.
-	  - `tab`: Two dimension characters array with data from file.
-	  - `lines`: Lines counter in file.
-	- `s_matrix`: Simple structure with two `int`'s
-	  - `z`: Value of Z-position
-	  - `rgb`: Value converted from `HEX` to `RGB Int` color of current position
-	  - In code i use this struct like a two dimensional array.
+1. `s_file`: Storage file data & how much lines in it.
+	- `tab`: Two dimension characters array with data from file.
+	- `lines`: Lines counter in file.
+2. `s_matrix`: Simple structure with two `int`'s
+	- `z`: Value of Z-position
+	- `rgb`: Value converted from `HEX` to `RGB Int` color of current position
+	- In code i use this struct like a two dimensional array.
 
-About `typedef`'s and `define`'s:
-	
-	1. `string`: `char *`.
-	2. `cstring`: `const char *`.
-	3. `ustring`: `unsigned char *`.
-	4. `bool`: `enum e_bool` with only 2 value's(`true` and `false`).
-	5. `pvoid`: `void *`
-	6. `WIN_X`: Width our window.
-	7. `WIN_Y`: Height our window.
-	8. `ZERO`: Just 0.
-	9. `NEG`; Just -1.
-	10. `HEX`: Just 16. Used for `ft_atoi_base`.
-	11. `DEC`: Just 10. Used for `ft_atoi_base`.
+About `typedef`'s and `define`'s:	
+1. `string`: `char *`.
+2. `cstring`: `const char *`.
+3. `ustring`: `unsigned char *`.
+4. `bool`: `enum e_bool` with only 2 value's(`true` and `false`).
+5. `pvoid`: `void *`
+6. `WIN_X`: Width our window.
+7. `WIN_Y`: Height our window.
+8. `ZERO`: Just 0.
+9. `NEG`; Just -1.
+10. `HEX`: Just 16. Used for `ft_atoi_base`.
+11. `DEC`: Just 10. Used for `ft_atoi_base`.
 
 ## Program usage:
 
