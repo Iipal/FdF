@@ -30,6 +30,7 @@
 # define _NOTIS_V(ex) if (!(ex)) return
 # define _NOTIS_F(ex) if (!(ex)) return (false)
 # define _NOTIS_N(ex) if (!(ex)) return (NULL)
+# define _SWAP(a, b) { (a) ^= (b); (b) ^= (a); (a) ^= (b); }
 
 enum	e_bool
 {
