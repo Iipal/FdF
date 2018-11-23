@@ -53,6 +53,8 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 	- **ustring**: `unsigned char *`.
 	- **bool**: `enum e_bool` with only 2 values(`true` and `false`).
 	- **pvoid**: `void *`.
+	- **t_matrix**: `s_matrix`.
+	- **t_file**: `s_file`.
 2. `define`:
 	- Constants:
 		- **WIN_Y**: Height our window.
@@ -67,26 +69,32 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 			- *Arguments*: `msg`.
 			- *Behavior*: Prints string with newline character in standard output.
 			- *Used*: Usually - used in `_NOTIS_MSG`.
+			- *Usage*: `_MSG("ERROR!!!");`
 		- **\_NOTIS_MSG()**:
 			- *Arguments*: `msg`, `ex`.
 			- *Behavior*: If `ex` isn't true - prints `msg` to standart output by **\_MSG**.
 			- *Used*: Usually - in main function for errors print.
+			- *Usage*: `_NOTIS_MSG(argc, "ERROR!!! argc is 0.");`
 		- **\_NOTIS_MPE()**:
 			- *Arguments*: `msg`, `ex`.
 			- *Behavior*: If `ex` isn't true - prints `msg` to error output by `perror()`.
 			- *Used*: Usually - in main function for errors print.
+			- *Usage*: `_NOTIS_MPE(argc > 1, "ERROR!!! argc is bigger than 1.");`
 		- **\_NOTIS_V()**:
 			- *Arguments*: `ex`.
 			- *Behavior*: If `ex` isn't true - just `return;`.
 			- *Used*: Usually - used in `void` functions.
+			- *Usage*: `_NOTIS_V(a > 1);`
 		- **\_NOTIS_F()**:
 			- *Arguments*: `ex`.
 			- *Behavior*: If `ex` isn't true - just `return (false);`.
 			- *Used*: Usually - used in `bool` or `int` functions.
+			- *Usage*: `_NOTIS_F(a > 1);`
 		- **\_NOTIS_N()**:
 			- *Arguments*: `ex`.
 			- *Behavior*: If `ex` isn't true - just `return (NULL);`.
 			- *Used*: Usually - used in functions where we must return pointer to something.
+			- *Usage*: `_NOTIS_N(a > 1);`
 
 #### Global variable's:
 
