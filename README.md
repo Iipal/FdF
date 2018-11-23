@@ -39,7 +39,7 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 
 #### About structures:
 1. `s_file`: Storage file data & how much lines in it.
-	- `tab`: Two dimension character array with data from file.
+	- `tab`: Two dimensional character array with data from file.
 	- `lines`: Lines counter in file.
 2. `s_matrix`: Simple structure with two `int`'s
 	- `z`: Value of Z-position
@@ -55,27 +55,27 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 	- **pvoid**: `void *`.
 2. `define`:
 	- Constants:
-		- **WIN_X**: Width our window.
 		- **WIN_Y**: Height our window.
-		- **ZERO**: Just 0.
-		- **NEG**; Just -1.
-		- **HEX**: Just 16. Used for `ft_atoi_base()`.
-		- **DEC**: Just 10. Used for `ft_atoi_base()`.
-		- **IRGB_WHITE**: RGB Int white color.
+		- **WIN_X**: Width our window.
+		- **ZERO**: Value - 0.
+		- **NEG**: Value - -1.
+		- **HEX**: Value - 16. Used for `ft_atoi_base()`.
+		- **DEC**: Value - 10. Used for `ft_atoi_base()`.
+		- **IRGB_WHITE**: RGB Int white color. Default `s_matrix.rgb` value.
 	- Macroses:
-		- **_MSG**: (`msg`) Used for put string with newline in standart output.
-		- **\_NOTIS_MSG**: (`msg`, `ex`) If `ex` isn't true - put `msg` to standart output by **_MSG**.
-		- **\_NOTIS_MPE**: (`msg`, `ex`) If `ex` isn't true - put `msg` to error output by `perror()`.
-		- **\_NOTIS_V**: (`ex`) If `ex` isn't true - just `return;`. Used in `void` functions.
-		- **\_NOTIS_F**: (`ex`) If `ex` isn't true - just `return (false);`. Used in `bool` or `int` functions.
-		- **\_NOTIS_N**: (`ex`) If `ex` isn't true - just `return (NULL);`. Used in functions where we must return pointer to something.
+		- **\_MSG**: (`msg`) | Used for put string with newline in standart output.
+		- **\_NOTIS_MSG**: (`msg`, `ex`) | If `ex` isn't true - put `msg` to standart output by **\_MSG**.
+		- **\_NOTIS_MPE**: (`msg`, `ex`) | If `ex` isn't true - put `msg` to error output by `perror()`.
+		- **\_NOTIS_V**: (`ex`) | If `ex` isn't true - just `return;`. Used in `void` functions.
+		- **\_NOTIS_F**: (`ex`) | If `ex` isn't true - just `return (false);`. Used in `bool` or `int` functions.
+		- **\_NOTIS_N**: (`ex`) | If `ex` isn't true - just `return (NULL);`. Used in functions where we must return pointer to something.
 
 #### Global variable's:
 
-1. *g_matrix_y*: Height our `s_matrix` two dimensional array.
-2. *g_matrix_x*: Width our `s_matrix` two dimensional array.
+1. **g_matrix_y**: Height our `s_matrix` two dimensional array.
+2. **g_matrix_x**: Width our `s_matrix` two dimensional array.
 
-## Program usage:
+## Program usage features:
 
 #### In this part i'll tell how you can interact with program.
 ###### dont done yet...
