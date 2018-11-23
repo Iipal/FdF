@@ -19,11 +19,9 @@
 # include <fcntl.h>
 # include <mlx.h>
 
-typedef struct	s_matrix
-{
-	int	z;
-	int	rgb;
-}				t_matrix;
+/*
+**	Structure 's_file' & functions to save data from a file and manipulate it.
+*/
 
 typedef struct	s_file
 {
@@ -31,13 +29,60 @@ typedef struct	s_file
 	size_t	lines;
 }				t_file;
 
+/*
+**	'pj_read' for save all data from 'file_name' to 's_file'.
+**
+**	'pj_free_file' for delete all data in 's_file'.
+*/
+
+t_file			*pj_read(cstring file_name);
+void			pj_free_file(t_file **file);
+
+/*
+**	Structure 's_matrix' & functions to save all data from file in program.
+**
+**	's_matrix' used like a two dimensional array (t_matrix **matrix).
+*/
+
+typedef struct	s_matrix
+{
+	int	z;
+	int	rgb;
+}				t_matrix;
+
+
+/*
+**	'pj_savenvalid' for save all data from 'file'
+**		to our two dimensional array of 's_matrix'.
+**
+**	'pj_free_matrix' for delete all data in 's_matrix'.
+*/
+
+t_matrix		**pj_savenvalid(t_file *file);
+void			pj_free_matrix(t_matrix **matrix);
+
+/*
+**	Two global variables for save height and width of
+**		our 's_matrix' two dimensional array.
+*/
+
 size_t	g_matrix_y;
 size_t	g_matrix_x;
 
-void			pj_free_file(t_file **file);
-void			pj_free_matrix(t_matrix **matrix);
+/*
+**	Structure 's_mlx' & functions to manipulate with MiniLibX library.
+*/
 
-t_file			*pj_read(cstring file_name);
-t_matrix		**pj_savenvalid(t_file *file);
+typedef struct	s_mlx
+{
+	pvoid	mlx;
+	pvoid	win;
+}				t_mlx;
+
+/*
+**	'pj_mlx_init' for initial 's_mlx' scopes & create graphic windows.
+*/
+
+t_mlx			*pj_mlx_init(void);
 
 #endif

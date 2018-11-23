@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readnvalid.c                                       :+:      :+:    :+:   */
+/*   pj_readnvalid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 16:51:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/11/20 16:51:15 by tmaluh           ###   ########.fr       */
+/*   Created: 2018/11/23 13:46:48 by tmaluh            #+#    #+#             */
+/*   Updated: 2018/11/23 13:47:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_file			*pj_read(cstring file_name)
 	close(fd);
 	_NOTIS_N(out->tab = (string*)malloc(sizeof(string) * out->lines));
 	out->tab[out->lines] = NULL;
-	// printf("%p\n", out->tab[out->lines - 1]);
 	_NOTIS_N((fd = open(file_name, O_RDONLY)) > ZERO);
 	i = NEG;
 	while ((ft_gnl(fd, &temp) > ZERO) && (out->tab[++i] = ft_strdup(temp)))
