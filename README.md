@@ -95,6 +95,11 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 			- *Behavior*: If `ex` isn't true - just `return (NULL);`.
 			- *Used*: Usually - used in functions where we must return pointer to something.
 			- *Usage*: `_NOTIS_N(a > 1);`
+		- **\_SWAP()**:
+			- *Arguments*: `a`, `b`.
+			- *Behavior*: Macros just swap two value of any type.
+			- *Used*: Nowhere yet.
+			- *Usage*: `_SWAP(var_int, var_char);`
 
 #### Global variable's:
 
