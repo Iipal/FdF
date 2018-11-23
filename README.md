@@ -83,7 +83,7 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 			- *Arguments*: `ex`.
 			- *Behavior*: If `ex` isn't true - just `return (false);`.
 			- *Used*: Usually - used in `bool` or `int` functions.
-		- **\_NOTIS_N()**: (`ex`) | If `ex` isn't true - just `return (NULL);`. Used in functions where we must return pointer to something.
+		- **\_NOTIS_N()**:
 			- *Arguments*: `ex`.
 			- *Behavior*: If `ex` isn't true - just `return (NULL);`.
 			- *Used*: Usually - used in functions where we must return pointer to something.
