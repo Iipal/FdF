@@ -63,27 +63,27 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 		- **DEC**: Value - 10. Used for `ft_atoi_base()`.
 		- **IRGB_WHITE**: RGB Int white color. Default `s_matrix.rgb` value.
 	- Macroses:
-		- **\_MSG**:
+		- **\_MSG()**:
 			- *Arguments*: `msg`.
 			- *Behavior*: Prints string with newline character in standard output.
 			- *Used*: Usually - used in `_NOTIS_MSG`.
-		- **\_NOTIS_MSG**:
+		- **\_NOTIS_MSG()**:
 			- *Arguments*: `msg`, `ex`.
 			- *Behavior*: If `ex` isn't true - prints `msg` to standart output by **\_MSG**.
 			- *Used*: Usually - in main function for errors print.
-		- **\_NOTIS_MPE**:
+		- **\_NOTIS_MPE()**:
 			- *Arguments*: `msg`, `ex`.
 			- *Behavior*: If `ex` isn't true - prints `msg` to error output by `perror()`.
 			- *Used*: Usually - in main function for errors print.
-		- **\_NOTIS_V**:
+		- **\_NOTIS_V()**:
 			- *Arguments*: `ex`.
 			- *Behavior*: If `ex` isn't true - just `return;`.
 			- *Used*: Usually - used in `void` functions.
-		- **\_NOTIS_F**:
+		- **\_NOTIS_F()**:
 			- *Arguments*: `ex`.
 			- *Behavior*: If `ex` isn't true - just `return (false);`.
 			- *Used*: Usually - used in `bool` or `int` functions.
-		- **\_NOTIS_N**: (`ex`) | If `ex` isn't true - just `return (NULL);`. Used in functions where we must return pointer to something.
+		- **\_NOTIS_N()**: (`ex`) | If `ex` isn't true - just `return (NULL);`. Used in functions where we must return pointer to something.
 			- *Arguments*: `ex`.
 			- *Behavior*: If `ex` isn't true - just `return (NULL);`.
 			- *Used*: Usually - used in functions where we must return pointer to something.

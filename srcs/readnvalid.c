@@ -97,7 +97,7 @@ t_matrix		**pj_savenvalid(t_file *file)
 	i = NEG;
 	while (++i < file->lines)
 	{
-		_NOTIS_N(pj_numbers_counter(file->tab[i]) == numbers);
+		_NOTIS_N(add_numbers_counter(file->tab[i]) == numbers);
 		_NOTIS_N(out[i] = add_save_line(file->tab[i], numbers));
 	}
 	g_matrix_y = file->lines;
