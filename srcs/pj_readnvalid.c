@@ -76,7 +76,6 @@ static size_t	add_numbers_inline(string line)
 **			Used for save all numbers in each 'line' of file to 'matrix[y]'.
 */
 
-
 static bool		add_line_to_matrix(string line, t_matrix *matrix)
 {
 	size_t		x;
