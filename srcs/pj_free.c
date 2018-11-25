@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-void	pj_free_file(string *file)
+void	pj_file_free(string *file)
 {
 	size_t	i;
 
@@ -23,7 +23,7 @@ void	pj_free_file(string *file)
 	file = NULL;
 }
 
-void	pj_free_matrix(t_matrix **matrix)
+void	pj_matrix_free(t_matrix **matrix)
 {
 	size_t	i;
 

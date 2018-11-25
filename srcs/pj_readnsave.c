@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pj_readnvalid.c                                    :+:      :+:    :+:   */
+/*   pj_readnsave.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-string			*pj_fileread(cstring file_name)
+string			*pj_file_read(cstring file_name)
 {
 	string	*out_tab;
 	string	gnl_temp;
@@ -61,7 +61,7 @@ static size_t	add_numbers_inline(string line)
 			number = ft_atoi(line);
 			number_abs_temp = _ABS(number);
 			_DIGITS_IN_NUMBER(number_abs_temp);
-			(line[digits] != '\0') ? line += digits : 0;
+			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
 			if (*line == ',')
 				line += 9;
 			++out_numbers_counter;
@@ -92,7 +92,7 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 			matrix[x].z = ft_atoi(line);
 			number_abs_temp = _ABS(matrix[x].z);
 			_DIGITS_IN_NUMBER(number_abs_temp);
-			(line[digits] != '\0') ? line += digits : 0;
+			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
 			if (*line == ',')
 			{
 				_NOTIS_F(matrix[x].rgb = ft_atoi_base(line + 3, HEX));
@@ -105,7 +105,7 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 	return (true);
 }
 
-t_matrix		**pj_savenvalid(string *file)
+t_matrix		**pj_matrix_save(string *file)
 {
 	t_matrix	**out;
 	size_t		y;

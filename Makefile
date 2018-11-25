@@ -16,7 +16,7 @@ CC = gcc -march=native
 CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-SRC = srcs/main.c srcs/pj_readnvalid.c srcs/pj_mlx.c srcs/pj_free.c
+SRC = srcs/main.c srcs/pj_readnsave.c srcs/pj_mlx.c srcs/pj_free.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -33,7 +33,7 @@ all: $(NAME)
 
 $(OBJ): %.o: %.c
 	@echo -n '+'
-	@$(CC) -c $(MLXFLAGS) $(CFLAGS) $< -o $@
+	@$(CC) -c $(CFLAGS) $< -o $@
 
 $(LIBFT):
 	@$(LMAKE)
