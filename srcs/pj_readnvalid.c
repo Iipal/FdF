@@ -29,7 +29,7 @@ string			*pj_fileread(cstring file_name)
 		ft_strdel(&gnl_temp);
 	}
 	close(fd);
-	_NOTIS_N(out_tab = (string*)malloc(sizeof(string) * (g_matrix_y - POS)));
+	_NOTIS_N(out_tab = (string*)malloc(sizeof(string) * g_matrix_y));
 	_NOTIS_N(fd = open(file_name, O_RDONLY));
 	i = ZERO;
 	while (ft_gnl(fd, &gnl_temp) > ZERO)
@@ -39,6 +39,11 @@ string			*pj_fileread(cstring file_name)
 	}
 	return (out_tab);
 }
+
+/*
+**	'add_numbers_inline' additional function for 'pj_savenvalid'.
+**			Used for known how much numbers in 1 line of "file".
+*/
 
 static size_t	add_numbers_inline(string line)
 {
@@ -56,15 +61,21 @@ static size_t	add_numbers_inline(string line)
 			number = ft_atoi(line);
 			number_abs_temp = _ABS(number);
 			_DIGITS_IN_NUMBER(number_abs_temp);
-			line += digits;
+			(line[digits] != '\0') ? line += digits : 0;
+			if (*line == ',')
+				line += 9;
 			++out_numbers_counter;
 		}
-		if (*line == ',')
-			line += 9;
 		++line;
 	}
 	return (out_numbers_counter);
 }
+
+/*
+**	'add_line_to_matrix' additional function for 'pj_savenvalid'.
+**			Used for save all numbers in each 'line' of file to 'matrix[y]'.
+*/
+
 
 static bool		add_line_to_matrix(string line, t_matrix *matrix)
 {
@@ -82,7 +93,7 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 			matrix[x].z = ft_atoi(line);
 			number_abs_temp = _ABS(matrix[x].z);
 			_DIGITS_IN_NUMBER(number_abs_temp);
-			line += digits;
+			(line[digits] != '\0') ? line += digits : 0;
 			if (*line == ',')
 			{
 				_NOTIS_F(matrix[x].rgb = ft_atoi_base(line + 3, HEX));
@@ -98,17 +109,17 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 t_matrix		**pj_savenvalid(string *file)
 {
 	t_matrix	**out;
-	size_t		i;
+	size_t		y;
 
-	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*)));
+	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*) * g_matrix_y));
 	_NOTIS_N(g_matrix_x = add_numbers_inline(*file));
-	i = ZERO;
-	while (i < g_matrix_y)
+	y = ZERO;
+	while (y < g_matrix_y)
 	{
-		_NOTIS_N(add_numbers_inline(file[i]) == g_matrix_x);
-		_NOTIS_N(out[i] = (t_matrix*)malloc(sizeof(t_matrix) * (g_matrix_x)));
-		_NOTIS_N(add_line_to_matrix(file[i], out[i]));
-		++i;
+		_NOTIS_N(add_numbers_inline(file[y]) == g_matrix_x);
+		_NOTIS_N(out[y] = (t_matrix*)malloc(sizeof(t_matrix) * (g_matrix_x)));
+		_NOTIS_N(add_line_to_matrix(file[y], out[y]));
+		++y;
 	}
 	return (out);
 }

@@ -38,8 +38,10 @@ int		main(int argc, cstring argv[])
 	++argv;
 	file = NULL;
 	_NOTIS_MSG("Usage: ./fdf <map_name>", !(!argc || argc > 1));
-	_NOTIS_MPE("Invalid file", file = pj_fileread(*argv));
-	_NOTIS_MSG("Invalid map.", matrix = pj_savenvalid(file));
-	//_NOTIS_MPE("MLX inir error", mlx = pj_mlx_init(*argv));
+	_NOTIS_MPE("Invalid file", file = pj_file_read(*argv));
+	_NOTIS_MSG("Invalid map.", matrix = pj_matrix_save(file));
+	// _NOTIS_MPE("MLX inir error", mlx = pj_mlx_init(*argv));
 	ft_show_matrix(matrix);
+	pj_file_free(file);
+	pj_matrix_free(matrix);
 }

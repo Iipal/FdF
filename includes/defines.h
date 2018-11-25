@@ -13,14 +13,18 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
+/*
+**	All info about that's macroses and constants include in README.
+*/
+
 # define WIN_X 1280
 # define WIN_Y 640
 
 # define IRGB_WHITE 16777215
 
-# define NEG	-1
-# define ZERO	0
-# define POS	1
+# define NEG -1
+# define ZERO 0
+# define POS 1
 
 # define HEX 16
 # define DEC 10

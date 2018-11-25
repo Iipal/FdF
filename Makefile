@@ -13,10 +13,10 @@
 NAME = fdf
 
 CC = gcc -march=native
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-SRC = srcs/main.c srcs/pj_readnvalid.c srcs/pj_mlx.c
+SRC = srcs/main.c srcs/pj_readnvalid.c srcs/pj_mlx.c srcs/pj_free.c
 
 OBJ = $(SRC:.c=.o)
 

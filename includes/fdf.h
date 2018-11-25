@@ -20,15 +20,26 @@
 # include <mlx.h>
 
 /*
-**	'pj_read' for save all data from 'file_name' to simple two dimensional array.
+**	"defines.h" - All macroses & constantes what will used in this program.
+**	<mlx.h> - MiniLibX. School42 private project for students,
+**			created by initiators of this schools.
 */
 
-string			*pj_fileread(cstring file_name);
+/*
+**	'pj_file_read' for save all data from 'file_name' to
+**			simple two-dimensional character array(in future "file").
+**
+**	'pj_free_file' for delete all data in "file".
+*/
+
+string			*pj_file_read(cstring file_name);
+void			pj_file_free(string *file);
 
 /*
-**	Structure 's_matrix' & functions to save all data from file in program.
+**	Structure 'struct s_matrix'(in future 't_matrix') &
+**			functions to save all data from file in program.
 **
-**	's_matrix' used like a two dimensional array (t_matrix **matrix).
+**	't_matrix' used like a dynamic two-dimensional array (in future 't_matrix **matrix').
 */
 
 typedef struct	s_matrix
@@ -38,22 +49,24 @@ typedef struct	s_matrix
 }				t_matrix;
 
 /*
-**	'pj_savenvalid' for save all data from 'file'
-**		to our two dimensional array of 's_matrix'.
+**	'pj_matrix_save' for save all data from "file" to 't_matrix **matrix'.
+**
+**	'pj_matrix_free' for delete all data in 't_matrix **matrix'.
 */
 
-t_matrix		**pj_savenvalid(string *file);
+t_matrix		**pj_matrix_save(string *file);
+void			pj_matrix_free(t_matrix **matrix);
 
 /*
-**	Two global variables for save height and width of
-**		our 's_matrix' two dimensional array.
+**	Two global variables for save height and width of our 't_matrix **matrix'.
 */
 
 size_t	g_matrix_y;
 size_t	g_matrix_x;
 
 /*
-**	Structure 's_mlx' & functions to manipulate with MiniLibX library.
+**	Structure 'struct s_mlx'(in future 't_mlx') &
+**			functions to manipulate with MiniLibX library.
 */
 
 typedef struct	s_mlx
@@ -63,7 +76,7 @@ typedef struct	s_mlx
 }				t_mlx;
 
 /*
-**	'pj_mlx_init' for initial 's_mlx' scopes & create graphic windows.
+**	'pj_mlx_init' for initializing 't_mlx' scopes & create graphic window.
 */
 
 t_mlx			*pj_mlx_init(cstring tittle);

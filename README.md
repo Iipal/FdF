@@ -61,13 +61,13 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 		- **ZERO**: Value - 0.
 		- **NEG**: Value - -1.
 		- **POS**: Value - 1.
-		- **HEX**: Value - 16. Used for `ft_atoi_base()`.
-		- **DEC**: Value - 10. Used for `ft_atoi_base()`.
-		- **IRGB_WHITE**: RGB Int white color. Default `s_matrix.rgb` value.
+		- **HEX**: Value - 16.
+		- **DEC**: Value - 10.
+		- **IRGB_WHITE**: RGB Int white color. Default `struct s_matrix.rgb` value.
 	- Macroses:
 		- **\_MSG()**:
 			- *Arguments*: `msg`.
-			- *Behavior*: Prints string with newline character in standard output.
+			- *Behavior*: Prints string with newline character in standart output.
 			- *Used*: Usually - used in `_NOTIS_MSG`.
 			- *Usage*: `_MSG("ERROR!!!");`
 		- **\_NOTIS_MSG()**:
