@@ -29,7 +29,7 @@ void	ft_strclr(string s);
 void	ft_striter(string s, void (*f)(string));
 void	ft_striteri(string s, void (*f)(unsigned int, string));
 
-int		ft_atoi(cstring str);
+int		ft_atoi(string str);
 int		ft_atoi_base(cstring str, int base);
 int		ft_strcmp(cstring s1, cstring s2);
 int		ft_strncmp(cstring s1, cstring s2, size_t n);

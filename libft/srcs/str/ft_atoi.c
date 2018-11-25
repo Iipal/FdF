@@ -13,7 +13,7 @@
 #include "../../includes/lft_str.h"
 #include "../../includes/lft_ctype.h"
 
-int					ft_atoi(cstring str)
+int					ft_atoi(string str)
 {
 	int		num;
 	int		sign;

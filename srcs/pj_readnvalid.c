@@ -12,94 +12,103 @@
 
 #include "../includes/fdf.h"
 
-t_file			*pj_read(cstring file_name)
+string			*pj_fileread(cstring file_name)
 {
-	t_file	*out;
-	string	temp;
+	string	*out_tab;
+	string	gnl_temp;
 	size_t	i;
 	int		fd;
 
-	_NOTIS_N(out = (t_file*)malloc(sizeof(t_file)));
+	gnl_temp = NULL;
+	g_matrix_y = ZERO;
 	_NOTIS_N(fd = open(file_name, O_RDONLY));
 	_NOTIS_N(read(fd, NULL, ZERO) >= ZERO);
-	out->lines = ZERO;
-	while ((ft_gnl(fd, &temp) > ZERO) && ++(out->lines))
-		ft_strdel(&temp);
-	close(fd);
-	_NOTIS_N(out->tab = (string*)malloc(sizeof(string) * out->lines));
-	out->tab[out->lines] = NULL;
-	_NOTIS_N((fd = open(file_name, O_RDONLY)) > ZERO);
-	i = NEG;
-	while ((ft_gnl(fd, &temp) > ZERO) && (out->tab[++i] = ft_strdup(temp)))
-		ft_strdel(&temp);
-	close(fd);
-	return (out);
-}
-
-static size_t	add_numbers_counter(cstring line)
-{
-	size_t	n;
-	size_t	i;
-	bool	is;
-
-	n = ZERO;
-	i = NEG;
-	while (line[++i])
+	while (ft_gnl(fd, &gnl_temp) > ZERO)
 	{
-		if (ft_isalpha(line[i]) || (line[i] == ','))
-			++i;
-		else if (ft_isdigit(line[i]) && (!is ? is = true : !is))
-			++n;
-		(!ft_isdigit(line[i]) && is) ? is = false : is;
+		++g_matrix_y;
+		ft_strdel(&gnl_temp);
 	}
-	return (!n ? n : n + 1);
+	close(fd);
+	_NOTIS_N(out_tab = (string*)malloc(sizeof(string) * (g_matrix_y - POS)));
+	_NOTIS_N(fd = open(file_name, O_RDONLY));
+	i = ZERO;
+	while (ft_gnl(fd, &gnl_temp) > ZERO)
+	{
+		out_tab[i++] = ft_strdup(gnl_temp);
+		ft_strdel(&gnl_temp);
+	}
+	return (out_tab);
 }
 
-static t_matrix	*add_save_line(cstring line, const size_t numbers)
+static size_t	add_numbers_inline(string line)
 {
-	t_matrix	*out;
-	bool		is;
-	size_t		start;
+	size_t	out_numbers_counter;
+	size_t	number_abs_temp;
+	size_t	digits;
+	long	number;
+
+	out_numbers_counter = ZERO;
+	while (*line)
+	{
+		if (ft_isdigit(*line) || *line == '-')
+		{
+			digits = ZERO;
+			number = ft_atoi(line);
+			number_abs_temp = _ABS(number);
+			_DIGITS_IN_NUMBER(number_abs_temp);
+			line += digits;
+			++out_numbers_counter;
+		}
+		if (*line == ',')
+			line += 9;
+		++line;
+	}
+	return (out_numbers_counter);
+}
+
+static bool		add_line_to_matrix(string line, t_matrix *matrix)
+{
 	size_t		x;
-	int			i;
+	size_t		digits;
+	size_t		number_abs_temp;
 
 	x = ZERO;
-	i = NEG;
-	start = ZERO;
-	_NOTIS_N(out = (t_matrix*)malloc(sizeof(t_matrix) * numbers));
-	while ((++i >= 0) && x < numbers)
-		if (ft_isdigit(line[i]) && (!is ? is = true : !is))
-			start = i;
-		else if (!ft_isdigit(line[i]) && is)
+	while (*line && x < g_matrix_x)
+	{
+		if (ft_isdigit(*line) || *line == '-')
 		{
-			is = false;
-			out[x].rgb = IRGB_WHITE;
-			if (line[i] == ',')
+			digits = ZERO;
+			matrix[x].rgb = IRGB_WHITE;
+			matrix[x].z = ft_atoi(line);
+			number_abs_temp = _ABS(matrix[x].z);
+			_DIGITS_IN_NUMBER(number_abs_temp);
+			line += digits;
+			if (*line == ',')
 			{
-				out[x].rgb = ft_atoi_base(line + (i + 3), HEX);
-				i += 9;
+				_NOTIS_F(matrix[x].rgb = ft_atoi_base(line + 3, HEX));
+				line += 9;
 			}
-			out[x++].z = ft_atoi(line + start);
+			++x;
 		}
-	return (out);
+		++line;
+	}
+	return (true);
 }
 
-t_matrix		**pj_savenvalid(t_file *file)
+t_matrix		**pj_savenvalid(string *file)
 {
 	t_matrix	**out;
 	size_t		i;
-	size_t		numbers;
 
-	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*) * file->lines));
-	_NOTIS_N(numbers = add_numbers_counter(file->tab[ZERO]));
-	out[file->lines] = NULL;
-	i = NEG;
-	while (++i < file->lines)
+	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*)));
+	_NOTIS_N(g_matrix_x = add_numbers_inline(*file));
+	i = ZERO;
+	while (i < g_matrix_y)
 	{
-		_NOTIS_N(add_numbers_counter(file->tab[i]) == numbers);
-		_NOTIS_N(out[i] = add_save_line(file->tab[i], numbers));
+		_NOTIS_N(add_numbers_inline(file[i]) == g_matrix_x);
+		_NOTIS_N(out[i] = (t_matrix*)malloc(sizeof(t_matrix) * (g_matrix_x)));
+		_NOTIS_N(add_line_to_matrix(file[i], out[i]));
+		++i;
 	}
-	g_matrix_y = file->lines;
-	g_matrix_x = numbers;
 	return (out);
 }

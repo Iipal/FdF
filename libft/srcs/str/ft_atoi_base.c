@@ -25,8 +25,8 @@ static int	isvalid(int c, int base)
 	while (base--)
 		if (valid_lower[base] == c || valid_upper[base] == c)
 		{
-			break ;
 			is = 1;
+			break ;
 		}
 	ft_strdel(&valid_lower);
 	ft_strdel(&valid_upper);

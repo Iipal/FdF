@@ -38,13 +38,13 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 - `ft_*`: This is functions from libft.
 
 #### About structures:
-1. `s_file`: Storage file data & how much lines in it.
-	- `tab`: Two dimensional character array with data from file.
-	- `lines`: Lines counter in file.
-2. `s_matrix`: Simple structure with two `int`'s
+1. `struct s_matrix`: Simple structure with two `int`'s
 	- `z`: Value of Z-position
 	- `rgb`: Value converted from `HEX` to `RGB Int` color of current position
 	- *In code i use this struct like a two dimensional array*.
+2. `struct	s_mlx`: Struct for work with MiniLibX library.
+	- `mlx`: Saving `void *` to init all mlx functions.
+	- `win`: Saving `void *` to graphic window.
 
 #### About `typedef`'s and `define`'s:	
 1. `typedef`: *(used in `define` macroses to get around the school42 norme. (Example: `_BOOL;` macros))*
@@ -53,14 +53,14 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 	- **ustring**: `unsigned char *`.
 	- **bool**: `enum e_bool` with only 2 values(`true` and `false`).
 	- **pvoid**: `void *`.
-	- **t_matrix**: `s_matrix`.
-	- **t_file**: `s_file`.
-2. `define`:
+	- **t_matrix**: `struct s_matrix`.
+2. `#define`:
 	- Constants:
 		- **WIN_Y**: Height our window.
 		- **WIN_X**: Width our window.
 		- **ZERO**: Value - 0.
 		- **NEG**: Value - -1.
+		- **POS**: Value - 1.
 		- **HEX**: Value - 16. Used for `ft_atoi_base()`.
 		- **DEC**: Value - 10. Used for `ft_atoi_base()`.
 		- **IRGB_WHITE**: RGB Int white color. Default `s_matrix.rgb` value.
@@ -100,11 +100,26 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 			- *Behavior*: Macros just swap two value of any type.
 			- *Used*: Nowhere yet.
 			- *Usage*: `_SWAP(var_int, var_char);`
+		- **\_DIGITS_IN_NUMBER()**:
+			- *Arguments*: `var`.
+			- *Behavior*: Macro to find out the number of digits in the number. Variable which you put in that macro can be changed. In function in which are you want to use that macro also must be defined variable `digits`.
+			- *Used*: When validating data in file and saving it in to `struct s_matrix` two dimensional array.
+			- *Usage*: `_DIGITS_IN_NUMBER(var);`
+		- **\_ABS()**:
+			- *Arguments*: `var`.
+			- *Behavior*: Simple macro to get absolute value.
+			- *Used*: When validating data in file and saving it in to`struct s_matrix` two dimensional array and with `_DIGITS_IN_NUMBER()` for find out number of digits in negative number.
+			- *Usage*: `_ABS(negative_number);`
+		- **\_BOOL**:
+			- *Arguments*: none.
+			- *Behavior*: Macro for using `bool` type in C. Only for to get around the school42 norme.
+			- *Used*: Only in header(`defines.h`).
+			- *Usage*: Dont needed use anywhere else.
 
 #### Global variable's:
 
-1. **g_matrix_y**: Height our `s_matrix` two dimensional array.
-2. **g_matrix_x**: Width our `s_matrix` two dimensional array.
+1. **g_matrix_y**: Height our `struct s_matrix` two dimensional array.
+2. **g_matrix_x**: Width our `struc ts_matrix` two dimensional array.
 
 ## Program usage features:
 
@@ -116,7 +131,7 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 ## Code progress & structuring program:
 
  - [x] File reading & validating data in it.
- - [ ] Drawing all points from map.
+ - [ ] Drawing all points from map in graphic window.
  - [ ] Add isometric camera view.
  - [ ] Add some colored effects like a `ft_raindow()` & etc.
  - [ ] Add bonus part from subject.

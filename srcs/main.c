@@ -17,30 +17,29 @@ void	ft_show_matrix(t_matrix **m)
 	size_t	i;
 	size_t	j;
 
-	i = NEG;
-	while (++i < g_matrix_y)
+	i = ZERO;
+	while (i < g_matrix_y)
 	{
-		j = NEG;
-		while (++j < g_matrix_x)
-			printf("%d ", m[i][j].z);
+		j = ZERO;
+		while (j < g_matrix_x)
+			printf("%d ", m[i][j++].z);
+		++i;
 		printf("\n");
 	}
 }
 
 int		main(int argc, cstring argv[])
 {
-	t_file		*file;
+	string		*file;
 	t_matrix	**matrix;
-	t_mlx		*mlx;
+	// t_mlx		*mlx;
 
 	--argc;
 	++argv;
 	file = NULL;
 	_NOTIS_MSG("Usage: ./fdf <map_name>", !(!argc || argc > 1));
-	_NOTIS_MPE("Invalid file", file = pj_read(*argv));
+	_NOTIS_MPE("Invalid file", file = pj_fileread(*argv));
 	_NOTIS_MSG("Invalid map.", matrix = pj_savenvalid(file));
-	_NOTIS_MPE("MLX inir error", mlx = pj_mlx_init());
+	//_NOTIS_MPE("MLX inir error", mlx = pj_mlx_init(*argv));
 	ft_show_matrix(matrix);
-	pj_free_file(&file);
-	pj_free_matrix(matrix);
 }

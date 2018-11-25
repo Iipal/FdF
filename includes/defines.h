@@ -13,13 +13,14 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define WIN_X	1920
-# define WIN_Y	960
+# define WIN_X 1280
+# define WIN_Y 640
 
 # define IRGB_WHITE 16777215
 
-# define ZERO 0
-# define NEG -1
+# define NEG	-1
+# define ZERO	0
+# define POS	1
 
 # define HEX 16
 # define DEC 10
@@ -31,6 +32,8 @@
 # define _NOTIS_F(ex) if (!(ex)) return (false)
 # define _NOTIS_N(ex) if (!(ex)) return (NULL)
 # define _SWAP(a, b) { (a) ^= (b); (b) ^= (a); (a) ^= (b); }
+# define _DIGITS_IN_NUMBER(var) while ((var)) {(var) /= DEC; ++digits;}
+# define _ABS(var) ((var) < 0) ? -(var) : (var);
 
 enum	e_bool
 {

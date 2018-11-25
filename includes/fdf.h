@@ -20,23 +20,10 @@
 # include <mlx.h>
 
 /*
-**	Structure 's_file' & functions to save data from a file and manipulate it.
+**	'pj_read' for save all data from 'file_name' to simple two dimensional array.
 */
 
-typedef struct	s_file
-{
-	string	*tab;
-	size_t	lines;
-}				t_file;
-
-/*
-**	'pj_read' for save all data from 'file_name' to 's_file'.
-**
-**	'pj_free_file' for delete all data in 's_file'.
-*/
-
-t_file			*pj_read(cstring file_name);
-void			pj_free_file(t_file **file);
+string			*pj_fileread(cstring file_name);
 
 /*
 **	Structure 's_matrix' & functions to save all data from file in program.
@@ -50,16 +37,12 @@ typedef struct	s_matrix
 	int	rgb;
 }				t_matrix;
 
-
 /*
 **	'pj_savenvalid' for save all data from 'file'
 **		to our two dimensional array of 's_matrix'.
-**
-**	'pj_free_matrix' for delete all data in 's_matrix'.
 */
 
-t_matrix		**pj_savenvalid(t_file *file);
-void			pj_free_matrix(t_matrix **matrix);
+t_matrix		**pj_savenvalid(string *file);
 
 /*
 **	Two global variables for save height and width of
@@ -83,6 +66,6 @@ typedef struct	s_mlx
 **	'pj_mlx_init' for initial 's_mlx' scopes & create graphic windows.
 */
 
-t_mlx			*pj_mlx_init(void);
+t_mlx			*pj_mlx_init(cstring tittle);
 
 #endif
