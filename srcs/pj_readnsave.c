@@ -63,7 +63,7 @@ static size_t	add_numbers_inline(string line)
 			(line[((digits == 0) ? (digits = 1) : digits)] != '\0') ?
 					(line += digits) : (line += (digits - 1));
 			if (*line == ',')
-				while (*(line + 1) && !ft_isblank(*line))
+				while (*line && !ft_isblank(*line))
 					++line;
 			++out_numbers_counter;
 		}
@@ -96,7 +96,7 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 			if (*line == ',')
 			{
 				_NOTIS_F(matrix[x].rgb = ft_atoi_base(line + 3, HEX));
-				while (*(line + 1) && !ft_isblank(*line))
+				while (*line && !ft_isblank(*line))
 					++line;
 			}
 			++x;
