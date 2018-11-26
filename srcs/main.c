@@ -32,15 +32,16 @@ int		main(int argc, cstring argv[])
 {
 	string		*file;
 	t_matrix	**matrix;
-	// t_mlx		*mlx;
+	t_mlx		*mlx;
 
 	--argc;
 	++argv;
 	file = NULL;
 	_NOTIS_MSG("Usage: ./fdf <map_name>", !(!argc || argc > 1));
 	_NOTIS_MPE("Invalid file", file = pj_file_read(*argv));
-	_NOTIS_MSG("Invalid map.", matrix = pj_matrix_save(file));
-	// _NOTIS_MPE("MLX inir error", mlx = pj_mlx_init(*argv));
+	_NOTIS_MSG("In-validating map error.", matrix = pj_matrix_save(file));
+	_NOTIS_MSG("MLX initialization error.", mlx = pj_mlx_init(*argv));
+	pj_mlx_draw_raw_matrix(mlx, matrix);
 	ft_show_matrix(matrix);
 	pj_file_free(file);
 	pj_matrix_free(matrix);

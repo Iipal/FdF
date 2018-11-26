@@ -63,10 +63,11 @@ static size_t	add_numbers_inline(string line)
 			_DIGITS_IN_NUMBER(number_abs_temp);
 			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
 			if (*line == ',')
-				line += 9;
+				while (!ft_isblank(*line))
+					++line;
 			++out_numbers_counter;
 		}
-		++line;
+		*line ? ++line : 0;
 	}
 	return (out_numbers_counter);
 }
@@ -85,9 +86,8 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 	x = ZERO;
 	while (*line && x < g_matrix_x)
 	{
-		if (ft_isdigit(*line) || *line == '-')
+		if ((ft_isdigit(*line) || *line == '-') && !(digits = ZERO))
 		{
-			digits = ZERO;
 			matrix[x].rgb = IRGB_WHITE;
 			matrix[x].z = ft_atoi(line);
 			number_abs_temp = _ABS(matrix[x].z);
@@ -96,11 +96,12 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 			if (*line == ',')
 			{
 				_NOTIS_F(matrix[x].rgb = ft_atoi_base(line + 3, HEX));
-				line += 9;
+				while (*line && !ft_isblank(*line))
+					++line;
 			}
 			++x;
 		}
-		++line;
+		*line ? ++line : 0;
 	}
 	return (true);
 }

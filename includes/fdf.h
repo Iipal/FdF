@@ -39,7 +39,8 @@ void			pj_file_free(string *file);
 **	Structure 'struct s_matrix'(in future 't_matrix') &
 **			functions to save all data from file in program.
 **
-**	't_matrix' used like a dynamic two-dimensional array (in future 't_matrix **matrix').
+**	't_matrix' used like a dynamic two-dimensional array
+**			(in future 't_matrix **matrix').
 */
 
 typedef struct	s_matrix
@@ -80,5 +81,12 @@ typedef struct	s_mlx
 */
 
 t_mlx			*pj_mlx_init(cstring tittle);
+void			pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix);
+
+typedef struct	s_point
+{
+	size_t	x;
+	size_t	y;
+}				t_point;
 
 #endif
