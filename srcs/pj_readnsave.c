@@ -58,12 +58,12 @@ static size_t	add_numbers_inline(string line)
 		if (ft_isdigit(*line) || *line == '-')
 		{
 			digits = ZERO;
-			number = ft_atoi(line);
-			number_abs_temp = _ABS(number);
+			number_abs_temp = _ABS(number = ft_atoi(line));
 			_DIGITS_IN_NUMBER(number_abs_temp);
-			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
+			(line[((digits == 0) ? (digits = 1) : digits)] != '\0') ?
+					(line += digits) : (line += (digits - 1));
 			if (*line == ',')
-				while (!ft_isblank(*line))
+				while (*(line + 1) && !ft_isblank(*line))
 					++line;
 			++out_numbers_counter;
 		}
@@ -89,14 +89,14 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 		if ((ft_isdigit(*line) || *line == '-') && !(digits = ZERO))
 		{
 			matrix[x].rgb = IRGB_WHITE;
-			matrix[x].z = ft_atoi(line);
-			number_abs_temp = _ABS(matrix[x].z);
+			number_abs_temp = _ABS(matrix[x].z = ft_atoi(line));
 			_DIGITS_IN_NUMBER(number_abs_temp);
-			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
+			(line[((digits == 0) ? (digits = 1) : digits)] != '\0') ?
+					(line += digits) : (line += (digits - 1));
 			if (*line == ',')
 			{
 				_NOTIS_F(matrix[x].rgb = ft_atoi_base(line + 3, HEX));
-				while (*line && !ft_isblank(*line))
+				while (*(line + 1) && !ft_isblank(*line))
 					++line;
 			}
 			++x;
