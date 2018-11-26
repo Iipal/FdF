@@ -17,8 +17,8 @@
 **	All info about that's macroses and constants include in README.
 */
 
-# define WIN_X 2000
-# define WIN_Y 1000
+# define WIN_X 1000
+# define WIN_Y 500
 
 # define IRGB_WHITE 16777215
 

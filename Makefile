@@ -14,8 +14,7 @@ NAME = fdf
 
 CC = gcc -march=native
 CFLAGS = -g -Wall -Wextra -Werror
-MLXFLAGS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
-INCLUDE = -I ./includes/
+MLXFLAGS = -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
 
 SRC = srcs/main.c srcs/pj_readnsave.c srcs/pj_mlx.c srcs/pj_free.c
 
@@ -40,7 +39,7 @@ $(LIBFT):
 	@$(LMAKE)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(INCLUDE) $(MLXFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 	@echo "> $(GREEN)FdF$(WHITE)"
 
 clean:

@@ -20,9 +20,10 @@ t_mlx	*pj_mlx_init(cstring tittle)
 	_NOTIS_N(out->mlx = mlx_init());
 	_NOTIS_N(out->win = mlx_new_window(out->mlx,
 					WIN_X, WIN_Y, (string)tittle));
+	mlx_loop(out->mlx);
 	return (out);
 }
-
+/*
 static void	add_draw_line(t_point delta, size_t *increase,
 							t_mlx *mlx, t_matrix *matrix)
 {
@@ -64,3 +65,4 @@ void	pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix)
 		++y;
 	}
 }
+*/
