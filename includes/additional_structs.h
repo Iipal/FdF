@@ -24,6 +24,12 @@ typedef struct	s_double_points
 {
 	t_point	p1;
 	t_point p2;
-}				t_double_points;
+}				t_dp;
+
+typedef	struct	s_mlxncolor
+{
+	t_mlx	*mlx;
+	int		color;
+}				t_mlxncolor;
 
 #endif

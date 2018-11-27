@@ -45,11 +45,11 @@ string			*pj_file_read(cstring file_name)
 **			Used for known how much numbers in 1 line of "file".
 */
 
-static int	add_numbers_inline(string line)
+static int		add_numbers_inline(string line)
 {
-	int	out_numbers_counter;
-	int	number_abs_temp;
-	int	digits;
+	int		out_numbers_counter;
+	int		number_abs_temp;
+	int		digits;
 	long	number;
 
 	out_numbers_counter = ZERO;
@@ -58,10 +58,11 @@ static int	add_numbers_inline(string line)
 		if (ft_isdigit(*line) || *line == '-')
 		{
 			digits = ZERO;
-			number_abs_temp = _ABS(number = ft_atoi(line));
+			number = ft_atoi(line);
+			number_abs_temp = _ABS(number);
 			_DIGITS_IN_NUMBER(number_abs_temp);
-			(line[((digits == 0) ? (digits = 1) : digits)] != '\0') ?
-					(line += digits) : (line += (digits - 1));
+			(digits == 0) ? (digits = 1) : digits;
+			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
 			if (*line == ',')
 				while (*line && !ft_isblank(*line))
 					++line;
@@ -83,23 +84,23 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 	int	digits;
 	int	number_abs_temp;
 
-	x = ZERO;
-	while (*line && x < g_matrix_x)
+	x = NEG;
+	while (*line && ++x < g_matrix_x)
 	{
 		if ((ft_isdigit(*line) || *line == '-') && !(digits = ZERO))
 		{
 			matrix[x].rgb = IRGB_WHITE;
-			number_abs_temp = _ABS(matrix[x].z = ft_atoi(line));
+			matrix[x].z = ft_atoi(line);
+			number_abs_temp = _ABS(matrix[x].z);
 			_DIGITS_IN_NUMBER(number_abs_temp);
-			(line[((digits == 0) ? (digits = 1) : digits)] != '\0') ?
-					(line += digits) : (line += (digits - 1));
+			((digits == 0) ? (digits = 1) : digits);
+			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
 			if (*line == ',')
 			{
 				_NOTIS_F(matrix[x].rgb = ft_atoi_base(line + 3, HEX));
 				while (*line && !ft_isblank(*line))
 					++line;
 			}
-			++x;
 		}
 		*line ? ++line : 0;
 	}
@@ -113,13 +114,12 @@ t_matrix		**pj_matrix_save(string *file)
 
 	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*) * g_matrix_y));
 	_NOTIS_N(g_matrix_x = add_numbers_inline(*file));
-	y = ZERO;
-	while (y < g_matrix_y)
+	y = NEG;
+	while (++y < g_matrix_y)
 	{
 		_NOTIS_N(add_numbers_inline(file[y]) == g_matrix_x);
 		_NOTIS_N(out[y] = (t_matrix*)malloc(sizeof(t_matrix) * (g_matrix_x)));
 		_NOTIS_N(add_line_to_matrix(file[y], out[y]));
-		++y;
 	}
 	return (out);
 }

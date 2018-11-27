@@ -13,7 +13,7 @@
 #include "../includes/fdf.h"
 #include "../includes/additional_structs.h"
 
-t_mlx	*pj_mlx_init(cstring tittle)
+t_mlx		*pj_mlx_init(cstring tittle)
 {
 	t_mlx	*out;
 
@@ -24,8 +24,8 @@ t_mlx	*pj_mlx_init(cstring tittle)
 	return (out);
 }
 
-static void	add_draw_line(t_double_points delta, t_double_points points,
-			float *increase, int color, t_mlx *mlx)
+static void	add_draw_line(t_dp delta, t_dp points,
+					float *increase, t_mlxncolor mnc)
 {
 	int	x;
 	int	y;
@@ -36,9 +36,9 @@ static void	add_draw_line(t_double_points delta, t_double_points points,
 	y = points.p1.y;
 	if (delta.p1.y)
 		dir = delta.p1.y > 0 ? 1 : -1;
-	while ((delta.p1.x > 0) ? (x <= points.p2.x) : (x >= points.p2.x))
+	while (((delta.p1.x > 0) ? (x <= points.p2.x) : (x >= points.p2.x)))
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, x, y, color);
+		mlx_pixel_put(mnc.mlx->mlx, mnc.mlx->win, x, y, mnc.color);
 		*increase += (float)delta.p2.y / (float)delta.p2.x;
 		if (*increase >= 1.0f)
 		{
@@ -49,7 +49,7 @@ static void	add_draw_line(t_double_points delta, t_double_points points,
 	}
 }
 
-static void add_set_line(t_point p1, t_point p2, t_mlx *mlx, int color)
+static void	add_set_line(t_point p1, t_point p2, t_mlxncolor mnc)
 {
 	const int	deltax = p1.x - p2.x;
 	const int	deltay = p1.y - p2.y;
@@ -59,20 +59,24 @@ static void add_set_line(t_point p1, t_point p2, t_mlx *mlx, int color)
 
 	increase = ZERO;
 	if (absdx >= absdy)
-		add_draw_line((t_double_points){{p1.x = deltax, p1.y = deltay},
-										{p2.x = absdx, p2.y = absdy}},
-					(t_double_points){{p1.x = p1.x, p1.y = p1. y},
-										{p2.x = p2.x, p2.y = p2.y}},
-					&increase, color, mlx);
+		add_draw_line((t_dp){{p1.x = deltax,
+								p1.y = deltay},
+							{p2.x = absdx,
+								p2.y = absdy}},
+					(t_dp){.p1 = p1,
+							.p2 = p2},
+					&increase, mnc);
 	else
-		add_draw_line((t_double_points){{p1.x = deltay, p1.y = deltax},
-										{p2.x = absdy, p2.y = absdx}},
-					(t_double_points){{p1.x = p2.x, p1.y = p2.y},
-										{p2.x = p1.x, p2.y = p1.y}},
-					&increase, color, mlx);
+		add_draw_line((t_dp){{p1.x = deltay,
+								p1.y = deltax},
+							{p2.x = absdy,
+								p2.y = absdx}},
+					(t_dp){.p1 = p2,
+							.p2 = p1},
+					&increase, mnc);
 }
 
-void	pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix)
+void		pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix)
 {
 	int	y;
 	int	x;
@@ -89,10 +93,10 @@ void	pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix)
 		{
 			add_set_line((t_point){.x = (x + dist_x), .y = (y + dist_y)},
 					(t_point){.x = (x + dist_x + DEC), .y = (y + dist_y)},
-					mlx, matrix[x][y].rgb);
+					(t_mlxncolor){.mlx = mlx, .color = matrix[y][x].rgb});
 			add_set_line((t_point){.x = (x + dist_x), .y = (y + dist_y)},
 					(t_point){.x = (x + dist_x + DEC), .y = (y + dist_y + DEC)},
-					mlx, matrix[x][y].rgb);
+					(t_mlxncolor){.mlx = mlx, .color = matrix[y][x].rgb});
 			dist_x += DEC;
 		}
 		dist_y += DEC;
