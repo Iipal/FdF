@@ -19,7 +19,8 @@ MLXFLAGS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 # linux:
 # MLXFLAGS = -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
 
-SRC = srcs/main.c srcs/pj_readnsave.c srcs/pj_mlx.c srcs/pj_free.c
+SRC = srcs/main.c srcs/pj_readnsave.c srcs/pj_mlx.c srcs/pj_free.c \
+srcs/ft_drawing_bresenham_algorithm.c 
 
 OBJ = $(SRC:.c=.o)
 

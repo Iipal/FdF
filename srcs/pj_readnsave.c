@@ -29,12 +29,13 @@ string			*pj_file_read(cstring file_name)
 		ft_strdel(&gnl_temp);
 	}
 	close(fd);
-	_NOTIS_N(out_tab = (string*)malloc(sizeof(string) * g_matrix_y));
-	_NOTIS_N(fd = open(file_name, O_RDONLY));
+	_NOTIS_FREE(out_tab = (string*)malloc(sizeof(string) * g_matrix_y),
+					pj_file_free(out_tab));
+	_NOTIS_FREE(fd = open(file_name, O_RDONLY), pj_file_free(out_tab));
 	i = ZERO;
 	while (ft_gnl(fd, &gnl_temp) > ZERO)
 	{
-		out_tab[i++] = ft_strdup(gnl_temp);
+		_NOTIS_FREE(out_tab[i++] = ft_strdup(gnl_temp), pj_file_free(out_tab));
 		ft_strdel(&gnl_temp);
 	}
 	return (out_tab);
@@ -112,14 +113,15 @@ t_matrix		**pj_matrix_save(string *file)
 	t_matrix	**out;
 	int			y;
 
-	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*) * g_matrix_y));
-	_NOTIS_N(g_matrix_x = add_numbers_inline(*file));
 	y = NEG;
+	_NOTIS_FREE_ALL(out = (t_matrix**)malloc(sizeof(t_matrix*) * g_matrix_y));
+	_NOTIS_FREE_ALL(g_matrix_x = add_numbers_inline(*file));
 	while (++y < g_matrix_y)
 	{
-		_NOTIS_N(add_numbers_inline(file[y]) == g_matrix_x);
-		_NOTIS_N(out[y] = (t_matrix*)malloc(sizeof(t_matrix) * (g_matrix_x)));
-		_NOTIS_N(add_line_to_matrix(file[y], out[y]));
+		_NOTIS_FREE_ALL(add_numbers_inline(file[y]) == g_matrix_x);
+		_NOTIS_FREE_ALL(out[y] = (t_matrix*)malloc(sizeof(t_matrix) *
+																(g_matrix_x)));
+		_NOTIS_FREE_ALL(add_line_to_matrix(file[y], out[y]));
 	}
 	return (out);
 }

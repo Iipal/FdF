@@ -17,8 +17,8 @@
 **	All info about that's macroses and constants include in README.
 */
 
-# define WIN_X 1000
-# define WIN_Y 500
+# define WIN_X 2000
+# define WIN_Y 1000
 
 # define IRGB_WHITE 16777215
 
@@ -35,6 +35,9 @@
 # define _NOTIS_V(ex) if (!(ex)) return
 # define _NOTIS_F(ex) if (!(ex)) return (false)
 # define _NOTIS_N(ex) if (!(ex)) return (NULL)
+# define _FREE() pj_matrix_free(out); pj_file_free(file);
+# define _NOTIS_FREE(ex, free) if (!(ex)) { free; return (NULL); }
+# define _NOTIS_FREE_ALL(ex) if (!(ex)) { _FREE(); return (NULL); }
 # define _SWAP(a, b) { (a) ^= (b); (b) ^= (a); (a) ^= (b); }
 # define _DIGITS_IN_NUMBER(var) while ((var)) {(var) /= DEC; ++digits;}
 # define _ABS(var) ((var) < 0) ? -(var) : (var);

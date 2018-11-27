@@ -16,20 +16,28 @@ void	pj_file_free(string *file)
 {
 	int	i;
 
-	i = ZERO;
-	while (i < g_matrix_y)
-		ft_strdel(&(file[i++]));
-	free(file);
-	file = NULL;
+	i = NEG;
+	while (++i < g_matrix_y)
+		if (file[i])
+			ft_strdel(&(file[i]));
+	if (file)
+	{
+		free(file);
+		file = NULL;
+	}
 }
 
 void	pj_matrix_free(t_matrix **matrix)
 {
 	int	i;
 
-	i = ZERO;
-	while (i < g_matrix_y)
-		free(matrix[i++]);
-	free(matrix);
-	matrix = NULL;
+	i = NEG;
+	while (++i < g_matrix_y)
+		if (matrix[i])
+			free(matrix[i]);
+	if (matrix)
+	{
+		free(matrix);
+		matrix = NULL;
+	}
 }

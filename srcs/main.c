@@ -28,7 +28,7 @@ void	ft_show_matrix(t_matrix **m)
 	}
 }
 
-int		main(int argc, cstring argv[])
+int			main(int argc, cstring argv[])
 {
 	string		*file;
 	t_matrix	**matrix;
@@ -36,7 +36,6 @@ int		main(int argc, cstring argv[])
 
 	--argc;
 	++argv;
-	file = NULL;
 	_NOTIS_MSG("Usage: ./fdf <map_name>", !(!argc || argc > 1));
 	_NOTIS_MPE("Invalid file", file = pj_file_read(*argv));
 	_NOTIS_MSG("In-validating map error.", matrix = pj_matrix_save(file));
