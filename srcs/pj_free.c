@@ -33,11 +33,3 @@ void	pj_matrix_free(t_matrix **matrix)
 	free(matrix);
 	matrix = NULL;
 }
-
-void	pj_mlx_free(t_mlx *mlx)
-{
-	free(mlx->mlx);
-	free(mlx->win);
-	free(mlx);
-	mlx = NULL;
-}

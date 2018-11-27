@@ -87,5 +87,6 @@ void		pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix)
 		}
 		dist_y = DEC;
 	}
+	mlx_destroy_window(mlx->mlx, mlx->win);
 	// mlx_loop(mlx->mlx);
 }
