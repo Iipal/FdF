@@ -44,4 +44,5 @@ int			main(int argc, cstring argv[])
 	ft_show_matrix(matrix);
 	pj_file_free(file);
 	pj_matrix_free(matrix);
+	pj_mlx_free(mlx);
 }

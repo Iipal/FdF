@@ -41,3 +41,16 @@ void	pj_matrix_free(t_matrix **matrix)
 		matrix = NULL;
 	}
 }
+
+void	pj_mlx_free(t_mlx *mlx)
+{
+	if (mlx->mlx)
+		free(mlx->mlx);
+	if (mlx->win)
+		free(mlx->win);
+	if (mlx)
+	{
+		free(mlx);
+		mlx = NULL;
+	}
+}
