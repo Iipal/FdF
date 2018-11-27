@@ -81,7 +81,7 @@ void		pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix)
 		while (++x < g_matrix_x - 1)
 		{
 			add_set_line((t_point){.x = x * dist_x, y * dist_y},
-						(t_point){.x = (x + 1) * dist_x , y * dist_y},
+						(t_point){.x = (x + 1) * dist_x, y * dist_y},
 						(t_mlxncolor){.mlx = mlx, .color = matrix[y][x].z});
 			dist_x = DEC;
 		}

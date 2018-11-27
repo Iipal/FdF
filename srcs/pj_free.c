@@ -18,13 +18,9 @@ void	pj_file_free(string *file)
 
 	i = NEG;
 	while (++i < g_matrix_y)
-		if (file[i])
-			ft_strdel(&(file[i]));
-	if (file)
-	{
-		free(file);
-		file = NULL;
-	}
+		ft_strdel(&(file[i]));
+	free(file);
+	file = NULL;
 }
 
 void	pj_matrix_free(t_matrix **matrix)
@@ -33,24 +29,15 @@ void	pj_matrix_free(t_matrix **matrix)
 
 	i = NEG;
 	while (++i < g_matrix_y)
-		if (matrix[i])
-			free(matrix[i]);
-	if (matrix)
-	{
-		free(matrix);
-		matrix = NULL;
-	}
+		free(matrix[i]);
+	free(matrix);
+	matrix = NULL;
 }
 
 void	pj_mlx_free(t_mlx *mlx)
 {
-	if (mlx->mlx)
-		free(mlx->mlx);
-	if (mlx->win)
-		free(mlx->win);
-	if (mlx)
-	{
-		free(mlx);
-		mlx = NULL;
-	}
+	free(mlx->mlx);
+	free(mlx->win);
+	free(mlx);
+	mlx = NULL;
 }
