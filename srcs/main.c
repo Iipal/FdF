@@ -14,8 +14,8 @@
 
 void	ft_show_matrix(t_matrix **m)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	i = ZERO;
 	while (i < g_matrix_y)
@@ -41,7 +41,7 @@ int		main(int argc, cstring argv[])
 	_NOTIS_MPE("Invalid file", file = pj_file_read(*argv));
 	_NOTIS_MSG("In-validating map error.", matrix = pj_matrix_save(file));
 	_NOTIS_MSG("MLX initialization error.", mlx = pj_mlx_init(*argv));
-	// pj_mlx_draw_raw_matrix(mlx, matrix);
+	pj_mlx_draw_raw_matrix(mlx, matrix);
 	ft_show_matrix(matrix);
 	pj_file_free(file);
 	pj_matrix_free(matrix);

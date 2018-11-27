@@ -16,7 +16,7 @@ string			*pj_file_read(cstring file_name)
 {
 	string	*out_tab;
 	string	gnl_temp;
-	size_t	i;
+	int		i;
 	int		fd;
 
 	gnl_temp = NULL;
@@ -45,11 +45,11 @@ string			*pj_file_read(cstring file_name)
 **			Used for known how much numbers in 1 line of "file".
 */
 
-static size_t	add_numbers_inline(string line)
+static int	add_numbers_inline(string line)
 {
-	size_t	out_numbers_counter;
-	size_t	number_abs_temp;
-	size_t	digits;
+	int	out_numbers_counter;
+	int	number_abs_temp;
+	int	digits;
 	long	number;
 
 	out_numbers_counter = ZERO;
@@ -79,9 +79,9 @@ static size_t	add_numbers_inline(string line)
 
 static bool		add_line_to_matrix(string line, t_matrix *matrix)
 {
-	size_t		x;
-	size_t		digits;
-	size_t		number_abs_temp;
+	int	x;
+	int	digits;
+	int	number_abs_temp;
 
 	x = ZERO;
 	while (*line && x < g_matrix_x)
@@ -109,7 +109,7 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 t_matrix		**pj_matrix_save(string *file)
 {
 	t_matrix	**out;
-	size_t		y;
+	int			y;
 
 	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*) * g_matrix_y));
 	_NOTIS_N(g_matrix_x = add_numbers_inline(*file));

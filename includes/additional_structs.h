@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pj_free.c                                          :+:      :+:    :+:   */
+/*   additional_structs.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/23 13:46:39 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/11/25 18:30:14 by tmaluh           ###   ########.fr       */
+/*   Created: 2018/11/27 11:38:39 by tmaluh            #+#    #+#             */
+/*   Updated: 2018/11/27 11:38:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#ifndef ADDITIONAL_STRUCTS_H
+# define ADDITIONAL_STRUCTS_H
+# include "fdf.h"
 
-void	pj_file_free(string *file)
+typedef struct	s_point
 {
-	int	i;
+	int	x;
+	int	y;
+}				t_point;
 
-	i = ZERO;
-	while (i < g_matrix_y)
-		ft_strdel(&(file[i++]));
-	free(file);
-	file = NULL;
-}
-
-void	pj_matrix_free(t_matrix **matrix)
+typedef struct	s_double_points
 {
-	int	i;
+	t_point	p1;
+	t_point p2;
+}				t_double_points;
 
-	i = ZERO;
-	while (i < g_matrix_y)
-		free(matrix[i++]);
-	free(matrix);
-	matrix = NULL;
-}
+#endif

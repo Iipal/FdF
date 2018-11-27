@@ -14,7 +14,10 @@ NAME = fdf
 
 CC = gcc -march=native
 CFLAGS = -g -Wall -Wextra -Werror
-MLXFLAGS = -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
+# macOS:
+MLXFLAGS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+# linux:
+# MLXFLAGS = -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
 
 SRC = srcs/main.c srcs/pj_readnsave.c srcs/pj_mlx.c srcs/pj_free.c
 

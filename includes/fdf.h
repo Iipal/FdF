@@ -62,8 +62,8 @@ void			pj_matrix_free(t_matrix **matrix);
 **	Two global variables for save height and width of our 't_matrix **matrix'.
 */
 
-size_t	g_matrix_y;
-size_t	g_matrix_x;
+int	g_matrix_y;
+int	g_matrix_x;
 
 /*
 **	Structure 'struct s_mlx'(in future 't_mlx') &
@@ -82,11 +82,5 @@ typedef struct	s_mlx
 
 t_mlx			*pj_mlx_init(cstring tittle);
 void			pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix);
-
-typedef struct	s_point
-{
-	size_t	x;
-	size_t	y;
-}				t_point;
 
 #endif
