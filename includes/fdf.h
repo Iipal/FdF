@@ -82,5 +82,6 @@ typedef struct	s_mlx
 
 t_mlx			*pj_mlx_init(cstring tittle);
 void			pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix);
+void			pj_mlx_free(t_mlx *mlx);
 
 #endif
