@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_drawing_bresenham_algorithm.c                   :+:      :+:    :+:   */
+/*   ft_drawing_raw.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -107,11 +107,11 @@ void		pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **matrix)
 		dist_x = ZERO;
 		while (++x < g_matrix_x - 1)
 		{
-			add_set_line((t_point){.x = x * dist_x, .y = y * dist_y},
-						(t_point){.x = (x + 1) * DEC, .y = y * dist_y},
+			add_set_line((t_point){.x = matrix[y][x].x * dist_x, .y = matrix[y][x].y * dist_y},
+						(t_point){.x = (matrix[y][x].x + 1) * DEC, .y = matrix[y][x].y * dist_y},
 						(t_mlxncolor){.mlx = mlx, .color = matrix[y][x].rgb});
-			add_set_line((t_point){.x = x * dist_x, .y = y * dist_y},
-						(t_point){.x = x * dist_x, .y = (y + 1) * DEC},
+			add_set_line((t_point){.x = matrix[y][x].x * dist_x, .y = matrix[y][x].y * dist_y},
+						(t_point){.x = matrix[y][x].x * dist_x, .y = (matrix[y][x].y + 1) * DEC},
 						(t_mlxncolor){.mlx = mlx, .color = matrix[y][x].rgb});
 			dist_x = DEC;
 		}

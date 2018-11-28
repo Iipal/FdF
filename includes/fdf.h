@@ -45,6 +45,8 @@ void			pj_file_free(string *file);
 
 typedef struct	s_matrix
 {
+	int	y;
+	int	x;
 	int	z;
 	int	rgb;
 }				t_matrix;

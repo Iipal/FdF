@@ -22,7 +22,10 @@ void	ft_show_matrix(t_matrix **m)
 	{
 		j = ZERO;
 		while (j < g_matrix_x)
-			printf("%d ", m[i][j++].z);
+		{
+			printf("%d | %d\n", m[i][j].y, m[i][j].x);
+			++j;
+		}
 		++i;
 		printf("\n");
 	}
@@ -44,5 +47,5 @@ int		main(int argc, cstring argv[])
 	ft_show_matrix(matrix);
 	pj_file_free(file);
 	pj_matrix_free(matrix);
-	mlx_loop(mlx->mlx);
+	mlx_loop(mlx->win);
 }

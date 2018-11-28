@@ -72,16 +72,18 @@ static int		add_numbers_inline(string line)
 **			Used for save all numbers in each 'line' of file to 'matrix[y]'.
 */
 
-static bool		add_line_to_matrix(string line, t_matrix *matrix)
+static bool		add_line_to_matrix(string line, t_matrix *matrix, int y)
 {
-	int	x;
-	int	digits;
+	int			x;
+	int			digits;
 
 	x = ZERO;
 	while (*line && x < g_matrix_x)
 	{
 		if ((ft_isdigit(*line) || *line == '-') && !(digits = ZERO))
 		{
+			matrix[x].y = y;
+			matrix[x].x = x;
 			matrix[x].rgb = IRGB_WHITE;
 			matrix[x].z = ft_atoi(line);
 			digits = ft_strlen(ft_itoa(matrix[x].z));
@@ -111,7 +113,7 @@ t_matrix		**pj_matrix_save(string *file)
 	{
 		_NOTIS_N(add_numbers_inline(file[y]) == g_matrix_x);
 		_NOTIS_N(out[y] = (t_matrix*)malloc(sizeof(t_matrix) * (g_matrix_x)));
-		_NOTIS_N(add_line_to_matrix(file[y], out[y]));
+		_NOTIS_N(add_line_to_matrix(file[y], out[y], y));
 	}
 	return (out);
 }
