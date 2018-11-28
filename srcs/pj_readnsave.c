@@ -42,26 +42,20 @@ string			*pj_file_read(cstring file_name)
 
 /*
 **	'add_numbers_inline' additional function for 'pj_savenvalid'.
-**			Used for known how much numbers in 1 line of "file".
+**			Used for known how much numbers in 1 'line' of "file".
 */
 
 static int		add_numbers_inline(string line)
 {
 	int		out_numbers_counter;
-	int		number_abs_temp;
 	int		digits;
-	long	number;
 
 	out_numbers_counter = ZERO;
 	while (*line)
 	{
 		if (ft_isdigit(*line) || *line == '-')
 		{
-			digits = ZERO;
-			number = ft_atoi(line);
-			number_abs_temp = _ABS(number);
-			_DIGITS_IN_NUMBER(number_abs_temp);
-			(digits == 0) ? (digits = 1) : digits;
+			digits = ft_strlen(ft_itoa(ft_atoi(line)));
 			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
 			if (*line == ',')
 				while (*line && !ft_isblank(*line))
@@ -82,18 +76,15 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 {
 	int	x;
 	int	digits;
-	int	number_abs_temp;
 
-	x = NEG;
-	while (*line && ++x < g_matrix_x)
+	x = ZERO;
+	while (*line && x < g_matrix_x)
 	{
 		if ((ft_isdigit(*line) || *line == '-') && !(digits = ZERO))
 		{
 			matrix[x].rgb = IRGB_WHITE;
 			matrix[x].z = ft_atoi(line);
-			number_abs_temp = _ABS(matrix[x].z);
-			_DIGITS_IN_NUMBER(number_abs_temp);
-			((digits == 0) ? (digits = 1) : digits);
+			digits = ft_strlen(ft_itoa(matrix[x].z));
 			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
 			if (*line == ',')
 			{
@@ -101,6 +92,7 @@ static bool		add_line_to_matrix(string line, t_matrix *matrix)
 				while (*line && !ft_isblank(*line))
 					++line;
 			}
+			++x;
 		}
 		*line ? ++line : 0;
 	}
@@ -112,9 +104,9 @@ t_matrix		**pj_matrix_save(string *file)
 	t_matrix	**out;
 	int			y;
 
+	y = NEG;
 	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*) * g_matrix_y));
 	_NOTIS_N(g_matrix_x = add_numbers_inline(*file));
-	y = NEG;
 	while (++y < g_matrix_y)
 	{
 		_NOTIS_N(add_numbers_inline(file[y]) == g_matrix_x);
