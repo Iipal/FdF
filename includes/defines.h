@@ -17,14 +17,13 @@
 **	All info about that's macroses and constants include in README.
 */
 
-# define WIN_X 2000
-# define WIN_Y 1000
+# define WIN_X 1200
+# define WIN_Y 600
 
 # define IRGB_WHITE 16777215
 
 # define NEG -1
 # define ZERO 0
-# define POS 1
 
 # define HEX 16
 # define DEC 10
@@ -36,8 +35,7 @@
 # define _NOTIS_F(ex) if (!(ex)) return (false)
 # define _NOTIS_N(ex) if (!(ex)) return (NULL)
 # define _SWAP(a, b) { (a) ^= (b); (b) ^= (a); (a) ^= (b); }
-# define _DIGITS_IN_NUMBER(var) while ((var)) {(var) /= DEC; ++digits;}
-# define _ABS(var) ((var) < 0) ? -(var) : (var);
+# define _ABS(var) ((var) < 0) ? -(var) : (var)
 
 enum	e_bool
 {

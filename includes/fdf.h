@@ -17,15 +17,15 @@
 # include "defines.h"
 # include <stdio.h>
 # include <fcntl.h>
+# include <math.h>
 # include <mlx.h>
 
 /*
 **	"defines.h" - All macroses & constantes what will used in this program.
 **	<mlx.h> - MiniLibX. School42 private project for students,
 **			created by initiators of this schools.
-*/
-
-/*
+**
+**
 **	'pj_file_read' for save all data from 'file_name' to
 **			simple two-dimensional character array(in future "file").
 **
@@ -78,10 +78,12 @@ typedef struct	s_mlx
 
 /*
 **	'pj_mlx_init' for initializing 't_mlx' scopes & create graphic window.
+**
+**	'pj_mlx_draw_matrix' for drawing matrix and lines between points
+**			in mlx window, using bresenham algorithm.
 */
 
 t_mlx			*pj_mlx_init(cstring tittle);
-void			pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix);
-void			pj_mlx_free(t_mlx *mlx);
+void			pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **matrix);
 
 #endif

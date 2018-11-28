@@ -15,7 +15,7 @@ NAME = libft.a
 CC = gcc -march=native
 LC = ar rc
 
-CFLAGS = -Wall -Wextra -Werror -Wno-unused-result -Ofast
+CFLAGS = -Wall -Wextra -Werror -Ofast
 
 WHITE=\033[0m
 GREEN=\033[32m

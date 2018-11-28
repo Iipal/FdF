@@ -54,16 +54,16 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 	- **bool**: `enum e_bool` with only 2 values(`true` and `false`).
 	- **pvoid**: `void *`.
 	- **t_matrix**: `struct s_matrix`.
+	- **t_mlx**: `struct s_mlx`.
 2. `#define`:
 	- Constants:
-		- **WIN_Y**: Height our window.
-		- **WIN_X**: Width our window.
+		- **WIN_Y**: Height our window. Value - 1200.
+		- **WIN_X**: Width our window. Value - 600. (2:1 Display aspect ratio)
 		- **ZERO**: Value - 0.
 		- **NEG**: Value - -1.
-		- **POS**: Value - 1.
 		- **HEX**: Value - 16.
 		- **DEC**: Value - 10.
-		- **IRGB_WHITE**: RGB Int white color. Default `struct s_matrix.rgb` value.
+		- **IRGB_WHITE**: RGB Int white color. Default `struct s_matrix.rgb` value. Value - 16777215.
 	- Macroses:
 		- **\_MSG()**:
 			- *Arguments*: `msg`.
@@ -100,11 +100,6 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 			- *Behavior*: Macros just swap two value of any type.
 			- *Used*: Nowhere yet.
 			- *Usage*: `_SWAP(var_int, var_char);`
-		- **\_DIGITS_IN_NUMBER()**:
-			- *Arguments*: `var`.
-			- *Behavior*: Macro to find out the number of digits in the number. Variable which you put in that macro can be changed. In function in which are you want to use that macro also must be defined variable `digits`.
-			- *Used*: When validating data in file and saving it in to `struct s_matrix` two dimensional array.
-			- *Usage*: `_DIGITS_IN_NUMBER(var);`
 		- **\_ABS()**:
 			- *Arguments*: `var`.
 			- *Behavior*: Simple macro to get absolute value.

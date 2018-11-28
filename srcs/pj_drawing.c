@@ -13,13 +13,13 @@
 #include "../includes/fdf.h"
 #include "../includes/additional_structs.h"
 
-static void	add_draw_line(t_dp delta, t_dp points, t_mlxncolor mnc)
+static void	add_draw_line_x(t_dp delta, t_dp points, t_mlxncolor mnc)
 {
 	int	x;
 	int	y;
 	int	dir;
 	int	increase;
-	
+
 	dir = ZERO;
 	increase = ZERO;
 	x = points.p1.x;
@@ -39,30 +39,60 @@ static void	add_draw_line(t_dp delta, t_dp points, t_mlxncolor mnc)
 	}
 }
 
+static void	add_draw_line_y(t_dp delta, t_dp points, t_mlxncolor mnc)
+{
+	int	x;
+	int	y;
+	int	dir;
+	int	increase;
+
+	dir = ZERO;
+	increase = ZERO;
+	x = points.p1.x;
+	y = points.p1.y;
+	if (delta.p1.y)
+		dir = (delta.p1.x > 0 ? 1 : -1);
+	while (((delta.p1.y > 0) ? (y <= points.p2.y) : (y >= points.p2.y)))
+	{
+		mlx_pixel_put(mnc.mlx->mlx, mnc.mlx->win, x, y, mnc.color);
+		increase += delta.p2.x;
+		if (increase >= delta.p2.y)
+		{
+			increase -= delta.p2.y;
+			x += dir;
+		}
+		(delta.p1.y > 0) ? ++y : --y;
+	}
+}
+
 static void	add_set_line(t_point point1, t_point point2, t_mlxncolor mnc)
 {
 	const int	deltax = point2.x - point1.x;
 	const int	deltay = point2.y - point1.y;
 	const int	absdx = _ABS(deltax);
 	const int	absdy = _ABS(deltay);
-	
+
 	if (absdx >= absdy)
-		add_draw_line((t_dp){.p1.x = deltax,
+		add_draw_line_x((t_dp){.p1.x = deltax,
 								.p1.y = deltay,
 							.p2.x = absdx,
 								.p2.y = absdy},
 					(t_dp){.p1 = point1,
 							.p2 = point2}, mnc);
 	else
-		add_draw_line((t_dp){.p1.x = deltay,
-								.p1.y = deltax,
-							.p2.x = absdy,
-								.p2.y = absdx},
-					(t_dp){.p1 = point2,
-							.p2 = point1}, mnc);
+		add_draw_line_y((t_dp){.p1.x = deltax,
+								.p1.y = deltay,
+							.p2.x = absdx,
+								.p2.y = absdy},
+					(t_dp){.p1 = point1,
+							.p2 = point2}, mnc);
 }
 
-void		pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix)
+/*
+**	'pj_mlx_draw_matrix' Bresenham algorithm optimization for my code.
+*/
+
+void		pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **matrix)
 {
 	int	y;
 	int	x;
@@ -80,13 +110,11 @@ void		pj_mlx_draw_raw_matrix(t_mlx *mlx, t_matrix **matrix)
 			add_set_line((t_point){.x = x * dist_x, .y = y * dist_y},
 						(t_point){.x = (x + 1) * DEC, .y = y * dist_y},
 						(t_mlxncolor){.mlx = mlx, .color = matrix[y][x].rgb});
-			// add_set_line((t_point){.x = x * dist_x, .y = y * dist_y},
-			// 			(t_point){.x = x * dist_x, .y = (y + 1) * DEC},
-			// 			(t_mlxncolor){.mlx = mlx, .color = matrix[y][x].rgb});
+			add_set_line((t_point){.x = x * dist_x, .y = y * dist_y},
+						(t_point){.x = x * dist_x, .y = (y + 1) * DEC},
+						(t_mlxncolor){.mlx = mlx, .color = matrix[y][x].rgb});
 			dist_x = DEC;
 		}
 		dist_y = DEC;
 	}
-	mlx_loop(mlx->mlx);
-	mlx_destroy_window(mlx->mlx, mlx->win);
 }
