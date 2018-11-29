@@ -15,15 +15,15 @@
 
 static void	add_draw_line_x(t_dp delta, t_dp points, t_mlxncolor mnc)
 {
-	int	x;
 	int	y;
+	int	x;
 	int	dir;
 	int	increase;
 
 	dir = ZERO;
 	increase = ZERO;
-	x = points.p1.x;
 	y = points.p1.y;
+	x = points.p1.x;
 	if (delta.p1.y)
 		dir = delta.p1.y > 0 ? 1 : -1;
 	while (((delta.p1.x > 0) ? (x <= points.p2.x) : (x >= points.p2.x)))
@@ -48,8 +48,8 @@ static void	add_draw_line_y(t_dp delta, t_dp points, t_mlxncolor mnc)
 
 	dir = ZERO;
 	increase = ZERO;
-	x = points.p1.x;
 	y = points.p1.y;
+	x = points.p1.x;
 	if (delta.p1.y)
 		dir = (delta.p1.x > 0 ? 1 : -1);
 	while (((delta.p1.y > 0) ? (y <= points.p2.y) : (y >= points.p2.y)))
@@ -92,29 +92,31 @@ static void	add_set_line(t_point point1, t_point point2, t_mlxncolor mnc)
 **	'pj_mlx_draw_matrix' Bresenham algorithm optimization for my code.
 */
 
-void		pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **matrix)
+void		pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **m)
 {
 	int	y;
 	int	x;
 	int	dist_x;
 	int	dist_y;
 
-	y = NEG;
+	y = ZERO;
 	dist_y = ZERO;
-	while (++y < g_matrix_y)
+	while (y < g_matrix_y)
 	{
-		x = NEG;
+		x = ZERO;
 		dist_x = ZERO;
-		while (++x < g_matrix_x - 1)
+		while (x < g_matrix_x)
 		{
-			add_set_line((t_point){.x = matrix[y][x].x * dist_x, .y = matrix[y][x].y * dist_y},
-						(t_point){.x = (matrix[y][x].x + 1) * DEC, .y = matrix[y][x].y * dist_y},
-						(t_mlxncolor){.mlx = mlx, .color = matrix[y][x].rgb});
-			add_set_line((t_point){.x = matrix[y][x].x * dist_x, .y = matrix[y][x].y * dist_y},
-						(t_point){.x = matrix[y][x].x * dist_x, .y = (matrix[y][x].y + 1) * DEC},
-						(t_mlxncolor){.mlx = mlx, .color = matrix[y][x].rgb});
+			add_set_line((t_point){.x = m[y][x].x * dist_x, .y = m[y][x].y * dist_y},
+						(t_point){.x = (m[y][x].x + 1) * DEC, .y = m[y][x].y * dist_y},
+						(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
+			add_set_line((t_point){.x = m[y][x].x * dist_x, .y = m[y][x].y * dist_y},
+						(t_point){.x = m[y][x].x * dist_x, .y = (m[y][x].y + 1) * DEC},
+						(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
 			dist_x = DEC;
+			++x;
 		}
 		dist_y = DEC;
+		++y;
 	}
 }

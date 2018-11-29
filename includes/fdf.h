@@ -17,7 +17,6 @@
 # include "defines.h"
 # include <stdio.h>
 # include <fcntl.h>
-# include <math.h>
 # include <mlx.h>
 
 /*
