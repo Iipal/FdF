@@ -74,12 +74,12 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 			- *Arguments*: `msg`, `ex`.
 			- *Behavior*: If `ex` isn't true - prints `msg` to standart output by **\_MSG**.
 			- *Used*: Usually - in main function for errors print.
-			- *Usage*: `_NOTIS_MSG(argc, "ERROR!!! argc is 0.");`
+			- *Usage*: `_NOTIS_MSG("ERROR!!! argc is 0.", argc);`
 		- **\_NOTIS_MPE()**:
 			- *Arguments*: `msg`, `ex`.
 			- *Behavior*: If `ex` isn't true - prints `msg` to error output by `perror()`.
 			- *Used*: Usually - in main function for errors print.
-			- *Usage*: `_NOTIS_MPE(argc > 1, "ERROR!!! argc is bigger than 1.");`
+			- *Usage*: `_NOTIS_MPE("ERROR!!! argc is bigger than 1.", argc > 1);`
 		- **\_NOTIS_V()**:
 			- *Arguments*: `ex`.
 			- *Behavior*: If `ex` isn't true - just `return;`.
@@ -102,8 +102,8 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 			- *Usage*: `_SWAP(var_int, var_char);`
 		- **\_ABS()**:
 			- *Arguments*: `var`.
-			- *Behavior*: Simple macro to get absolute value.
-			- *Used*: When validating data in file and saving it in to`struct s_matrix` two dimensional array and with `_DIGITS_IN_NUMBER()` for find out number of digits in negative number.
+			- *Behavior*: Simple macro to get absolute value from `var`.
+			- *Used*: For Bresenham Algorithm.
 			- *Usage*: `_ABS(negative_number);`
 		- **\_BOOL**:
 			- *Arguments*: none.
