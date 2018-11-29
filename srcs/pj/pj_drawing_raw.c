@@ -99,13 +99,13 @@ void		pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **m)
 	int	dist_x;
 	int	dist_y;
 
-	y = ZERO;
+	y = NEG;
 	dist_y = ZERO;
-	while (y < g_matrix_y)
+	while (++y < g_matrix_y)
 	{
-		x = ZERO;
+		x = NEG;
 		dist_x = ZERO;
-		while (x < g_matrix_x)
+		while (++x < g_matrix_x - 1)
 		{
 			add_set_line((t_point){.x = m[y][x].x * dist_x, .y = m[y][x].y * dist_y},
 						(t_point){.x = (m[y][x].x + 1) * DEC, .y = m[y][x].y * dist_y},
@@ -114,9 +114,7 @@ void		pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **m)
 						(t_point){.x = m[y][x].x * dist_x, .y = (m[y][x].y + 1) * DEC},
 						(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
 			dist_x = DEC;
-			++x;
 		}
 		dist_y = DEC;
-		++y;
 	}
 }
