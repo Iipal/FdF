@@ -16,6 +16,7 @@
 # include "../libft/includes/libft.h"
 # include "defines.h"
 # include <stdio.h>
+# include <math.h>
 # include <fcntl.h>
 # include <mlx.h>
 
@@ -36,7 +37,7 @@ void			pj_file_free(string *file);
 
 /*
 **	Structure 'struct s_matrix'(in future 't_matrix') &
-**			functions to save all data from file in program.
+**			functions to save all data from file to 't_matrix'.
 **
 **	't_matrix' used like a dynamic two-dimensional array
 **			(in future 't_matrix **matrix').
@@ -86,5 +87,7 @@ typedef struct	s_mlx
 
 t_mlx			*pj_mlx_init(cstring tittle);
 void			pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **matrix);
+
+void		pj_rotare_xyz(t_matrix **m);
 
 #endif
