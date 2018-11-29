@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   additional_structs.h                               :+:      :+:    :+:   */
+/*   pj_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 11:38:39 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/11/27 11:38:40 by tmaluh           ###   ########.fr       */
+/*   Created: 2018/11/23 13:46:39 by tmaluh            #+#    #+#             */
+/*   Updated: 2018/11/25 18:30:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ADDITIONAL_STRUCTS_H
-# define ADDITIONAL_STRUCTS_H
-# include "fdf.h"
+#include "../../includes/fdf.h"
 
-/*
-**	All of this structs are very simple and using only
-**			for drawing matrix in 'pj_drawing.c'
-*/
-typedef struct	s_point
+void	pj_file_free(string *file)
 {
-	int	y;
-	int	x;
-}				t_point;
+	int	i;
 
-typedef struct	s_double_points
+	i = NEG;
+	while (++i < g_matrix_y)
+		ft_strdel(&(file[i]));
+	free(file);
+	file = NULL;
+}
+
+void	pj_matrix_free(t_matrix **matrix)
 {
-	t_point	p1;
-	t_point p2;
-}				t_dp;
+	int	i;
 
-typedef	struct	s_mlxncolor
-{
-	t_mlx	*mlx;
-	int		color;
-}				t_mlxncolor;
-
-#endif
+	i = NEG;
+	while (++i < g_matrix_y)
+		free(matrix[i]);
+	free(matrix);
+	matrix = NULL;
+}

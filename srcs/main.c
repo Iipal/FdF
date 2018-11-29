@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/matrix_list.h"
 
 void	ft_show_matrix(t_matrix **m)
 {
@@ -31,14 +32,22 @@ void	ft_show_matrix(t_matrix **m)
 	}
 }
 
+void	show_ml(t_matrix_list *ml)
+{
+	printf("z: %lf y: %lf x: %lf\tcolor: %lu", ml->z, ml->p.y, ml->p.x, ml->rgb);
+}
+
 int		main(int argc, cstring argv[])
 {
 	string		*file;
 	t_matrix	**matrix;
 	t_mlx		*mlx;
+	t_matrix_list	*ml;
 
 	--argc;
 	++argv;
+	ml = ml_new();
+	show_ml(ml);
 	_NOTIS_MSG("Usage: ./fdf <map_name>", !(!argc || argc > 1));
 	_NOTIS_MPE("Invalid file", file = pj_file_read(*argv));
 	_NOTIS_MSG("In-validating map error.", matrix = pj_matrix_save(file));

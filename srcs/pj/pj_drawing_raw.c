@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-#include "../includes/additional_structs.h"
+#include "../../includes/fdf.h"
+#include "../../includes/additional_structs.h"
 
 static void	add_draw_line_x(t_dp delta, t_dp points, t_mlxncolor mnc)
 {
