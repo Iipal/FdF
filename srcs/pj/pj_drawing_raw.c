@@ -105,8 +105,9 @@ void		pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **m)
 	{
 		x = NEG;
 		dist_x = ZERO;
-		while (++x < g_matrix_x - 1)
+		while (++x < g_matrix_x)
 		{
+
 			add_set_line((t_point){.x = m[y][x].x * dist_x, .y = m[y][x].y * dist_y},
 						(t_point){.x = (m[y][x].x + 1) * DEC, .y = m[y][x].y * dist_y},
 						(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});

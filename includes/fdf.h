@@ -88,6 +88,4 @@ typedef struct	s_mlx
 t_mlx			*pj_mlx_init(cstring tittle);
 void			pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **matrix);
 
-void		pj_rotare_xyz(t_matrix **m);
-
 #endif
