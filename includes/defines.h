@@ -18,7 +18,7 @@
 */
 
 # define WIN_X 2000
-# define WIN_Y 1500
+# define WIN_Y 1000
 
 # define IRGB_WHITE 16777215
 

@@ -92,40 +92,22 @@ static void	add_set_line(t_point point1, t_point point2, t_mlxncolor mnc)
 							.p2 = point2}, mnc);
 }
 
-static void	add_draw_last_lines(t_mlx *mlx, t_matrix **m)
-{
-	int		x;
-	int		y;
-
-	y = NEG;
-	x = g_matrix_x - 1;
-	while (++y < g_matrix_y)
-		add_set_line((t_p){.x = (m[y][x].x + 1) * DEC, .y = m[y][x].y * DEC},
-				(t_p){.x = (m[y][x].x + 1) * DEC, .y = (m[y][x].y + 1) * DEC},
-				(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
-	--y;
-	x = NEG;
-	while (++x < g_matrix_x)
-		add_set_line((t_p){.x = m[y][x].x + 1, .y = m[y][x].y + 1},
-				(t_p){.x = m[y][x].x + 1, .y = m[y][x].y + 1},
-				(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
-}
-
 void		pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **m)
 {
 	int	y;
 	int	x;
 
 	y = NEG;
-	while (++y < (g_matrix_y - 1) && (x = NEG))
-		while (++x < (g_matrix_x - 1))
+	while (++y < g_matrix_y && (x = NEG))
+		while (++x < g_matrix_x)
 		{
-			add_set_line((t_p){.x = m[y][x].x, .y = m[y][x].y},
-					(t_p){.x = m[y][x + 1].x, .y = m[y][x].y},
-					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
-			add_set_line((t_p){.x = m[y][x].x, .y = m[y][x].y},
-					(t_p){.x = m[y][x].x, .y = m[y + 1][x].y},
-					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
+			if (x + 1 != g_matrix_x)
+				add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+						(t_p){.y = m[y][x].y, .x = m[y][x + 1].x},
+						(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
+			if (y + 1 != g_matrix_y)
+				add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+						(t_p){.y = m[y + 1][x].y, .x = m[y][x].x},
+						(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
 		}
-	add_draw_last_lines(mlx, m);
 }

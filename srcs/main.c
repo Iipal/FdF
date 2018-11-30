@@ -22,7 +22,8 @@ void	ft_show_matrix(t_matrix **m)
 	{
 		j = NEG;
 		while (++j < g_matrix_x)
-			printf("%d - %d - %d |\t%d\n", m[i][j].y, m[i][j].x, m[i][j].z, m[i][j].rgb);
+			printf("%d - %d - %d |\t%d\n",
+				m[i][j].y, m[i][j].x, m[i][j].z, m[i][j].rgb);
 		printf("\n");
 	}
 	printf("%d | %d\n", g_matrix_y, g_matrix_x);
@@ -40,7 +41,7 @@ int		main(int argc, cstring argv[])
 	_NOTIS_MPE("Invalid file", file = pj_file_read(*argv));
 	_NOTIS_MSG("In-validating map error.", matrix = pj_matrix_save(file));
 	_NOTIS_MSG("MLX initialization error.", mlx = pj_mlx_init(*argv));
-	pj_appscale_xy(matrix, DEC);
+	pj_appscale_xy(matrix, 10);
 	pj_rotare_xyz(matrix);
 	pj_mlx_draw_matrix(mlx, matrix);
 	ft_show_matrix(matrix);
