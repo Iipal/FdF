@@ -76,6 +76,7 @@ typedef struct	s_mlx
 {
 	pvoid	mlx;
 	pvoid	win;
+	pvoid	img;
 }				t_mlx;
 
 /*
@@ -88,7 +89,8 @@ typedef struct	s_mlx
 t_mlx			*pj_mlx_init(cstring tittle);
 void			pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **m);
 void			pj_appscale_xy(t_matrix **m, int value);
-void			pj_rotare_xyz(t_matrix **m);
+void			pj_rotare_x(t_matrix **m);
+void			pj_rotare_y(t_matrix **m);
 
 typedef struct	s_point
 {
