@@ -28,6 +28,8 @@
 # define HEX 16
 # define DEC 10
 
+# define PI 3.141592
+
 # define _MSG(msg) ft_putendl(msg)
 # define _NOTIS_MSG(msg, ex) if (!(ex)) { _MSG(msg); return (false); }
 # define _NOTIS_MPE(msg, ex) if (!(ex)) { perror(msg); return (false); }
@@ -36,6 +38,8 @@
 # define _NOTIS_N(ex) if (!(ex)) return (NULL)
 # define _SWAP(a, b) { (a) ^= (b); (b) ^= (a); (a) ^= (b); }
 # define _ABS(var) ((var) < 0) ? -(var) : (var)
+# define _DEG(rad) (((rad) * 180.0) / PI)
+# define _RAD(deg) (((deg) * PI) / 180.0)
 
 enum	e_bool
 {
