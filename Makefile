@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 13:30:08 by tmaluh            #+#    #+#              #
-#    Updated: 2018/11/13 13:30:10 by tmaluh           ###   ########.fr        #
+#    Updated: 2018/11/30 09:59:34 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,12 @@ NAME = fdf
 CC = gcc -march=native
 CFLAGS = -g -Wall -Wextra -Werror
 # macOS:
-# MLXFLAGS = -L /usr/local/lib -lmlx -lm -framework OpenGL -framework AppKit
+MLXFLAGS = -L /usr/local/lib -lmlx -lm -framework OpenGL -framework AppKit
 # linux:
-MLXFLAGS = -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
+# MLXFLAGS = -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
 
-SRC = srcs/main.c srcs/pj/pj_readnsave.c srcs/pj/pj_mlx.c srcs/pj/pj_free.c \
-srcs/pj/pj_drawing_raw.c
-# srcs/pj/pj_rotare_xyz.c
+SRC = srcs/main.c srcs/pj_readnsave.c srcs/pj_mlx.c srcs/pj_free.c \
+srcs/pj_drawing_raw.c srcs/pj_xyz.c
 
 OBJ = $(SRC:.c=.o)
 

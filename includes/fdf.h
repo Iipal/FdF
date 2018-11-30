@@ -86,6 +86,14 @@ typedef struct	s_mlx
 */
 
 t_mlx			*pj_mlx_init(cstring tittle);
-void			pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **matrix);
+void			pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **m);
+void			pj_appscale_xy(t_matrix **m, int value);
+void			pj_rotare_xyz(t_matrix **m);
+
+typedef struct	s_point
+{
+	int	y;
+	int	x;
+}				t_point;
 
 #endif

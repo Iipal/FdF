@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
+#include "../includes/fdf.h"
 
 void	pj_file_free(string *file)
 {

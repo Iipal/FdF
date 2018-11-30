@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
+#include "../includes/fdf.h"
 
 t_mlx	*pj_mlx_init(cstring tittle)
 {

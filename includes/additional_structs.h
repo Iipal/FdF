@@ -18,11 +18,8 @@
 **	All of this structs are very simple and using only
 **			for drawing matrix in 'pj_drawing.c'
 */
-typedef struct	s_point
-{
-	int	y;
-	int	x;
-}				t_point;
+
+typedef t_point	t_p;
 
 typedef struct	s_double_points
 {

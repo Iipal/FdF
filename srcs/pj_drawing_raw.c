@@ -10,8 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
-#include "../../includes/additional_structs.h"
+#include "../includes/fdf.h"
+#include "../includes/additional_structs.h"
+
+/*
+**	'pj_mlx_draw_matrix' Bresenham algorithm optimization for my code.
+*/
 
 static void	add_draw_line_x(t_dp delta, t_dp points, t_mlxncolor mnc)
 {
@@ -88,34 +92,40 @@ static void	add_set_line(t_point point1, t_point point2, t_mlxncolor mnc)
 							.p2 = point2}, mnc);
 }
 
-/*
-**	'pj_mlx_draw_matrix' Bresenham algorithm optimization for my code.
-*/
+static void	add_draw_last_lines(t_mlx *mlx, t_matrix **m)
+{
+	int		x;
+	int		y;
+
+	y = NEG;
+	x = g_matrix_x - 1;
+	while (++y < g_matrix_y)
+		add_set_line((t_p){.x = (m[y][x].x + 1) * DEC, .y = m[y][x].y * DEC},
+				(t_p){.x = (m[y][x].x + 1) * DEC, .y = (m[y][x].y + 1) * DEC},
+				(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
+	--y;
+	x = NEG;
+	while (++x < g_matrix_x)
+		add_set_line((t_p){.x = m[y][x].x + 1, .y = m[y][x].y + 1},
+				(t_p){.x = m[y][x].x + 1, .y = m[y][x].y + 1},
+				(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
+}
 
 void		pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **m)
 {
 	int	y;
 	int	x;
-	int	dist_x;
-	int	dist_y;
 
 	y = NEG;
-	dist_y = ZERO;
-	while (++y < g_matrix_y)
-	{
-		x = NEG;
-		dist_x = ZERO;
-		while (++x < g_matrix_x)
+	while (++y < (g_matrix_y - 1) && (x = NEG))
+		while (++x < (g_matrix_x - 1))
 		{
-
-			add_set_line((t_point){.x = m[y][x].x * dist_x, .y = m[y][x].y * dist_y},
-						(t_point){.x = (m[y][x].x + 1) * DEC, .y = m[y][x].y * dist_y},
-						(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
-			add_set_line((t_point){.x = m[y][x].x * dist_x, .y = m[y][x].y * dist_y},
-						(t_point){.x = m[y][x].x * dist_x, .y = (m[y][x].y + 1) * DEC},
-						(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
-			dist_x = DEC;
+			add_set_line((t_p){.x = m[y][x].x, .y = m[y][x].y},
+					(t_p){.x = m[y][x + 1].x, .y = m[y][x].y},
+					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
+			add_set_line((t_p){.x = m[y][x].x, .y = m[y][x].y},
+					(t_p){.x = m[y][x].x, .y = m[y + 1][x].y},
+					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
 		}
-		dist_y = DEC;
-	}
+	add_draw_last_lines(mlx, m);
 }
