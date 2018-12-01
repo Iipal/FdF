@@ -5,11 +5,24 @@
 
 ## Installation:
 
-Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
-- *make*: Compile all.
-- *make clean*: Delete temporal files.
-- *make fclean*: Delete executable FdF file & libft library.
-- *make re*: It's rules - *make fclean* & *make*.
+Use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
+
+#### MLX
+For correct work program & project need install MLX library. (Use this [MLX](https://github.com/abouvier/minilibx.git))
+When you have already installed MLX library - uncomment one of this variables in `Makefile` for compiling on MacOS\Linux system:
+
+```bash
+# macOS:
+# MLXFLAGS = -L /usr/local/lib -lmlx -lm -framework OpenGL -framework AppKit
+# linux:
+# MLXFLAGS = -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
+```
+
+after that, you can use this simple rules:
+- **make**: Compile all.
+- **make clean**: Delete temporal files.
+- **make fclean**: Delete executable FdF file & libft library.
+- **make re**: It's rules - **make fclean** & **make** in one.
 
 ## Usage:
 
@@ -38,13 +51,16 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 - `ft_*`: This is functions from libft.
 
 #### About structures:
-1. `struct s_matrix`: Simple structure with two `int`'s
+1. `struct	s_matrix`: Simple structure with two `int`'s
 	- `z`: Value of Z-position
 	- `rgb`: Value converted from `HEX` to `RGB Int` color of current position
 	- *In code i use this struct like a two dimensional array*.
 2. `struct	s_mlx`: Struct for work with MiniLibX library.
 	- `mlx`: Saving `void *` to init all mlx functions.
 	- `win`: Saving `void *` to graphic window.
+3. `struct	s_point`: Simpe struct for storage X and Y.
+	- `y`: Y-position.
+	- `x`: X-position.
 
 #### About `typedef`'s and `define`'s:	
 1. `typedef`: *(used in `define` macroses to get around the school42 norme. (Example: `_BOOL;` macros))*
@@ -55,6 +71,7 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 	- **pvoid**: `void *`.
 	- **t_matrix**: `struct s_matrix`.
 	- **t_mlx**: `struct s_mlx`.
+	- **t_point**: `struct s_point`.
 2. `#define`:
 	- Constants:
 		- **WIN_Y**: Height our window. Value - 1200.
@@ -63,6 +80,7 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 		- **NEG**: Value - -1.
 		- **HEX**: Value - 16.
 		- **DEC**: Value - 10.
+		- **PI**: Value - 3.141592.
 		- **IRGB_WHITE**: RGB Int white color. Default `struct s_matrix.rgb` value. Value - 16777215.
 	- Macroses:
 		- **\_MSG()**:
@@ -105,6 +123,16 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 			- *Behavior*: Simple macro to get absolute value from `var`.
 			- *Used*: For Bresenham Algorithm.
 			- *Usage*: `_ABS(negative_number);`
+		- **\_DEG()**:
+			- *Arguments*: `rad`.
+			- *Behavior*: Simple macro to get degrees from `rad`.
+			- *Used*: For XYZ-rotation.
+			- *Usage*: `_DEG(0.01);`
+		- **\_RAD()**:
+			- *Arguments*: `deg`.
+			- *Behavior*: Simple macro to get radianas from `deg`.
+			- *Used*: For XYZ-rotation.
+			- *Usage*: `_RAD(90);`
 		- **\_BOOL**:
 			- *Arguments*: none.
 			- *Behavior*: Macro for using `bool` type in C. Only for to get around the school42 norme.
@@ -126,7 +154,7 @@ Just use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 ## Code progress & structuring program:
 
  - [x] File reading & validating data in it.
- - [ ] Drawing all points from map in graphic window.
+ - [x] Drawing all points from map in graphic window.
  - [ ] Add isometric camera view.
  - [ ] Add some colored effects like a `ft_raindow()` & etc.
  - [ ] Add bonus part from subject.
