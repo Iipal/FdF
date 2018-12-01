@@ -9,6 +9,7 @@ Use [make](https://en.wikipedia.org/wiki/Makefile) for compiling all files.
 
 #### MLX
 For correct work program & project need install MLX library. (Use this [MLX](https://github.com/abouvier/minilibx.git))
+
 When you have already installed MLX library - uncomment one of this variables in `Makefile` for compiling on MacOS\Linux system:
 
 ```bash
