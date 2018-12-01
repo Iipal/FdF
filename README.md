@@ -47,7 +47,7 @@ after that, you can use this simple rules:
 ### In code:
 
 #### In code i have some function prefixes for better understanding:
-- `pj_*`: This is **important** functions for program work.
+- `pj_*`: This is **important** functions for project.
 - `add_*`: This is *additional* functions for `pj_*`.
 - `ft_*`: This is functions from libft.
 
