@@ -22,13 +22,13 @@ string			*pj_file_read(cstring file_name)
 	gnl_temp = NULL;
 	g_matrix_y = ZERO;
 	_NOTIS_N(fd = open(file_name, O_RDONLY));
-	_NOTIS_N(read(fd, NULL, ZERO) >= ZERO);
 	while (ft_gnl(fd, &gnl_temp) > ZERO)
 	{
 		++g_matrix_y;
 		ft_strdel(&gnl_temp);
 	}
 	close(fd);
+	_NOTIS_N(g_matrix_y);
 	_NOTIS_N(out_tab = (string*)malloc(sizeof(string) * g_matrix_y));
 	_NOTIS_N(fd = open(file_name, O_RDONLY));
 	i = ZERO;
