@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-void	pj_appscale_xy(t_matrix **m, int value)
+void	pj_matrix_upscale(t_matrix **m, int value)
 {
 	int	y;
 	int	x;
@@ -21,15 +21,15 @@ void	pj_appscale_xy(t_matrix **m, int value)
 	while (++y < g_matrix_y && (x = NEG))
 		while (++x < g_matrix_x)
 		{
-			m[y][x].y *= value;
 			m[y][x].x *= value;
+			m[y][x].y *= value;
 		}
-
 }
 
 void	pj_rotare_x(t_matrix **m)
 {
 	int	oy;
+	int oz;
 	int	y;
 	int	x;
 
@@ -38,15 +38,16 @@ void	pj_rotare_x(t_matrix **m)
 		while (++x < g_matrix_x)
 		{
 			oy = m[y][x].y;
-			m[y][x].y = oy * cos(_RAD(45)) + m[y][x].z * sin(_RAD(45));
-			m[y][x].z = m[y][x].z * cos(_RAD(45)) - oy * sin(_RAD(45));
+			oz = m[y][x].z;
+			m[y][x].y = (oy * cos(_RAD(55))) + (oz * sin(_RAD(55)));
+			m[y][x].z = (oy * sin(_RAD(55))) + (oz * cos(_RAD(55)));
 		}
 }
 
 void	pj_rotare_y(t_matrix **m)
 {
 	int	ox;
-	int	oz;
+	int oz;
 	int	y;
 	int	x;
 
@@ -56,10 +57,25 @@ void	pj_rotare_y(t_matrix **m)
 		{
 			ox = m[y][x].x;
 			oz = m[y][x].z;
-			m[y][x].x = ox * cos(_RAD(45)) - oz * sin(_RAD(45));
-			m[y][x].z = oz * cos(_RAD(45)) + ox * sin(_RAD(45));
+			m[y][x].x = (ox * cos(_RAD(45))) + (oz * sin(_RAD(45)));
+			m[y][x].z = (ox * sin(_RAD(45))) + (oz * cos(_RAD(45)));
+		}
+}
+
+void	pj_rotare_z(t_matrix **m)
+{
+	int	ox;
+	int oy;
+	int	y;
+	int	x;
+
+	y = NEG;
+	while (++y < g_matrix_y && (x = NEG))
+		while (++x < g_matrix_x)
+		{
 			ox = m[y][x].x;
-			m[y][x].x = ox * cos(_RAD(0)) + m[y][x].y * sin(_RAD(0));
-			m[y][x].y = m[y][x].y * cos(_RAD(0)) - ox * sin(_RAD(0));
+			oy = m[y][x].y;
+			m[y][x].x = (ox * cos(_RAD(55))) - (oy * sin(_RAD(55)));
+			m[y][x].z = (ox * sin(_RAD(55))) + (oy * cos(_RAD(55)));
 		}
 }

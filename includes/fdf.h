@@ -82,15 +82,17 @@ typedef struct	s_mlx
 /*
 **	'pj_mlx_init' for initializing 't_mlx' scopes & create graphic window.
 **
-**	'pj_mlx_draw_matrix' for drawing matrix and lines between points
-**			in mlx window, using bresenham algorithm.
+**	'pj_mlx_draw_raw' for drawing matrix and lines between points
+**			in mlx window, using bresenham algorithm with 'mlx_pixel_put()'.
 */
 
 t_mlx			*pj_mlx_init(cstring tittle);
-void			pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **m);
-void			pj_appscale_xy(t_matrix **m, int value);
+void			pj_mlx_draw_raw(t_mlx *mlx, t_matrix **m);
+void			pj_mlx_draw_image(t_mlx *mlx, t_matrix **matrix);
+void			pj_matrix_upscale(t_matrix **m, int value);
 void			pj_rotare_x(t_matrix **m);
 void			pj_rotare_y(t_matrix **m);
+void			pj_rotare_z(t_matrix **m);
 
 typedef struct	s_point
 {

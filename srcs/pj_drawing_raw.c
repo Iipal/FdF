@@ -92,7 +92,7 @@ static void	add_set_line(t_point point1, t_point point2, t_mlxncolor mnc)
 							.p2 = point2}, mnc);
 }
 
-void		pj_mlx_draw_matrix(t_mlx *mlx, t_matrix **m)
+void		pj_mlx_draw_raw(t_mlx *mlx, t_matrix **m)
 {
 	int	y;
 	int	x;
