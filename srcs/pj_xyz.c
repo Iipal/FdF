@@ -26,6 +26,28 @@ void	pj_matrix_upscale(t_matrix **m, int value)
 		}
 }
 
+void	pj_isometric(t_matrix **m)
+{
+	int	ox;
+	int oz;
+	int oy;
+	int	y;
+	int	x;
+
+	y = NEG;
+	while (++y < g_matrix_y && (x = NEG))
+		while (++x < g_matrix_x)
+		{
+			ox = m[y][x].x;
+			oy = m[y][x].y;
+			oz = m[y][x].z;
+			m[y][x].x = (1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz);
+			m[y][x].y = (1 / sqrt(6)) * (-ox + 2 * oy + oz);
+			m[y][x].z = (1 / sqrt(6)) *
+					(sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz);
+		}
+}
+
 void	pj_rotare_x(t_matrix **m)
 {
 	int	oy;

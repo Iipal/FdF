@@ -31,6 +31,7 @@ void	ft_show_matrix(t_matrix **m)
 
 int		main(int argc, cstring argv[])
 {
+	// Onlywsx
 	string		*file;
 	t_matrix	**matrix;
 	t_mlx		*mlx;
@@ -42,13 +43,23 @@ int		main(int argc, cstring argv[])
 	_NOTIS_MSG("In-validating map error.", matrix = pj_matrix_save(file));
 	_NOTIS_MSG("MLX initialization error.", mlx = pj_mlx_init(*argv));
 	pj_matrix_upscale(matrix, DEC);
-	pj_rotare_x(matrix);
-	pj_rotare_y(matrix);
-	pj_rotare_z(matrix);
+	pj_isometric(matrix);
+	int	y = NEG;
+	int	x;
+
+	while (++y < g_matrix_y && (x = NEG))
+		while (++x < g_matrix_x)
+		{
+			matrix[y][x].x += 250;
+			matrix[y][x].y += 250;
+		}
+	// pj_rotare_x(matrix);	
+	// pj_rotare_y(matrix);
+	// pj_rotare_z(matrix);
 	pj_mlx_draw_raw(mlx, matrix);
 	// pj_mlx_draw_image(mlx, matrix);
 	pj_file_free(file);
-	// ft_show_matrix(matrix);
+	ft_show_matrix(matrix);
 	pj_matrix_free(matrix);
 	mlx_loop(mlx->mlx);
 }

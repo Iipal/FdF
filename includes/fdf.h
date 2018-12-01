@@ -37,7 +37,7 @@ void			pj_file_free(string *file);
 
 /*
 **	Structure 'struct s_matrix'(in future 't_matrix') &
-**			functions to save all data from file to 't_matrix'.
+**			functions to save all data from "file" to 't_matrix'.
 **
 **	't_matrix' used like a dynamic two-dimensional array
 **			(in future 't_matrix **matrix').
@@ -88,6 +88,8 @@ typedef struct	s_mlx
 
 t_mlx			*pj_mlx_init(cstring tittle);
 void			pj_mlx_draw_raw(t_mlx *mlx, t_matrix **m);
+
+void			pj_isometric(t_matrix **m);
 void			pj_mlx_draw_image(t_mlx *mlx, t_matrix **matrix);
 void			pj_matrix_upscale(t_matrix **m, int value);
 void			pj_rotare_x(t_matrix **m);
