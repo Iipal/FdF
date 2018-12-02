@@ -156,6 +156,6 @@ after that, you can use this simple rules:
 
  - [x] File reading & validating data in it.
  - [x] Drawing all points from map in graphic window.
- - [ ] Add isometric camera view.
+ - [x] Add isometric camera view.
  - [ ] Add some colored effects like a `ft_raindow()` & etc.
  - [ ] Add bonus part from subject.

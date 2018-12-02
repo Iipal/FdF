@@ -15,7 +15,7 @@
 void	pj_mlx_draw_image(t_mlx *mlx, t_matrix **matrix)
 {
 	if (matrix)
-		;
+		{}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 	// printf("%s\n\n\n%d | %d | %d\n", mlx_get_data_addr(mlx->img, b, s, e), *b, *s, *e);
 }

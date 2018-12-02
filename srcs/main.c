@@ -43,6 +43,10 @@ int		main(int argc, cstring argv[])
 	_NOTIS_MSG("In-validating map error.", matrix = pj_matrix_save(file));
 	_NOTIS_MSG("MLX initialization error.", mlx = pj_mlx_init(*argv));
 	pj_matrix_upscale(matrix, DEC);
+	
+	// pj_rotare_x(matrix);
+	pj_rotare_y(matrix);
+	// pj_rotare_z(matrix);
 	pj_isometric(matrix);
 	int	y = NEG;
 	int	x;
@@ -50,12 +54,9 @@ int		main(int argc, cstring argv[])
 	while (++y < g_matrix_y && (x = NEG))
 		while (++x < g_matrix_x)
 		{
-			matrix[y][x].x += 250;
-			matrix[y][x].y += 250;
+			matrix[y][x].x += 100;
+			matrix[y][x].y += 100;
 		}
-	// pj_rotare_x(matrix);	
-	// pj_rotare_y(matrix);
-	// pj_rotare_z(matrix);
 	pj_mlx_draw_raw(mlx, matrix);
 	// pj_mlx_draw_image(mlx, matrix);
 	pj_file_free(file);
