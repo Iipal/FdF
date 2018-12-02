@@ -101,14 +101,14 @@ void		pj_mlx_draw_raw(t_mlx *mlx, t_matrix **m)
 	while (++y < g_matrix_y && (x = NEG))
 		while (++x < g_matrix_x)
 		{
-			mlx_pixel_put(mlx->mlx, mlx->win, m[y][x].x, m[y][x].y, m[y][x].rgb);
+			// mlx_pixel_put(mlx->mlx, mlx->win, m[y][x].x, m[y][x].y, m[y][x].rgb);
 			if (x + 1 >= g_matrix_x || y + 1 >= g_matrix_y)
 				break;
 			add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-					(t_p){.y = m[y][x].y, .x = m[y][x + 1].x},
+					(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
 					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
 			add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-					(t_p){.y = m[y + 1][x].y, .x = m[y][x].x},
+					(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
 					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
 		}
 }
