@@ -45,18 +45,25 @@ LIBSRC_STR = srcs/str/ft_atoi.c srcs/str/ft_atoi_base.c srcs/str/ft_count_if.c s
 		srcs/str/ft_strsplit.c srcs/str/ft_strstr.c srcs/str/ft_strsub.c srcs/str/ft_strtrim.c
 LIBSRC_LFT = srcs/lft/ft_gnl.c
 
+LIBOBJ_STR = $(LIBSRC_STR:%.c=%.o)
 LIBOBJ_CTYPE = $(LIBSRC_CTYPE:%.c=%.o)
 LIBOBJ_MEM = $(LIBSRC_MEM:%.c=%.o)
 LIBOBJ_PUT = $(LIBSRC_PUT:%.c=%.o)
 LIBOBJ_LST = $(LIBSRC_LST:%.c=%.o)
-LIBOBJ_STR = $(LIBSRC_STR:%.c=%.o)
 LIBOBJ_LFT = $(LIBSRC_LFT:%.c=%.o)
 
 all: $(NAME)
 
-$(NAME): OUTPUT_CTYPE OUTPUT_MEM OUTPUT_PUT OUTPUT_LST OUTPUT_STR OUTPUT_LFT
+$(NAME): OUTPUT_STR OUTPUT_CTYPE OUTPUT_MEM OUTPUT_PUT OUTPUT_LST OUTPUT_LFT
 	@$(LC) $(NAME) $(LIBOBJ_CTYPE) $(LIBOBJ_MEM) $(LIBOBJ_PUT) $(LIBOBJ_LST) $(LIBOBJ_STR) $(LIBOBJ_LFT)
 	@echo "=>$(GREEN)$(WHITE)\t$(GREEN)libft$(WHITE) compiled."
+
+
+OUTPUT_STR: $(LIBOBJ_STR)
+	@echo "> done: $(GREEN)str$(WHITE) lib-part"
+$(LIBOBJ_STR): %.o: %.c
+	@echo -n '+'
+	@$(CC) -c $(CFLAGS) $< -o $@
 
 OUTPUT_CTYPE: $(LIBOBJ_CTYPE)
 	@echo "> done: $(GREEN)ctype$(WHITE) lib-part"
@@ -82,12 +89,6 @@ $(LIBOBJ_LST): %.o: %.c
 	@echo -n '+'
 	@$(CC) -c $(CFLAGS) $< -o $@
 
-OUTPUT_STR: $(LIBOBJ_STR)
-	@echo "> done: $(GREEN)str$(WHITE) lib-part"
-$(LIBOBJ_STR): %.o: %.c
-	@echo -n '+'
-	@$(CC) -c $(CFLAGS) $< -o $@
-
 OUTPUT_LFT: $(LIBOBJ_LFT)
 	@echo "> done: $(GREEN)lft$(WHITE) lib-part"
 $(LIBOBJ_LFT): %.o: %.c
@@ -95,11 +96,11 @@ $(LIBOBJ_LFT): %.o: %.c
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
+	@$(DEL) $(LIBOBJ_STR)
 	@$(DEL) $(LIBOBJ_CTYPE)
 	@$(DEL) $(LIBOBJ_MEM)
 	@$(DEL) $(LIBOBJ_PUT)
 	@$(DEL) $(LIBOBJ_LST)
-	@$(DEL) $(LIBOBJ_STR)
 	@$(DEL) $(LIBOBJ_LFT)
 
 fclean: clean
