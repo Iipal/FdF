@@ -17,7 +17,6 @@
 # include "lft_lst.h"
 # include "lft_mem.h"
 # include "lft_put.h"
-# include "lft_math.h"
 # include "lft_ctype.h"
 
 # define BUFF_SIZE 2048

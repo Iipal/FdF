@@ -44,7 +44,7 @@ int		main(int argc, cstring argv[])
 	_NOTIS_MSG("MLX initialization error.", mlx = pj_mlx_init(*argv));
 	pj_matrix_upscale(matrix, DEC);
 	
-	// pj_rotare_x(matrix);
+	// pj_rotare_x(matrix);	
 	pj_rotare_y(matrix);
 	// pj_rotare_z(matrix);
 	pj_isometric(matrix);
