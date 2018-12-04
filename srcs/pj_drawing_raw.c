@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_drawing_raw.c                                   :+:      :+:    :+:   */
+/*   pj_drawing_raw.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -92,7 +92,7 @@ static void	add_set_line(t_point point1, t_point point2, t_mlxncolor mnc)
 							.p2 = point2}, mnc);
 }
 
-void		pj_mlx_draw_raw(t_mlx *mlx, t_matrix **m)
+void		pj_drawing_raw(t_mlx *mlx, t_matrix **m)
 {
 	int	y;
 	int	x;
@@ -101,14 +101,22 @@ void		pj_mlx_draw_raw(t_mlx *mlx, t_matrix **m)
 	while (++y < g_matrix_y && (x = NEG))
 		while (++x < g_matrix_x)
 		{
-			// mlx_pixel_put(mlx->mlx, mlx->win, m[y][x].x, m[y][x].y, m[y][x].rgb);
-			if (x + 1 >= g_matrix_x || y + 1 >= g_matrix_y)
-				break;
-			add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+			if ((x + 1 < g_matrix_x) && (y + 1 < g_matrix_y))
+			{
+				add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
 					(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
 					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
-			add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+				add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
 					(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
+					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
+			}
+			else if (x == g_matrix_x - 1 && y + 1 < g_matrix_y)
+				add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+					(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
+					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
+			else if (y == g_matrix_y - 1 && x + 1 < g_matrix_x)
+				add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+					(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
 					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
 		}
 }
