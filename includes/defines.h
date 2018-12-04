@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 16:52:22 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/11/21 16:52:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/03 10:17:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 **	All info about that's macroses and constants include in README.
 */
 
-# define WIN_X 1200
-# define WIN_Y 600
+# define WIN_X 2000
+# define WIN_Y 1000
 
 # define IRGB_WHITE 16777215
 
