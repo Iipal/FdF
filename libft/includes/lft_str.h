@@ -17,12 +17,14 @@
 # include <stdlib.h>
 
 # define _STR	typedef char*			string
-# define _USTR	typedef unsigned char*	ustring
 # define _CSTR	typedef const char*		cstring
+# define _USTR	typedef unsigned char*	ustring
+# define _UCHAR	typedef unsigned char	uchar
 
 _STR;
-_USTR;
 _CSTR;
+_USTR;
+_UCHAR;
 
 void	ft_strdel(string *as);
 void	ft_strclr(string s);
