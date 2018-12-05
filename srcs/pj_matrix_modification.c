@@ -3,34 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   pj_matrix_modification.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:13:50 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/05 09:11:20 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/05 14:28:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	pj_matrix_find_center(t_matrix **m, uchar grid_zoom)
+t_matrix	**pj_matrix_new_centralize(t_matrix **m, uchar grid_zoom)
 {
-	int	y;
-	int	x;
-	int	center_y;
-	int	center_x;
+	t_matrix	**out;
+	int			center_y;
+	int			center_x;
+	int			y;
+	int			x;
 
 	y = NEG;
-	center_y = (WIN_Y / 2) - (((g_matrix_y * grid_zoom) / 2));
-	center_x = (WIN_X / 2) - (((g_matrix_x * grid_zoom) / 2));
+	_NOTIS_N(out = (t_matrix**)malloc(sizeof(t_matrix*) * g_matrix_y));
+	while (++y < g_matrix_y)
+		_NOTIS_N(out[y] = (t_matrix*)malloc(sizeof(t_matrix) * g_matrix_x));
+	center_y = (g_matrix_y / 2) * grid_zoom;
+	center_x = (g_matrix_x / 2) * grid_zoom;
+	y = NEG;
 	while (++y < g_matrix_y && (x = NEG))
 		while (++x < g_matrix_x)
 		{
-			m[y][x].y += center_y;
-			m[y][x].x += center_x;
+			out[y][x].y = center_y - WIN_Y / 2;
+			out[y][x].x = center_x - WIN_X / 2;
+			out[y][x].z = m[y][x].z;
+			out[y][x].rgb = m[y][x].rgb;
 		}
+	return (out);
 }
 
-void	pj_matrix_upscale(t_matrix **m, uchar upvalue)
+void		pj_matrix_upscale(t_matrix **m, uchar upvalue)
 {
 	int	y;
 	int	x;
@@ -44,7 +52,7 @@ void	pj_matrix_upscale(t_matrix **m, uchar upvalue)
 		}
 }
 
-void	pj_matrix_isometric(t_matrix **m)
+void		pj_matrix_isometric(t_matrix **m)
 {
 	int	ox;
 	int oz;

@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pj_render.c                                        :+:      :+:    :+:   */
+/*   mac_keycodes.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 14:57:48 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/05 14:33:53 by tmaluh           ###   ########.fr       */
+/*   Created: 2018/12/05 12:25:53 by tmaluh            #+#    #+#             */
+/*   Updated: 2018/12/05 14:32:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#ifndef MAC_KEYCODES
+# define MAC_KEYCODES
 
-bool	pj_render(t_mlx *mlx, t_matrix **matrix, uchar grid_size)
-{
-	// t_matrix **changed;
+# define ESC			53
 
-	pj_matrix_upscale(matrix, grid_size);
-	// pj_matrix_isometric(changed);
-	// _NOTIS_F(changed = pj_matrix_new_centralize(matrix, grid_size));
-	pj_drawing_brasenham(mlx, matrix);
-	pj_key_pressed(mlx, matrix);
-	return (true);
-}
+# define ARROW_UP		126
+# define ARROW_DOWN		125
+# define ARROW_RIGHT	124
+# define ARROW_LEFT		123
+
+# define NUMPAD_PLUS	69
+# define NUMPAD_MINUS	78
+# define KEYBOARD_PLUS	24
+# define KEYBOARD_MINUS	27
+
+#endif

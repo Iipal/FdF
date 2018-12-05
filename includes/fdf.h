@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 11:57:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/11/13 11:57:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/05 13:51:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct	s_mlx
 {
 	pvoid	mlx;
 	pvoid	win;
-	pvoid	img;
 }				t_mlx;
 
 /*
@@ -95,14 +94,16 @@ typedef struct	s_point
 	int	x;
 }				t_point;
 
-void			pj_render(t_mlx *mlx, t_matrix **matrix, uchar upscale);
+bool			pj_render(t_mlx *mlx, t_matrix **matrix, uchar upscale);
 
-void			pj_matrix_find_center(t_matrix **m, uchar grid_size);
+t_matrix		**pj_matrix_new_centralize(t_matrix **m, uchar grid_size);
 void			pj_matrix_isometric(t_matrix **m);
 void			pj_matrix_upscale(t_matrix **m, uchar value);
 
 void			pj_rotare_x(t_matrix **m);
 void			pj_rotare_y(t_matrix **m);
 void			pj_rotare_z(t_matrix **m);
+
+void			pj_key_pressed(t_mlx *mlx, t_matrix **m);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 11:56:15 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/11/13 11:56:16 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/05 14:28:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ int		main(int argc, cstring argv[])
 	_NOTIS_MSG("In-validating map error.", matrix = pj_matrix_save(file));
 	_NOTIS_MSG("MLX initialization error.", mlx = pj_mlx_init(*argv));
 	pj_file_free(file);
-	/*
-	**	WTF?!?
-	*/
-	pj_render(mlx, matrix, DEC);
+	_NOTIS_MSG("Rendering error.", pj_render(mlx, matrix, DEC));
 	ft_show_matrix(matrix);
 	pj_matrix_free(matrix);
 	mlx_loop(mlx->mlx);
