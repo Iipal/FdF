@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mac_keycodes.h                                     :+:      :+:    :+:   */
+/*   fdf_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/05 12:25:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/05 14:32:29 by tmaluh           ###   ########.fr       */
+/*   Created: 2018/12/05 18:10:47 by tmaluh            #+#    #+#             */
+/*   Updated: 2018/12/05 18:45:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAC_KEYCODES
-# define MAC_KEYCODES
+#include "../includes/fdf.h"
 
-# define ESC			53
+/*
+**	File with all "free" functions.
+**		'fdf_file_free' - Free "file". About "file":
+**			| - Created in 'fdf_file_readnsave_tomatrix_env'. (fdf_readnsave.c)
+**			| - Including in 'add_save_tomatrix'. (fdf_readnsave.c)
+*/
 
-# define ARROW_UP		126
-# define ARROW_DOWN		125
-# define ARROW_RIGHT	124
-# define ARROW_LEFT		123
+void	fdf_file_free(string *file, int lines)
+{
+	int	i;
 
-# define NUMPAD_PLUS	69
-# define NUMPAD_MINUS	78
-# define KEYBOARD_PLUS	24
-# define KEYBOARD_MINUS	27
-
-#endif
+	i = NEG;
+	while (++i < lines)
+		ft_strdel(&(file[i]));
+	free(file);
+	file = NULL;
+}
