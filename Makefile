@@ -21,7 +21,7 @@ MLXFLAGS = -L /usr/local/lib -lmlx -lm -framework OpenGL -framework AppKit
 
 SRC = srcs/main.c srcs/pj_readnsave.c srcs/pj_mlx.c srcs/pj_free.c \
 srcs/pj_drawing_raw.c srcs/pj_matrix_xyz_rotare.c srcs/pj_render.c \
-srcs/pj_matrix_mod.c
+srcs/pj_matrix_modification.c 
 
 OBJ = $(SRC:.c=.o)
 

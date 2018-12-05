@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pj_matrix_mod.c                                    :+:      :+:    :+:   */
+/*   pj_matrix_modification.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 15:13:50 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/04 15:13:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/05 09:11:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	pj_matrix_center(t_matrix **m, uchar grid_zoom)
+void	pj_matrix_find_center(t_matrix **m, uchar grid_zoom)
 {
 	int	y;
 	int	x;
@@ -20,8 +20,6 @@ void	pj_matrix_center(t_matrix **m, uchar grid_zoom)
 	int	center_x;
 
 	y = NEG;
-	if (grid_zoom)
-		;
 	center_y = (WIN_Y / 2) - (((g_matrix_y * grid_zoom) / 2));
 	center_x = (WIN_X / 2) - (((g_matrix_x * grid_zoom) / 2));
 	while (++y < g_matrix_y && (x = NEG))
@@ -46,7 +44,7 @@ void	pj_matrix_upscale(t_matrix **m, uchar upvalue)
 		}
 }
 
-void	pj_isometric(t_matrix **m)
+void	pj_matrix_isometric(t_matrix **m)
 {
 	int	ox;
 	int oz;
@@ -63,6 +61,7 @@ void	pj_isometric(t_matrix **m)
 			oz = m[y][x].z;
 			m[y][x].x = (1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz);
 			m[y][x].y = (1 / sqrt(6)) * (-ox + 2 * oy + oz);
-			m[y][x].z = (1 / sqrt(6)) * (sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz);
+			m[y][x].z = (1 / sqrt(6)) *
+						(sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz);
 		}
 }

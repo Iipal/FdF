@@ -87,7 +87,7 @@ typedef struct	s_mlx
 */
 
 t_mlx			*pj_mlx_init(cstring tittle);
-void			pj_drawing_raw(t_mlx *mlx, t_matrix **m);
+void			pj_drawing_brasenham(t_mlx *mlx, t_matrix **m);
 
 typedef struct	s_point
 {
@@ -95,11 +95,12 @@ typedef struct	s_point
 	int	x;
 }				t_point;
 
-void			pj_matrix_center(t_matrix **m, uchar grid_size);
 void			pj_render(t_mlx *mlx, t_matrix **matrix, uchar upscale);
-void			pj_isometric(t_matrix **m);
-void			pj_mlx_draw_image(t_mlx *mlx, t_matrix **matrix);
+
+void			pj_matrix_find_center(t_matrix **m, uchar grid_size);
+void			pj_matrix_isometric(t_matrix **m);
 void			pj_matrix_upscale(t_matrix **m, uchar value);
+
 void			pj_rotare_x(t_matrix **m);
 void			pj_rotare_y(t_matrix **m);
 void			pj_rotare_z(t_matrix **m);

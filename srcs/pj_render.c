@@ -15,7 +15,7 @@
 void	pj_render(t_mlx *mlx, t_matrix **matrix, uchar grid_size)
 {
 	pj_matrix_upscale(matrix, grid_size);
-	pj_isometric(matrix);
-	pj_matrix_center(matrix, grid_size);
-	pj_drawing_raw(mlx, matrix);
+	// pj_matrix_isometric(matrix);
+	pj_matrix_find_center(matrix, grid_size);
+	pj_drawing_brasenham(mlx, matrix);
 }

@@ -17,7 +17,7 @@
 **	'pj_mlx_draw_matrix' Bresenham algorithm optimization for my code.
 */
 
-static void	add_draw_line_x(t_dp delta, t_dp points, t_mlxncolor mnc)
+static void	add_bresenham_draw_line_x(t_dp delta, t_dp points, t_mlxncolor mnc)
 {
 	int	y;
 	int	x;
@@ -43,7 +43,7 @@ static void	add_draw_line_x(t_dp delta, t_dp points, t_mlxncolor mnc)
 	}
 }
 
-static void	add_draw_line_y(t_dp delta, t_dp points, t_mlxncolor mnc)
+static void	add_bresenham_draw_line_y(t_dp delta, t_dp points, t_mlxncolor mnc)
 {
 	int	x;
 	int	y;
@@ -69,30 +69,28 @@ static void	add_draw_line_y(t_dp delta, t_dp points, t_mlxncolor mnc)
 	}
 }
 
-static void	add_set_line(t_point point1, t_point point2, t_mlxncolor mnc)
+static void	add_bresenham_set_line(t_point dot1, t_point dot2, t_mlxncolor mnc)
 {
-	const int	deltax = point2.x - point1.x;
-	const int	deltay = point2.y - point1.y;
+	const int	deltax = dot2.x - dot1.x;
+	const int	deltay = dot2.y - dot1.y;
 	const int	absdx = _ABS(deltax);
 	const int	absdy = _ABS(deltay);
 
 	if (absdx >= absdy)
-		add_draw_line_x((t_dp){.p1.x = deltax,
-								.p1.y = deltay,
-							.p2.x = absdx,
-								.p2.y = absdy},
-					(t_dp){.p1 = point1,
-							.p2 = point2}, mnc);
+		add_bresenham_draw_line_x((t_dp){.p1.x = deltax,
+										.p1.y = deltay,
+										.p2.x = absdx,
+										.p2.y = absdy},
+								(t_dp){.p1 = dot1, .p2 = dot2}, mnc);
 	else
-		add_draw_line_y((t_dp){.p1.x = deltax,
-								.p1.y = deltay,
-							.p2.x = absdx,
-								.p2.y = absdy},
-					(t_dp){.p1 = point1,
-							.p2 = point2}, mnc);
+		add_bresenham_draw_line_y((t_dp){.p1.x = deltax,
+										.p1.y = deltay,
+										.p2.x = absdx,
+										.p2.y = absdy},
+								(t_dp){.p1 = dot1, .p2 = dot2}, mnc);
 }
 
-void		pj_drawing_raw(t_mlx *mlx, t_matrix **m)
+void		pj_drawing_brasenham(t_mlx *mlx, t_matrix **m)
 {
 	int	y;
 	int	x;
@@ -103,19 +101,19 @@ void		pj_drawing_raw(t_mlx *mlx, t_matrix **m)
 		{
 			if ((x + 1 < g_matrix_x) && (y + 1 < g_matrix_y))
 			{
-				add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+				add_bresenham_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
 					(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
 					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
-				add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+				add_bresenham_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
 					(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
 					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
 			}
 			else if (x == g_matrix_x - 1 && y + 1 < g_matrix_y)
-				add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+				add_bresenham_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
 					(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
 					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
 			else if (y == g_matrix_y - 1 && x + 1 < g_matrix_x)
-				add_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+				add_bresenham_set_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
 					(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
 					(t_mlxncolor){.mlx = mlx, .color = m[y][x].rgb});
 		}

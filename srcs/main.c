@@ -14,16 +14,15 @@
 
 void	ft_show_matrix(t_matrix **m)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 
-	i = NEG;
-	while (++i < g_matrix_y)
+	y = NEG;
+	while (++y < g_matrix_y && (x = NEG))
 	{
-		j = NEG;
-		while (++j < g_matrix_x)
+		while (++x < g_matrix_x)
 			printf("%3d - %3d - %4d\t| %d\n",
-				m[i][j].y, m[i][j].x, m[i][j].z, m[i][j].rgb);
+				m[y][x].y, m[y][x].x, m[y][x].z, m[y][x].rgb);
 		printf("\n");
 	}
 	printf("%d | %d\n", g_matrix_y, g_matrix_x);
@@ -46,7 +45,7 @@ int		main(int argc, cstring argv[])
 	/*
 	**	WTF?!?
 	*/
-	pj_render(mlx, matrix, DEC * 5);
+	pj_render(mlx, matrix, DEC);
 	ft_show_matrix(matrix);
 	pj_matrix_free(matrix);
 	mlx_loop(mlx->mlx);
