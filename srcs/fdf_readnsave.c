@@ -6,27 +6,26 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/05 18:45:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/06 17:11:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
 /*
-**	The 'fdf_file_readnsave_tomatrix_env' function is at the bottom.
+**	The 'fdf_file_readnsave_env' function is at the bottom.
 **
-**		'fdf_file_readnsave_tomatrix_env' - Function for file reading and
+**		'fdf_file_readnsave_env' - Function for file reading and
 **		\____ saving data from it to main environmnet structure.
-**			| - Main function.
-**			| - Including in 'main'. (main.c)
+**			| - Called from the 'main' function. (main.c)
 **
 **		'add_alloc_env' - Allocate memory for main program environment
 **		\____ variables and main initilization MLX variables.
-**			| - Additional function for 'fdf_file_readnsave_tomatrix_env'.
+**			| - Additional function for 'fdf_file_readnsave_env'.
 **
 **		'add_save_tomatrix' - Save data from "file" in environment
 **		\____ two-dimensioanl matrix.
-**			| - Additional function for 'fdf_file_readnsave_tomatrix_env'.
+**			| - Additional function for 'fdf_file_readnsave_env'.
 **
 **		'add_numbers_inline' - Function for find how much is numbers
 **		\____ and colors in one line of "file".
@@ -89,22 +88,22 @@ static int		add_numbers_inline(string line)
 	return (numbers);
 }
 
-static t_matrix	**add_save_tomatrix(string *file, int *matrix_y, int *matrix_x)
+static matrix	add_save_tomatrix(string *file, int matrix_y, int *matrix_x)
 {
-	t_matrix	**matrix;
+	matrix		m;
 	int			y;
 
 	y = NEG;
-	_NOTIS_N(matrix = (t_matrix**)malloc(sizeof(t_matrix*) * *matrix_y));
+	_NOTIS_N(m = (matrix)malloc(sizeof(t_matrix*) * matrix_y));
 	_NOTIS_N(*matrix_x = add_numbers_inline(*file));
-	while (++y < *matrix_y)
+	while (++y < matrix_y)
 	{
 		_NOTIS_N(add_numbers_inline(file[y]) == *matrix_x);
-		_NOTIS_N(matrix[y] = (t_matrix*)malloc(sizeof(t_matrix) * *matrix_x));
-		_NOTIS_N(add_line_tomatrix(file[y], matrix[y], y, *matrix_x));
+		_NOTIS_N(m[y] = (t_matrix*)malloc(sizeof(t_matrix) * *matrix_x));
+		_NOTIS_N(add_line_tomatrix(file[y], m[y], y, *matrix_x));
 	}
-	fdf_file_free(file, *matrix_y);
-	return (matrix);
+	fdf_free_file(file, matrix_y);
+	return (m);
 }
 
 static t_env	*add_alloc_env(string tittle)
@@ -116,10 +115,12 @@ static t_env	*add_alloc_env(string tittle)
 	_NOTIS_N(out->win = mlx_new_window(out->mlx, WIN_X, WIN_Y, tittle));
 	out->matrix_y = ZERO;
 	out->matrix_x = ZERO;
+	out->zoom = ZOOM_DEF;
+	out->buff = NULL;
 	return (out);
 }
 
-t_env			*fdf_file_readnsave_tomatrix_env(cstring file_name)
+t_env			*fdf_file_readnsave_env(cstring file_name)
 {
 	string	gnl_temp;
 	string	*file;
@@ -141,7 +142,7 @@ t_env			*fdf_file_readnsave_tomatrix_env(cstring file_name)
 		file[i++] = ft_strdup(gnl_temp);
 		ft_strdel(&gnl_temp);
 	}
-	_NOTIS_N(env->matrix = add_save_tomatrix(file,
-		&(env->matrix_y), &(env->matrix_x)));
+	_NOTIS_N(env->m = add_save_tomatrix(file,
+		env->matrix_y, &(env->matrix_x)));
 	return (env);
 }

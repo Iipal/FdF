@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf_moving.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/06 18:09:44 by tmaluh           ###   ########.fr       */
+/*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
+/*   Updated: 2018/12/06 18:21:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int		main(int argc, char const *argv[])
+void	fdf_moving_x(t_env *env, int increase)
 {
-	t_env	*env;
 
-	--argc;
-	++argv;
-	env = NULL;
-	_NOTIS_MSG("Usage: ./fdf <map_name>", !(!argc || argc > 1));
-	_NOTIS_MPE("", env = fdf_file_readnsave_env(*argv));
-	_NOTIS_MSG("Rendering error.", fdf_rendering(env));
-	fdf_key_hooks(env);
-	mlx_loop(env->mlx);
 }

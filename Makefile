@@ -6,7 +6,7 @@
 #    By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 13:30:08 by tmaluh            #+#    #+#              #
-#    Updated: 2018/12/05 18:10:56 by tmaluh           ###   ########.fr        #
+#    Updated: 2018/12/06 18:20:40 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ MLXFLAGS = -L /usr/local/lib -lmlx -lm -framework OpenGL -framework AppKit
 # linux:
 # MLXFLAGS = -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
 
-SRC = srcs/main.c srcs/fdf_readnsave.c srcs/fdf_free.c
+SRC = srcs/main.c srcs/fdf_readnsave.c srcs/fdf_free.c srcs/fdf_rendering.c \
+srcs/fdf_brasenham_drawing.c srcs/fdf_key_hooks.c srcs/fdf_moving.c
 
 OBJ = $(SRC:.c=.o)
 
