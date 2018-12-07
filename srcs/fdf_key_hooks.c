@@ -6,44 +6,25 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/07 12:08:30 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/07 14:43:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	add_keys_moving(int key, t_env *env)
+static void	add_keys_movenrotare(int key, t_env *env)
 {
 	if (key == KEY_D || key == ARROW_RIGHT)
-	{
 		fdf_xmove(env, MOVE_INC);
-		fdf_rendering(env);
-	}
 	if (key == KEY_A || key == ARROW_LEFT)
-	{
 		fdf_xmove(env, -MOVE_INC);
-		fdf_rendering(env);
-	}
 	if (key == KEY_W || key == ARROW_UP)
-	{
 		fdf_ymove(env, -MOVE_INC);
-		fdf_rendering(env);
-	}
 	if (key == KEY_S || key == ARROW_DOWN)
-	{
 		fdf_ymove(env, MOVE_INC);
-		fdf_rendering(env);
-	}
-}
-
-/*static void	add_keys_rotare(int key, t_env *env)
-{
 	if (key == ROT_X_PLUS)
-	{
 		fdf_xrotare(env, ROT_INC);
-		fdf_rendering(env);
-	}
-}*/
+}
 
 static int	add_keys_hook(int key, t_env *env)
 {
@@ -62,7 +43,7 @@ static int	add_keys_hook(int key, t_env *env)
 		(env->zoom - ZOOM_INC >= ZOOM_MIN) ? (env->zoom -= ZOOM_INC) : 0;
 		fdf_rendering(env);
 	}
-	add_keys_moving(key, env);
+	add_keys_movenrotare(key, env);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/07 12:15:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/07 14:13:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ static t_env	*add_alloc_env(string tittle)
 	out->zoom = ZOOM_DEF;
 	out->matrix_y = ZERO;
 	out->matrix_x = ZERO;
+	out->shift_y = ZERO;
+	out->shift_x = ZERO;
 	out->buff = NULL;
 	return (out);
 }
