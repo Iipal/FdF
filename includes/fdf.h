@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/06 18:18:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/07 12:15:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/includes/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
+# include <math.h>
 # include <mlx.h>
 
 /*
@@ -42,7 +43,9 @@
 
 # define HEX			16
 
-# define MOVE_INC		10
+# define ROT_INC		10
+
+# define MOVE_INC		2
 
 # define ZOOM_INC		2
 # define ZOOM_MIN		5
@@ -65,6 +68,11 @@
 # define ARROW_RIGHT	124
 # define ARROW_LEFT		123
 
+# define ROT_X_PLUS		12
+# define ROT_Y_PLUS		13
+# define ROT_X_MINUS	0
+# define ROT_Y_MINUS	1
+
 # define PLUS_NUMPAD	69
 # define MINUS_NUMPAD	78
 # define PLUS_KEYBOARD	24
@@ -80,6 +88,7 @@
 # define _NOTIS_N(ex) if (!(ex)) return (NULL)
 # define _NOTIS_F(ex) if (!(ex)) return (false)
 # define _ABS(var) ((var) < 0) ? -(var) : (var)
+# define _RAD(deg) (((deg) * PI) / 180.0)
 
 enum	e_bool
 {
@@ -147,6 +156,10 @@ typedef struct	s_mlx
 void			fdf_bdrawing(matrix m, int matrix_y, int matrix_x, t_mlx mlx);
 void			fdf_key_hooks(t_env *env);
 
+void			fdf_xmove(t_env *env, int increase);
+void			fdf_ymove(t_env *env, int increase);
+
+void			fdf_xrotare(t_env *env, int increase);
 void			fdf_free_env(t_env *env);
 
 #endif

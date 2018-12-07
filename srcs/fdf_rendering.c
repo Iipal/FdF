@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/06 18:19:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/07 12:15:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static bool	add_init_buff(t_env *env)
 
 bool		fdf_rendering(t_env *env)
 {
+	mlx_clear_window(env->mlx, env->win);
 	if (!env->buff)
 		add_init_buff(env);
 	add_zooming(env);
