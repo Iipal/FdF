@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/08 16:02:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/08 18:25:34 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ static void	add_keys_movenrotare(int key, t_env *env)
 		env->shift_y -= SHIFT_INC;
 		// fdf_ymove(env, -SHIFT_INC);
 	if (key == KEY_S || key == ARROW_DOWN)
-		env->shift_y += SHIFT_INC;
-	fdf_rendering(env);
-		// fdf_ymove(env, SHIFT_INC);
+		fdf_ymove(env, MOVE_INC);
+	if (key == KEY_R)
+		fdf_xrotare(env, ROT_INC);
+	if (key == KEY_F)
+		fdf_xrotare(env, -ROT_INC);
 }
 
 static int	add_keys_hook(int key, t_env *env)

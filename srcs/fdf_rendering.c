@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/08 16:05:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/08 18:21:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	add_centralize(t_env *env)
 	int	x;
 
 	y = NEG;
-	env->shift_y = (WIN_Y / 2) - ((env->matrix_y * env->zoom) / 2);
-	env->shift_x = (WIN_X / 2) - ((env->matrix_x * env->zoom) / 2);
-	mlx_pixel_put(env->mlx, env->win, env->shift_x, env->shift_y, 4063076);
+	cy = (WIN_Y / 2) - ((env->matrix_y * env->zoom) / 2);
+	cx = (WIN_X / 2) - ((env->matrix_x * env->zoom) / 2);
+	// mlx_pixel_put(env->mlx, env->win, cx, cy, 4063076);
 	while (++y < env->matrix_y && (x = NEG))
 		while (++x < env->matrix_x)
 		{
@@ -112,6 +112,28 @@ void	add_print(t_env *env)
 	}
 }
 
+static void	add_isometric(t_env *env)
+{
+	int	oy;
+	int	ox;
+	int	oz;
+	int	y;
+	int	x;
+
+	y = NEG;
+	while (++y < env->matrix_y && (x = NEG))
+		while (++x < env->matrix_x)
+		{
+			oy = env->m[y][x].y;
+			ox = env->m[y][x].x;
+			oz = env->m[y][x].z;
+			env->buff[y][x].y = (1 / sqrt(6)) * (-ox + 2 * oy + oz) * env->zoom;
+			env->buff[y][x].x = (1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz) * env->zoom;
+			env->buff[y][x].z = (1 / sqrt(6)) *
+						(sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz) * env->zoom;
+		}
+}
+
 bool		fdf_rendering(t_env *env)
 {
 	static bool	is_center;
@@ -120,11 +142,11 @@ bool		fdf_rendering(t_env *env)
 	
 	if (!env->buff)
 		add_init_buff(env);
-	add_zooming(env);
 	if (!is_center ? (is_center = true) : false)
-		;// add_centralize(env);
-	// add_isometric(env);
-	 add_print(env);
+		add_centralize(env);
+	add_zooming(env);
+	add_isometric(env);
+	// add_print(env);
 	fdf_bdrawing(env->buff, env->matrix_y, env->matrix_x,
 		(t_mlx){.mlx = env->mlx, .win = env->win});
 	return (true);

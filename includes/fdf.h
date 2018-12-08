@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/08 11:49:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/08 17:37:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@
 # define _NOTIS_F(ex) if (!(ex)) return (false)
 # define _ABS(var) ((var) < 0) ? -(var) : (var)
 # define _RAD(deg) (((deg) * PI) / 180.0)
+# define _ISVIEW(my, mx) add_is_view((t_p){.y = my, .x = mx})
 
 enum	e_bool
 {
