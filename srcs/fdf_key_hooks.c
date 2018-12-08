@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/07 14:43:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/08 16:02:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 static void	add_keys_movenrotare(int key, t_env *env)
 {
 	if (key == KEY_D || key == ARROW_RIGHT)
-		fdf_xmove(env, MOVE_INC);
+		env->shift_x += SHIFT_INC;
+		// fdf_xmove(env, SHIFT_INC);
 	if (key == KEY_A || key == ARROW_LEFT)
-		fdf_xmove(env, -MOVE_INC);
+		env->shift_x -= SHIFT_INC;
+		// fdf_xmove(env, -SHIFT_INC);
 	if (key == KEY_W || key == ARROW_UP)
-		fdf_ymove(env, -MOVE_INC);
+		env->shift_y -= SHIFT_INC;
+		// fdf_ymove(env, -SHIFT_INC);
 	if (key == KEY_S || key == ARROW_DOWN)
-		fdf_ymove(env, MOVE_INC);
-	if (key == ROT_X_PLUS)
-		fdf_xrotare(env, ROT_INC);
+		env->shift_y += SHIFT_INC;
+	fdf_rendering(env);
+		// fdf_ymove(env, SHIFT_INC);
 }
 
 static int	add_keys_hook(int key, t_env *env)

@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/07 14:40:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/08 11:49:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@
 
 # define PI				3.141592
 
-# define NEG			-1
-# define ZERO			0
-
 # define HEX			16
 
-# define MOVE_INC		2
+# define NEG			-1
+# define ZERO			0
 
 # define ROT_INC		10
 
@@ -52,11 +50,18 @@
 # define ZOOM_DEF		13
 # define ZOOM_MAX		255
 
+# define SHIFT_INC		2
+
 /*
 **	Simple MAC keyboard decimal values in constantes:
 */
 
 # define ESC			53
+
+# define KEY_R			15
+# define KEY_T			17
+# define KEY_F			3
+# define KEY_G			5
 
 # define KEY_W			13
 # define KEY_A			0
@@ -67,11 +72,6 @@
 # define ARROW_DOWN		125
 # define ARROW_RIGHT	124
 # define ARROW_LEFT		123
-
-# define ROT_X_PLUS		15
-# define ROT_Y_PLUS		17
-# define ROT_X_MINUS	3
-# define ROT_Y_MINUS	5
 
 # define PLUS_NUMPAD	69
 # define MINUS_NUMPAD	78
