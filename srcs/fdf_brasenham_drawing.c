@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:31 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/07 09:34:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/08 17:35:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,15 @@ static void	add_bset_line(t_p dot1, t_p dot2, t_mnc mnc)
 					(t_dp){.p1 = dot1, .p2 = dot2}, mnc);
 }
 
+bool	add_is_view(t_p dot)
+{
+	if (dot.x > WIN_X || dot.x < 0)
+		return (false);
+	if (dot.y > WIN_Y || dot.y < 0)
+		return (false);
+	return (true);
+}
+
 void		fdf_bdrawing(matrix m, int matrix_y, int matrix_x, t_mlx mlx)
 {
 	int	y;
@@ -97,19 +106,19 @@ void		fdf_bdrawing(matrix m, int matrix_y, int matrix_x, t_mlx mlx)
 			if ((x + 1 < matrix_x) && (y + 1 < matrix_y))
 			{
 				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-					(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
-			(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
+							(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
+				(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
 				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-					(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
-			(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
+							(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
+				(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
 			}
 			else if (x == matrix_x - 1 && y + 1 < matrix_y)
 				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-					(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
-			(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
+							(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
+				(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
 			else if (y == matrix_y - 1 && x + 1 < matrix_x)
 				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-					(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
-			(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
+							(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
+				(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
 		}
 }

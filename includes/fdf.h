@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/07 14:40:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/08 17:37:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@
 
 # define ESC			53
 
+# define KEY_R			15
+# define KEY_T			17
+# define KEY_F			3
+# define KEY_G			5
+
+
 # define KEY_W			13
 # define KEY_A			0
 # define KEY_S			1
@@ -67,11 +73,6 @@
 # define ARROW_DOWN		125
 # define ARROW_RIGHT	124
 # define ARROW_LEFT		123
-
-# define ROT_X_PLUS		15
-# define ROT_Y_PLUS		17
-# define ROT_X_MINUS	3
-# define ROT_Y_MINUS	5
 
 # define PLUS_NUMPAD	69
 # define MINUS_NUMPAD	78
@@ -89,6 +90,7 @@
 # define _NOTIS_F(ex) if (!(ex)) return (false)
 # define _ABS(var) ((var) < 0) ? -(var) : (var)
 # define _RAD(deg) (((deg) * PI) / 180.0)
+# define _ISVIEW(my, mx) add_is_view((t_p){.y = my, .x = mx})
 
 enum	e_bool
 {
