@@ -12,24 +12,30 @@
 
 #include "../includes/fdf.h"
 
-static void	add_zooming(t_env *env)
+void	add_zooming(t_env *env)
 {
 	int	y;
 	int	x;
 
+	printf("%d\n", env->zoom);
 	y = NEG;
 	while (++y < env->matrix_y && (x = NEG))
 		while (++x < env->matrix_x)
 		{
+			env->shift_x >= ZERO
+				? (env->m[y][x].x += SHIFT_INC)
+				: (env->m[y][x].x -= SHIFT_INC);
 			env->buff[y][x].x = env->m[y][x].x * env->zoom;
+			env->shift_y >= ZERO
+				? (env->m[y][x].y += SHIFT_INC)
+				: (env->m[y][x].y -= SHIFT_INC);
 			env->buff[y][x].y = env->m[y][x].y * env->zoom;
+			
 		}
 }
 
-static void	add_centralize(t_env *env)
+void	add_centralize(t_env *env)
 {
-	int	cy;
-	int	cx;
 	int	y;
 	int	x;
 
@@ -40,12 +46,12 @@ static void	add_centralize(t_env *env)
 	while (++y < env->matrix_y && (x = NEG))
 		while (++x < env->matrix_x)
 		{
-			env->buff[y][x].y = env->m[y][x].y + cy;
-			env->buff[y][x].x = env->m[y][x].x + cx;
+			env->m[y][x].y += env->shift_y;
+			env->m[y][x].x += env->shift_x;
 		}
 }
 
-static bool	add_init_buff(t_env *env)
+bool	add_init_buff(t_env *env)
 {
 	int	y;
 	int	x;
@@ -67,6 +73,28 @@ static bool	add_init_buff(t_env *env)
 	return (true);
 }
 
+void	add_isometric(t_env *env)
+{
+	int	oy;
+	int	ox;
+	int	oz;
+	int	y;
+	int	x;
+
+	y = NEG;
+	while (++y < env->matrix_y && (x = NEG))
+		while (++x < env->matrix_x)
+		{
+			oy = env->buff[y][x].y;
+			ox = env->buff[y][x].x;
+			oz = env->buff[y][x].z;
+			env->buff[y][x].x = (1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz);
+			env->buff[y][x].y = (1 / sqrt(6)) * (-ox + 2 * oy + oz);
+			env->buff[y][x].z = (1 / sqrt(6)) *
+						(sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz);
+		}
+}
+
 void	add_print(t_env *env)
 {
 	int	y;
@@ -78,7 +106,7 @@ void	add_print(t_env *env)
 		while (++x < env->matrix_x)
 		{
 			printf("m: %d | %d\n", env->m[y][x].y, env->m[y][x].x);
-			printf("b: %d | %d\n", env->buff[y][x].y, env->buff[y][x].x);
+			// printf("b: %d | %d\n", env->buff[y][x].y, env->buff[y][x].x);
 		}
 		printf("\n");
 	}
