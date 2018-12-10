@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/08 18:25:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/10 18:24:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ static void	add_keys_movenrotare(int key, t_env *env)
 		fdf_xrotare(env, ROT_INC);
 	if (key == KEY_F)
 		fdf_xrotare(env, -ROT_INC);
+	if (key == KEY_T)
+		fdf_yrotare(env, ROT_INC);
+	if (key == KEY_G)
+		fdf_yrotare(env, -ROT_INC);
+	if (key == KEY_Y)
+		fdf_zrotare(env, ROT_INC);
+	if (key == KEY_H)
+		fdf_zrotare(env, -ROT_INC);
 }
 
 static int	add_keys_hook(int key, t_env *env)
@@ -39,16 +47,11 @@ static int	add_keys_hook(int key, t_env *env)
 		exit(EXIT_SUCCESS);
 	}
 	if (key == PLUS_NUMPAD || key == PLUS_KEYBOARD)
-	{
 		(env->zoom + ZOOM_INC <= ZOOM_MAX) ? (env->zoom += ZOOM_INC) : 0;
-		fdf_rendering(env);
-	}
 	if (key == MINUS_NUMPAD || key == MINUS_KEYBOARD)
-	{
 		(env->zoom - ZOOM_INC >= ZOOM_MIN) ? (env->zoom -= ZOOM_INC) : 0;
-		fdf_rendering(env);
-	}
 	add_keys_movenrotare(key, env);
+	fdf_rendering(env);
 	return (1);
 }
 
