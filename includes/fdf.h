@@ -38,12 +38,10 @@
 
 # define PI				3.141592
 
-# define NEG			-1
-# define ZERO			0
-
 # define HEX			16
 
-# define MOVE_INC		2
+# define NEG			-1
+# define ZERO			0
 
 # define ROT_INC		3
 
@@ -51,6 +49,8 @@
 # define ZOOM_MIN		5
 # define ZOOM_DEF		13
 # define ZOOM_MAX		255
+
+# define SHIFT_INC		2
 
 /*
 **	Simple MAC keyboard decimal values in constantes:
@@ -64,7 +64,6 @@
 # define KEY_F			3
 # define KEY_G			5
 # define KEY_H			4
-
 
 # define KEY_W			13
 # define KEY_A			0
