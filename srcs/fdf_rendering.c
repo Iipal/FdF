@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/08 18:21:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/10 16:08:31 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	add_zooming(t_env *env)
 		}
 }
 
-static void	add_centralize(t_env *env)
+void	add_centralize(t_env *env)
 {
 	int	cy;
 	int	cx;
@@ -67,24 +67,27 @@ static bool	add_init_buff(t_env *env)
 	return (true);
 }
 
-void	add_print(t_env *env)
+void	add_print(t_env *env, bool mode)
 {
 	int	y;
 	int	x;
 
 	y = NEG;
-	while (++y < env->matrix_y && (x = NEG))
-	{
-		while (++x < env->matrix_x)
+	if (mode)
+		while (++y < env->matrix_y && (x = NEG))
 		{
-			printf("m: %d | %d\n", env->m[y][x].y, env->m[y][x].x);
-			printf("b: %d | %d\n", env->buff[y][x].y, env->buff[y][x].x);
+			while (++x < env->matrix_x)
+			{
+				printf("m: %d | %d\n", env->m[y][x].y, env->m[y][x].x);
+				printf("b: %d | %d\n", env->buff[y][x].y, env->buff[y][x].x);
+			}
+			printf("\n");
 		}
-		printf("\n");
-	}
+	else
+		printf("%d | %d\n", env->matrix_y, env->matrix_x);
 }
 
-static void	add_isometric(t_env *env)
+void	add_isometric(t_env *env)
 {
 	int	oy;
 	int	ox;
@@ -109,16 +112,15 @@ static void	add_isometric(t_env *env)
 bool		fdf_rendering(t_env *env)
 {
 	static bool	is_center;
-
-	mlx_clear_window(env->mlx, env->win);
 	
 	if (!env->buff)
 		add_init_buff(env);
 	if (!is_center ? (is_center = true) : false)
-		add_centralize(env);
+		;// add_centralize(env);
 	add_zooming(env);
 	add_isometric(env);
-	// add_print(env);
+	add_print(env, false);
+	mlx_clear_window(env->mlx, env->win);
 	fdf_bdrawing(env->buff, env->matrix_y, env->matrix_x,
 		(t_mlx){.mlx = env->mlx, .win = env->win});
 	return (true);

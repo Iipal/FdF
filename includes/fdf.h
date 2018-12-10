@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/08 17:37:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/10 15:27:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 # define MOVE_INC		2
 
-# define ROT_INC		10
+# define ROT_INC		3
 
 # define ZOOM_INC		2
 # define ZOOM_MIN		5
@@ -60,8 +60,10 @@
 
 # define KEY_R			15
 # define KEY_T			17
+# define KEY_Y			16
 # define KEY_F			3
 # define KEY_G			5
+# define KEY_H			4
 
 
 # define KEY_W			13
@@ -167,4 +169,7 @@ void			fdf_xrotare(t_env *env, int inc);
 void			fdf_free_env(t_env *env);
 
 void			fdf_xrotare(t_env *env, int inc);
+void			fdf_yrotare(t_env *env, int inc);
+void			fdf_zrotare(t_env *env, int inc);
+
 #endif
