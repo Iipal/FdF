@@ -12,24 +12,30 @@
 
 #include "../includes/fdf.h"
 
-static void	add_zooming(t_env *env)
+void	add_zooming(t_env *env)
 {
 	int	y;
 	int	x;
 
+	printf("%d\n", env->zoom);
 	y = NEG;
 	while (++y < env->matrix_y && (x = NEG))
 		while (++x < env->matrix_x)
 		{
+			env->shift_x >= ZERO
+				? (env->m[y][x].x += SHIFT_INC)
+				: (env->m[y][x].x -= SHIFT_INC);
 			env->buff[y][x].x = env->m[y][x].x * env->zoom;
+			env->shift_y >= ZERO
+				? (env->m[y][x].y += SHIFT_INC)
+				: (env->m[y][x].y -= SHIFT_INC);
 			env->buff[y][x].y = env->m[y][x].y * env->zoom;
+			
 		}
 }
 
 void	add_centralize(t_env *env)
 {
-	int	cy;
-	int	cx;
 	int	y;
 	int	x;
 
@@ -40,12 +46,12 @@ void	add_centralize(t_env *env)
 	while (++y < env->matrix_y && (x = NEG))
 		while (++x < env->matrix_x)
 		{
-			env->buff[y][x].y = env->m[y][x].y + cy;
-			env->buff[y][x].x = env->m[y][x].x + cx;
+			env->m[y][x].y += env->shift_y;
+			env->m[y][x].x += env->shift_x;
 		}
 }
 
-static bool	add_init_buff(t_env *env)
+bool	add_init_buff(t_env *env)
 {
 	int	y;
 	int	x;
