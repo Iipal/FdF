@@ -15,14 +15,11 @@
 static void	add_keys_movenrotare(int key, t_env *env)
 {
 	if (key == KEY_D || key == ARROW_RIGHT)
-		env->shift_x += SHIFT_INC;
-		// fdf_xmove(env, SHIFT_INC);
+		fdf_xmove(env, MOVE_INC);
 	if (key == KEY_A || key == ARROW_LEFT)
-		env->shift_x -= SHIFT_INC;
-		// fdf_xmove(env, -SHIFT_INC);
+		fdf_xmove(env, -MOVE_INC);
 	if (key == KEY_W || key == ARROW_UP)
-		env->shift_y -= SHIFT_INC;
-		// fdf_ymove(env, -SHIFT_INC);
+		fdf_ymove(env, -MOVE_INC);
 	if (key == KEY_S || key == ARROW_DOWN)
 		fdf_ymove(env, MOVE_INC);
 	if (key == KEY_R)

@@ -6,36 +6,30 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/10 16:08:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/11 13:48:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	add_zooming(t_env *env)
+static void	add_zooming(t_env *env)
 {
 	int	y;
 	int	x;
 
-	printf("%d\n", env->zoom);
 	y = NEG;
 	while (++y < env->matrix_y && (x = NEG))
 		while (++x < env->matrix_x)
 		{
-			env->shift_x >= ZERO
-				? (env->m[y][x].x += SHIFT_INC)
-				: (env->m[y][x].x -= SHIFT_INC);
 			env->buff[y][x].x = env->m[y][x].x * env->zoom;
-			env->shift_y >= ZERO
-				? (env->m[y][x].y += SHIFT_INC)
-				: (env->m[y][x].y -= SHIFT_INC);
 			env->buff[y][x].y = env->m[y][x].y * env->zoom;
-			
 		}
 }
 
 void	add_centralize(t_env *env)
 {
+	int	cy;
+	int	cx;
 	int	y;
 	int	x;
 
@@ -46,12 +40,12 @@ void	add_centralize(t_env *env)
 	while (++y < env->matrix_y && (x = NEG))
 		while (++x < env->matrix_x)
 		{
-			env->m[y][x].y += env->shift_y;
-			env->m[y][x].x += env->shift_x;
+			env->buff[y][x].y = env->m[y][x].y + cy;
+			env->buff[y][x].x = env->m[y][x].x + cx;
 		}
 }
 
-bool	add_init_buff(t_env *env)
+static bool	add_init_buff(t_env *env)
 {
 	int	y;
 	int	x;

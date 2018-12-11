@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/07 14:13:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/11 13:46:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@
 **		'fdf_file_readnsave_env' - Function for file reading and
 **		\____ saving data from it to main environmnet structure.
 **			| - Called from the 'main' function. (main.c)
-**
-**		'add_alloc_env' - Allocate memory for main program environment
-**		\____ variables and main initilization MLX variables.
-**			| - Additional function for 'fdf_file_readnsave_env'.
 **
 **		'add_save_tomatrix' - Save data from "file" in environment
 **		\____ two-dimensioanl matrix.
@@ -106,45 +102,27 @@ static matrix	add_save_tomatrix(string *file, int matrix_y, int *matrix_x)
 	return (m);
 }
 
-static t_env	*add_alloc_env(string tittle)
-{
-	t_env	*out;
-
-	_NOTIS_N(out = (t_env*)malloc(sizeof(t_env)));
-	_NOTIS_N(out->mlx = mlx_init());
-	_NOTIS_N(out->win = mlx_new_window(out->mlx, WIN_X, WIN_Y, tittle));
-	out->zoom = ZOOM_DEF;
-	out->matrix_y = ZERO;
-	out->matrix_x = ZERO;
-	out->shift_y = ZERO;
-	out->shift_x = ZERO;
-	out->buff = NULL;
-	return (out);
-}
-
-t_env			*fdf_file_readnsave_env(cstring file_name)
+bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
 {
 	string	gnl_temp;
 	string	*file;
-	t_env	*env;
 	int		fd;
 	int		i;
 
 	i = ZERO;
-	_NOTIS_N(env = add_alloc_env((string)file_name));
-	_NOTIS_N(fd = open(file_name, O_RDONLY));
+	_NOTIS_F(fd = open(file_name, O_RDONLY));
 	while (ft_gnl(fd, &gnl_temp) > ZERO && ++(env->matrix_y))
 		ft_strdel(&gnl_temp);
 	close(fd);
-	_NOTIS_N(env->matrix_y);
-	_NOTIS_N(file = (string*)malloc(sizeof(string) * env->matrix_y));
-	_NOTIS_N(fd = open(file_name, O_RDONLY));
+	_NOTIS_F(env->matrix_y);
+	_NOTIS_F(file = (string*)malloc(sizeof(string) * env->matrix_y));
+	_NOTIS_F(fd = open(file_name, O_RDONLY));
 	while (ft_gnl(fd, &gnl_temp) > ZERO)
 	{
 		file[i++] = ft_strdup(gnl_temp);
 		ft_strdel(&gnl_temp);
 	}
-	_NOTIS_N(env->m = add_save_tomatrix(file,
+	_NOTIS_F(env->m = add_save_tomatrix(file,
 		env->matrix_y, &(env->matrix_x)));
-	return (env);
+	return (true);
 }

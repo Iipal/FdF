@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/10 15:27:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/11 13:47:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@
 
 # define PI				3.141592
 
-# define HEX			16
-
 # define NEG			-1
 # define ZERO			0
 
-# define ROT_INC		3
+# define HEX			16
+
+# define MOVE_INC		2
+
+# define ROT_INC		32
 
 # define ZOOM_INC		2
 # define ZOOM_MIN		5
 # define ZOOM_DEF		13
 # define ZOOM_MAX		255
-
-# define SHIFT_INC		2
 
 /*
 **	Simple MAC keyboard decimal values in constantes:
@@ -64,6 +64,7 @@
 # define KEY_F			3
 # define KEY_G			5
 # define KEY_H			4
+
 
 # define KEY_W			13
 # define KEY_A			0
@@ -128,7 +129,7 @@ typedef struct	s_fdf_environment
 	matrix		buff;
 }				t_env;
 
-t_env			*fdf_file_readnsave_env(cstring file_name);
+bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
 void			fdf_free_file(string *file, int lines);
 
 bool			fdf_rendering(t_env *env);
