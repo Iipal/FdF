@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 15:49:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/11 19:53:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static void	add_change_color(int *color)
 static void	add_keys_movenrotare(int key, t_env *env)
 {
 	if (key == KEY_D || key == ARROW_RIGHT)
-		fdf_xmove(env, MOVE_INC);
+		env->shift_x += MOVE_INC;
 	if (key == KEY_A || key == ARROW_LEFT)
-		fdf_xmove(env, -MOVE_INC);
+		env->shift_x -= MOVE_INC;
 	if (key == KEY_W || key == ARROW_UP)
-		fdf_ymove(env, -MOVE_INC);
+		env->shift_y -= MOVE_INC; 
 	if (key == KEY_S || key == ARROW_DOWN)
-		fdf_ymove(env, MOVE_INC);
+		env->shift_y += MOVE_INC; 
 	if (key == KEY_R)
 		fdf_xrotare(env, ROT_INC);
 	if (key == KEY_F)
@@ -64,11 +64,11 @@ static int	add_keys_hook(int key, t_env *env)
 	if (key == MINUS_NUMPAD || key == MINUS_KEYBOARD)
 		(env->zoom - ZOOM_INC >= ZOOM_MIN) ? (env->zoom -= ZOOM_INC) : 0;
 	add_keys_movenrotare(key, env);
+	fdf_rendering(env);
 	return (1);
 }
 
 void		fdf_key_hooks(t_env *env)
 {
-	if (mlx_hook(env->win, 2, 2, add_keys_hook, env))
-		fdf_rendering(env);
+	mlx_hook(env->win, 2, 2, add_keys_hook, env);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 15:48:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/11 19:52:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 **		'NEG', 'ZERO' & 'HEX' is just simple values.
 */
 
-# define IRGB_GRAY			3684408
+# define IRGB_GRAY			3355443
 # define IRGB_WHITE			16777215
 # define IRGB_LIME			15007539
 # define IRGB_CHERRY		15865942
-# define IRGB_AQUA			1694207
+# define IRGB_AQUA			7273983
 
 # define WIN_X			2000
 # define WIN_Y			1000
@@ -47,7 +47,7 @@
 
 # define HEX			16
 
-# define MOVE_INC		2
+# define MOVE_INC		4
 
 # define ROT_INC		32
 
@@ -127,8 +127,8 @@ _MATRIX;
 
 typedef struct	s_fdf_environment
 {
-	int			matrix_y;
-	int			matrix_x;
+	int			my;
+	int			mx;
 	int			shift_y;
 	int			shift_x;
 	int 		color;
@@ -169,7 +169,7 @@ typedef struct	s_mlx
 	pvoid	win;
 }				t_mlx;
 
-void			fdf_bdrawing(matrix m, int matrix_y, int matrix_x, t_mlx mlx);
+void			fdf_bdrawing(t_env *env);
 void			fdf_key_hooks(t_env *env);
 
 void			fdf_xmove(t_env *env, int inc);

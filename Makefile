@@ -6,7 +6,7 @@
 #    By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 13:30:08 by tmaluh            #+#    #+#              #
-#    Updated: 2018/12/11 18:17:19 by tmaluh           ###   ########.fr        #
+#    Updated: 2018/12/11 18:52:38 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = fdf
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	MLXFLAGS = -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
+	MLXFLAGS := -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
 endif
 ifeq ($(UNAME_S),Darwin)
-	MLXFLAGS = -L /usr/local/lib -lmlx -lm -framework OpenGL -framework AppKit
+	MLXFLAGS := -L /usr/local/lib -lmlx -lm -framework OpenGL -framework AppKit
 endif
 
 CC = gcc -march=native
