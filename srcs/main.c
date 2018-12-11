@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 13:47:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/11 15:37:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 static bool	add_alloc_env(string tittle, t_env *env)
 {
-	env->zoom = ZOOM_DEF;
 	env->matrix_y = ZERO;
 	env->matrix_x = ZERO;
 	env->shift_y = ZERO;
 	env->shift_x = ZERO;
+	env->color = IRGB_WHITE;
+	env->zoom = ZOOM_DEF;
 	env->buff = NULL;
 	_NOTIS_F(env->mlx = mlx_init());
 	_NOTIS_F(env->win = mlx_new_window(env->mlx, WIN_X, WIN_Y, tittle));

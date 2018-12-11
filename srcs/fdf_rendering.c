@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 13:48:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/11 15:42:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,24 @@ void	add_isometric(t_env *env)
 		}
 }
 
+static void	add_change_grid_color(t_env *env, int old, int new)
+{
+	int	y;
+	int	x;
+
+	y = NEG;
+	printf("%d | %d\n", old, new);
+	while (++y < env->matrix_y && (x = NEG))
+		while (++x < env->matrix_x)
+			if (env->buff[y][x].rgb == old)
+				env->buff[y][x].rgb = new;
+}
+
 bool		fdf_rendering(t_env *env)
 {
 	static bool	is_center;
-	
+	static int	is_color;
+
 	if (!env->buff)
 		add_init_buff(env);
 	if (!is_center ? (is_center = true) : false)
@@ -120,6 +134,13 @@ bool		fdf_rendering(t_env *env)
 	add_zooming(env);
 	add_isometric(env);
 	add_print(env, false);
+	if (!is_color)
+		is_color = env->color;
+	else if (is_color != env->color)
+	{
+		add_change_grid_color(env, is_color, env->color);
+		is_color = env->color;
+	}
 	mlx_clear_window(env->mlx, env->win);
 	fdf_bdrawing(env->buff, env->matrix_y, env->matrix_x,
 		(t_mlx){.mlx = env->mlx, .win = env->win});

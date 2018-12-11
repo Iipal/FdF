@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 13:47:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/11 15:48:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@
 **		'NEG', 'ZERO' & 'HEX' is just simple values.
 */
 
+# define IRGB_GRAY			3684408
+# define IRGB_WHITE			16777215
+# define IRGB_LIME			15007539
+# define IRGB_CHERRY		15865942
+# define IRGB_AQUA			1694207
+
 # define WIN_X			2000
 # define WIN_Y			1000
-
-# define IRGB_WHITE		16777215
 
 # define PI				3.141592
 
@@ -65,6 +69,7 @@
 # define KEY_G			5
 # define KEY_H			4
 
+# define KEY_C			8
 
 # define KEY_W			13
 # define KEY_A			0
@@ -94,13 +99,17 @@
 # define _RAD(deg) (((deg) * PI) / 180.0)
 # define _ISVIEW(my, mx) add_is_view((t_p){.y = my, .x = mx})
 
+# define _COLORS typedef enum e_intrgb_colors	colors
+
+_COLORS;
+
 enum	e_bool
 {
 	false,
 	true
 };
 
-# define _BOOL typedef enum e_bool	bool
+# define _BOOL typedef enum e_bool				bool
 
 _BOOL;
 
@@ -112,7 +121,7 @@ typedef struct	s_matrix
 	int	rgb;
 }				t_matrix;
 
-# define _MATRIX typedef t_matrix**	matrix
+# define _MATRIX typedef t_matrix**				matrix
 
 _MATRIX;
 
@@ -122,6 +131,7 @@ typedef struct	s_fdf_environment
 	int			matrix_x;
 	int			shift_y;
 	int			shift_x;
+	int 		color;
 	uchar		zoom;
 	pvoid		mlx;
 	pvoid		win;
