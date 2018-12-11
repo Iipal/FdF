@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 19:50:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/11 20:28:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void	add_isometric(t_env *env)
 			oy = env->m[y][x].y;
 			ox = env->m[y][x].x;
 			oz = env->m[y][x].z;
-			env->buff[y][x].y = (1 / sqrt(6)) * (-ox + 2 * oy + oz);
-			env->buff[y][x].x = (1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz);
-			env->buff[y][x].z = (1 / sqrt(6)) *
+			env->m[y][x].y = (1 / sqrt(6)) * (-ox + 2 * oy + oz);
+			env->m[y][x].x = (1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz);
+			env->m[y][x].z = (1 / sqrt(6)) *
 						(sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz);
 		}
 }
@@ -116,8 +116,8 @@ static void	add_change_grid_color(t_env *env, int old, int new)
 	y = NEG;
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
-			if (env->buff[y][x].rgb == old)
-				env->buff[y][x].rgb = new;
+			if (env->m[y][x].rgb == old)
+				env->m[y][x].rgb = new;
 }
 
 bool		fdf_rendering(t_env *env)
@@ -129,7 +129,7 @@ bool		fdf_rendering(t_env *env)
 	if (!env->buff)
 		add_init_buff(env);
 	if (!is_isometric ? (is_isometric = true) : false)
-		add_isometric(env);
+		;// add_isometric(env);
 	if (!is_center ? (is_center = true) : false)
 		;// add_centralize(env);
 	// add_zooming(env);

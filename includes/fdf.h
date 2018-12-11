@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 19:52:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/11 20:28:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 
 # define HEX			16
 
-# define MOVE_INC		4
+# define MOVE_INC		10
 
 # define ROT_INC		32
 
@@ -99,17 +99,13 @@
 # define _RAD(deg) (((deg) * PI) / 180.0)
 # define _ISVIEW(my, mx) add_is_view((t_p){.y = my, .x = mx})
 
-# define _COLORS typedef enum e_intrgb_colors	colors
-
-_COLORS;
-
 enum	e_bool
 {
 	false,
 	true
 };
 
-# define _BOOL typedef enum e_bool				bool
+# define _BOOL typedef enum e_bool	bool
 
 _BOOL;
 
@@ -121,7 +117,7 @@ typedef struct	s_matrix
 	int	rgb;
 }				t_matrix;
 
-# define _MATRIX typedef t_matrix**				matrix
+# define _MATRIX typedef t_matrix**	matrix
 
 _MATRIX;
 
