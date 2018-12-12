@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 15:11:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 17:01:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,15 @@ typedef struct	s_fdf_environment
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
 void			fdf_free_file(string *file, int lines);
+
+typedef struct	s_isrender
+{
+	bool	is_center;
+	int		is_zoomed;
+	int		is_color;
+	int		is_shiftx;
+	int		is_shifty;
+}				t_isrender;
 
 bool			fdf_rendering(t_env *env);
 

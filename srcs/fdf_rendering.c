@@ -6,13 +6,13 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 15:04:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 17:12:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void		add_zooming(t_env *env)
+void		add_zooming(t_env *env, int old_zoom, int new_zoom)
 {
 	int	y;
 	int	x;
@@ -21,18 +21,18 @@ void		add_zooming(t_env *env)
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{
-			env->buff[y][x].x = env->m[y][x].x * env->zoom;
-			env->buff[y][x].y = env->m[y][x].y * env->zoom;
+			env->buff[y][x].x = env->m[y][x].x / old_zoom * new_zoom;
+			env->buff[y][x].y = env->m[y][x].y / old_zoom * new_zoom;
 		}
 }
 
-/*static bool	add_init_buff(t_env *env)
+static bool	add_init_buff(t_env *env)
 {
 	int	y;
 	int	x;
 
 	y = NEG;
-	_NOTIS_F(env->buff = (matrix)malloc(sizeof(t_matrix*) * env->my));
+	_NOTIS_F(env->buff = (t_matrix**)malloc(sizeof(t_matrix*) * env->my));
 	while (++y < env->my && (x = NEG))
 	{
 		_NOTIS_F(env->buff[y] = (t_matrix*)malloc(sizeof(t_matrix)
@@ -47,7 +47,7 @@ void		add_zooming(t_env *env)
 	}
 	return (true);
 }
-*/
+
 void		add_isometric(t_env *env)
 {
 	int	oy;
@@ -60,17 +60,33 @@ void		add_isometric(t_env *env)
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{
-			oy = env->m[y][x].y;
-			ox = env->m[y][x].x;
-			oz = env->m[y][x].z;
-			env->m[y][x].y = (1 / sqrt(6)) * (-ox + 2 * oy + oz);
-			env->m[y][x].x = (1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz);
-			env->m[y][x].z = (1 / sqrt(6)) *
+			oy = env->buff[y][x].y;
+			ox = env->buff[y][x].x;
+			oz = env->buff[y][x].z;
+			env->buff[y][x].y = (1 / sqrt(6)) * (-ox + 2 * oy + oz);
+			env->buff[y][x].x = (1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz);
+			env->buff[y][x].z = (1 / sqrt(6)) *
 						(sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz);
 		}
 }
 
-static void	add_change_grid_color(t_env *env, int old, int new)
+void		add_centralize(t_env *env)
+{
+	int	y;
+	int	x;
+
+	y = NEG;
+	env->cy = (WIN_Y / 2) - ((env->my / 2) * env->zoom);
+	env->cx = (WIN_X / 2) - ((env->mx / 2) * env->zoom);
+	while (++y < env->my && (x = NEG))
+		while (++x < env->mx)
+		{
+			env->buff[y][x].y += env->cy;
+			env->buff[y][x].x += env->cx;
+		}
+}
+
+void		add_change_grid_color(t_env *env, int old, int new)
 {
 	int	y;
 	int	x;
@@ -78,33 +94,42 @@ static void	add_change_grid_color(t_env *env, int old, int new)
 	y = NEG;
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
-			if (env->m[y][x].rgb == old)
-				env->m[y][x].rgb = new;
+			if (env->buff[y][x].rgb == old)
+				env->buff[y][x].rgb = new;
+}
+
+static void	add_is
+
+static void	add_is_render(t_isrender *isr, t_env *env)
+{
+	if (!isr->is_color)
+		isr->is_color = env->color;
+	else if (isr->is_color != env->color)
+	{
+		add_change_grid_color(env, isr->is_color, env->color);
+		isr->is_color = env->color;
+	}
+	if (!isr->is_zoomed)
+	{
+		isr->is_zoomed = env->zoom;
+		add_zooming(env, 1, isr->is_zoomed);
+	}
+	else if (isr->is_zoomed != env->zoom)
+	{
+		add_zooming(env, isr->is_zoomed, env->zoom);
+		isr->is_zoomed = env->zoom;
+	}
+	if (!isr->is_center ? (isr->is_center = true) : false)
+		add_centralize(env);
 }
 
 bool		fdf_rendering(t_env *env)
 {
-	static bool	is_isometric;
-	static bool	is_center;
-	static int	is_color;
+	static t_isrender	isr;
 
-	/*if (!env->buff)
-		add_init_buff(env);*/
-	if (!is_isometric ? (is_isometric = true) : false)
-		;// add_isometric(env);
-	if (!is_center ? (is_center = true) : false)
-	{
-		env->cy = (env->my / 2 * env->zoom) + WIN_Y / 2;
-		env->cx = (env->mx / 2 * env->zoom) + WIN_X / 2;
-	}
-	// add_zooming(env);
-	if (!is_color)
-		is_color = env->color;
-	else if (is_color != env->color)
-	{
-		add_change_grid_color(env, is_color, env->color);
-		is_color = env->color;
-	}
+	if (!env->buff)
+		add_init_buff(env);
+	add_is_render(&isr, env);
 	mlx_clear_window(env->mlx, env->win);
 	fdf_bdrawing(env);
 	return (true);
