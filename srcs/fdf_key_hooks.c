@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 20:28:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 15:03:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static void	add_change_color(int *color)
 static void	add_keys_movenrotare(int key, t_env *env)
 {
 	if (key == KEY_D || key == ARROW_RIGHT)
-		env->shift_x += MOVE_INC;
+		env->cx += MOVE_INC;
 	if (key == KEY_A || key == ARROW_LEFT)
-		env->shift_x -= MOVE_INC;
+		env->cx -= MOVE_INC;
 	if (key == KEY_W || key == ARROW_UP)
-		env->shift_y -= MOVE_INC; 
+		env->cy -= MOVE_INC;
 	if (key == KEY_S || key == ARROW_DOWN)
-		env->shift_y += MOVE_INC; 
+		env->cy += MOVE_INC;
 	if (key == KEY_R)
 		fdf_xrotare(env, ROT_INC);
 	if (key == KEY_F)

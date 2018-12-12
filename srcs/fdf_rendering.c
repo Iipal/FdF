@@ -6,13 +6,13 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 20:28:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 15:04:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	add_zooming(t_env *env)
+void		add_zooming(t_env *env)
 {
 	int	y;
 	int	x;
@@ -26,25 +26,7 @@ void	add_zooming(t_env *env)
 		}
 }
 
-void	add_centralize(t_env *env)
-{
-	int	cy;
-	int	cx;
-	int	y;
-	int	x;
-
-	y = NEG;
-	cy = (WIN_Y / 2) - ((env->my * env->zoom) / 2);
-	cx = (WIN_X / 2) - ((env->mx * env->zoom) / 2);
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-		{
-			env->m[y][x].y = env->m[y][x].y + cy;
-			env->m[y][x].x = env->m[y][x].x + cx;
-		}
-}
-
-static bool	add_init_buff(t_env *env)
+/*static bool	add_init_buff(t_env *env)
 {
 	int	y;
 	int	x;
@@ -65,28 +47,8 @@ static bool	add_init_buff(t_env *env)
 	}
 	return (true);
 }
-
-void	add_print(t_env *env, bool mode)
-{
-	int	y;
-	int	x;
-
-	y = NEG;
-	if (mode)
-		while (++y < env->my && (x = NEG))
-		{
-			while (++x < env->mx)
-			{
-				printf("m: %d | %d\n", env->m[y][x].y, env->m[y][x].x);
-				printf("b: %d | %d\n", env->buff[y][x].y, env->buff[y][x].x);
-			}
-			printf("\n");
-		}
-	else
-		printf("%d | %d\n", env->my, env->mx);
-}
-
-void	add_isometric(t_env *env)
+*/
+void		add_isometric(t_env *env)
 {
 	int	oy;
 	int	ox;
@@ -126,14 +88,16 @@ bool		fdf_rendering(t_env *env)
 	static bool	is_center;
 	static int	is_color;
 
-	if (!env->buff)
-		add_init_buff(env);
+	/*if (!env->buff)
+		add_init_buff(env);*/
 	if (!is_isometric ? (is_isometric = true) : false)
 		;// add_isometric(env);
 	if (!is_center ? (is_center = true) : false)
-		;// add_centralize(env);
+	{
+		env->cy = (env->my / 2 * env->zoom) + WIN_Y / 2;
+		env->cx = (env->mx / 2 * env->zoom) + WIN_X / 2;
+	}
 	// add_zooming(env);
-	// add_print(env, false);
 	if (!is_color)
 		is_color = env->color;
 	else if (is_color != env->color)

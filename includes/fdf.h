@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 20:28:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 15:11:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@
 **		'NEG', 'ZERO' & 'HEX' is just simple values.
 */
 
-# define IRGB_GRAY			3355443
-# define IRGB_WHITE			16777215
-# define IRGB_LIME			15007539
-# define IRGB_CHERRY		15865942
-# define IRGB_AQUA			7273983
-
 # define WIN_X			2000
 # define WIN_Y			1000
 
@@ -47,7 +41,7 @@
 
 # define HEX			16
 
-# define MOVE_INC		10
+# define MOVE_INC		15
 
 # define ROT_INC		32
 
@@ -88,16 +82,21 @@
 
 /*
 **	Macroses:
+**	\____ Info include in README.md
 */
 
-# define _MSG(msg)	ft_putendl(msg);
+# define _MSG(msg) ft_putendl(msg);
 # define _NOTIS_MSG(msg, ex) if (!(ex)) { _MSG(msg); return (false); }
 # define _NOTIS_MPE(msg, ex) if (!(ex)) { perror(msg); return (false); }
 # define _NOTIS_N(ex) if (!(ex)) return (NULL)
 # define _NOTIS_F(ex) if (!(ex)) return (false)
 # define _ABS(var) ((var) < 0) ? -(var) : (var)
 # define _RAD(deg) (((deg) * PI) / 180.0)
-# define _ISVIEW(my, mx) add_is_view((t_p){.y = my, .x = mx})
+
+/*
+**	Additional code functional for program:
+**	\____ For boolean data type in C.
+*/
 
 enum	e_bool
 {
@@ -109,6 +108,28 @@ enum	e_bool
 
 _BOOL;
 
+/*
+**	Bonus part:
+**	\____ 5 Colors constantes for changing grid default color.
+*/
+
+# define IRGB_GRAY			3355443
+# define IRGB_WHITE			16777215
+# define IRGB_LIME			15007539
+# define IRGB_CHERRY		15865942
+# define IRGB_AQUA			7273983
+
+/*
+**	Main struct's definitions and functions prototypes
+**	\____ main struct definitions:
+**		| 'my' - counter Y-positions. (max Y-positions)
+**		| 'mx' - counter X-positions. (max X-positions)
+**		| 'color' - default grid color. (bonus)
+**		| 'zoom' - current zoom value.
+**		| 'mlx' && 'win' - for init mlx and mlx_window.
+**		| 'm' - raw matrix with data from file.
+*/
+
 typedef struct	s_matrix
 {
 	int	y;
@@ -117,22 +138,18 @@ typedef struct	s_matrix
 	int	rgb;
 }				t_matrix;
 
-# define _MATRIX typedef t_matrix**	matrix
-
-_MATRIX;
-
 typedef struct	s_fdf_environment
 {
 	int			my;
 	int			mx;
-	int			shift_y;
-	int			shift_x;
+	int			cy;
+	int			cx;
 	int 		color;
 	uchar		zoom;
 	pvoid		mlx;
 	pvoid		win;
-	matrix		m;
-	matrix		buff;
+	t_matrix	**m;
+	t_matrix	**buff;
 }				t_env;
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
@@ -171,7 +188,6 @@ void			fdf_key_hooks(t_env *env);
 void			fdf_xmove(t_env *env, int inc);
 void			fdf_ymove(t_env *env, int inc);
 
-void			fdf_xrotare(t_env *env, int inc);
 void			fdf_free_env(t_env *env);
 
 void			fdf_xrotare(t_env *env, int inc);

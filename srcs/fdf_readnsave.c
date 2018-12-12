@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/11 19:14:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 15:10:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,17 @@
 **	The 'fdf_file_readnsave_env' function is at the bottom.
 **
 **		'fdf_file_readnsave_env' - Function for file reading and
-**		\____ saving data from it to main environmnet structure.
-**			| - Called from the 'main' function. (main.c)
+**									saving data from it to
+**									main environmnet structure.
 **
 **		'add_numbers_inline' - Function for find how much is numbers
-**		\____ and colors in one line of "file".
-**			| - Additional function for 'add_save_tomatrix'.
+**								and colors in one line of "file".
 **
 **		'add_save_tomatrix' - Save data from "file" in environment
-**		\____ two-dimensioanl matrix.
-**			| - Additional function for 'fdf_file_readnsave_env'.
+**								two-dimensioanl matrix.
 **
 **		'add_line_tomatrix' - Function for saving all numbers and colors
-**		\____ to environment two-dimensioanl matrix.
-**			| - Additional function for 'add_save_tomatrix'.
+**								to environment two-dimensioanl matrix.
 */
 
 static int		add_numbers_inline(string line)
@@ -43,7 +40,7 @@ static int		add_numbers_inline(string line)
 		if (ft_isdigit(*line) || *line == '-')
 		{
 			digits = ft_strlen(ft_itoa(ft_atoi(line)));
-			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
+			(line[digits] != '\0') ? (line += digits) : (line += --digits);
 			if (*line == ',')
 				while (*line && !ft_isblank(*line))
 					++line;
@@ -54,42 +51,43 @@ static int		add_numbers_inline(string line)
 	return (out);
 }
 
-static bool		add_line_tomatrix(string line, t_matrix *matrix, int matrix_x, int current_y)
+static bool		add_line_tomatrix(string line, t_matrix *matrix,
+									int matrix_x, int current_y)
 {
+	int	current_x;
 	int	digits;
-	int	x;
 
-	x = ZERO;
-	while (*line && x < matrix_x)
+	current_x = ZERO;
+	while (*line && current_x < matrix_x)
 	{
-		if ((ft_isdigit(*line) || *line == '-') && !(digits = ZERO))
+		if ((ft_isdigit(*line) || *line == '-'))
 		{
-			matrix[x].y = current_y;
-			matrix[x].x = x;
-			matrix[x].rgb = IRGB_WHITE;
-			matrix[x].z = ft_atoi(line);
-			digits = ft_strlen(ft_itoa(matrix[x].z));
-			(line[digits] != '\0') ? (line += digits) : (line += (digits - 1));
+			matrix[current_x].rgb = IRGB_WHITE;
+			matrix[current_x].y = current_y;
+			matrix[current_x].x = current_x;
+			matrix[current_x].z = ft_atoi(line);
+			digits = ft_strlen(ft_itoa(matrix[current_x].z));
+			(line[digits] != '\0') ? (line += digits) : (line += --digits);
 			if (*line == ',')
 			{
-				_NOTIS_F(matrix[x].rgb = ft_atoi_base(line + 3, HEX));
+				_NOTIS_F(matrix[current_x].rgb = ft_atoi_base(line + 3, HEX));
 				while (*line && !ft_isblank(*line))
 					++line;
 			}
-			++x;
+			++current_x;
 		}
 		*line ? ++line : 0;
 	}
 	return (true);
 }
 
-static matrix	add_save_tomatrix(string *file, int matrix_y, int *matrix_x)
+static t_matrix	**add_save_tomatrix(string *file, int matrix_y, int *matrix_x)
 {
-	matrix	m;
-	int		y;
+	t_matrix	**m;
+	int			y;
 
 	y = NEG;
-	_NOTIS_N(m = (matrix)malloc(sizeof(t_matrix*) * matrix_y));
+	_NOTIS_N(m = (t_matrix**)malloc(sizeof(t_matrix*) * matrix_y));
 	_NOTIS_N(*matrix_x = add_numbers_inline(*file));
 	while (++y < matrix_y)
 	{
