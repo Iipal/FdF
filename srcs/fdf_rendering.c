@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 17:12:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 17:29:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,7 @@ void		add_change_grid_color(t_env *env, int old, int new)
 				env->buff[y][x].rgb = new;
 }
 
-static void	add_is
-
-static void	add_is_render(t_isrender *isr, t_env *env)
+static void	add_is_render_bonus(t_isrender *isr, t_env *env)
 {
 	if (!isr->is_color)
 		isr->is_color = env->color;
@@ -109,6 +107,10 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 		add_change_grid_color(env, isr->is_color, env->color);
 		isr->is_color = env->color;
 	}
+}
+
+static void	add_is_render(t_isrender *isr, t_env *env)
+{
 	if (!isr->is_zoomed)
 	{
 		isr->is_zoomed = env->zoom;
@@ -121,6 +123,20 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 	}
 	if (!isr->is_center ? (isr->is_center = true) : false)
 		add_centralize(env);
+	if (!isr->is_shiftx)
+		isr->is_shiftx = env->cx;
+	else if (isr->is_shiftx != env->cx)
+	{
+		fdf_xmove(env, ((env->cx > isr->is_shiftx) ? SHIFT_INC : -SHIFT_INC));
+		isr->is_shiftx = env->cx;
+	}
+	if (!isr->is_shifty)
+		isr->is_shifty = env->cy;
+	else if (isr->is_shifty != env->cy)
+	{
+		fdf_ymove(env, ((env->cy > isr->is_shifty) ? SHIFT_INC : -SHIFT_INC));
+		isr->is_shifty = env->cy;
+	}
 }
 
 bool		fdf_rendering(t_env *env)
@@ -130,6 +146,7 @@ bool		fdf_rendering(t_env *env)
 	if (!env->buff)
 		add_init_buff(env);
 	add_is_render(&isr, env);
+	add_is_render_bonus(&isr, env);
 	mlx_clear_window(env->mlx, env->win);
 	fdf_bdrawing(env);
 	return (true);

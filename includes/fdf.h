@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 17:01:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 17:21:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define HEX			16
 
-# define MOVE_INC		15
+# define SHIFT_INC		15
 
 # define ROT_INC		32
 

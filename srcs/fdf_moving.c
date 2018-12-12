@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 11:04:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 17:20:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	fdf_xmove(t_env *env, int inc)
 	inc < 0 ? (env->cx -= _ABS(inc)) : (env->cx += inc);
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
-			inc < 0 ? (env->m[y][x].x -= _ABS(inc)) : (env->m[y][x].x += inc);
+			inc < 0 ? (env->buff[y][x].x -= _ABS(inc)) : (env->buff[y][x].x += inc);
 }
 
 void	fdf_ymove(t_env *env, int inc)
@@ -33,7 +33,7 @@ void	fdf_ymove(t_env *env, int inc)
 	inc < 0 ? (env->cy -= _ABS(inc)) : (env->cy += inc);
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
-			inc < 0 ? (env->m[y][x].y -= _ABS(inc)) : (env->m[y][x].y += inc);
+			inc < 0 ? (env->buff[y][x].y -= _ABS(inc)) : (env->buff[y][x].y += inc);
 }
 
 void	fdf_xrotare(t_env *env, int inc)
