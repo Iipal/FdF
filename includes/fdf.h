@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 17:21:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 17:52:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ typedef struct	s_mlx
 	pvoid	win;
 }				t_mlx;
 
-void			fdf_bdrawing(t_env *env);
+void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
 void			fdf_key_hooks(t_env *env);
 
 void			fdf_xmove(t_env *env, int inc);

@@ -6,13 +6,13 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 17:29:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 20:44:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void		add_zooming(t_env *env, int old_zoom, int new_zoom)
+void		add_zooming(t_env *env)
 {
 	int	y;
 	int	x;
@@ -21,8 +21,8 @@ void		add_zooming(t_env *env, int old_zoom, int new_zoom)
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{
-			env->buff[y][x].x = env->m[y][x].x / old_zoom * new_zoom;
-			env->buff[y][x].y = env->m[y][x].y / old_zoom * new_zoom;
+			env->buff[y][x].x *= env->zoom;
+			env->buff[y][x].y *= env->zoom;
 		}
 }
 
@@ -86,6 +86,25 @@ void		add_centralize(t_env *env)
 		}
 }
 
+static void	add_refreshnzoom_buff(t_env *env, void (*zooming)(t_env*))
+{
+	int	y;
+	int	x;
+
+	y = NEG;
+	while (++y < env->my && (x = NEG))
+		while (++x < env->mx)
+		{
+			env->buff[y][x].y = env->m[y][x].y;
+			env->buff[y][x].x = env->m[y][x].x;
+		}
+	zooming(env);
+	env->cy = (WIN_Y / 2) - ((env->my / 2) * env->zoom);
+	fdf_xmove(env, env->cx);
+	env->cx = (WIN_X / 2) - ((env->mx / 2) * env->zoom);
+	fdf_ymove(env, env->cy);
+}
+
 void		add_change_grid_color(t_env *env, int old, int new)
 {
 	int	y;
@@ -114,25 +133,23 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 	if (!isr->is_zoomed)
 	{
 		isr->is_zoomed = env->zoom;
-		add_zooming(env, 1, isr->is_zoomed);
+		add_zooming(env);
 	}
 	else if (isr->is_zoomed != env->zoom)
 	{
-		add_zooming(env, isr->is_zoomed, env->zoom);
+		add_refreshnzoom_buff(env, add_zooming);
 		isr->is_zoomed = env->zoom;
 	}
 	if (!isr->is_center ? (isr->is_center = true) : false)
 		add_centralize(env);
-	if (!isr->is_shiftx)
-		isr->is_shiftx = env->cx;
-	else if (isr->is_shiftx != env->cx)
+	!isr->is_shiftx ? (isr->is_shiftx = env->cx) : 0;
+	if (isr->is_shiftx != env->cx)
 	{
 		fdf_xmove(env, ((env->cx > isr->is_shiftx) ? SHIFT_INC : -SHIFT_INC));
 		isr->is_shiftx = env->cx;
 	}
-	if (!isr->is_shifty)
-		isr->is_shifty = env->cy;
-	else if (isr->is_shifty != env->cy)
+	!isr->is_shifty ? (isr->is_shifty = env->cy) : 0;
+	if (isr->is_shifty != env->cy)
 	{
 		fdf_ymove(env, ((env->cy > isr->is_shifty) ? SHIFT_INC : -SHIFT_INC));
 		isr->is_shifty = env->cy;
@@ -148,6 +165,7 @@ bool		fdf_rendering(t_env *env)
 	add_is_render(&isr, env);
 	add_is_render_bonus(&isr, env);
 	mlx_clear_window(env->mlx, env->win);
-	fdf_bdrawing(env);
+	fdf_bdrawing(env->buff, (t_p){.y = env->my, .x = env->mx},
+		(t_mlx){.mlx = env->mlx, .win = env->win});
 	return (true);
 }

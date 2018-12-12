@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:31 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 16:09:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/12 20:39:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,31 +84,32 @@ static void	add_bset_line(t_p dot1, t_p dot2, t_mnc mnc)
 								.p2.y = absdy},
 					(t_dp){.p1 = dot1, .p2 = dot2}, mnc);
 }
-void		fdf_bdrawing(t_env *env)
+
+void		fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx)
 {
 	int	y;
 	int	x;
 
 	y = NEG;
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
+	while (++y < mxy.y && (x = NEG))
+		while (++x < mxy.x)
 		{
-			if ((x + 1 < env->mx) && (y + 1 < env->my))
+			if ((x + 1 < mxy.x) && (y + 1 < mxy.y))
 			{
-				add_bset_line((t_p){.y = env->buff[y][x].y, .x = env->buff[y][x].x},
-					(t_p){.y = env->buff[y][x + 1].y, .x = env->buff[y][x + 1].x},
-				(t_mnc){.mlx = env->mlx, .win = env->win, .color = env->buff[y][x].rgb});
-				add_bset_line((t_p){.y = env->buff[y][x].y, .x = env->buff[y][x].x},
-							(t_p){.y = env->buff[y + 1][x].y, .x = env->buff[y + 1][x].x},
-				(t_mnc){.mlx = env->mlx, .win = env->win, .color = env->buff[y][x].rgb});
+				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+					(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
+				(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
+				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+							(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
+				(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
 			}
-			else if (x == env->mx - 1 && y + 1 < env->my)
-				add_bset_line((t_p){.y = env->buff[y][x].y, .x = env->buff[y][x].x},
-							(t_p){.y = env->buff[y + 1][x].y, .x = env->buff[y + 1][x].x},
-				(t_mnc){.mlx = env->mlx, .win = env->win, .color = env->buff[y][x].rgb});
-			else if (y == env->my - 1 && x + 1 < env->mx)
-				add_bset_line((t_p){.y = env->buff[y][x].y, .x = env->buff[y][x].x},
-							(t_p){.y = env->buff[y][x + 1].y, .x = env->buff[y][x + 1].x},
-				(t_mnc){.mlx = env->mlx, .win = env->win, .color = env->buff[y][x].rgb});
+			else if (x == mxy.x - 1 && y + 1 < mxy.y)
+				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+							(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
+				(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
+			else if (y == mxy.y - 1 && x + 1 < mxy.x)
+				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+							(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
+				(t_mnc){.mlx = mlx.mlx, .win = mlx.win, .color = m[y][x].rgb});
 		}
 }
