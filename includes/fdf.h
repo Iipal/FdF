@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 17:52:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/14 12:50:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,42 +43,22 @@
 
 # define SHIFT_INC		15
 
-# define ROT_INC		32
+# define ROT_INC		15
 
 # define ZOOM_INC		2
 # define ZOOM_MIN		5
-# define ZOOM_DEF		13
+# define ZOOM_DEF		15
 # define ZOOM_MAX		255
 
 /*
 **	Simple MAC keyboard decimal values in constantes:
 */
 
-# define ESC			53
-
-# define KEY_R			15
-# define KEY_T			17
-# define KEY_Y			16
-# define KEY_F			3
-# define KEY_G			5
-# define KEY_H			4
-
-# define KEY_C			8
-
-# define KEY_W			13
-# define KEY_A			0
-# define KEY_S			1
-# define KEY_D			2
-
-# define ARROW_UP		126
-# define ARROW_DOWN		125
-# define ARROW_RIGHT	124
-# define ARROW_LEFT		123
-
-# define PLUS_NUMPAD	69
-# define MINUS_NUMPAD	78
-# define PLUS_KEYBOARD	24
-# define MINUS_KEYBOARD	27
+# ifdef __APPLE__
+# include "macos_keys.h"
+# elif ifdef __linux__
+# include "linux_keys.h"
+# endif
 
 /*
 **	Macroses:
@@ -113,11 +93,11 @@ _BOOL;
 **	\____ 5 Colors constantes for changing grid default color.
 */
 
-# define IRGB_GRAY			3355443
-# define IRGB_WHITE			16777215
-# define IRGB_LIME			15007539
-# define IRGB_CHERRY		15865942
-# define IRGB_AQUA			7273983
+# define IRGB_GRAY		3355443
+# define IRGB_WHITE		16777215
+# define IRGB_LIME		8388352
+# define IRGB_CHERRY	15865942
+# define IRGB_AQUA		7273983
 
 /*
 **	Main struct's definitions and functions prototypes
@@ -142,8 +122,8 @@ typedef struct	s_fdf_environment
 {
 	int			my;
 	int			mx;
-	int			cy;
-	int			cx;
+	int			sy;
+	int			sx;
 	int 		color;
 	uchar		zoom;
 	pvoid		mlx;
@@ -157,14 +137,16 @@ void			fdf_free_file(string *file, int lines);
 
 typedef struct	s_isrender
 {
+	bool	is_isometric;
+	bool	is_render;
 	bool	is_center;
-	int		is_zoomed;
+	bool	is_zoomed;
 	int		is_color;
 	int		is_shiftx;
 	int		is_shifty;
 }				t_isrender;
 
-bool			fdf_rendering(t_env *env);
+void			fdf_rendering(t_env *env);
 
 typedef struct	s_point
 {

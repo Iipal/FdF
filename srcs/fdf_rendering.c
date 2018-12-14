@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 20:44:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/14 12:15:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void		add_isometric(t_env *env)
 			env->buff[y][x].z = (1 / sqrt(6)) *
 						(sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz);
 		}
+	fdf_yrotare(env, -120);
 }
 
 void		add_centralize(t_env *env)
@@ -76,33 +77,14 @@ void		add_centralize(t_env *env)
 	int	x;
 
 	y = NEG;
-	env->cy = (WIN_Y / 2) - ((env->my / 2) * env->zoom);
-	env->cx = (WIN_X / 2) - ((env->mx / 2) * env->zoom);
+	env->sy = (WIN_Y / 2) - ((env->my / 2) * env->zoom);
+	env->sx = (WIN_X / 2) - ((env->mx / 2) * env->zoom);
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{
-			env->buff[y][x].y += env->cy;
-			env->buff[y][x].x += env->cx;
+			env->buff[y][x].y += env->sy;
+			env->buff[y][x].x += env->sx;
 		}
-}
-
-static void	add_refreshnzoom_buff(t_env *env, void (*zooming)(t_env*))
-{
-	int	y;
-	int	x;
-
-	y = NEG;
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-		{
-			env->buff[y][x].y = env->m[y][x].y;
-			env->buff[y][x].x = env->m[y][x].x;
-		}
-	zooming(env);
-	env->cy = (WIN_Y / 2) - ((env->my / 2) * env->zoom);
-	fdf_xmove(env, env->cx);
-	env->cx = (WIN_X / 2) - ((env->mx / 2) * env->zoom);
-	fdf_ymove(env, env->cy);
 }
 
 void		add_change_grid_color(t_env *env, int old, int new)
@@ -119,9 +101,9 @@ void		add_change_grid_color(t_env *env, int old, int new)
 
 static void	add_is_render_bonus(t_isrender *isr, t_env *env)
 {
-	if (!isr->is_color)
+	if (!isr->is_color && (isr->is_render = true))
 		isr->is_color = env->color;
-	else if (isr->is_color != env->color)
+	else if (isr->is_color != env->color && (isr->is_render = true))
 	{
 		add_change_grid_color(env, isr->is_color, env->color);
 		isr->is_color = env->color;
@@ -130,33 +112,31 @@ static void	add_is_render_bonus(t_isrender *isr, t_env *env)
 
 static void	add_is_render(t_isrender *isr, t_env *env)
 {
-	if (!isr->is_zoomed)
+	isr->is_render = false;
+	if (!isr->is_zoomed && (isr->is_render = true))
 	{
-		isr->is_zoomed = env->zoom;
 		add_zooming(env);
+		isr->is_zoomed = true;
 	}
-	else if (isr->is_zoomed != env->zoom)
-	{
-		add_refreshnzoom_buff(env, add_zooming);
-		isr->is_zoomed = env->zoom;
-	}
-	if (!isr->is_center ? (isr->is_center = true) : false)
+	if (!isr->is_isometric ? (isr->is_isometric = true) : false)
+		add_isometric(env);
+	if ((!isr->is_center ? (isr->is_center = 1) : 0) && (isr->is_render = true))
 		add_centralize(env);
-	!isr->is_shiftx ? (isr->is_shiftx = env->cx) : 0;
-	if (isr->is_shiftx != env->cx)
+	!isr->is_shiftx ? (isr->is_shiftx = env->sx) : 0;
+	if (isr->is_shiftx != env->sx && (isr->is_render = true))
 	{
-		fdf_xmove(env, ((env->cx > isr->is_shiftx) ? SHIFT_INC : -SHIFT_INC));
-		isr->is_shiftx = env->cx;
+		fdf_xmove(env, ((env->sx > isr->is_shiftx) ? SHIFT_INC : -SHIFT_INC));
+		isr->is_shiftx = env->sx;
 	}
-	!isr->is_shifty ? (isr->is_shifty = env->cy) : 0;
-	if (isr->is_shifty != env->cy)
+	!isr->is_shifty ? (isr->is_shifty = env->sy) : 0;
+	if (isr->is_shifty != env->sy && (isr->is_render = true))
 	{
-		fdf_ymove(env, ((env->cy > isr->is_shifty) ? SHIFT_INC : -SHIFT_INC));
-		isr->is_shifty = env->cy;
+		fdf_ymove(env, ((env->sy > isr->is_shifty) ? SHIFT_INC : -SHIFT_INC));
+		isr->is_shifty = env->sy;
 	}
 }
 
-bool		fdf_rendering(t_env *env)
+void		fdf_rendering(t_env *env)
 {
 	static t_isrender	isr;
 
@@ -164,8 +144,10 @@ bool		fdf_rendering(t_env *env)
 		add_init_buff(env);
 	add_is_render(&isr, env);
 	add_is_render_bonus(&isr, env);
-	mlx_clear_window(env->mlx, env->win);
-	fdf_bdrawing(env->buff, (t_p){.y = env->my, .x = env->mx},
-		(t_mlx){.mlx = env->mlx, .win = env->win});
-	return (true);
+	if (isr.is_render)
+	{
+		mlx_clear_window(env->mlx, env->win);
+		fdf_bdrawing(env->buff, (t_p){.y = env->my, .x = env->mx},
+					(t_mlx){.mlx = env->mlx, .win = env->win});
+	}
 }

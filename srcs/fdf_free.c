@@ -6,18 +6,11 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:10:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 15:30:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/13 11:55:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-/*
-**	File with all "free" functions.
-**		'fdf_free_file' - Free "file". About "file":
-**			| - Created in 'fdf_file_readnsave_env'. (fdf_readnsave.c)
-**			| - Including in 'add_save_tomatrix'. (fdf_readnsave.c)
-*/
 
 void		fdf_free_file(string *file, int lines)
 {

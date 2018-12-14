@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 17:22:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/13 16:19:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,7 @@ static void	add_change_color(int *color)
 
 static void	add_keys_movenrotare(int key, t_env *env)
 {
-	if (key == KEY_D || key == ARROW_RIGHT)
-		env->cx += SHIFT_INC;
-	if (key == KEY_A || key == ARROW_LEFT)
-		env->cx -= SHIFT_INC;
-	if (key == KEY_W || key == ARROW_UP)
-		env->cy -= SHIFT_INC;
-	if (key == KEY_S || key == ARROW_DOWN)
-		env->cy += SHIFT_INC;
-	if (key == KEY_R)
+	/*if (key == KEY_R)
 		fdf_xrotare(env, ROT_INC);
 	if (key == KEY_F)
 		fdf_xrotare(env, -ROT_INC);
@@ -47,7 +39,7 @@ static void	add_keys_movenrotare(int key, t_env *env)
 	if (key == KEY_Y)
 		fdf_zrotare(env, ROT_INC);
 	if (key == KEY_H)
-		fdf_zrotare(env, -ROT_INC);
+		fdf_zrotare(env, -ROT_INC);*/
 	if (key == KEY_C)
 		add_change_color(&(env->color));
 }
@@ -59,13 +51,17 @@ static int	add_keys_hook(int key, t_env *env)
 		fdf_free_env(env);
 		exit(EXIT_SUCCESS);
 	}
-	if (key == PLUS_NUMPAD || key == PLUS_KEYBOARD)
-		(env->zoom + ZOOM_INC <= ZOOM_MAX) ? (env->zoom += ZOOM_INC) : 0;
-	if (key == MINUS_NUMPAD || key == MINUS_KEYBOARD)
-		(env->zoom - ZOOM_INC >= ZOOM_MIN) ? (env->zoom -= ZOOM_INC) : 0;
+	if (key == KEY_D || key == ARROW_RIGHT)
+		env->sx += SHIFT_INC;
+	if (key == KEY_A || key == ARROW_LEFT)
+		env->sx -= SHIFT_INC;
+	if (key == KEY_W || key == ARROW_UP)
+		env->sy -= SHIFT_INC;
+	if (key == KEY_S || key == ARROW_DOWN)
+		env->sy += SHIFT_INC;
 	add_keys_movenrotare(key, env);
 	fdf_rendering(env);
-	return (1);
+	return (0);
 }
 
 void		fdf_key_hooks(t_env *env)

@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/12 17:48:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/14 11:02:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	fdf_xmove(t_env *env, int inc)
 	int	x;
 
 	y = NEG;
-	inc < 0 ? (env->cx -= _ABS(inc)) : (env->cx += inc);
+	inc < 0 ? (env->sx -= _ABS(inc)) : (env->sx += inc);
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 			inc < 0 ? (env->buff[y][x].x -= _ABS(inc)) : (env->buff[y][x].x += inc);
@@ -30,7 +30,7 @@ void	fdf_ymove(t_env *env, int inc)
 	int	x;
 
 	y = NEG;
-	inc < 0 ? (env->cy -= _ABS(inc)) : (env->cy += inc);
+	inc < 0 ? (env->sy -= _ABS(inc)) : (env->sy += inc);
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 			inc < 0 ? (env->buff[y][x].y -= _ABS(inc)) : (env->buff[y][x].y += inc);
@@ -63,16 +63,15 @@ void	fdf_yrotare(t_env *env, int inc)
 	int	x;
 
 	y = NEG;
-	if (inc)
-		;
+	printf("\n");
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{
-			ox = env->m[y][x].x;
-			env->m[y][x].x = ox * cos(_RAD(inc)) +
-							env->m[y][x].z * sin(_RAD(inc));
-			env->m[y][x].z = -ox * sin(_RAD(inc)) +
-							env->m[y][x].z * cos(_RAD(inc));
+			ox = env->buff[y][x].x;
+			env->buff[y][x].x = ox * cos(_RAD(inc)) +
+							env->buff[y][x].z * sin(_RAD(inc));
+			env->buff[y][x].z = -ox * sin(_RAD(inc)) +
+							env->buff[y][x].z * cos(_RAD(inc));
 		}
 }
 
