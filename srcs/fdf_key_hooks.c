@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_key_hooks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/13 16:19:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/14 14:13:23 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ static int	add_keys_hook(int key, t_env *env)
 
 void		fdf_key_hooks(t_env *env)
 {
-	mlx_hook(env->win, 2, 2, add_keys_hook, env);
+	mlx_hook(env->win, KEY_PRESS, KEY_MASK, add_keys_hook, env);
 }

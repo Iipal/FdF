@@ -14,7 +14,7 @@ NAME = fdf
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	MLXFLAGS := -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11
+	MLXFLAGS := -L /usr/local/lib -I /usr/local/lib -lmlx -lXext -lX11 -lm
 endif
 ifeq ($(UNAME_S),Darwin)
 	MLXFLAGS := -L /usr/local/lib -lmlx -lm -framework OpenGL -framework AppKit

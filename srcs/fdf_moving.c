@@ -43,8 +43,6 @@ void	fdf_xrotare(t_env *env, int inc)
 	int	x;
 
 	y = NEG;
-	if (inc)
-		;
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{
@@ -63,7 +61,6 @@ void	fdf_yrotare(t_env *env, int inc)
 	int	x;
 
 	y = NEG;
-	printf("\n");
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{
@@ -82,8 +79,6 @@ void	fdf_zrotare(t_env *env, int inc)
 	int	x;
 
 	y = NEG;
-	if (inc)
-		;
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{

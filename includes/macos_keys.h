@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   macos_keys.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/14 12:50:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/14 14:11:19 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACOS_KEYS_H
 # define MACOS_KEYS_H
+
+# define KEY_PRESS		2
+# define KEY_MASK		2
 
 # define ESC			53
 
