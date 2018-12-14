@@ -6,21 +6,25 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/13 10:34:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/14 17:45:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/frog.h"
 
 static t_env	*add_alloc_env(string tittle)
 {
-	t_env	*out;
+	t_env	*out_env;
 
-	out = (t_env*)malloc(sizeof(t_env));
-	*out = (t_env){0, 0, 0, 0, IRGB_WHITE, ZOOM_DEF, NULL, NULL, NULL, NULL};
-	_NOTIS_N(out->mlx = mlx_init());
-	_NOTIS_N(out->win = mlx_new_window(out->mlx, WIN_X, WIN_Y, tittle));
-	return (out);
+	out_env = (t_env*)malloc(sizeof(t_env));
+	*out_env = (t_env){0, 0, 0, 0,
+				IRGB_WHITE, ZOOM_DEF,
+			NULL, NULL, NULL, NULL, NULL};
+	_NOTIS_N(out_env->mlx = mlx_init());
+	_NOTIS_N(out_env->win = mlx_new_window(out_env->mlx, WIN_X, WIN_Y, tittle));
+	_NOTIS_N(out_env->frog = bonus_init_frog());
+	return (out_env);
 }
 
 int				main(int argc, char const *argv[])

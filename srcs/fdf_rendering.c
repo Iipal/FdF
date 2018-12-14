@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/14 12:15:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/14 17:18:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		add_isometric(t_env *env)
 			env->buff[y][x].z = (1 / sqrt(6)) *
 						(sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz);
 		}
-	fdf_yrotare(env, -120);
+	// fdf_yrotare(env, 120);
 }
 
 void		add_centralize(t_env *env)

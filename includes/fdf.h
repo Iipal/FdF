@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/14 13:03:59 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/14 17:39:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct	s_fdf_environment
 	pvoid		win;
 	t_matrix	**m;
 	t_matrix	**buff;
+	int			**frog;
 }				t_env;
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
