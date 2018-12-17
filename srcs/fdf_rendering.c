@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_rendering.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 19:43:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/17 22:13:24 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static void	add_zooming(t_env *env)
 static void	add_is_render_sec(t_isrender *isr, t_env *env)
 {
 	if (isr)
-		;
+	{}
 	if (env)
-		;
+	{}
 }
 
 static void	add_is_render(t_isrender *isr, t_env *env)
@@ -83,11 +83,13 @@ void		fdf_rendering(t_env *env)
 	if (env->frog)
 		isr.is_frog = true;
 	add_is_render(&isr, env);
-	add_is_render_sec(&isr, env);
 	add_is_render_bonus(&isr, env);
+	add_is_render_sec(&isr, env);
 	if (isr.is_render)
 	{
 		mlx_clear_window(env->mlx, env->win);
+		if (env->is_frog_render)
+			add_print_fucking_frog(env);
 		fdf_bdrawing(env->m, (t_p){.y = env->my, .x = env->mx},
 					(t_mlx){.mlx = env->mlx, .win = env->win});
 	}

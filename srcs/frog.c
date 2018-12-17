@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 19:44:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/17 22:14:14 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ static void	add_change_grid_color(t_env *env, int old, int new)
 				env->frog[y][x] = new;
 }
 
+void		add_print_fucking_frog(t_env *env)
+{
+	int	y;
+	int	x;
+
+	y = NEG;
+	x = NEG;
+	while (++y < FHEIGHT && (x = NEG))
+		while (++x < FWIDTH)
+			mlx_pixel_put(env->mlx, env->win, x, y, env->frog[y][x]);
+}
+
 void		add_is_render_bonus(t_isrender *isr, t_env *env)
 {
 	if (isr->is_frog && env->is_frog_render)
@@ -41,20 +53,7 @@ void		add_is_render_bonus(t_isrender *isr, t_env *env)
 			add_change_grid_color(env, isr->is_color, env->color);
 			isr->is_color = env->color;
 		}
-		add_print_fucking_frog(env);
 	}
-}
-
-void		add_print_fucking_frog(t_env *env)
-{
-	int	y;
-	int	x;
-
-	y = NEG;
-	x = NEG;
-	while (++y < FHEIGHT && (x = NEG))
-		while (++x < FWIDTH)
-			mlx_pixel_put(env->mlx, env->win, x, y, env->frog[y][x]);
 }
 
 static bool	add_save_to_frog(int *frog, string line)

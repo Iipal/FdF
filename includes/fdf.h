@@ -31,8 +31,8 @@
 **		'NEG', 'ZERO' & 'HEX' is just simple values.
 */
 
-# define WIN_X			2000
-# define WIN_Y			1000
+# define WIN_X			1000
+# define WIN_Y			500
 
 # define PI				3.141592
 
