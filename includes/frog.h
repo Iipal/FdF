@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:23:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 22:12:54 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/17 22:20:22 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FROG_H
 
 # define FFILE_NAME	"test_maps/frog_bonus.fdf"
+
+# define FBG_COLOR	197379
 
 # define FHEIGHT	19
 # define FWIDTH		21

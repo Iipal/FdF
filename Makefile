@@ -21,7 +21,7 @@ ifeq ($(UNAME_S),Darwin)
 endif
 
 CC = gcc -march=native
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -Ofast
 
 SRC = srcs/main.c srcs/fdf_readnsave.c srcs/fdf_free.c srcs/fdf_rendering.c \
 srcs/fdf_brasenham_drawing.c srcs/fdf_key_hooks.c srcs/fdf_moving.c srcs/frog.c \

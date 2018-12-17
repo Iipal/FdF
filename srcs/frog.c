@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 22:14:14 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/17 22:21:49 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		add_print_fucking_frog(t_env *env)
 	x = NEG;
 	while (++y < FHEIGHT && (x = NEG))
 		while (++x < FWIDTH)
+			if (env->frog[y][x] != FBG_COLOR)
 			mlx_pixel_put(env->mlx, env->win, x, y, env->frog[y][x]);
 }
 
