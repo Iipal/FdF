@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 18:24:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/17 19:42:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ typedef struct	s_fdf_environment
 	pvoid		mlx;
 	pvoid		win;
 	t_matrix	**m;
-	t_matrix	**buff;
 	int			**frog;
 }				t_env;
 
@@ -140,6 +139,7 @@ typedef struct	s_isrender
 	bool	is_render;
 	bool	is_center;
 	bool	is_frog;
+	bool	is_zoomed;
 	int		is_color;
 	int		is_shiftx;
 	int		is_shifty;
@@ -152,13 +152,6 @@ typedef struct	s_point
 	int	y;
 	int	x;
 }				t_p;
-
-typedef struct	s_mlxncolor
-{
-	pvoid	mlx;
-	pvoid	win;
-	int		color;
-}				t_mnc;
 
 typedef struct	s_double_points
 {

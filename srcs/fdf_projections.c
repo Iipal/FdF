@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 14:52:22 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 18:26:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/17 19:26:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void		fdf_isometric(t_env *env)
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{
-			oy = env->buff[y][x].y;
-			ox = env->buff[y][x].x;
-			oz = env->buff[y][x].z;
-			env->buff[y][x].y = (1 / sqrt(6)) * (-ox + 2 * oy + oz);
-			env->buff[y][x].x = (1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz);
-			env->buff[y][x].z = (1 / sqrt(6)) *
+			oy = env->m[y][x].y;
+			ox = env->m[y][x].x;
+			oz = env->m[y][x].z;
+			env->m[y][x].y = (1 / sqrt(6)) * (-ox + 2 * oy + oz);
+			env->m[y][x].x = (1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz);
+			env->m[y][x].z = (1 / sqrt(6)) *
 						(sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz);
 		}
 }

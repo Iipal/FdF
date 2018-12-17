@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 14:53:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/17 19:44:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ static void	add_change_grid_color(t_env *env, int old, int new)
 	y = NEG;
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
-			if (env->buff[y][x].rgb == old)
-				env->buff[y][x].rgb = new;
+			if (env->m[y][x].rgb == old)
+				env->m[y][x].rgb = new;
 	y = NEG;
 	while (++y < FHEIGHT && (x = NEG))
 		while (++x < FWIDTH)
 			if (env->frog[y][x] == old)
 				env->frog[y][x] = new;
 }
-
 
 void		add_is_render_bonus(t_isrender *isr, t_env *env)
 {
