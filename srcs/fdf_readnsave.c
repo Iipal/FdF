@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/13 10:26:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/17 10:53:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,27 @@ static int		add_numbers_inline(string line)
 }
 
 static bool		add_line_tomatrix(string line, t_matrix *matrix,
-									int matrix_x, int current_y)
+									int matrix_x, int y)
 {
-	int	current_x;
+	int	x;
 	int	digits;
 
-	current_x = ZERO;
-	while (*line && current_x < matrix_x)
+	x = ZERO;
+	while (*line && x < matrix_x)
 	{
 		if ((ft_isdigit(*line) || *line == '-'))
 		{
-			matrix[current_x].rgb = IRGB_WHITE;
-			matrix[current_x].y = current_y;
-			matrix[current_x].x = current_x;
-			matrix[current_x].z = ft_atoi(line);
-			digits = ft_strlen(ft_itoa(matrix[current_x].z));
+			matrix[x] = (t_matrix){y, x, ft_atoi(line), IRGB_WHITE};
+			digits = ft_strlen(ft_itoa(matrix[x].z));
 			(line[digits] != '\0') ? (line += digits) : (line += --digits);
 			if (*line == ',')
 			{
-				_NOTIS_F(matrix[current_x].rgb = ft_atoi_base(line + 3, HEX));
+				_NOTIS_MSG("Invalid HEX code or you put black color.",
+					matrix[x].rgb = ft_atoi_base(line + 3, HEX));
 				while (*line && !ft_isblank(*line))
 					++line;
 			}
-			++current_x;
+			++x;
 		}
 		*line ? ++line : 0;
 	}
@@ -111,7 +109,7 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
 	while (ft_gnl(fd, &gnl_temp) > ZERO && ++(env->my))
 		ft_strdel(&gnl_temp);
 	close(fd);
-	_NOTIS_F(env->my);
+	_NOTIS_MSG("Empty map.", env->my);
 	_NOTIS_F(file = (string*)malloc(sizeof(string) * env->my));
 	_NOTIS_F(fd = open(file_name, O_RDONLY));
 	while (ft_gnl(fd, &gnl_temp) > ZERO)
