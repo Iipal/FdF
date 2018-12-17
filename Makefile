@@ -6,7 +6,7 @@
 #    By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 13:30:08 by tmaluh            #+#    #+#              #
-#    Updated: 2018/12/14 11:39:35 by tmaluh           ###   ########.fr        #
+#    Updated: 2018/12/17 14:59:49 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ CC = gcc -march=native
 CFLAGS = -g -Wall -Wextra -Werror -Ofast
 
 SRC = srcs/main.c srcs/fdf_readnsave.c srcs/fdf_free.c srcs/fdf_rendering.c \
-srcs/fdf_brasenham_drawing.c srcs/fdf_key_hooks.c srcs/fdf_moving.c
+srcs/fdf_brasenham_drawing.c srcs/fdf_key_hooks.c srcs/fdf_moving.c srcs/frog.c \
+srcs/fdf_projections.c
 
 OBJ = $(SRC:.c=.o)
 

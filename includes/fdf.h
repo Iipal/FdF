@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/14 17:39:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/17 18:24:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@
 
 # define ROT_INC		15
 
-# define ZOOM_INC		2
-# define ZOOM_MIN		5
 # define ZOOM_DEF		15
-# define ZOOM_MAX		255
 
 /*
 **	Simple MAC keyboard decimal values in constantes:
@@ -121,12 +118,12 @@ typedef struct	s_matrix
 
 typedef struct	s_fdf_environment
 {
+	bool		is_frog_render;
 	int			my;
 	int			mx;
 	int			sy;
 	int			sx;
 	int 		color;
-	uchar		zoom;
 	pvoid		mlx;
 	pvoid		win;
 	t_matrix	**m;
@@ -142,7 +139,7 @@ typedef struct	s_isrender
 	bool	is_isometric;
 	bool	is_render;
 	bool	is_center;
-	bool	is_zoomed;
+	bool	is_frog;
 	int		is_color;
 	int		is_shiftx;
 	int		is_shifty;
@@ -177,6 +174,8 @@ typedef struct	s_mlx
 
 void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
 void			fdf_key_hooks(t_env *env);
+
+void			fdf_isometric(t_env *env);
 
 void			fdf_xmove(t_env *env, int inc);
 void			fdf_ymove(t_env *env, int inc);

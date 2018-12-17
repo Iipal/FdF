@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 10:53:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/17 14:53:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static bool		add_line_tomatrix(string line, t_matrix *matrix,
 	x = ZERO;
 	while (*line && x < matrix_x)
 	{
-		if ((ft_isdigit(*line) || *line == '-'))
+		if (ft_isdigit(*line) || *line == '-')
 		{
 			matrix[x] = (t_matrix){y, x, ft_atoi(line), IRGB_WHITE};
 			digits = ft_strlen(ft_itoa(matrix[x].z));

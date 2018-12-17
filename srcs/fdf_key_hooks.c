@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_key_hooks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/14 14:13:23 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/17 12:38:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,12 @@ static void	add_keys_movenrotare(int key, t_env *env)
 	if (key == KEY_H)
 		fdf_zrotare(env, -ROT_INC);*/
 	if (key == KEY_C)
+	{
+		env->is_frog_render = true;
 		add_change_color(&(env->color));
+	}
+	else
+		env->is_frog_render = false;
 }
 
 static int	add_keys_hook(int key, t_env *env)
