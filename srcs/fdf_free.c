@@ -6,11 +6,12 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:10:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 19:38:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/18 16:23:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/frog.h"
 
 void		fdf_free_file(string *file, int lines)
 {
@@ -23,7 +24,18 @@ void		fdf_free_file(string *file, int lines)
 	file = NULL;
 }
 
-static void	fdf_free_matrix(t_matrix **m, int matrix_y)
+static void	add_free_frog(int **frog)
+{
+	int	y;
+
+	y = ZERO;
+	while (y < FHEIGHT)
+		free(frog[y++]);
+	free(frog);
+	frog = NULL;
+}
+
+static void	add_free_matrix(t_matrix **m, int matrix_y)
 {
 	int	y;
 
@@ -36,7 +48,9 @@ static void	fdf_free_matrix(t_matrix **m, int matrix_y)
 
 void		fdf_free_env(t_env *env)
 {
-	fdf_free_matrix(env->m, env->my);
+	if (env->frog)
+		add_free_frog(env->frog);
+	add_free_matrix(env->m, env->my);
 	mlx_destroy_window(env->mlx, env->win);
 	free(env);
 	env = NULL;

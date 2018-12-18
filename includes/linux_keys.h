@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linux_keys.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:50 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/14 14:13:03 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/18 11:28:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,6 @@
 # define KEY_MASK		5
 
 # define ESC			65307
-
-# define KEY_R			114
-# define KEY_T			116
-# define KEY_Y			121
-# define KEY_F			102
-# define KEY_G			103
-# define KEY_H			104
 
 # define KEY_C			99
 
@@ -36,10 +29,5 @@
 # define ARROW_DOWN		65364
 # define ARROW_RIGHT	65363
 # define ARROW_LEFT		65361
-
-# define PLUS_NUMPAD	65451
-# define MINUS_NUMPAD	65453
-# define PLUS_KEYBOARD	61
-# define MINUS_KEYBOARD	45
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 14:53:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/18 16:08:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@
 
 static int		add_numbers_inline(string line)
 {
-	int	out;
-	int	digits;
+	string	temp_digits;
+	int		out;
+	int		digits;
 
 	out = ZERO;
 	while (*line)
 	{
 		if (ft_isdigit(*line) || *line == '-')
 		{
-			digits = ft_strlen(ft_itoa(ft_atoi(line)));
+			digits = ft_strlen(temp_digits = ft_itoa(ft_atoi(line)));
+			ft_strdel(&temp_digits);
 			(line[digits] != '\0') ? (line += digits) : (line += --digits);
 			if (*line == ',')
 				while (*line && !ft_isblank(*line))
@@ -54,8 +56,9 @@ static int		add_numbers_inline(string line)
 static bool		add_line_tomatrix(string line, t_matrix *matrix,
 									int matrix_x, int y)
 {
-	int	x;
-	int	digits;
+	string	temp_digits;
+	int		x;
+	int		digits;
 
 	x = ZERO;
 	while (*line && x < matrix_x)
@@ -63,7 +66,8 @@ static bool		add_line_tomatrix(string line, t_matrix *matrix,
 		if (ft_isdigit(*line) || *line == '-')
 		{
 			matrix[x] = (t_matrix){y, x, ft_atoi(line), IRGB_WHITE};
-			digits = ft_strlen(ft_itoa(matrix[x].z));
+			digits = ft_strlen(temp_digits = ft_itoa(matrix[x].z));
+			ft_strdel(&temp_digits);
 			(line[digits] != '\0') ? (line += digits) : (line += --digits);
 			if (*line == ',')
 			{

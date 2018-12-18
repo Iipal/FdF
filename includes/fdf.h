@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 19:42:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/18 16:08:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 # include <stdio.h>
 # include <math.h>
 # include <mlx.h>
+
+# ifdef __APPLE__
+#  include "macos_keys.h"
+# endif
+
+# ifdef __linux__
+#  include "linux_keys.h"
+# endif
 
 /*
 **	Main constantes for ease of use:
@@ -43,20 +51,9 @@
 
 # define SHIFT_INC		15
 
-# define ROT_INC		15
+# define ROT_INC		32
 
 # define ZOOM_DEF		15
-
-/*
-**	Simple MAC keyboard decimal values in constantes:
-*/
-
-# ifdef __APPLE__
-# include "macos_keys.h"
-# endif
-# ifdef __linux__
-# include "linux_keys.h"
-# endif
 
 /*
 **	Macroses:
@@ -110,9 +107,9 @@ _BOOL;
 
 typedef struct	s_matrix
 {
-	int	y;
-	int	x;
-	int	z;
+	int	y:16;
+	int	x:16;
+	int	z:16;
 	int	rgb;
 }				t_matrix;
 
@@ -123,7 +120,7 @@ typedef struct	s_fdf_environment
 	int			mx;
 	int			sy;
 	int			sx;
-	int 		color;
+	int			color;
 	pvoid		mlx;
 	pvoid		win;
 	t_matrix	**m;
@@ -149,8 +146,8 @@ void			fdf_rendering(t_env *env);
 
 typedef struct	s_point
 {
-	int	y;
-	int	x;
+	int	y:16;
+	int	x:16;
 }				t_p;
 
 typedef struct	s_double_points
@@ -166,7 +163,7 @@ typedef struct	s_mlx
 }				t_mlx;
 
 void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
-void			fdf_key_hooks(t_env *env);
+void			fdf_key_hooks(t_env **env);
 
 void			fdf_isometric(t_env *env);
 

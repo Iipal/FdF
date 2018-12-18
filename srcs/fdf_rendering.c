@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_rendering.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 22:22:33 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/18 12:25:34 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,6 @@ static void	add_zooming(t_env *env)
 		}
 }
 
-static void	add_is_render_sec(t_isrender *isr, t_env *env)
-{
-	if (isr)
-	{}
-	if (env)
-	{}
-}
-
 static void	add_is_render(t_isrender *isr, t_env *env)
 {
 	isr->is_render = false;
@@ -84,7 +76,6 @@ void		fdf_rendering(t_env *env)
 		isr.is_frog = true;
 	add_is_render(&isr, env);
 	add_is_render_bonus(&isr, env);
-	add_is_render_sec(&isr, env);
 	if (isr.is_render)
 	{
 		mlx_clear_window(env->mlx, env->win);
