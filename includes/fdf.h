@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/18 16:08:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/18 18:43:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 **		'NEG', 'ZERO' & 'HEX' is just simple values.
 */
 
-# define WIN_X			1000
-# define WIN_Y			500
+# define WIN_X			2000
+# define WIN_Y			1000
 
 # define PI				3.141592
 

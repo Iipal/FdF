@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/18 13:28:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/18 18:41:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		add_print_fucking_frog(t_env *env)
 	while (++y < FHEIGHT && (x = NEG))
 		while (++x < FWIDTH)
 			if (env->frog[y][x] != FBG_COLOR)
-			mlx_pixel_put(env->mlx, env->win, x, y, env->frog[y][x]);
+				mlx_pixel_put(env->mlx, env->win, x, y, env->frog[y][x]);
 }
 
 void		add_is_render_bonus(t_isrender *isr, t_env *env)

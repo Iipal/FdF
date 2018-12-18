@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/18 16:08:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/18 18:46:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static int		add_numbers_inline(string line)
 	{
 		if (ft_isdigit(*line) || *line == '-')
 		{
-			digits = ft_strlen(temp_digits = ft_itoa(ft_atoi(line)));
+			temp_digits = ft_itoa(ft_atoi(line));
+			digits = ft_strlen(temp_digits);
 			ft_strdel(&temp_digits);
 			(line[digits] != '\0') ? (line += digits) : (line += --digits);
 			if (*line == ',')
@@ -60,13 +61,14 @@ static bool		add_line_tomatrix(string line, t_matrix *matrix,
 	int		x;
 	int		digits;
 
-	x = ZERO;
+	x = NEG;
 	while (*line && x < matrix_x)
 	{
-		if (ft_isdigit(*line) || *line == '-')
+		if ((ft_isdigit(*line) || *line == '-') && (++x > -1))
 		{
 			matrix[x] = (t_matrix){y, x, ft_atoi(line), IRGB_WHITE};
-			digits = ft_strlen(temp_digits = ft_itoa(matrix[x].z));
+			temp_digits = ft_itoa(matrix[x].z);
+			digits = ft_strlen(temp_digits);
 			ft_strdel(&temp_digits);
 			(line[digits] != '\0') ? (line += digits) : (line += --digits);
 			if (*line == ',')
@@ -76,7 +78,6 @@ static bool		add_line_tomatrix(string line, t_matrix *matrix,
 				while (*line && !ft_isblank(*line))
 					++line;
 			}
-			++x;
 		}
 		*line ? ++line : 0;
 	}
