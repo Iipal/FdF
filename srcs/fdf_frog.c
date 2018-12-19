@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 12:44:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 13:50:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@ static void	add_change_grid_color(t_env *env, int old, int new)
 	int	x;
 
 	y = NEG;
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-			if (env->raw[y][x].rgb == old)
-				env->raw[y][x].rgb = new;
+	_WHILE(y, x, env->my, env->mx)
+		if (env->raw[y][x].rgb == old)
+			env->raw[y][x].rgb = new;
 	y = NEG;
-	while (++y < FHEIGHT && (x = NEG))
-		while (++x < FWIDTH)
-			if (env->frog[y][x] == old)
-				env->frog[y][x] = new;
+	_WHILE(y, x, env->my, env->mx)
+		if (env->frog[y][x] == old)
+			env->frog[y][x] = new;
 }
 
 void		fdf_print_fucking_frog(t_env *env)
@@ -37,10 +35,9 @@ void		fdf_print_fucking_frog(t_env *env)
 
 	y = NEG;
 	x = NEG;
-	while (++y < FHEIGHT && (x = NEG))
-		while (++x < FWIDTH)
-			if (env->frog[y][x] != FBG_COLOR)
-				mlx_pixel_put(env->mlx, env->win, x, y, env->frog[y][x]);
+	_WHILE(y, x, FHEIGHT, FWIDTH)
+		if (env->frog[y][x] != FBG_COLOR)
+			mlx_pixel_put(env->mlx, env->win, x, y, env->frog[y][x]);
 }
 
 void		fdf_is_render_bonus(t_isrender *isr, t_env *env)

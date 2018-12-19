@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 13:02:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 13:45:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ static void	add_centralize(t_env *env)
 	y = NEG;
 	env->sy = (WIN_Y / 2) - ((env->my / 2) * ZOOM_DEF);
 	env->sx = (WIN_X / 2) - ((env->mx / 2) * ZOOM_DEF);
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-		{
-			env->raw[y][x].y += env->sy;
-			env->raw[y][x].x += env->sx;
-		}
+	_WHILE(y, x, env->my, env->mx)
+	{
+		env->raw[y][x].y += env->sy;
+		env->raw[y][x].x += env->sx;
+	}
 }
 
 static void	add_zooming(t_env *env)
@@ -35,13 +34,12 @@ static void	add_zooming(t_env *env)
 	int	x;
 
 	y = NEG;
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-		{
-			env->raw[y][x].y *= ZOOM_DEF;
-			env->raw[y][x].x *= ZOOM_DEF;
-			env->raw[y][x].z *= ZOOM_DEF;
-		}
+	_WHILE(y, x, env->my, env->mx)
+	{
+		env->raw[y][x].y *= ZOOM_DEF;
+		env->raw[y][x].x *= ZOOM_DEF;
+		env->raw[y][x].z *= ZOOM_DEF;
+	}
 }
 
 static void	add_is_render(t_isrender *isr, t_env *env)

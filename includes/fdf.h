@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 12:59:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 13:53:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@
 # define _NOTIS_F(ex) if (!(ex)) return (false)
 # define _ABS(var) ((var) < 0) ? -(var) : (var)
 # define _RAD(deg) (((deg) * PI) / 180.0)
+# define _WHILE(i, j, a, b) while (++(i) < (a) && (j = NEG)) while (++(j) < (b))
 
 /*
 **	Additional code functional for program:

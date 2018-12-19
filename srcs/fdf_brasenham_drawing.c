@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:31 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/17 19:42:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 13:48:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,25 +91,24 @@ void		fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx)
 	int	x;
 
 	y = NEG;
-	while (++y < mxy.y && (x = NEG))
-		while (++x < mxy.x)
+	_WHILE(y, x, mxy.y, mxy.x)
+	{
+		if ((x + 1 < mxy.x) && (y + 1 < mxy.y))
 		{
-			if ((x + 1 < mxy.x) && (y + 1 < mxy.y))
-			{
-				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-					(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
-				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-							(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
-			}
-			else if (x == mxy.x - 1 && y + 1 < mxy.y)
-				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-							(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
-			else if (y == mxy.y - 1 && x + 1 < mxy.x)
-				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-							(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
+			add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+				(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
+			(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
+			add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+						(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
+			(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
 		}
+		else if (x == mxy.x - 1 && y + 1 < mxy.y)
+			add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+						(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
+			(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
+		else if (y == mxy.y - 1 && x + 1 < mxy.x)
+			add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
+						(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
+			(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
+	}
 }
