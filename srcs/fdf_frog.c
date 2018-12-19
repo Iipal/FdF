@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 10:37:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 12:44:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	add_change_grid_color(t_env *env, int old, int new)
 	y = NEG;
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
-			if (env->m[y][x].rgb == old)
-				env->m[y][x].rgb = new;
+			if (env->raw[y][x].rgb == old)
+				env->raw[y][x].rgb = new;
 	y = NEG;
 	while (++y < FHEIGHT && (x = NEG))
 		while (++x < FWIDTH)

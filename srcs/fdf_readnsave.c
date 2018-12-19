@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 10:52:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 12:43:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,6 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
 		file[i++] = ft_strdup(gnl_temp);
 		ft_strdel(&gnl_temp);
 	}
-	_NOTIS_F(env->m = add_save_tomatrix(file, env->my, &(env->mx)));
+	_NOTIS_F(env->raw = add_save_tomatrix(file, env->my, &(env->mx)));
 	return (true);
 }

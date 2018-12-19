@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 10:38:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 13:02:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	add_centralize(t_env *env)
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{
-			env->m[y][x].y += env->sy;
-			env->m[y][x].x += env->sx;
+			env->raw[y][x].y += env->sy;
+			env->raw[y][x].x += env->sx;
 		}
 }
 
@@ -38,9 +38,9 @@ static void	add_zooming(t_env *env)
 	while (++y < env->my && (x = NEG))
 		while (++x < env->mx)
 		{
-			env->m[y][x].y *= ZOOM_DEF;
-			env->m[y][x].x *= ZOOM_DEF;
-			env->m[y][x].z *= ZOOM_DEF;
+			env->raw[y][x].y *= ZOOM_DEF;
+			env->raw[y][x].x *= ZOOM_DEF;
+			env->raw[y][x].z *= ZOOM_DEF;
 		}
 }
 
@@ -74,12 +74,18 @@ void		fdf_rendering(t_env *env)
 
 	if (env->frog)
 		isr.is_frog = true;
+	if (!env->torender)
+		if (!fdf_init_render_buff(env))
+		{
+			fdf_free_env(env);
+			exit(EXIT_SUCCESS);
+		}
 	add_is_render(&isr, env);
 	fdf_is_render_bonus(&isr, env);
 	if (isr.is_render)
 	{
 		mlx_clear_window(env->mlx, env->win);
-		fdf_bdrawing(env->m, (t_p){.y = env->my, .x = env->mx},
+		fdf_bdrawing(env->raw, (t_p){.y = env->my, .x = env->mx},
 					(t_mlx){.mlx = env->mlx, .win = env->win});
 		if (env->is_frog_render)
 			fdf_print_fucking_frog(env);

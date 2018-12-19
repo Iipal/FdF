@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 10:54:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 12:59:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ typedef struct	s_fdf_environment
 	int			color;
 	pvoid		mlx;
 	pvoid		win;
-	t_matrix	**m;
+	t_matrix	**raw;
+	t_matrix	**torender;
 	int			**frog;
 }				t_env;
 
@@ -162,9 +163,9 @@ typedef struct	s_mlx
 }				t_mlx;
 
 void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
-void			fdf_key_hooks(t_env **env);
-
 void			fdf_isometric(t_env *env);
+
+int				fdf_keys_hook(int key, t_env *env);
 
 void			fdf_xmove(t_env *env, int inc);
 void			fdf_ymove(t_env *env, int inc);
@@ -176,5 +177,7 @@ void			fdf_zrotare(t_env *env, int inc);
 void			fdf_free_env(t_env *env);
 void			fdf_free_matrix(t_matrix **m, int matrix_y);
 void			fdf_free_file(string *file, int lines);
+
+bool			fdf_init_render_buff(t_env *env);
 
 #endif
