@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frog.h                                             :+:      :+:    :+:   */
+/*   fdf_dot_drawing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 17:23:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 10:38:25 by tmaluh           ###   ########.fr       */
+/*   Created: 2018/12/18 18:31:06 by tmaluh            #+#    #+#             */
+/*   Updated: 2018/12/19 10:23:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FROG_H
-# define FROG_H
+#include "../includes/fdf.h"
 
-# define FFILE_NAME	"test_maps/frog_bonus.fdf"
+void	fdf_dot_drawing(t_matrix **m, t_p mxy, t_mlx mlx)
+{
+	int	y;
+	int	x;
 
-# define FBG_COLOR	197379
-
-# define FHEIGHT	19
-# define FWIDTH		21
-
-int		**bonus_init_frog(void);
-void	fdf_print_fucking_frog(t_env *env);
-void	fdf_is_render_bonus(t_isrender *isr, t_env *env);
-
-#endif
+	y = NEG;
+	while (++y < mxy.y && (x = NEG))
+		while (++x < mxy.x)
+			mlx_pixel_put(mlx.mlx, mlx.win, x, y, m[y][x].rgb);
+}

@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/18 13:28:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 10:22:48 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_env	*add_alloc_env(string tittle)
 {
 	t_env	*out_env;
 
-	out_env = (t_env*)malloc(sizeof(t_env));
+	_NOTIS_N(out_env = (t_env*)malloc(sizeof(t_env)));
 	*out_env = (t_env){false, 0, 0, 0, 0, IRGB_WHITE, NULL, NULL, NULL, NULL};
 	_NOTIS_N(out_env->mlx = mlx_init());
 	_NOTIS_N(out_env->win = mlx_new_window(out_env->mlx, WIN_X, WIN_Y, tittle));

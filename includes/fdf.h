@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/18 18:43:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 10:54:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ typedef struct	s_fdf_environment
 }				t_env;
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
-void			fdf_free_file(string *file, int lines);
 
 typedef struct	s_isrender
 {
@@ -170,10 +169,12 @@ void			fdf_isometric(t_env *env);
 void			fdf_xmove(t_env *env, int inc);
 void			fdf_ymove(t_env *env, int inc);
 
-void			fdf_free_env(t_env *env);
-
 void			fdf_xrotare(t_env *env, int inc);
 void			fdf_yrotare(t_env *env, int inc);
 void			fdf_zrotare(t_env *env, int inc);
+
+void			fdf_free_env(t_env *env);
+void			fdf_free_matrix(t_matrix **m, int matrix_y);
+void			fdf_free_file(string *file, int lines);
 
 #endif

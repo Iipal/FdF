@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/18 18:42:24 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 10:38:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ void		fdf_rendering(t_env *env)
 	if (env->frog)
 		isr.is_frog = true;
 	add_is_render(&isr, env);
-	add_is_render_bonus(&isr, env);
+	fdf_is_render_bonus(&isr, env);
 	if (isr.is_render)
 	{
 		mlx_clear_window(env->mlx, env->win);
 		fdf_bdrawing(env->m, (t_p){.y = env->my, .x = env->mx},
 					(t_mlx){.mlx = env->mlx, .win = env->win});
 		if (env->is_frog_render)
-			add_print_fucking_frog(env);
+			fdf_print_fucking_frog(env);
 	}
 }

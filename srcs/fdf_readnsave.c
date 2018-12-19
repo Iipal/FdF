@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/18 18:46:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 10:52:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,28 @@ static t_matrix	**add_save_tomatrix(string *file, int matrix_y, int *matrix_x)
 	_NOTIS_N(*matrix_x = add_numbers_inline(*file));
 	while (++y < matrix_y)
 	{
-		_NOTIS_N(add_numbers_inline(file[y]) == *matrix_x);
 		_NOTIS_N(m[y] = (t_matrix*)malloc(sizeof(t_matrix) * *matrix_x));
+		if (add_numbers_inline(file[y]) != *matrix_x)
+		{
+			fdf_free_file(file, matrix_y);
+			fdf_free_matrix(m, y + 1);
+			return (NULL);
+		}
 		_NOTIS_N(add_line_tomatrix(file[y], m[y], *matrix_x, y));
 	}
 	fdf_free_file(file, matrix_y);
 	return (m);
+}
+
+static bool		add_valid_temp_line(string line, string *file, int lines)
+{
+	if (!add_numbers_inline(line) || (!ft_isdigit(*line) && !ft_isblank(*line)))
+	{
+		ft_strdel(&line);
+		fdf_free_file(file, lines);
+		return (false);
+	}
+	return (true);
 }
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
@@ -109,16 +125,17 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
 	int		fd;
 	int		i;
 
-	i = ZERO;
-	_NOTIS_F(fd = open(file_name, O_RDONLY));
+	_NOTIS_F(!(!(fd = open(file_name, O_RDONLY)) || fd < 0));
 	while (ft_gnl(fd, &gnl_temp) > ZERO && ++(env->my))
 		ft_strdel(&gnl_temp);
 	close(fd);
 	_NOTIS_MSG("Empty map.", env->my);
 	_NOTIS_F(file = (string*)malloc(sizeof(string) * env->my));
 	_NOTIS_F(fd = open(file_name, O_RDONLY));
+	i = ZERO;
 	while (ft_gnl(fd, &gnl_temp) > ZERO)
 	{
+		_NOTIS_F(add_valid_temp_line(gnl_temp, file, i));
 		file[i++] = ft_strdup(gnl_temp);
 		ft_strdel(&gnl_temp);
 	}

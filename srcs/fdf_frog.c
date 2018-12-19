@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/18 18:41:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 10:37:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	add_change_grid_color(t_env *env, int old, int new)
 				env->frog[y][x] = new;
 }
 
-void		add_print_fucking_frog(t_env *env)
+void		fdf_print_fucking_frog(t_env *env)
 {
 	int	y;
 	int	x;
@@ -43,7 +43,7 @@ void		add_print_fucking_frog(t_env *env)
 				mlx_pixel_put(env->mlx, env->win, x, y, env->frog[y][x]);
 }
 
-void		add_is_render_bonus(t_isrender *isr, t_env *env)
+void		fdf_is_render_bonus(t_isrender *isr, t_env *env)
 {
 	if (isr->is_frog && env->is_frog_render)
 	{
@@ -87,8 +87,8 @@ int			**bonus_init_frog(void)
 
 	y = NEG;
 	gnl_temp = NULL;
-	fd = open(FFILE_NAME, O_RDONLY);
-	_NOTIS_N(!(!fd || fd < 0));
+	;
+	_NOTIS_N(!(!(fd = open(FFILE_NAME, O_RDONLY)) || fd < 0));
 	_NOTIS_N(out_frog = (int**)malloc(sizeof(int*) * FHEIGHT));
 	while (++y < FHEIGHT)
 		_NOTIS_N(out_frog[y] = (int*)malloc(sizeof(int) * FWIDTH));
