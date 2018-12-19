@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 18:31:06 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 13:49:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 14:00:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	fdf_dot_drawing(t_matrix **m, t_p mxy, t_mlx mlx)
 	int	x;
 
 	y = NEG;
-	_WHILE(y, x, mxy.y, mxy.x)
-		mlx_pixel_put(mlx.mlx, mlx.win, x, y, m[y][x].rgb);
+	while (++y < mxy.y && (x = NEG))
+		while (++x < mxy.x)
+			mlx_pixel_put(mlx.mlx, mlx.win, x, y, m[y][x].rgb);
 }

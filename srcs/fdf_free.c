@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:10:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 13:05:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 14:20:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		fdf_free_matrix(t_matrix **m, int matrix_y)
 
 void		fdf_free_env(t_env *env)
 {
-	env->torender ? fdf_free_matrix(env->torender, env->my) : NULL;
+	env->render ? fdf_free_matrix(env->render, env->my) : NULL;
 	env->raw ? fdf_free_matrix(env->raw, env->my) : NULL;
 	env->frog ? add_free_frog(env->frog) : NULL;
 	mlx_destroy_window(env->mlx, env->win);

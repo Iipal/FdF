@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 13:45:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 14:22:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ static void	add_centralize(t_env *env)
 	y = NEG;
 	env->sy = (WIN_Y / 2) - ((env->my / 2) * ZOOM_DEF);
 	env->sx = (WIN_X / 2) - ((env->mx / 2) * ZOOM_DEF);
-	_WHILE(y, x, env->my, env->mx)
+	while (++y < env->my && (x = NEG))
+		while (++x < env->mx)
 	{
-		env->raw[y][x].y += env->sy;
-		env->raw[y][x].x += env->sx;
+		env->render[y][x].y += env->sy;
+		env->render[y][x].x += env->sx;
 	}
 }
 
@@ -34,11 +35,12 @@ static void	add_zooming(t_env *env)
 	int	x;
 
 	y = NEG;
-	_WHILE(y, x, env->my, env->mx)
+	while (++y < env->my && (x = NEG))
+		while (++x < env->mx)
 	{
-		env->raw[y][x].y *= ZOOM_DEF;
-		env->raw[y][x].x *= ZOOM_DEF;
-		env->raw[y][x].z *= ZOOM_DEF;
+		env->render[y][x].y *= ZOOM_DEF;
+		env->render[y][x].x *= ZOOM_DEF;
+		env->render[y][x].z *= ZOOM_DEF;
 	}
 }
 
@@ -72,7 +74,7 @@ void		fdf_rendering(t_env *env)
 
 	if (env->frog)
 		isr.is_frog = true;
-	if (!env->torender)
+	if (!env->render)
 		if (!fdf_init_render_buff(env))
 		{
 			fdf_free_env(env);
@@ -83,7 +85,7 @@ void		fdf_rendering(t_env *env)
 	if (isr.is_render)
 	{
 		mlx_clear_window(env->mlx, env->win);
-		fdf_bdrawing(env->raw, (t_p){.y = env->my, .x = env->mx},
+		fdf_bdrawing(env->render, (t_p){.y = env->my, .x = env->mx},
 					(t_mlx){.mlx = env->mlx, .win = env->win});
 		if (env->is_frog_render)
 			fdf_print_fucking_frog(env);

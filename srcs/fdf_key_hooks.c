@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 12:58:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 14:14:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,3 @@ int			fdf_keys_hook(int key, t_env *env)
 	fdf_rendering(env);
 	return (0);
 }
-
