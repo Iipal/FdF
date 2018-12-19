@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 14:19:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 17:22:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@
 
 # define ROT_INC		32
 
+# define ZOOM_INC		2
+# define ZOOM_MIN		3
 # define ZOOM_DEF		15
+# define ZOOM_MAX		255
 
 /*
 **	Macroses:
@@ -115,17 +118,18 @@ typedef struct	s_matrix
 
 typedef struct	s_fdf_environment
 {
+	t_matrix	**raw;
+	t_matrix	**render;
+	pvoid		mlx;
+	pvoid		win;
+	uchar		zoom;
 	bool		is_frog_render;
+	int			**frog;
+	int			color;
 	int			my;
 	int			mx;
 	int			sy;
 	int			sx;
-	int			color;
-	pvoid		mlx;
-	pvoid		win;
-	t_matrix	**raw;
-	t_matrix	**render;
-	int			**frog;
 }				t_env;
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env);

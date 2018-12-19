@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:23:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 14:14:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 17:17:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@
 
 int		**bonus_init_frog(void);
 void	fdf_print_fucking_frog(t_env *env);
-void	fdf_is_render_bonus(t_isrender *isr, t_env *env);
+void	fdf_is_render_frog(t_isrender *isr, t_env *env);
 
 #endif

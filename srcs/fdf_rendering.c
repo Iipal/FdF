@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 14:22:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 17:19:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		fdf_rendering(t_env *env)
 			exit(EXIT_SUCCESS);
 		}
 	add_is_render(&isr, env);
-	fdf_is_render_bonus(&isr, env);
+	fdf_is_render_frog(&isr, env);
 	if (isr.is_render)
 	{
 		mlx_clear_window(env->mlx, env->win);
