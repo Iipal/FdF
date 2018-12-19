@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:50 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/18 11:28:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 14:39:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,10 @@
 # define ARROW_DOWN		65364
 # define ARROW_RIGHT	65363
 # define ARROW_LEFT		65361
+
+# define PLUS_NUMPAD	65451
+# define MINUS_NUMPAD	65453
+# define PLUS_KEYBOARD	61
+# define MINUS_KEYBOARD	45
 
 #endif
