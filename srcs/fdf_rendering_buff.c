@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 16:29:24 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 17:26:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ bool	fdf_init_render_buff(t_env *env)
 	return (true);
 }
 
-void	fdf_refresh_buffnzoom(t_env *env)
+void	fdf_refresh_buffnzoom(t_env *env, t_isrender *isr)
 {
-	env->sy = (WIN_Y / 2) - ((env->my / 2) * env->zoom) - ZOOM_INC;
-	env->sx = (WIN_X / 2) - ((env->mx / 2) * env->zoom) - ZOOM_INC;
+	env->sy = ((WIN_Y - (env->my * env->zoom)) / 2) + env->dx;
+	env->sx = ((WIN_X - (env->mx * env->zoom)) / 2) - env->dy;
 	fdf_zooming(env);
 	fdf_isometric(env);
 	fdf_ymove(env, env->sy);
 	fdf_xmove(env, env->sx);
+	isr->is_shifty = env->sy;
+	isr->is_shiftx = env->sx;
 }

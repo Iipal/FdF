@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 16:24:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 17:21:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 	isr->is_render = false;
 	if ((!isr->is_zoomed) ? (isr->is_zoomed = env->zoom) : false)
 		fdf_zooming(env);
-	else if (isr->is_zoomed != env->zoom)
+	else if (isr->is_zoomed != env->zoom && (isr->is_render = true))
 	{
 		isr->is_zoomed = env->zoom;
-		fdf_refresh_buffnzoom(env);
+		fdf_refresh_buffnzoom(env, isr);
 	}
 	if (!isr->is_isometric ? (isr->is_isometric = true) : false)
 		fdf_isometric(env);
@@ -88,6 +88,7 @@ void		fdf_rendering(t_env *env)
 	fdf_is_render_frog(&isr, env);
 	if (isr.is_render)
 	{
+		printf("%d | %d\n", env->dy, env->dx);
 		mlx_clear_window(env->mlx, env->win);
 		fdf_bdrawing(env->render, (t_p){.y = env->my, .x = env->mx},
 					(t_mlx){.mlx = env->mlx, .win = env->win});

@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 16:25:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 17:11:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ _ITAB;
 
 typedef struct	s_matrix
 {
-	int	y;
-	int	x;
+	int	y:16;
+	int	x:16;
 	int	z;
 	int	rgb;
 }				t_matrix;
@@ -132,6 +132,8 @@ typedef struct	s_fdf_environment
 	int			mx;
 	int			sy;
 	int			sx;
+	int			dy;
+	int			dx;
 }				t_env;
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
@@ -189,7 +191,7 @@ void			fdf_free_matrix(t_matrix **m, int matrix_y);
 void			fdf_free_file(string *file, int lines);
 
 bool			fdf_init_render_buff(t_env *env);
-void			fdf_refresh_buffnzoom(t_env *env);
+void			fdf_refresh_buffnzoom(t_env *env, t_isrender *isr);
 void			fdf_zooming(t_env *env);
 
 #endif

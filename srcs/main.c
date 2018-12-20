@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 16:30:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 16:59:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_env	*add_alloc_env(string tittle)
 
 	_NOTIS_N(out_env = (t_env*)malloc(sizeof(t_env)));
 	*out_env = (t_env){NULL, NULL, NULL, NULL, NULL, ZOOM_DEF, false,
-					IRGB_WHITE, ZERO, ZERO, ZERO, ZERO};
+					IRGB_WHITE, ZERO, ZERO, ZERO, ZERO, ZERO, ZERO};
 	_NOTIS_N(out_env->mlx = mlx_init());
 	_NOTIS_N(out_env->win = mlx_new_window(out_env->mlx, WIN_X, WIN_Y, tittle));
 	out_env->frog = fdf_bonus_init_frog();

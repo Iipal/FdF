@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 16:24:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 17:26:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,25 @@ int			fdf_keys_hook(int key, t_env *env)
 		exit(EXIT_SUCCESS);
 	}
 	if (key == KEY_D || key == ARROW_RIGHT)
+	{
+		env->dx += ZOOM_INC;
 		env->sx += SHIFT_INC;
+	}
 	if (key == KEY_A || key == ARROW_LEFT)
+	{
+		env->dx -= ZOOM_INC;
 		env->sx -= SHIFT_INC;
+	}
 	if (key == KEY_W || key == ARROW_UP)
+	{
+		env->dy -= ZOOM_INC;
 		env->sy -= SHIFT_INC;
+	}
 	if (key == KEY_S || key == ARROW_DOWN)
+	{
 		env->sy += SHIFT_INC;
+		env->dy += ZOOM_INC;
+	}
 	(key == KEY_C) ? add_change_color(&(env->color), &(env->is_frog_render))
 					: (env->is_frog_render = false);
 	if (key == PLUS_NUMPAD || key == PLUS_KEYBOARD)
