@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 09:41:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 16:04:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	fdf_xmove(t_env *env, int inc)
 	point	p;
 
 	p.y = NEG;
-	inc < 0 ? (env->sx -= _ABS(inc)) : (env->sx += inc);
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
 			inc < 0 ? (env->render[p.y][p.x].x -= _ABS(inc))
@@ -29,7 +28,6 @@ void	fdf_ymove(t_env *env, int inc)
 	point	p;
 
 	p.y = NEG;
-	inc < 0 ? (env->sy -= _ABS(inc)) : (env->sy += inc);
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
 			inc < 0 ? (env->render[p.y][p.x].y -= _ABS(inc))

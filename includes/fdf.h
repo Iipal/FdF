@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 10:04:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 16:25:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ _ITAB;
 
 typedef struct	s_matrix
 {
-	int	y:16;
-	int	x:16;
-	int	z:16;
+	int	y;
+	int	x;
+	int	z;
 	int	rgb;
 }				t_matrix;
 
@@ -124,8 +124,8 @@ typedef struct	s_fdf_environment
 	t_matrix	**render;
 	pvoid		mlx;
 	pvoid		win;
-	uchar		zoom;
 	itab		frog;
+	uchar		zoom;
 	bool		is_frog_render;
 	int			color;
 	int			my;
@@ -138,14 +138,14 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
 
 typedef struct	s_isrender
 {
-	bool	is_isometric;
-	bool	is_render;
-	bool	is_center;
-	bool	is_frog;
-	bool	is_zoomed;
+	uchar 	is_zoomed;
+	bool	is_isometric:1;
+	bool	is_render:1;
+	bool	is_center:1;
+	bool	is_frog:1;
 	int		is_color;
-	int		is_shiftx;
-	int		is_shifty;
+	int		is_shiftx:16;
+	int		is_shifty:16;
 }				t_isrender;
 
 void			fdf_rendering(t_env *env);
@@ -189,5 +189,7 @@ void			fdf_free_matrix(t_matrix **m, int matrix_y);
 void			fdf_free_file(string *file, int lines);
 
 bool			fdf_init_render_buff(t_env *env);
+void			fdf_refresh_buffnzoom(t_env *env);
+void			fdf_zooming(t_env *env);
 
 #endif

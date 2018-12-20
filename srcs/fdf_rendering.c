@@ -6,14 +6,30 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 10:01:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 16:24:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include "../includes/frog.h"
 
-static void	add_centralize(t_env *env)
+void		fdf_zooming(t_env *env)
+{
+	point	p;
+
+	p.y = NEG;
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+			env->render[p.y][p.x] = (t_matrix)
+			{
+				env->raw[p.y][p.x].y * env->zoom,
+				env->raw[p.y][p.x].x * env->zoom,
+				env->raw[p.y][p.x].z * env->zoom,
+				env->render[p.y][p.x].rgb
+			};
+}
+
+static void	add_init_centralize(t_env *env)
 {
 	point	p;
 
@@ -28,30 +44,21 @@ static void	add_centralize(t_env *env)
 		}
 }
 
-static void	add_zooming(t_env *env)
-{
-	point	p;
-
-	p.y = NEG;
-	while (++(p.y) < env->my && (p.x = NEG))
-		while (++(p.x) < env->mx)
-		{
-			env->render[p.y][p.x].y *= env->zoom;
-			env->render[p.y][p.x].x *= env->zoom;
-			env->render[p.y][p.x].z *= env->zoom;
-		}
-}
-
 static void	add_is_render(t_isrender *isr, t_env *env)
 {
 	isr->is_render = false;
-	if ((!isr->is_zoomed) ? (isr->is_zoomed = true) : false)
-		add_zooming(env);
+	if ((!isr->is_zoomed) ? (isr->is_zoomed = env->zoom) : false)
+		fdf_zooming(env);
+	else if (isr->is_zoomed != env->zoom)
+	{
+		isr->is_zoomed = env->zoom;
+		fdf_refresh_buffnzoom(env);
+	}
 	if (!isr->is_isometric ? (isr->is_isometric = true) : false)
 		fdf_isometric(env);
 	if ((!isr->is_center ? (isr->is_center = true) : 0)
 			&& (isr->is_render = true))
-		add_centralize(env);
+		add_init_centralize(env);
 	!isr->is_shiftx ? (isr->is_shiftx = env->sx) : 0;
 	if (isr->is_shiftx != env->sx && (isr->is_render = true))
 	{
@@ -70,8 +77,7 @@ void		fdf_rendering(t_env *env)
 {
 	static t_isrender	isr;
 
-	if (env->frog)
-		isr.is_frog = true;
+	env->frog ? (isr.is_frog = true) : (isr.is_frog = false);
 	if (!env->render)
 		if (!fdf_init_render_buff(env))
 		{

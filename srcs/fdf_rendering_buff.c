@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 09:43:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 16:29:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,22 @@ bool	fdf_init_render_buff(t_env *env)
 		}
 		else
 			while (++(p.x) < env->mx)
-				env->render[p.y][p.x] = (t_matrix){env->raw[p.y][p.x].y,
-												env->raw[p.y][p.x].x,
-												env->raw[p.y][p.x].z,
-												env->raw[p.y][p.x].rgb};
+				env->render[p.y][p.x] = (t_matrix)
+				{
+					env->raw[p.y][p.x].y,
+					env->raw[p.y][p.x].x,
+					env->raw[p.y][p.x].z,
+					env->raw[p.y][p.x].rgb
+				};
 	return (true);
+}
+
+void	fdf_refresh_buffnzoom(t_env *env)
+{
+	env->sy = (WIN_Y / 2) - ((env->my / 2) * env->zoom) - ZOOM_INC;
+	env->sx = (WIN_X / 2) - ((env->mx / 2) * env->zoom) - ZOOM_INC;
+	fdf_zooming(env);
+	fdf_isometric(env);
+	fdf_ymove(env, env->sy);
+	fdf_xmove(env, env->sx);
 }
