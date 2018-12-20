@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 16:04:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 21:04:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	fdf_xmove(t_env *env, int inc)
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
-			inc < 0 ? (env->render[p.y][p.x].x -= _ABS(inc))
-					: (env->render[p.y][p.x].x += inc);
+			inc < ZERO ? (env->render[p.y][p.x].x -= _ABS(inc))
+						: (env->render[p.y][p.x].x += inc);
 }
 
 void	fdf_ymove(t_env *env, int inc)
@@ -30,8 +30,8 @@ void	fdf_ymove(t_env *env, int inc)
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
-			inc < 0 ? (env->render[p.y][p.x].y -= _ABS(inc))
-					: (env->render[p.y][p.x].y += inc);
+			inc < ZERO ? (env->render[p.y][p.x].y -= _ABS(inc))
+						: (env->render[p.y][p.x].y += inc);
 }
 
 void	fdf_xrotare(t_env *env, int inc)

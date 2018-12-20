@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 17:21:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 21:00:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	add_init_centralize(t_env *env)
 	point	p;
 
 	p.y = NEG;
-	env->sy = (WIN_Y / 2) - ((env->my / 2) * env->zoom);
-	env->sx = (WIN_X / 2) - ((env->mx / 2) * env->zoom);
+	env->sy = (WIN_Y / 2) - (((float)env->my / 2) * env->zoom);
+	env->sx = (WIN_X / 2) - (((float)env->mx / 2) * env->zoom);
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
 		{
@@ -51,6 +51,7 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 		fdf_zooming(env);
 	else if (isr->is_zoomed != env->zoom && (isr->is_render = true))
 	{
+		printf("zoom was %d | zoom is %d\n", isr->is_zoomed, env->zoom);
 		isr->is_zoomed = env->zoom;
 		fdf_refresh_buffnzoom(env, isr);
 	}
@@ -88,7 +89,6 @@ void		fdf_rendering(t_env *env)
 	fdf_is_render_frog(&isr, env);
 	if (isr.is_render)
 	{
-		printf("%d | %d\n", env->dy, env->dx);
 		mlx_clear_window(env->mlx, env->win);
 		fdf_bdrawing(env->render, (t_p){.y = env->my, .x = env->mx},
 					(t_mlx){.mlx = env->mlx, .win = env->win});

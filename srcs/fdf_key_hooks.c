@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 17:26:32 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 21:00:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,30 @@ int			fdf_keys_hook(int key, t_env *env)
 	}
 	if (key == KEY_D || key == ARROW_RIGHT)
 	{
-		env->dx += ZOOM_INC;
 		env->sx += SHIFT_INC;
+		++env->dx;
 	}
 	if (key == KEY_A || key == ARROW_LEFT)
 	{
-		env->dx -= ZOOM_INC;
 		env->sx -= SHIFT_INC;
+		--env->dx;
 	}
 	if (key == KEY_W || key == ARROW_UP)
 	{
-		env->dy -= ZOOM_INC;
 		env->sy -= SHIFT_INC;
+		--env->dy;
 	}
 	if (key == KEY_S || key == ARROW_DOWN)
 	{
 		env->sy += SHIFT_INC;
-		env->dy += ZOOM_INC;
+		++env->dy;
 	}
 	(key == KEY_C) ? add_change_color(&(env->color), &(env->is_frog_render))
 					: (env->is_frog_render = false);
 	if (key == PLUS_NUMPAD || key == PLUS_KEYBOARD)
-		env->zoom + ZOOM_INC < ZOOM_MAX ? (env->zoom += ZOOM_INC) : false;
+		env->zoom + ZOOM_INC <= ZOOM_MAX ? (env->zoom += ZOOM_INC) : false;
 	if (key == MINUS_NUMPAD || key == MINUS_KEYBOARD)
-		env->zoom - ZOOM_INC > ZOOM_MIN ? (env->zoom -= ZOOM_INC) : false;
+		env->zoom - ZOOM_INC >= ZOOM_MIN ? (env->zoom -= ZOOM_INC) : false;
 	fdf_rendering(env);
 	return (0);
 }

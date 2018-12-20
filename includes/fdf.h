@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 17:11:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 21:03:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ typedef struct	s_fdf_environment
 	int			color;
 	int			my;
 	int			mx;
-	int			sy;
-	int			sx;
+	float		sy;
+	float		sx;
 	int			dy;
 	int			dx;
 }				t_env;
@@ -141,13 +141,13 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
 typedef struct	s_isrender
 {
 	uchar 	is_zoomed;
+	float	is_shiftx;
+	float	is_shifty;
 	bool	is_isometric:1;
 	bool	is_render:1;
 	bool	is_center:1;
 	bool	is_frog:1;
 	int		is_color;
-	int		is_shiftx:16;
-	int		is_shifty:16;
 }				t_isrender;
 
 void			fdf_rendering(t_env *env);
