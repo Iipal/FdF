@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_readnsave.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 11:17:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 23:19:14 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ static t_matrix	**add_save_tomatrix(strtab file, int matrix_y, int *matrix_x)
 		_NOTIS_N(m[y] = (t_matrix*)malloc(sizeof(t_matrix) * *matrix_x));
 		if (add_numbers_inline(file[y]) != *matrix_x)
 		{
+			ft_putstr("Invalid map | ");
 			fdf_free_file(file, matrix_y);
 			fdf_free_matrix(m, y + 1);
 			return (NULL);
@@ -109,7 +110,8 @@ static t_matrix	**add_save_tomatrix(strtab file, int matrix_y, int *matrix_x)
 
 static bool		add_valid_temp_line(string line, strtab file, int lines)
 {
-	if (!add_numbers_inline(line) || (!ft_isdigit(*line) && !ft_isblank(*line)))
+	if (*line != '-' && (!add_numbers_inline(line)
+		|| (!ft_isdigit(*line) && !ft_isblank(*line))))
 	{
 		ft_strdel(&line);
 		fdf_free_file(file, lines);
