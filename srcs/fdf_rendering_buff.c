@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_rendering_buff.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 21:04:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 22:50:14 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,8 @@ bool	fdf_init_render_buff(t_env *env)
 
 void	fdf_refresh_buffnzoom(t_env *env, t_isrender *isr)
 {
-	env->sy = ((WIN_Y - ((float)env->my * env->zoom)) / 2);
-	env->sx = ((WIN_X - ((float)env->mx * env->zoom)) / 2);
-	env->dx < ZERO ? (env->sx += (_ABS(env->dx) * env->zoom))
-					: (env->sx += (env->dx * env->zoom));
-	env->dy < ZERO ? (env->sy -= (_ABS(env->dy) * env->zoom))
-					: (env->sy -= (env->dy * env->zoom));
+	env->sy = ((WIN_Y - (env->my * env->zoom)) / 2.0) + env->dy;
+	env->sx = ((WIN_X - (env->mx * env->zoom)) / 2.0) + env->dx;
 	fdf_zooming(env);
 	fdf_isometric(env);
 	fdf_ymove(env, env->sy);

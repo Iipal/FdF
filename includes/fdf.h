@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 21:03:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 22:56:56 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 **		'NEG', 'ZERO' & 'HEX' is just simple values.
 */
 
-# define WIN_X			2000
-# define WIN_Y			1000
+# define WIN_X			1000
+# define WIN_Y			500
 
 # define PI				3.141592
 
@@ -126,14 +126,14 @@ typedef struct	s_fdf_environment
 	pvoid		win;
 	itab		frog;
 	uchar		zoom;
-	bool		is_frog_render;
 	int			color;
 	int			my;
 	int			mx;
 	float		sy;
 	float		sx;
-	int			dy;
-	int			dx;
+	int			dy:16;
+	int			dx:16;
+	bool		is_frog_render;
 }				t_env;
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env);

@@ -1,5 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf_rendering.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -51,7 +49,6 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 		fdf_zooming(env);
 	else if (isr->is_zoomed != env->zoom && (isr->is_render = true))
 	{
-		printf("zoom was %d | zoom is %d\n", isr->is_zoomed, env->zoom);
 		isr->is_zoomed = env->zoom;
 		fdf_refresh_buffnzoom(env, isr);
 	}
