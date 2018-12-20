@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 17:19:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 10:01:19 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,31 @@
 
 static void	add_centralize(t_env *env)
 {
-	int	y;
-	int	x;
+	point	p;
 
-	y = NEG;
-	env->sy = (WIN_Y / 2) - ((env->my / 2) * ZOOM_DEF);
-	env->sx = (WIN_X / 2) - ((env->mx / 2) * ZOOM_DEF);
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-	{
-		env->render[y][x].y += env->sy;
-		env->render[y][x].x += env->sx;
-	}
+	p.y = NEG;
+	env->sy = (WIN_Y / 2) - ((env->my / 2) * env->zoom);
+	env->sx = (WIN_X / 2) - ((env->mx / 2) * env->zoom);
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+		{
+			env->render[p.y][p.x].y += env->sy;
+			env->render[p.y][p.x].x += env->sx;
+		}
 }
 
 static void	add_zooming(t_env *env)
 {
-	int	y;
-	int	x;
+	point	p;
 
-	y = NEG;
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-	{
-		env->render[y][x].y *= ZOOM_DEF;
-		env->render[y][x].x *= ZOOM_DEF;
-		env->render[y][x].z *= ZOOM_DEF;
-	}
+	p.y = NEG;
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+		{
+			env->render[p.y][p.x].y *= env->zoom;
+			env->render[p.y][p.x].x *= env->zoom;
+			env->render[p.y][p.x].z *= env->zoom;
+		}
 }
 
 static void	add_is_render(t_isrender *isr, t_env *env)

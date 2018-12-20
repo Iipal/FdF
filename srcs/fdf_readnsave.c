@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 14:02:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 10:01:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static bool		add_line_tomatrix(string line, t_matrix *matrix,
 									int matrix_x, int y)
 {
 	string	temp_digits;
-	int		x;
 	int		digits;
+	int		x;
 
 	x = NEG;
 	while (*line && x < matrix_x)
@@ -84,7 +84,7 @@ static bool		add_line_tomatrix(string line, t_matrix *matrix,
 	return (true);
 }
 
-static t_matrix	**add_save_tomatrix(string *file, int matrix_y, int *matrix_x)
+static t_matrix	**add_save_tomatrix(strtab file, int matrix_y, int *matrix_x)
 {
 	t_matrix	**m;
 	int			y;
@@ -107,7 +107,7 @@ static t_matrix	**add_save_tomatrix(string *file, int matrix_y, int *matrix_x)
 	return (m);
 }
 
-static bool		add_valid_temp_line(string line, string *file, int lines)
+static bool		add_valid_temp_line(string line, strtab file, int lines)
 {
 	if (!add_numbers_inline(line) || (!ft_isdigit(*line) && !ft_isblank(*line)))
 	{
@@ -121,7 +121,7 @@ static bool		add_valid_temp_line(string line, string *file, int lines)
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
 {
 	string	gnl_temp;
-	string	*file;
+	strtab	file;
 	int		fd;
 	int		i;
 
@@ -130,7 +130,7 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
 		ft_strdel(&gnl_temp);
 	close(fd);
 	_NOTIS_MSG("Empty map.", env->my);
-	_NOTIS_F(file = (string*)malloc(sizeof(string) * env->my));
+	_NOTIS_F(file = (strtab)malloc(sizeof(string) * env->my));
 	_NOTIS_F(fd = open(file_name, O_RDONLY));
 	i = ZERO;
 	while (ft_gnl(fd, &gnl_temp) > ZERO)

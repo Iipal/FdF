@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:31 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 14:03:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 10:07:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,51 @@
 
 static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, int *color)
 {
-	int	y;
-	int	x;
-	int	dir;
-	int	increase;
+	point	p;
+	int		dir;
+	int		increase;
 
 	dir = ZERO;
 	increase = ZERO;
-	y = points.p1.y;
-	x = points.p1.x;
+	p.y = points.p1.y;
+	p.x = points.p1.x;
 	if (delta.p1.y)
 		dir = delta.p1.y > 0 ? 1 : -1;
-	while (((delta.p1.x > 0) ? (x <= points.p2.x) : (x >= points.p2.x)))
+	while (((delta.p1.x > 0) ? (p.x <= points.p2.x) : (p.x >= points.p2.x)))
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, x, y, *color);
+		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, *color);
 		increase += delta.p2.y;
 		if (increase >= delta.p2.x)
 		{
 			increase -= delta.p2.x;
-			y += dir;
+			p.y += dir;
 		}
-		(delta.p1.x > 0) ? ++x : --x;
+		(delta.p1.x > 0) ? ++(p.x) : --(p.x);
 	}
 }
 
 static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, int *color)
 {
-	int	x;
-	int	y;
-	int	dir;
-	int	increase;
+	point	p;
+	int		dir;
+	int		increase;
 
 	dir = ZERO;
 	increase = ZERO;
-	y = points.p1.y;
-	x = points.p1.x;
+	p.y = points.p1.y;
+	p.x = points.p1.x;
 	if (delta.p1.y)
 		dir = (delta.p1.x > 0 ? 1 : -1);
-	while (((delta.p1.y > 0) ? (y <= points.p2.y) : (y >= points.p2.y)))
+	while (((delta.p1.y > 0) ? (p.y <= points.p2.y) : (p.y >= points.p2.y)))
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, x, y, *color);
+		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, *color);
 		increase += delta.p2.x;
 		if (increase >= delta.p2.y)
 		{
 			increase -= delta.p2.y;
-			x += dir;
+			p.x += dir;
 		}
-		(delta.p1.y > 0) ? ++y : --y;
+		(delta.p1.y > 0) ? ++(p.y) : --(p.y);
 	}
 }
 
@@ -87,29 +85,28 @@ static void	add_bset_line(t_p dot1, t_p dot2, t_mlx mlx, int color)
 
 void		fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx)
 {
-	int	y;
-	int	x;
+	point	p;
 
-	y = NEG;
-	while (++y < mxy.y && (x = NEG))
-		while (++x < mxy.x)
+	p.y = NEG;
+	while (++(p.y) < mxy.y && (p.x = NEG))
+		while (++(p.x) < mxy.x)
 		{
-			if ((x + 1 < mxy.x) && (y + 1 < mxy.y))
+			if ((p.x + 1 < mxy.x) && (p.y + 1 < mxy.y))
 			{
-				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-					(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
-				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-							(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
+				add_bset_line((t_p){.y = m[p.y][p.x].y, .x = m[p.y][p.x].x},
+					(t_p){.y = m[p.y][p.x + 1].y, .x = m[p.y][p.x + 1].x},
+				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[p.y][p.x].rgb);
+				add_bset_line((t_p){.y = m[p.y][p.x].y, .x = m[p.y][p.x].x},
+					(t_p){.y = m[p.y + 1][p.x].y, .x = m[p.y + 1][p.x].x},
+				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[p.y][p.x].rgb);
 			}
-			else if (x == mxy.x - 1 && y + 1 < mxy.y)
-				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-							(t_p){.y = m[y + 1][x].y, .x = m[y + 1][x].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
-			else if (y == mxy.y - 1 && x + 1 < mxy.x)
-				add_bset_line((t_p){.y = m[y][x].y, .x = m[y][x].x},
-							(t_p){.y = m[y][x + 1].y, .x = m[y][x + 1].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[y][x].rgb);
+			else if (p.x == mxy.x - 1 && p.y + 1 < mxy.y)
+				add_bset_line((t_p){.y = m[p.y][p.x].y, .x = m[p.y][p.x].x},
+					(t_p){.y = m[p.y + 1][p.x].y, .x = m[p.y + 1][p.x].x},
+				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[p.y][p.x].rgb);
+			else if (p.y == mxy.y - 1 && p.x + 1 < mxy.x)
+				add_bset_line((t_p){.y = m[p.y][p.x].y, .x = m[p.y][p.x].x},
+					(t_p){.y = m[p.y][p.x + 1].y, .x = m[p.y][p.x + 1].x},
+				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[p.y][p.x].rgb);
 		}
 }

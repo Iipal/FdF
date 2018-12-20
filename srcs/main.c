@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 19:25:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 10:00:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static t_env	*add_alloc_env(string tittle)
 	t_env	*out_env;
 
 	_NOTIS_N(out_env = (t_env*)malloc(sizeof(t_env)));
-	*out_env = (t_env){NULL, NULL, NULL, NULL, ZOOM_DEF,
-					false, NULL, IRGB_WHITE, 0, 0, 0, 0};
+	*out_env = (t_env){NULL, NULL, NULL, NULL, ZOOM_DEF, NULL,
+					false, IRGB_WHITE, 0, 0, 0, 0};
 	_NOTIS_N(out_env->mlx = mlx_init());
 	_NOTIS_N(out_env->win = mlx_new_window(out_env->mlx, WIN_X, WIN_Y, tittle));
-	out_env->frog = bonus_init_frog();
+	out_env->frog = fdf_bonus_init_frog();
 	return (out_env);
 }
 
@@ -32,11 +32,11 @@ int				main(int argc, char const *argv[])
 
 	--argc;
 	++argv;
+	printf("%lu\n", sizeof(strtab));
 	_NOTIS_MSG("Usage: ./fdf <map_name>", !(!argc || argc > 1));
 	_NOTIS_MPE("Where is memory, pal ?", env = add_alloc_env((string)*argv));
 	_NOTIS_MPE("File reading error", fdf_file_readnsave_env(*argv, env));
 	fdf_rendering(env);
 	mlx_hook(env->win, KEY_PRESS, KEY_MASK, fdf_keys_hook, env);
-	if (env)
-		mlx_loop(env->mlx);
+	env ? mlx_loop(env->mlx) : false;
 }

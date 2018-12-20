@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 17:22:30 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 10:04:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,11 @@ enum	e_bool
 	true
 };
 
-# define _BOOL typedef enum e_bool	bool
+# define _BOOL	typedef enum e_bool	bool
+# define _ITAB	typedef int**		itab
 
 _BOOL;
+_ITAB;
 
 /*
 **	Bonus part:
@@ -123,8 +125,8 @@ typedef struct	s_fdf_environment
 	pvoid		mlx;
 	pvoid		win;
 	uchar		zoom;
+	itab		frog;
 	bool		is_frog_render;
-	int			**frog;
 	int			color;
 	int			my;
 	int			mx;
@@ -154,10 +156,14 @@ typedef struct	s_point
 	int	x:16;
 }				t_p;
 
+# define _POINT typedef t_p	point
+
+_POINT;
+
 typedef struct	s_double_points
 {
-	t_p	p1;
-	t_p	p2;
+	point	p1;
+	point	p2;
 }				t_dp;
 
 typedef struct	s_mlx

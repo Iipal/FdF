@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 19:34:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 09:49:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,30 @@
 
 void		fdf_print_fucking_frog(t_env *env)
 {
-	int	y;
-	int	x;
+	point	p;
 
-	y = NEG;
-	x = NEG;
-	while (++y < FHEIGHT && (x = NEG))
-		while (++x < FWIDTH)
-			if (env->frog[y][x] != FBG_COLOR)
-				mlx_pixel_put(env->mlx, env->win, x, y, env->frog[y][x]);
+	p.y = NEG;
+	while (++(p.y) < FHEIGHT && (p.x = NEG))
+		while (++(p.x) < FWIDTH)
+			if (env->frog[p.y][p.x] != FBG_COLOR)
+				mlx_pixel_put(env->mlx, env->win,
+						p.x, p.y, env->frog[p.y][p.x]);
 }
 
 static void	add_change_grid_color(t_env *env, int old, int new)
 {
-	int	y;
-	int	x;
+	point	p;
 
-	y = NEG;
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-			if (env->render[y][x].rgb == old)
-				env->render[y][x].rgb = new;
-	y = NEG;
-	while (++y < FHEIGHT && (x = NEG))
-		while (++x < FWIDTH)
-			if (env->frog[y][x] == old)
-				env->frog[y][x] = new;
+	p.y = NEG;
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+			if (env->render[p.y][p.x].rgb == old)
+				env->render[p.y][p.x].rgb = new;
+	p.y = NEG;
+	while (++(p.y) < FHEIGHT && (p.x = NEG))
+		while (++(p.x) < FWIDTH)
+			if (env->frog[p.y][p.x] == old)
+				env->frog[p.y][p.x] = new;
 }
 
 void		fdf_is_render_frog(t_isrender *isr, t_env *env)
@@ -78,18 +76,17 @@ static bool	add_save_to_frog(int *frog, string line)
 	return (true);
 }
 
-int			**bonus_init_frog(void)
+itab		fdf_bonus_init_frog(void)
 {
 	string	gnl_temp;
-	int		**out_frog;
+	itab	out_frog;
 	int		fd;
 	int		y;
 
 	y = NEG;
 	gnl_temp = NULL;
-	;
 	_NOTIS_N(!(!(fd = open(FFILE_NAME, O_RDONLY)) || fd < 0));
-	_NOTIS_N(out_frog = (int**)malloc(sizeof(int*) * FHEIGHT));
+	_NOTIS_N(out_frog = (itab)malloc(sizeof(int*) * FHEIGHT));
 	while (++y < FHEIGHT)
 		_NOTIS_N(out_frog[y] = (int*)malloc(sizeof(int) * FWIDTH));
 	y = NEG;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lft_str.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:09:02 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/11/15 09:09:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 20:34:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@
 # include <string.h>
 # include <stdlib.h>
 
-# define _STR	typedef char*			string
-# define _CSTR	typedef const char*		cstring
-# define _USTR	typedef unsigned char*	ustring
-# define _UCHAR	typedef unsigned char	uchar
+# define _STR		typedef char*			string
+# define _CSTR		typedef const char*		cstring
+# define _USTR		typedef unsigned char*	ustring
+# define _UCHAR		typedef unsigned char	uchar
+# define _STRTAB	typedef char**			strtab
 
 _STR;
 _CSTR;
 _USTR;
 _UCHAR;
+_STRTAB;
 
 void	ft_strdel(string *as);
 void	ft_strclr(string s);
@@ -61,6 +63,6 @@ string	ft_strmapi(char const *s, char (*f)(unsigned int, char));
 string	ft_strsub(char const *s, unsigned int start, size_t len);
 string	ft_strjoin(char const *s1, char const *s2);
 string	ft_strtrim(char const *s);
-string	*ft_strsplit(char const *s, char c);
+strtab	ft_strsplit(char const *s, char c);
 
 #endif

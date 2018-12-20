@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/27 13:58:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/10/28 14:46:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/19 20:34:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static inline int	ft_ss_wlen(cstring str, char ch)
 	return (len);
 }
 
-string				*ft_strsplit(char const *s, char c)
+strtab				ft_strsplit(char const *s, char c)
 {
-	string	*out;
+	strtab	out;
 	int		w_counter;
 	int		i;
 

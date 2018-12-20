@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 14:52:22 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 14:19:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 09:45:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void		fdf_isometric(t_env *env)
 {
-	int	oy;
-	int	ox;
-	int	oz;
-	int	y;
-	int	x;
+	point	p;
+	int		oy;
+	int		ox;
+	int		oz;
 
-	y = NEG;
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
+	p.y = NEG;
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
 		{
-			oy = env->render[y][x].y;
-			ox = env->render[y][x].x;
-			oz = env->render[y][x].z;
-			env->render[y][x] = (t_matrix){(1 / sqrt(6)) * (-ox + 2 * oy + oz),
-							(1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz),
+			oy = env->render[p.y][p.x].y;
+			ox = env->render[p.y][p.x].x;
+			oz = env->render[p.y][p.x].z;
+			env->render[p.y][p.x] = (t_matrix){
+			(1 / sqrt(6)) * (-ox + 2 * oy + oz),
+			(1 / sqrt(6)) * (sqrt(3) * ox + sqrt(3) * oz),
 			(1 / sqrt(6)) * (sqrt(2) * ox - sqrt(2) * oy + sqrt(2) * oz),
-												env->render[y][x].rgb};
+												env->render[p.y][p.x].rgb};
 		}
 }

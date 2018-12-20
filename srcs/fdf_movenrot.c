@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/19 17:25:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/20 09:41:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 void	fdf_xmove(t_env *env, int inc)
 {
-	int	y;
-	int	x;
+	point	p;
 
-	y = NEG;
+	p.y = NEG;
 	inc < 0 ? (env->sx -= _ABS(inc)) : (env->sx += inc);
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-			inc < 0 ? (env->render[y][x].x -= _ABS(inc))
-					: (env->render[y][x].x += inc);
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+			inc < 0 ? (env->render[p.y][p.x].x -= _ABS(inc))
+					: (env->render[p.y][p.x].x += inc);
 }
 
 void	fdf_ymove(t_env *env, int inc)
 {
-	int	y;
-	int	x;
+	point	p;
 
-	y = NEG;
+	p.y = NEG;
 	inc < 0 ? (env->sy -= _ABS(inc)) : (env->sy += inc);
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-			inc < 0 ? (env->render[y][x].y -= _ABS(inc))
-					: (env->render[y][x].y += inc);
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+			inc < 0 ? (env->render[p.y][p.x].y -= _ABS(inc))
+					: (env->render[p.y][p.x].y += inc);
 }
 
 void	fdf_xrotare(t_env *env, int inc)
@@ -58,36 +56,34 @@ void	fdf_xrotare(t_env *env, int inc)
 
 void	fdf_yrotare(t_env *env, int inc)
 {
-	int	ox;
-	int	y;
-	int	x;
+	point	p;
+	int		ox;
 
-	y = NEG;
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
+	p.y = NEG;
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
 		{
-			ox = env->render[y][x].x;
-			env->render[y][x].x = ox * cos(_RAD(inc)) +
-							env->render[y][x].z * sin(_RAD(inc));
-			env->render[y][x].z = -ox * sin(_RAD(inc)) +
-							env->render[y][x].z * cos(_RAD(inc));
+			ox = env->render[p.y][p.x].x;
+			env->render[p.y][p.x].x = ox * cos(_RAD(inc)) +
+							env->render[p.y][p.x].z * sin(_RAD(inc));
+			env->render[p.y][p.x].z = -ox * sin(_RAD(inc)) +
+							env->render[p.y][p.x].z * cos(_RAD(inc));
 		}
 }
 
 void	fdf_zrotare(t_env *env, int inc)
 {
-	int	ox;
-	int	y;
-	int	x;
+	point	p;
+	int		ox;
 
-	y = NEG;
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
+	p.y = NEG;
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
 		{
-			ox = env->render[y][x].x;
-			env->render[y][x].x = ox * cos(_RAD(inc)) -
-							env->render[y][x].y * sin(_RAD(inc));
-			env->render[y][x].y = -ox * sin(_RAD(inc)) +
-							env->render[y][x].y * cos(_RAD(inc));
+			ox = env->render[p.y][p.x].x;
+			env->render[p.y][p.x].x = ox * cos(_RAD(inc)) -
+							env->render[p.y][p.x].y * sin(_RAD(inc));
+			env->render[p.y][p.x].y = -ox * sin(_RAD(inc)) +
+							env->render[p.y][p.x].y * cos(_RAD(inc));
 		}
 }
