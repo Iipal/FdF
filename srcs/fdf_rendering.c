@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_rendering.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 18:56:39 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 22:10:36 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,21 @@ static void	add_init_centralize(t_env *env)
 		}
 }
 
-static void	add_is_render_rot_init(t_isrender *isr, t_env *env)
+static void	add_is_render_init(t_isrender *isr, t_env *env)
 {
-	if (!isr->is_rot_init)
+	if (!isr->is_isr_init)
 	{
 		isr->is_roty = env->roty;
 		isr->is_rotx = env->rotx;
 		isr->is_rotz = env->rotz;
-		isr->is_rot_init = true;
+		isr->is_shiftx = env->dx;
+		isr->is_shifty = env->dy;
+		isr->is_isr_init = true;
 	}
 }
 
 static void	add_is_render_rot(t_isrender *isr, t_env *env)
 {
-	add_is_render_rot_init(isr, env);
 	if (isr->is_rotx != env->rotx && (isr->is_render = true))
 	{
 		(env->rotx == ROT_MAX) ? (env->rotx = ROT_MIN) : ZERO;
@@ -82,8 +83,6 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 	if ((!isr->is_center ? (isr->is_center = true) : false)
 			&& (isr->is_render = true))
 		add_init_centralize(env);
-	!isr->is_shiftx ? (isr->is_shiftx = env->dx) : 0;
-	!isr->is_shifty ? (isr->is_shifty = env->dy) : 0;
 	if (isr->is_shiftx != env->dx && (isr->is_render = true))
 	{
 		fdf_xmove(env, ((env->dx > isr->is_shiftx) ? SHIFT_INC : -SHIFT_INC));
@@ -108,6 +107,7 @@ void		fdf_rendering(t_env *env)
 			fdf_free_env(env);
 			exit(EXIT_SUCCESS);
 		}
+	add_is_render_init(&isr, env);
 	add_is_render(&isr, env);
 	add_is_render_rot(&isr, env);
 	fdf_is_render_frog(&isr, env);

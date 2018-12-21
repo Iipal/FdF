@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_brasenham_drawing.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:31 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 19:56:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 23:58:32 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,21 @@ static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 	point	p;
 	int		dir;
 	int		increase;
+	int		*rgb;
+	int		i;
 
+	i = ZERO;
 	dir = ZERO;
-	increase = ZERO;
 	p.y = points.p1.y;
 	p.x = points.p1.x;
+	increase = ZERO;
+	rgb = fdf_bdrawing_gradient(*gradient,
+		fdf_find_gradient_len(delta.p1.x, points.p2.x, p.x));
 	if (delta.p1.y)
 		dir = delta.p1.y > 0 ? 1 : -1;
 	while (((delta.p1.x > 0) ? (p.x <= points.p2.x) : (p.x >= points.p2.x)))
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, gradient->start);
+		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, rgb[i++]);
 		increase += delta.p2.y;
 		if (increase >= delta.p2.x)
 		{
@@ -35,6 +40,7 @@ static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 		}
 		(delta.p1.x > 0) ? ++(p.x) : --(p.x);
 	}
+	free(rgb);
 }
 
 static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
@@ -42,16 +48,21 @@ static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 	point	p;
 	int		dir;
 	int		increase;
+	int		*rgb;
+	int		i;
 
+	i = ZERO;
 	dir = ZERO;
-	increase = ZERO;
 	p.y = points.p1.y;
 	p.x = points.p1.x;
+	increase = ZERO;
+	rgb = fdf_bdrawing_gradient(*gradient,
+		fdf_find_gradient_len(delta.p1.y, points.p2.y, p.y));
 	if (delta.p1.y)
 		dir = (delta.p1.x > 0 ? 1 : -1);
 	while (((delta.p1.y > 0) ? (p.y <= points.p2.y) : (p.y >= points.p2.y)))
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, gradient->start);
+		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, rgb[i++]);
 		increase += delta.p2.x;
 		if (increase >= delta.p2.y)
 		{
@@ -60,6 +71,7 @@ static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 		}
 		(delta.p1.y > 0) ? ++(p.y) : --(p.y);
 	}
+	free(rgb);
 }
 
 static void	add_bset_line(t_p dot1, t_p dot2, t_mlx mlx, t_g gradient)
