@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_key_hooks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 22:54:15 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/21 11:16:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,36 @@ static void	add_change_color(int *color)
 		*color = IRGB_WHITE;
 }
 
-static void	add_hook_zoom_exitbonus(int key, t_env *env)
+static void	add_hook_zoomnrot(int key, t_env *env)
 {
+	
+	if (key == PLUS_NUMPAD || key == PLUS_KEYBOARD)
+		env->zoom + ZOOM_INC <= ZOOM_MAX ? (env->zoom += ZOOM_INC) : false;
+	if (key == MINUS_NUMPAD || key == MINUS_KEYBOARD)
+		env->zoom - ZOOM_INC >= ZOOM_MIN ? (env->zoom -= ZOOM_INC) : false;
+	key == KEY_T ? (env->rotx += ROT_INC) : ZERO;
+	key == KEY_G ? (env->rotx -= ROT_INC) : ZERO;
+	key == KEY_Y ? (env->roty += ROT_INC) : ZERO;
+	key == KEY_H ? (env->roty -= ROT_INC) : ZERO;
+	key == KEY_U ? (env->rotz += ROT_INC) : ZERO;
+	key == KEY_J ? (env->rotz -= ROT_INC) : ZERO;
+}
+
+int			fdf_keys_hook(int key, t_env *env)
+{
+	if (key == ESC)
+	{
+		fdf_free_env(env);
+		exit(EXIT_SUCCESS);
+	}
+	if (key == KEY_D || key == ARROW_RIGHT)
+		env->dx += SHIFT_INC;
+	if (key == KEY_A || key == ARROW_LEFT)
+		env->dx -= SHIFT_INC;
+	if (key == KEY_W || key == ARROW_UP)
+		env->dy -= SHIFT_INC;
+	if (key == KEY_S || key == ARROW_DOWN)
+		env->dy += SHIFT_INC;
 	if (key == KEY_C)
 	{
 		add_change_color(&(env->color));
@@ -35,41 +63,7 @@ static void	add_hook_zoom_exitbonus(int key, t_env *env)
 	}
 	else
 		env->is_frog_render = false;
-	if (key == PLUS_NUMPAD || key == PLUS_KEYBOARD)
-		env->zoom + ZOOM_INC <= ZOOM_MAX ? (env->zoom += ZOOM_INC) : false;
-	if (key == MINUS_NUMPAD || key == MINUS_KEYBOARD)
-		env->zoom - ZOOM_INC >= ZOOM_MIN ? (env->zoom -= ZOOM_INC) : false;
-	if (key == ESC)
-	{
-		fdf_free_env(env);
-		exit(EXIT_SUCCESS);
-	}
-	
-}
-
-int			fdf_keys_hook(int key, t_env *env)
-{
-	if (key == KEY_D || key == ARROW_RIGHT)
-	{
-		env->sx += SHIFT_INC;
-		env->dx += SHIFT_INC;
-	}
-	if (key == KEY_A || key == ARROW_LEFT)
-	{
-		env->sx -= SHIFT_INC;
-		env->dx -= SHIFT_INC;
-	}
-	if (key == KEY_W || key == ARROW_UP)
-	{
-		env->sy -= SHIFT_INC;
-		env->dy -= SHIFT_INC;
-	}
-	if (key == KEY_S || key == ARROW_DOWN)
-	{
-		env->sy += SHIFT_INC;
-		env->dy += SHIFT_INC;
-	}
-	add_hook_zoom_exitbonus(key, env);
+	add_hook_zoomnrot(key, env);
 	fdf_rendering(env);
 	return (0);
 }

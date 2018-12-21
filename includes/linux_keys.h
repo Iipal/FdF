@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:50 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 10:39:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 09:57:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define KEY_A			97
 # define KEY_S			115
 # define KEY_D			100
+
+# define KEY_T			116
+# define KEY_G			103
 
 # define ARROW_UP		65362
 # define ARROW_DOWN		65364

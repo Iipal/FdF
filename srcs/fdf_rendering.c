@@ -3,45 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_rendering.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 08:50:18 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/21 11:17:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include "../includes/frog.h"
 
-void		fdf_zooming(t_env *env)
-{
-	point	p;
-
-	p.y = NEG;
-	while (++(p.y) < env->my && (p.x = NEG))
-		while (++(p.x) < env->mx)
-			env->render[p.y][p.x] = (t_matrix)
-			{
-				env->raw[p.y][p.x].y * env->zoom,
-				env->raw[p.y][p.x].x * env->zoom,
-				env->raw[p.y][p.x].z * env->zoom,
-				env->render[p.y][p.x].rgb
-			};
-}
-
 static void	add_init_centralize(t_env *env)
 {
 	point	p;
 
 	p.y = NEG;
-	env->sy = (WIN_Y / 2) - (((float)env->my / 2) * env->zoom);
-	env->sx = (WIN_X / 2) - (((float)env->mx / 2) * env->zoom);
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
 		{
-			env->render[p.y][p.x].y += env->sy;
-			env->render[p.y][p.x].x += env->sx;
+			env->render[p.y][p.x].y += (WIN_Y / 2) -
+							(((float)env->my / 2) * env->zoom);
+			env->render[p.y][p.x].x += (WIN_X / 2) -
+							(((float)env->mx / 2) * env->zoom);
 		}
+}
+
+static void	add_is_render_rot_init(t_isrender *isr, t_env *env)
+{
+	if (!isr->is_rot_init)
+	{
+		isr->is_roty = env->roty;
+		isr->is_rotx = env->rotx;
+		isr->is_rotz = env->rotz;
+		isr->is_rot_init = true;
+	}
+}
+
+static void	add_is_render_rot(t_isrender *isr, t_env *env)
+{
+	add_is_render_rot_init(isr, env);
+	if (isr->is_rotx != env->rotx && (isr->is_render = true))
+	{
+		(env->rotx == ROT_MAX) ? (env->rotx = ROT_MIN) : ZERO;
+		(env->rotx > ROT_MAX) ? (env->rotx -= ROT_MAX) : ZERO;
+		(env->rotx < ROT_MIN) ? (env->rotx += ROT_MAX) : ZERO;
+		fdf_refresh_buff_zoomnrot(env, isr);
+	}
+	if (isr->is_roty != env->roty && (isr->is_render = true))
+	{
+		(env->roty == ROT_MAX) ? (env->roty = ROT_MIN) : ZERO;
+		(env->roty > ROT_MAX) ? (env->roty -= ROT_MAX) : ZERO;
+		(env->roty < ROT_MIN) ? (env->roty += ROT_MAX) : ZERO;
+		fdf_refresh_buff_zoomnrot(env, isr);
+	}
+	if (isr->is_rotz != env->rotz && (isr->is_render = true))
+	{
+		(env->rotz == ROT_MAX) ? (env->rotz = ROT_MIN) : ZERO;
+		(env->rotz > ROT_MAX) ? (env->rotz -= ROT_MAX) : ZERO;
+		(env->rotz < ROT_MIN) ? (env->rotz += ROT_MAX) : ZERO;
+		fdf_refresh_buff_zoomnrot(env, isr);
+	}
 }
 
 static void	add_is_render(t_isrender *isr, t_env *env)
@@ -50,26 +71,23 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 	if ((!isr->is_zoomed) ? (isr->is_zoomed = env->zoom) : false)
 		fdf_zooming(env);
 	else if (isr->is_zoomed != env->zoom && (isr->is_render = true))
-	{
-		isr->is_zoomed = env->zoom;
-		fdf_refresh_buffnzoom(env, isr);
-	}
+		fdf_refresh_buff_zoomnrot(env, isr);
 	if (!isr->is_isometric ? (isr->is_isometric = true) : false)
 		fdf_isometric(env);
 	if ((!isr->is_center ? (isr->is_center = true) : 0)
 			&& (isr->is_render = true))
 		add_init_centralize(env);
-	!isr->is_shiftx ? (isr->is_shiftx = env->sx) : 0;
-	if (isr->is_shiftx != env->sx && (isr->is_render = true))
+	!isr->is_shiftx ? (isr->is_shiftx = env->dx) : 0;
+	if (isr->is_shiftx != env->dx && (isr->is_render = true))
 	{
-		fdf_xmove(env, ((env->sx > isr->is_shiftx) ? SHIFT_INC : -SHIFT_INC));
-		isr->is_shiftx = env->sx;
+		fdf_xmove(env, ((env->dx > isr->is_shiftx) ? SHIFT_INC : -SHIFT_INC));
+		isr->is_shiftx = env->dx;
 	}
-	!isr->is_shifty ? (isr->is_shifty = env->sy) : 0;
-	if (isr->is_shifty != env->sy && (isr->is_render = true))
+	!isr->is_shifty ? (isr->is_shifty = env->dy) : 0;
+	if (isr->is_shifty != env->dy && (isr->is_render = true))
 	{
-		fdf_ymove(env, ((env->sy > isr->is_shifty) ? SHIFT_INC : -SHIFT_INC));
-		isr->is_shifty = env->sy;
+		fdf_ymove(env, ((env->dy > isr->is_shifty) ? SHIFT_INC : -SHIFT_INC));
+		isr->is_shifty = env->dy;
 	}
 }
 
@@ -85,6 +103,7 @@ void		fdf_rendering(t_env *env)
 			exit(EXIT_SUCCESS);
 		}
 	add_is_render(&isr, env);
+	add_is_render_rot(&isr, env);
 	fdf_is_render_frog(&isr, env);
 	if (isr.is_render)
 	{

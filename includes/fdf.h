@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 22:56:56 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/21 11:16:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 **		'NEG', 'ZERO' & 'HEX' is just simple values.
 */
 
-# define WIN_X			1000
-# define WIN_Y			500
+# define WIN_X			2000
+# define WIN_Y			1000
 
 # define PI				3.141592
 
@@ -51,7 +51,14 @@
 
 # define SHIFT_INC		15
 
-# define ROT_INC		32
+# define ROT_MIN		0.0
+# define ROT_INC		10.0
+# define ROT_MAX		360.0
+
+# define AXIS_X			'x'
+# define AXIS_Y			'y'
+# define AXIS_Z			'z'
+# define AXIS_ALL		'a'
 
 # define ZOOM_INC		2
 # define ZOOM_MIN		3
@@ -129,10 +136,11 @@ typedef struct	s_fdf_environment
 	int			color;
 	int			my;
 	int			mx;
-	float		sy;
-	float		sx;
 	int			dy:16;
 	int			dx:16;
+	float		roty;
+	float		rotx;
+	float		rotz;
 	bool		is_frog_render;
 }				t_env;
 
@@ -143,6 +151,10 @@ typedef struct	s_isrender
 	uchar 	is_zoomed;
 	float	is_shiftx;
 	float	is_shifty;
+	float	is_roty;
+	float	is_rotx;
+	float	is_rotz;
+	bool	is_rot_init:1;
 	bool	is_isometric:1;
 	bool	is_render:1;
 	bool	is_center:1;
@@ -191,7 +203,7 @@ void			fdf_free_matrix(t_matrix **m, int matrix_y);
 void			fdf_free_file(string *file, int lines);
 
 bool			fdf_init_render_buff(t_env *env);
-void			fdf_refresh_buffnzoom(t_env *env, t_isrender *isr);
+void			fdf_refresh_buff_zoomnrot(t_env *env, t_isrender *isr);
 void			fdf_zooming(t_env *env);
 
 #endif

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_rendering_buff.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 22:50:14 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/21 11:18:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-bool	fdf_init_render_buff(t_env *env)
+bool		fdf_init_render_buff(t_env *env)
 {
 	point	p;
 
@@ -36,14 +36,45 @@ bool	fdf_init_render_buff(t_env *env)
 	return (true);
 }
 
-void	fdf_refresh_buffnzoom(t_env *env, t_isrender *isr)
+void		fdf_zooming(t_env *env)
 {
-	env->sy = ((WIN_Y - (env->my * env->zoom)) / 2.0) + env->dy;
-	env->sx = ((WIN_X - (env->mx * env->zoom)) / 2.0) + env->dx;
+	point	p;
+
+	p.y = NEG;
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+			env->render[p.y][p.x] = (t_matrix)
+			{
+				env->raw[p.y][p.x].y * env->zoom,
+				env->raw[p.y][p.x].x * env->zoom,
+				env->raw[p.y][p.x].z * env->zoom,
+				env->render[p.y][p.x].rgb
+			};
+}
+
+static void	fdf_refresh_buffnzoom(t_env *env, t_isrender *isr)
+{
+	float	shift_y;
+	float	shift_x;
+	
+	shift_y = ((WIN_Y - (env->my * env->zoom)) / 2.0) + env->dy;
+	shift_x = ((WIN_X - (env->mx * env->zoom)) / 2.0) + env->dx;
 	fdf_zooming(env);
 	fdf_isometric(env);
-	fdf_ymove(env, env->sy);
-	fdf_xmove(env, env->sx);
-	isr->is_shifty = env->sy;
-	isr->is_shiftx = env->sx;
+	fdf_ymove(env, shift_y);
+	fdf_xmove(env, shift_x);
+	isr->is_shifty = shift_y;
+	isr->is_shiftx = shift_x;
+	isr->is_zoomed = env->zoom;
+}
+
+void		fdf_refresh_buff_zoomnrot(t_env *env, t_isrender *isr)
+{
+	fdf_refresh_buffnzoom(env, isr);
+	fdf_xrotare(env, env->rotx);
+	fdf_yrotare(env, env->roty);
+	fdf_zrotare(env, env->rotz);
+	isr->is_roty = env->roty;
+	isr->is_rotx = env->rotx;
+	isr->is_rotz = env->rotz;
 }
