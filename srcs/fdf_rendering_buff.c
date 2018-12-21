@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 11:18:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 17:11:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ static void	fdf_refresh_buffnzoom(t_env *env, t_isrender *isr)
 {
 	float	shift_y;
 	float	shift_x;
-	
-	shift_y = ((WIN_Y - (env->my * env->zoom)) / 2.0) + env->dy;
-	shift_x = ((WIN_X - (env->mx * env->zoom)) / 2.0) + env->dx;
+
+	shift_y = ((WIN_Y - ((float)env->my * env->zoom)) / 2) + env->dy;
+	shift_x = ((WIN_X - ((float)env->mx * env->zoom)) / 2) + env->dx;
 	fdf_zooming(env);
 	fdf_isometric(env);
 	fdf_ymove(env, shift_y);
 	fdf_xmove(env, shift_x);
-	isr->is_shifty = shift_y;
-	isr->is_shiftx = shift_x;
+	isr->is_shifty = env->dy;
+	isr->is_shiftx = env->dx;
 	isr->is_zoomed = env->zoom;
 }
 

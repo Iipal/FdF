@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 11:16:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 17:25:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int				main(int argc, char const *argv[])
 	_NOTIS_MSG("Usage: ./fdf <map_name>", !(!argc || argc > 1));
 	_NOTIS_MPE("Where is memory, pal ?", env = add_alloc_env((string)*argv));
 	_NOTIS_MPE("File reading error", fdf_file_readnsave_env(*argv, env));
+	fdf_valid_zoom(env);
 	fdf_rendering(env);
 	mlx_hook(env->win, KEY_PRESS, KEY_MASK, fdf_keys_hook, env);
 	env ? mlx_loop(env->mlx) : false;

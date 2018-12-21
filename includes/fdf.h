@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 11:16:32 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 17:22:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 
 # define ZOOM_INC		2
 # define ZOOM_MIN		3
-# define ZOOM_DEF		15
+# define ZOOM_DEF		42
 # define ZOOM_MAX		255
 
 /*
@@ -149,8 +149,6 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
 typedef struct	s_isrender
 {
 	uchar 	is_zoomed;
-	float	is_shiftx;
-	float	is_shifty;
 	float	is_roty;
 	float	is_rotx;
 	float	is_rotz;
@@ -159,6 +157,8 @@ typedef struct	s_isrender
 	bool	is_render:1;
 	bool	is_center:1;
 	bool	is_frog:1;
+	int		is_shiftx:16;
+	int		is_shifty:16;
 	int		is_color;
 }				t_isrender;
 
@@ -205,5 +205,7 @@ void			fdf_free_file(string *file, int lines);
 bool			fdf_init_render_buff(t_env *env);
 void			fdf_refresh_buff_zoomnrot(t_env *env, t_isrender *isr);
 void			fdf_zooming(t_env *env);
+
+void			fdf_valid_zoom(t_env *env);
 
 #endif

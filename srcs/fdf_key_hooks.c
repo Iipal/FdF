@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 11:16:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 13:42:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	add_change_color(int *color)
 
 static void	add_hook_zoomnrot(int key, t_env *env)
 {
-	
 	if (key == PLUS_NUMPAD || key == PLUS_KEYBOARD)
 		env->zoom + ZOOM_INC <= ZOOM_MAX ? (env->zoom += ZOOM_INC) : false;
 	if (key == MINUS_NUMPAD || key == MINUS_KEYBOARD)
