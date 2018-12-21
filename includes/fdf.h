@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 17:22:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 17:46:19 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
 
 typedef struct	s_isrender
 {
-	uchar 	is_zoomed;
+	uchar	is_zoomed;
 	float	is_roty;
 	float	is_rotx;
 	float	is_rotz;

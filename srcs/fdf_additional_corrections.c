@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:10:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 17:33:20 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 17:45:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	fdf_valid_zoom(t_env *env)
 	point	pl;
 	float	shift_y;
 	float	shift_x;
-	
+
 	while (true)
 	{
 		shift_y = ((WIN_Y - ((float)env->my * env->zoom)) / 2);
