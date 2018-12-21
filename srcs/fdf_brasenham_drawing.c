@@ -6,13 +6,13 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:31 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 10:07:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 19:56:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, int *color)
+static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 {
 	point	p;
 	int		dir;
@@ -26,7 +26,7 @@ static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, int *color)
 		dir = delta.p1.y > 0 ? 1 : -1;
 	while (((delta.p1.x > 0) ? (p.x <= points.p2.x) : (p.x >= points.p2.x)))
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, *color);
+		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, gradient->start);
 		increase += delta.p2.y;
 		if (increase >= delta.p2.x)
 		{
@@ -37,7 +37,7 @@ static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, int *color)
 	}
 }
 
-static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, int *color)
+static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 {
 	point	p;
 	int		dir;
@@ -51,7 +51,7 @@ static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, int *color)
 		dir = (delta.p1.x > 0 ? 1 : -1);
 	while (((delta.p1.y > 0) ? (p.y <= points.p2.y) : (p.y >= points.p2.y)))
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, *color);
+		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, gradient->start);
 		increase += delta.p2.x;
 		if (increase >= delta.p2.y)
 		{
@@ -62,7 +62,7 @@ static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, int *color)
 	}
 }
 
-static void	add_bset_line(t_p dot1, t_p dot2, t_mlx mlx, int color)
+static void	add_bset_line(t_p dot1, t_p dot2, t_mlx mlx, t_g gradient)
 {
 	const int	deltax = dot2.x - dot1.x;
 	const int	deltay = dot2.y - dot1.y;
@@ -74,13 +74,27 @@ static void	add_bset_line(t_p dot1, t_p dot2, t_mlx mlx, int color)
 								.p1.y = deltay,
 								.p2.x = absdx,
 								.p2.y = absdy},
-					(t_dp){.p1 = dot1, .p2 = dot2}, &mlx, &color);
+					(t_dp){.p1 = dot1, .p2 = dot2}, &mlx, &gradient);
 	else
 		add_bdraw_yline((t_dp){.p1.x = deltax,
 								.p1.y = deltay,
 								.p2.x = absdx,
 								.p2.y = absdy},
-					(t_dp){.p1 = dot1, .p2 = dot2}, &mlx, &color);
+					(t_dp){.p1 = dot1, .p2 = dot2}, &mlx, &gradient);
+}
+
+static void	add_blast_lines(t_matrix **m, t_p mxy, t_mlx mlx, t_p p)
+{
+	if (p.x == mxy.x - 1 && p.y + 1 < mxy.y)
+		add_bset_line((t_p){.y = m[p.y][p.x].y, .x = m[p.y][p.x].x},
+			(t_p){.y = m[p.y + 1][p.x].y, .x = m[p.y + 1][p.x].x},
+						(t_mlx){.mlx = mlx.mlx, .win = mlx.win},
+		(t_g){.start = m[p.y][p.x].rgb, .end = m[p.y + 1][p.x].rgb});
+	if (p.y == mxy.y - 1 && p.x + 1 < mxy.x)
+		add_bset_line((t_p){.y = m[p.y][p.x].y, .x = m[p.y][p.x].x},
+			(t_p){.y = m[p.y][p.x + 1].y, .x = m[p.y][p.x + 1].x},
+						(t_mlx){.mlx = mlx.mlx, .win = mlx.win},
+		(t_g){.start = m[p.y][p.x].rgb, .end = m[p.y][p.x + 1].rgb});
 }
 
 void		fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx)
@@ -95,18 +109,13 @@ void		fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx)
 			{
 				add_bset_line((t_p){.y = m[p.y][p.x].y, .x = m[p.y][p.x].x},
 					(t_p){.y = m[p.y][p.x + 1].y, .x = m[p.y][p.x + 1].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[p.y][p.x].rgb);
+								(t_mlx){.mlx = mlx.mlx, .win = mlx.win},
+				(t_g){.start = m[p.y][p.x].rgb, .end = m[p.y][p.x + 1].rgb});
 				add_bset_line((t_p){.y = m[p.y][p.x].y, .x = m[p.y][p.x].x},
 					(t_p){.y = m[p.y + 1][p.x].y, .x = m[p.y + 1][p.x].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[p.y][p.x].rgb);
+								(t_mlx){.mlx = mlx.mlx, .win = mlx.win},
+				(t_g){.start = m[p.y][p.x].rgb, .end = m[p.y + 1][p.x].rgb});
 			}
-			else if (p.x == mxy.x - 1 && p.y + 1 < mxy.y)
-				add_bset_line((t_p){.y = m[p.y][p.x].y, .x = m[p.y][p.x].x},
-					(t_p){.y = m[p.y + 1][p.x].y, .x = m[p.y + 1][p.x].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[p.y][p.x].rgb);
-			else if (p.y == mxy.y - 1 && p.x + 1 < mxy.x)
-				add_bset_line((t_p){.y = m[p.y][p.x].y, .x = m[p.y][p.x].x},
-					(t_p){.y = m[p.y][p.x + 1].y, .x = m[p.y][p.x + 1].x},
-				(t_mlx){.mlx = mlx.mlx, .win = mlx.win}, m[p.y][p.x].rgb);
+			add_blast_lines(m, mxy, mlx, p);
 		}
 }

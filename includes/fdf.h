@@ -6,7 +6,7 @@
 /*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 17:46:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/21 19:52:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 
 # define ZOOM_INC		2
 # define ZOOM_MIN		3
-# define ZOOM_DEF		42
+# define ZOOM_DEF		20
 # define ZOOM_MAX		255
 
 /*
@@ -169,6 +169,13 @@ typedef struct	s_point
 	int	y:16;
 	int	x:16;
 }				t_p;
+
+typedef struct	s_gradient
+{
+	unsigned int	start;
+	unsigned int	end;
+}				t_g;
+
 
 # define _POINT typedef t_p	point
 
