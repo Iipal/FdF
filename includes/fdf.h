@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 23:49:56 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/23 18:45:00 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,15 +176,15 @@ _POINT;
 
 typedef struct	s_gradient
 {
-	unsigned int	start;
-	unsigned int	end;
+	int	start;
+	int	end;
 }				t_g;
 
 typedef struct	s_rgb
 {
-	uchar	r;
-	uchar	g;
-	uchar	b;
+	float	r;
+	float	g;
+	float	b;
 }				t_rgb;
 
 typedef struct	s_double_points
@@ -218,8 +218,8 @@ void			fdf_free_file(string *file, int lines);
 bool			fdf_init_render_buff(t_env *env);
 void			fdf_refresh_buff_zoomnrot(t_env *env, t_isrender *isr);
 void			fdf_zooming(t_env *env);
-int				*fdf_bdrawing_gradient(t_g gradient, int line_len);
-int				fdf_find_gradient_len(int delta, int point, int xy);
+int				*fdf_gradient(t_g *gradient, int line_len);
+int				fdf_glen(int delta, int point, int xy);
 void			fdf_valid_zoom(t_env *env);
 
 #endif

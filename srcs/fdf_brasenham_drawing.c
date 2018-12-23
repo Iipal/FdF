@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:31 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 23:58:32 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/22 12:10:50 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 
 	i = ZERO;
 	dir = ZERO;
-	p.y = points.p1.y;
-	p.x = points.p1.x;
 	increase = ZERO;
-	rgb = fdf_bdrawing_gradient(*gradient,
-		fdf_find_gradient_len(delta.p1.x, points.p2.x, p.x));
+	p = (t_p) {points.p1.y, points.p1.x};
+	rgb = fdf_gradient(gradient, fdf_glen(delta.p1.x, points.p2.x, p.x));
 	if (delta.p1.y)
 		dir = delta.p1.y > 0 ? 1 : -1;
 	while (((delta.p1.x > 0) ? (p.x <= points.p2.x) : (p.x >= points.p2.x)))
@@ -53,11 +51,9 @@ static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 
 	i = ZERO;
 	dir = ZERO;
-	p.y = points.p1.y;
-	p.x = points.p1.x;
 	increase = ZERO;
-	rgb = fdf_bdrawing_gradient(*gradient,
-		fdf_find_gradient_len(delta.p1.y, points.p2.y, p.y));
+	p = (t_p) {points.p1.y, points.p1.x};
+	rgb = fdf_gradient(gradient, fdf_glen(delta.p1.y, points.p2.y, p.y));
 	if (delta.p1.y)
 		dir = (delta.p1.x > 0 ? 1 : -1);
 	while (((delta.p1.y > 0) ? (p.y <= points.p2.y) : (p.y >= points.p2.y)))
