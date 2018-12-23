@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 22:12:29 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/23 23:30:35 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	add_change_color(int *color)
 		*color = IRGB_WHITE;
 }
 
-static void	add_hook_zoomnrot(int key, t_env *env)
+static void	add_hook_zoom_projectnrot(int key, t_env *env)
 {
 	if (key == PLUS_NUMPAD || key == PLUS_KEYBOARD)
 		env->zoom + ZOOM_INC <= ZOOM_MAX ? (env->zoom += ZOOM_INC) : false;
@@ -38,6 +38,9 @@ static void	add_hook_zoomnrot(int key, t_env *env)
 	key == KEY_H ? (env->roty -= ROT_INC) : ZERO;
 	key == KEY_U ? (env->rotz += ROT_INC) : ZERO;
 	key == KEY_J ? (env->rotz -= ROT_INC) : ZERO;
+	key == KEY_I ? (env->project = P_ISO) : ZERO;
+	key == KEY_O ? (env->project = P_RAW) : ZERO;
+	key == KEY_P ? (env->project = P_PER) : ZERO;
 }
 
 int			fdf_keys_hook(int key, t_env *env)
@@ -62,7 +65,7 @@ int			fdf_keys_hook(int key, t_env *env)
 	}
 	else
 		env->is_frog_render = false;
-	add_hook_zoomnrot(key, env);
+	add_hook_zoom_projectnrot(key, env);
 	fdf_rendering(env);
 	return (0);
 }

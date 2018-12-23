@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/23 18:45:00 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/23 23:27:49 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@
 
 # define NEG			-1
 # define ZERO			0
+
+# define P_ISO			1
+# define P_PER			2
+# define P_RAW			3
 
 # define HEX			16
 
@@ -141,7 +145,8 @@ typedef struct	s_fdf_environment
 	float		roty;
 	float		rotx;
 	float		rotz;
-	bool		is_frog_render;
+	bool		is_frog_render:1;
+	uchar		project;
 }				t_env;
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
@@ -149,11 +154,11 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
 typedef struct	s_isrender
 {
 	uchar	is_zoomed;
+	uchar	is_project;
 	float	is_roty;
 	float	is_rotx;
 	float	is_rotz;
 	bool	is_isr_init:1;
-	bool	is_isometric:1;
 	bool	is_render:1;
 	bool	is_center:1;
 	bool	is_frog:1;
@@ -216,10 +221,11 @@ void			fdf_free_matrix(t_matrix **m, int matrix_y);
 void			fdf_free_file(string *file, int lines);
 
 bool			fdf_init_render_buff(t_env *env);
-void			fdf_refresh_buff_zoomnrot(t_env *env, t_isrender *isr);
+void			fdf_refresh_buff(t_env *env, t_isrender *isr);
 void			fdf_zooming(t_env *env);
 int				*fdf_gradient(t_g *gradient, int line_len);
 int				fdf_glen(int delta, int point, int xy);
-void			fdf_valid_zoom(t_env *env);
+void			fdf_add_valid_zoom(t_env *env);
+void			fdf_add_print_usage(void);
 
 #endif

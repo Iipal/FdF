@@ -6,13 +6,13 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:10:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 22:12:42 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/23 22:48:56 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	fdf_valid_zoom(t_env *env)
+void	fdf_add_valid_zoom(t_env *env)
 {
 	point	pl;
 	float	shift_y;
@@ -28,4 +28,14 @@ void	fdf_valid_zoom(t_env *env)
 			return ;
 		--(env->zoom);
 	}
+}
+
+void	fdf_add_print_usage(void)
+{
+	_MSG("USAGE:");
+	_MSG("\t[W | A | S | D] or Arrows for moving.");
+	_MSG("\t[+] & [-] on [numpad | keyboard] for zooming.");
+	_MSG("\t[T | G] - x rotare\n\t[Y | H] - y rotare\n\t[U | J] - z rotare.");
+	_MSG("\t[ESC] - exit.");
+	_MSG("\t[C] - bonus.");
 }

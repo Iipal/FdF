@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_rendering_buff.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 19:51:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/23 23:29:29 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		fdf_zooming(t_env *env)
 			};
 }
 
-static void	fdf_refresh_buffnzoom(t_env *env, t_isrender *isr)
+static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 {
 	float	shift_y;
 	float	shift_x;
@@ -60,17 +60,20 @@ static void	fdf_refresh_buffnzoom(t_env *env, t_isrender *isr)
 	shift_y = ((WIN_Y - ((float)env->my * env->zoom)) / 2) + env->dy;
 	shift_x = ((WIN_X - ((float)env->mx * env->zoom)) / 2) + env->dx;
 	fdf_zooming(env);
-	fdf_isometric(env);
+	env->project == P_ISO ? fdf_isometric(env) : false;
+	env->project == P_RAW ? (env->project = P_RAW) : false;
+	env->project == P_PER ? (env->project = P_PER) : false;
 	fdf_ymove(env, shift_y);
 	fdf_xmove(env, shift_x);
 	isr->is_shifty = env->dy;
 	isr->is_shiftx = env->dx;
 	isr->is_zoomed = env->zoom;
+	isr->is_project = env->project;
 }
 
-void		fdf_refresh_buff_zoomnrot(t_env *env, t_isrender *isr)
+void		fdf_refresh_buff(t_env *env, t_isrender *isr)
 {
-	fdf_refresh_buffnzoom(env, isr);
+	fdf_refresh_zoom(env, isr);
 	fdf_xrotare(env, env->rotx);
 	fdf_yrotare(env, env->roty);
 	fdf_zrotare(env, env->rotz);
