@@ -22,17 +22,15 @@ When you have already installed MLX library you can use this simple rules:
 ./fdf test_maps/<map_name>
 ```
 
+- Move figure up, down, right & left. `[WASD or Arrows]`
+- Zooming it. `[+ or -]`
+- Rotate by XYZ axis. (X`[T | G]`, Y`[Y | H]`, Z`[U | J]`) 
+- Close FdF. `[ESC]`
+- Bonus. `[C]` (Working only if issue file `frog_bonus.fdf` in `test_maps/`: [frog.h](https://github.com/Iipal/FdF/blob/c2ae671c89be79027b7e69cf3475624b758d886e/includes/frog.h#L16))
+
 ### Something about maps for that project:
 
 - Numbers in one line means our X-positions on map.
 - Lines in file means our Y-positions on map.
 - Each numbers on map means our Z-positions on map.
 - `0xFFFFFF`: HEX color code for XYZ-position.
-
-### Program usage features:
-###### Info will be also printed when program start
-- Move figure up, down, right & left. `[WASD or Arrows]`
-- Zooming it. `[+ or -]`
-- Rotate by XYZ axis. (X`[T | G]`, Y`[Y | H]`, Z`[U | J]`) 
-- Close FdF. `[ESC]`
-- Bonus. `[C]` (Working only if issue file `frog_bonus.fdf` in `test_maps/`: [frog.h](https://github.com/Iipal/FdF/blob/c2ae671c89be79027b7e69cf3475624b758d886e/includes/frog.h#L16))
