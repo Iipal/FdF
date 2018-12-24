@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:07:19 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 10:51:20 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,9 @@
 # define ROT_INC		10.0
 # define ROT_MAX		360.0
 
-# define AXIS_X			'x'
-# define AXIS_Y			'y'
-# define AXIS_Z			'z'
-# define AXIS_ALL		'a'
-
 # define ZOOM_INC		2
 # define ZOOM_MIN		3
-# define ZOOM_DEF		20
+# define ZOOM_DEF		15
 # define ZOOM_MAX		255
 
 /*
@@ -103,15 +98,6 @@ _ITAB;
 **	Bonus part:
 **	\____ 5 Colors constantes for changing grid default color.
 */
-
-# define IRGB_GRAY		3355443
-# define IRGB_WHITE		16777215
-# define IRGB_LIME		8388352
-# define IRGB_CHERRY	15865942
-# define IRGB_AQUA		7273983
-# define IRGB_PINK		13704642
-# define IRGB_ORANGE	16758835
-# define IRGB_PURPLE	3356415
 
 /*
 **	Main struct's definitions and functions prototypes
@@ -223,7 +209,6 @@ void			fdf_zrotare(t_env *env, int inc);
 void			fdf_free_env(t_env *env);
 void			fdf_free_matrix(t_matrix **m, int matrix_y);
 void			fdf_free_file(string *file, int lines);
-
 bool			fdf_init_render_buff(t_env *env);
 void			fdf_refresh_buff(t_env *env, t_isrender *isr);
 void			fdf_zooming(t_env *env);
