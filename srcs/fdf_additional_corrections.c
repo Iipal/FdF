@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:10:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/23 23:34:31 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 22:27:43 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	fdf_add_print_usage(void)
 	_MSG("USAGE:");
 	_MSG("\t[W | A | S | D] or Arrows for moving.");
 	_MSG("\t[+] & [-] on [numpad | keyboard] for zooming.");
-	_MSG("\t[T | G] - x rotare\n\t[Y | H] - y rotare\n\t[U | J] - z rotare.");
+	_MSG("\t[T | G] - x rotate\n\t[Y | H] - y rotate\n\t[U | J] - z rotate.");
 	_MSG("\t[I | O | P] - projections switch.");
 	_MSG("\t\t[I] - Isometric.");
 	_MSG("\t\t[O] - Original(RAW), without any projections.");
