@@ -35,4 +35,4 @@ When you have already installed MLX library you can use this simple rules:
 - Zooming it. `[+ or -]`
 - Rotate by XYZ axis. (X`[T | G]`, Y`[Y | H]`, Z`[U | J]`) 
 - Close FdF. `[ESC]`
-- Bonus. `[C]` (Working only if issue file `frog_bonus.fdf` in `test_maps/`)
+- Bonus. `[C]` (Working only if issue file `frog_bonus.fdf` in `test_maps/`: [frog.h](https://github.com/Iipal/FdF/blob/c2ae671c89be79027b7e69cf3475624b758d886e/includes/frog.h#L16))
