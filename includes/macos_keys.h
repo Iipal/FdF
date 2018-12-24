@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macos_keys.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 10:05:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/24 10:57:22 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define KEY_H			4
 # define KEY_U			32
 # define KEY_J			38
+
+# define KEY_I			34
+# define KEY_O			31
+# define KEY_P			35
 
 # define ARROW_UP		126
 # define ARROW_DOWN		125

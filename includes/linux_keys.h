@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:50 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:39:05 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 10:56:07 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 # define KEY_I			105
 # define KEY_O			111
 # define KEY_P			112
-
-# define KEY_L			108
 
 # define ARROW_UP		65362
 # define ARROW_DOWN		65364
