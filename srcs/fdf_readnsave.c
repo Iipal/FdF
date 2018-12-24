@@ -6,11 +6,12 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/20 23:19:14 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 10:28:38 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/frog.h"
 
 /*
 **	The 'fdf_file_readnsave_env' function is at the bottom.

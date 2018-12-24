@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/23 23:31:07 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 10:49:10 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,14 @@ static void	add_init_centralize(t_env *env)
 
 static void	add_is_render_init(t_isrender *isr, t_env *env)
 {
-	if (!isr->is_isr_init)
-	{
-		fdf_add_print_usage();
-		isr->is_roty = env->roty;
-		isr->is_rotx = env->rotx;
-		isr->is_rotz = env->rotz;
-		isr->is_shiftx = env->dx;
-		isr->is_shifty = env->dy;
-		isr->is_isr_init = true;
-		isr->is_project = P_RAW;
-	}
+	fdf_add_print_usage();
+	isr->is_roty = env->roty;
+	isr->is_rotx = env->rotx;
+	isr->is_rotz = env->rotz;
+	isr->is_shiftx = env->dx;
+	isr->is_shifty = env->dy;
+	isr->is_isr_init = true;
+	isr->is_project = P_RAW;
 }
 
 static void	add_is_render_rot(t_isrender *isr, t_env *env)

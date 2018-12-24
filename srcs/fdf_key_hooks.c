@@ -6,11 +6,12 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:12:00 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 10:49:25 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/frog.h"
 
 static void	add_change_color(int *color)
 {
