@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:28:38 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 18:16:40 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,11 @@ static int		add_numbers_inline(string line)
 			ft_strdel(&temp_digits);
 			(line[digits] != '\0') ? (line += digits) : (line += --digits);
 			if (*line == ',')
+			{
+				_NOTIS_F(ft_strnstr(line, ",0x", 3));
 				while (*line && !ft_isblank(*line))
 					++line;
+			}
 			++out;
 		}
 		*line ? ++line : 0;
@@ -85,28 +88,31 @@ static bool		add_line_tomatrix(string line, t_matrix *matrix,
 	return (true);
 }
 
-static t_matrix	**add_save_tomatrix(strtab file, int matrix_y, int *matrix_x)
+static bool		add_save_tomatrix(strtab file, t_env *env)
 {
-	t_matrix	**m;
 	int			y;
+	int			line_len;
 
 	y = NEG;
-	_NOTIS_N(m = (t_matrix**)malloc(sizeof(t_matrix*) * matrix_y));
-	_NOTIS_N(*matrix_x = add_numbers_inline(*file));
-	while (++y < matrix_y)
+	line_len = ZERO;
+	_NOTIS_F(env->raw = (t_matrix**)malloc(sizeof(t_matrix*) * env->my));
+	_NOTIS_F(env->mx = add_numbers_inline(*file));
+	while (++y < env->my)
 	{
-		_NOTIS_N(m[y] = (t_matrix*)malloc(sizeof(t_matrix) * *matrix_x));
-		if (add_numbers_inline(file[y]) != *matrix_x)
+		_NOTIS_F(env->raw[y] = (t_matrix*)malloc(sizeof(t_matrix) * env->mx));
+		line_len = add_numbers_inline(file[y]);
+		if (line_len != env->mx || !line_len)
 		{
-			ft_putstr("Invalid map | ");
-			fdf_free_file(file, matrix_y);
-			fdf_free_matrix(m, y + 1);
-			return (NULL);
+			ft_putstr("Invalid map \\ ");
+			fdf_free_file(&file, env->my);
+			fdf_free_matrix(&(env->raw), y + 1);
+			fdf_free_env(&env);
+			return (false);
 		}
-		_NOTIS_N(add_line_tomatrix(file[y], m[y], *matrix_x, y));
+		_NOTIS_F(add_line_tomatrix(file[y], env->raw[y], env->mx, y));
 	}
-	fdf_free_file(file, matrix_y);
-	return (m);
+	fdf_free_file(&file, env->my);
+	return (true);
 }
 
 static bool		add_valid_temp_line(string line, strtab file, int lines)
@@ -115,7 +121,7 @@ static bool		add_valid_temp_line(string line, strtab file, int lines)
 		|| (!ft_isdigit(*line) && !ft_isblank(*line))))
 	{
 		ft_strdel(&line);
-		fdf_free_file(file, lines);
+		fdf_free_file(&file, lines);
 		return (false);
 	}
 	return (true);
@@ -142,6 +148,6 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
 		file[i++] = ft_strdup(gnl_temp);
 		ft_strdel(&gnl_temp);
 	}
-	_NOTIS_F(env->raw = add_save_tomatrix(file, env->my, &(env->mx)));
+	_NOTIS_F(add_save_tomatrix(file, env));
 	return (true);
 }

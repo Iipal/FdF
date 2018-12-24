@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/23 23:29:29 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 19:23:44 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ bool		fdf_init_render_buff(t_env *env)
 	while (++(p.y) < env->my && (p.x = NEG))
 		if (!(env->render[p.y] = (t_matrix*)malloc(sizeof(t_matrix) * env->mx)))
 		{
-			fdf_free_matrix(env->render, p.y);
+			fdf_free_matrix(&(env->render), p.y);
+			fdf_free_env(&env);
 			return (false);
 		}
 		else
@@ -56,9 +57,9 @@ static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 {
 	float	shift_y;
 	float	shift_x;
-
-	shift_y = ((WIN_Y - ((float)env->my * env->zoom)) / 2) + env->dy;
-	shift_x = ((WIN_X - ((float)env->mx * env->zoom)) / 2) + env->dx;
+	
+	shift_y = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2.0) + env->dy;
+	shift_x = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2.0) + env->dx;
 	fdf_zooming(env);
 	env->project == P_ISO ? fdf_isometric(env) : false;
 	env->project == P_RAW ? (env->project = P_RAW) : false;

@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:49:25 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 18:14:04 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			fdf_keys_hook(int key, t_env *env)
 {
 	if (key == ESC)
 	{
-		fdf_free_env(env);
+		fdf_free_env(&env);
 		exit(EXIT_SUCCESS);
 	}
 	if (key == KEY_D || key == ARROW_RIGHT)

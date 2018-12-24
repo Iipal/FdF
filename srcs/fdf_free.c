@@ -6,52 +6,53 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 18:10:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:28:45 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 18:51:04 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include "../includes/frog.h"
 
-void		fdf_free_file(string *file, int lines)
+void		fdf_free_file(strtab *file, int lines)
 {
 	int	i;
 
 	i = NEG;
 	while (++i < lines)
-		ft_strdel(&(file[i]));
-	free(file);
-	file = NULL;
+		free((*file)[i]);
+	free(*file);
+	*file = NULL;
 }
 
-static void	add_free_frog(int **frog)
+static void	add_free_frog(itab *frog)
 {
 	int	y;
 
 	y = ZERO;
 	while (y < FHEIGHT)
-		free(frog[y++]);
-	free(frog);
-	frog = NULL;
+		free((*frog)[y++]);
+	free(*frog);
+	*frog = NULL;
 }
 
-void		fdf_free_matrix(t_matrix **m, int matrix_y)
+void		fdf_free_matrix(t_matrix ***m, int matrix_y)
 {
 	int	y;
 
 	y = NEG;
 	while (++y < matrix_y)
-		free(m[y]);
-	free(m);
-	m = NULL;
+		free((*m)[y]);
+	free(*m);
+	*m = NULL;
 }
 
-void		fdf_free_env(t_env *env)
+void		fdf_free_env(t_env **env)
 {
-	env->render ? fdf_free_matrix(env->render, env->my) : NULL;
-	env->raw ? fdf_free_matrix(env->raw, env->my) : NULL;
-	env->frog ? add_free_frog(env->frog) : NULL;
-	mlx_destroy_window(env->mlx, env->win);
-	free(env);
-	env = NULL;
+	(*env)->render ? fdf_free_matrix(&((*env)->render), (*env)->my) : NULL;
+	(*env)->raw ? fdf_free_matrix(&((*env)->raw), (*env)->my) : NULL;
+	(*env)->frog ? add_free_frog(&(*env)->frog) : NULL;
+	// (*env)->img ? mlx_destroy_image((*env)->mlx, (*env)->img) : ZERO;
+	mlx_destroy_window((*env)->mlx, (*env)->win);
+	free(*env);
+	*env = NULL;
 }

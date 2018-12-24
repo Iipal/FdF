@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:51:20 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 18:12:23 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ typedef struct	s_mlx
 {
 	pvoid	mlx;
 	pvoid	win;
+	pvoid	img;
 }				t_mlx;
 
 void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
@@ -206,9 +207,9 @@ void			fdf_xrotare(t_env *env, int inc);
 void			fdf_yrotare(t_env *env, int inc);
 void			fdf_zrotare(t_env *env, int inc);
 
-void			fdf_free_env(t_env *env);
-void			fdf_free_matrix(t_matrix **m, int matrix_y);
-void			fdf_free_file(string *file, int lines);
+void			fdf_free_env(t_env **env);
+void			fdf_free_matrix(t_matrix ***m, int matrix_y);
+void			fdf_free_file(strtab *file, int lines);
 bool			fdf_init_render_buff(t_env *env);
 void			fdf_refresh_buff(t_env *env, t_isrender *isr);
 void			fdf_zooming(t_env *env);

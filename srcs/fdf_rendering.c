@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:49:10 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 18:13:47 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	add_init_centralize(t_env *env)
 	float	shift_x;
 
 	p.y = NEG;
-	shift_y = ((WIN_Y - ((float)env->my * env->zoom)) / 2);
-	shift_x = ((WIN_X - ((float)env->mx * env->zoom)) / 2);
+	shift_y = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2);
+	shift_x = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2);
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
 		{
@@ -79,6 +79,7 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 		fdf_refresh_buff(env, isr);
 	if (isr->is_project != env->project && (isr->is_render = true))
 	{
+		isr->is_project = env->project;
 		env->project == P_ISO ? fdf_refresh_buff(env, isr) : false;
 		env->project == P_PER ? fdf_refresh_buff(env, isr) : false;
 		env->project == P_RAW ? fdf_refresh_buff(env, isr) : false;
@@ -107,7 +108,7 @@ void		fdf_rendering(t_env *env)
 	if (!env->render)
 		if (!fdf_init_render_buff(env))
 		{
-			fdf_free_env(env);
+			fdf_free_env(&env);
 			exit(EXIT_SUCCESS);
 		}
 	if (!isr.is_isr_init)
@@ -118,8 +119,9 @@ void		fdf_rendering(t_env *env)
 	if (isr.is_render)
 	{
 		mlx_clear_window(env->mlx, env->win);
-		fdf_bdrawing(env->render, (t_p){.y = env->my, .x = env->mx},
-					(t_mlx){.mlx = env->mlx, .win = env->win});
+		fdf_bdrawing(env->render, (t_p){env->my, env->mx},
+					(t_mlx){env->mlx, env->win, env->img});
+		// mlx_put_image_to_window(env->mlx, env->win, env->img, ZERO, ZERO);
 		if (env->is_frog_render)
 			fdf_print_fucking_frog(env);
 	}
