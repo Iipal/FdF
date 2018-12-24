@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/23 23:27:49 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 10:07:19 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,9 @@ _ITAB;
 # define IRGB_LIME		8388352
 # define IRGB_CHERRY	15865942
 # define IRGB_AQUA		7273983
+# define IRGB_PINK		13704642
+# define IRGB_ORANGE	16758835
+# define IRGB_PURPLE	3356415
 
 /*
 **	Main struct's definitions and functions prototypes
@@ -135,6 +138,7 @@ typedef struct	s_fdf_environment
 	t_matrix	**render;
 	pvoid		mlx;
 	pvoid		win;
+	pvoid		img;
 	itab		frog;
 	uchar		zoom;
 	int			color;
@@ -146,7 +150,7 @@ typedef struct	s_fdf_environment
 	float		rotx;
 	float		rotz;
 	bool		is_frog_render:1;
-	uchar		project;
+	uchar		project:8;
 }				t_env;
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env);

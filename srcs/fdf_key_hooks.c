@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/23 23:30:35 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/24 10:12:00 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ static void	add_change_color(int *color)
 	else if (*color == IRGB_CHERRY)
 		*color = IRGB_AQUA;
 	else if (*color == IRGB_AQUA)
+		*color = IRGB_PINK;
+	else if (*color == IRGB_PINK)
+		*color = IRGB_ORANGE;
+	else if (*color == IRGB_ORANGE)
+		*color = IRGB_PURPLE;
+	else if (*color == IRGB_PURPLE)
 		*color = IRGB_GRAY;
 	else
 		*color = IRGB_WHITE;
