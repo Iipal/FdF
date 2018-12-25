@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 18:12:23 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/25 12:08:37 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # define SHIFT_INC		15
 
 # define ROT_MIN		0.0
-# define ROT_INC		10.0
+# define ROT_INC		5.0
 # define ROT_MAX		360.0
 
 # define ZOOM_INC		2
@@ -139,8 +139,6 @@ typedef struct	s_fdf_environment
 	uchar		project:8;
 }				t_env;
 
-bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
-
 typedef struct	s_isrender
 {
 	uchar	is_zoomed;
@@ -149,6 +147,7 @@ typedef struct	s_isrender
 	float	is_rotx;
 	float	is_rotz;
 	bool	is_isr_init:1;
+	bool	is_perspective:1;
 	bool	is_render:1;
 	bool	is_center:1;
 	bool	is_frog:1;
@@ -156,8 +155,6 @@ typedef struct	s_isrender
 	int		is_shifty:16;
 	int		is_color;
 }				t_isrender;
-
-void			fdf_rendering(t_env *env);
 
 typedef struct	s_point
 {
@@ -195,27 +192,35 @@ typedef struct	s_mlx
 	pvoid	img;
 }				t_mlx;
 
-void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
+bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
+void			fdf_rendering(t_env *env);
+
+bool			fdf_init_render_buff(t_env *env);
+void			fdf_refresh_buff(t_env *env, t_isrender *isr);
+
 void			fdf_isometric(t_env *env);
+void			fdf_perspective(t_env *env);
+
+void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
+void			fdf_zooming(t_env *env);
+int				*fdf_gradient(t_g *gradient, int line_len);
+int				fdf_glen(int delta, int point, int xy);
 
 int				fdf_keys_hook(int key, t_env *env);
 
-void			fdf_xmove(t_env *env, int inc);
-void			fdf_ymove(t_env *env, int inc);
+void			fdf_xmove(t_env *env, float inc);
+void			fdf_ymove(t_env *env, float inc);
 
 void			fdf_xrotare(t_env *env, int inc);
 void			fdf_yrotare(t_env *env, int inc);
 void			fdf_zrotare(t_env *env, int inc);
 
+void			fdf_add_valid_zoom(t_env *env);
+void			fdf_add_print_usage(void);
+bool			fdf_add_check_valid_perspective(t_env *env);
+
 void			fdf_free_env(t_env **env);
 void			fdf_free_matrix(t_matrix ***m, int matrix_y);
 void			fdf_free_file(strtab *file, int lines);
-bool			fdf_init_render_buff(t_env *env);
-void			fdf_refresh_buff(t_env *env, t_isrender *isr);
-void			fdf_zooming(t_env *env);
-int				*fdf_gradient(t_g *gradient, int line_len);
-int				fdf_glen(int delta, int point, int xy);
-void			fdf_add_valid_zoom(t_env *env);
-void			fdf_add_print_usage(void);
 
 #endif
