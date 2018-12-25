@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 18:13:47 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/25 11:09:33 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	add_init_centralize(t_env *env)
 static void	add_is_render_init(t_isrender *isr, t_env *env)
 {
 	fdf_add_print_usage();
+	if (fdf_add_check_valid_perspective(env))
+		isr->is_perspective = true;
 	isr->is_roty = env->roty;
 	isr->is_rotx = env->rotx;
 	isr->is_rotz = env->rotz;

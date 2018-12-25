@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 19:23:44 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/25 11:10:39 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,18 @@ static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 	shift_y = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2.0) + env->dy;
 	shift_x = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2.0) + env->dx;
 	fdf_zooming(env);
+	if (env->project == P_PER)
+	{
+		if (isr->is_perspective)
+			fdf_perspective(env);
+		else
+		{
+			_MSG("\tERROR: Perspective didn't work with negative values of Z.");
+			env->project = P_RAW;
+		}
+	}
 	env->project == P_ISO ? fdf_isometric(env) : false;
 	env->project == P_RAW ? (env->project = P_RAW) : false;
-	env->project == P_PER ? (env->project = P_PER) : false;
 	fdf_ymove(env, shift_y);
 	fdf_xmove(env, shift_x);
 	isr->is_shifty = env->dy;
