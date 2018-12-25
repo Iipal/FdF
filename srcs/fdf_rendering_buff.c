@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/25 14:11:31 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/25 20:51:34 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void		fdf_zooming(t_env *env)
 			};
 }
 
-static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
+static void	fdf_refresh_zoom(t_env *env, t_isrender *isr, bool is_move)
 {
-	float	shift_y;
+/*	float	shift_y;
 	float	shift_x;
 	
-	shift_y = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2.0) + env->dy;
-	shift_x = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2.0) + env->dx;
+*/	env->sy = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2.0) + env->dy;
+	env->sx = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2.0) + env->dx;
 	fdf_zooming(env);
 	if (env->project == P_PER)
 	{
@@ -73,8 +73,8 @@ static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 	}
 	env->project == P_ISO ? fdf_isometric(env) : false;
 	env->project == P_RAW ? (env->project = P_RAW) : false;
-	fdf_ymove(env, shift_y);
-	fdf_xmove(env, shift_x);
+	is_move ? fdf_ymove(env, env->sy) : false;
+	is_move ? fdf_xmove(env, env->sx) : false;
 	isr->is_shifty = env->dy;
 	isr->is_shiftx = env->dx;
 	isr->is_zoomed = env->zoom;
@@ -83,10 +83,19 @@ static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 
 void		fdf_refresh_buff(t_env *env, t_isrender *isr)
 {
-	fdf_refresh_zoom(env, isr);
+	bool	is_move;
+
+	if (isr->is_roty != env->roty || isr->is_rotx != env->rotx
+	|| isr->is_rotz != env->rotz)
+		is_move = false;
+	else
+		is_move = true;
+	fdf_refresh_zoom(env, isr, is_move);
 	fdf_xrotare(env, env->rotx);
 	fdf_yrotare(env, env->roty);
 	fdf_zrotare(env, env->rotz);
+	!is_move ? fdf_xmove(env, env->sx + env->mx / 2) : false;
+	!is_move ? fdf_ymove(env, env->sy + env->my / 2) : false;
 	isr->is_roty = env->roty;
 	isr->is_rotx = env->rotx;
 	isr->is_rotz = env->rotz;

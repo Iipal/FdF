@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/25 14:21:44 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/25 20:45:49 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ typedef struct	s_fdf_environment
 	int			mx;
 	int			dy:16;
 	int			dx:16;
+	float		sy;
+	float		sx;
 	float		roty;
 	float		rotx;
 	float		rotz;
