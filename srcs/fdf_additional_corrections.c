@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:10:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 22:27:43 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/25 10:56:48 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ void	fdf_add_valid_zoom(t_env *env)
 			return ;
 		--(env->zoom);
 	}
+}
+bool	fdf_add_check_valid_perspective(t_env *env)
+{
+	point	p;
+
+	p.y = NEG;
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+			if (env->raw[p.y][p.x].z < ZERO)
+				return (false);
+	return (true);
 }
 
 void	fdf_add_print_usage(void)
