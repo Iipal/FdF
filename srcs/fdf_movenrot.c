@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_movenrot.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <tmaluh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/21 09:45:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/25 12:37:54 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	fdf_xmove(t_env *env, int inc)
+void	fdf_xmove(t_env *env, float inc)
 {
 	point	p;
 
@@ -23,7 +23,7 @@ void	fdf_xmove(t_env *env, int inc)
 						: (env->render[p.y][p.x].x += inc);
 }
 
-void	fdf_ymove(t_env *env, int inc)
+void	fdf_ymove(t_env *env, float inc)
 {
 	point	p;
 
