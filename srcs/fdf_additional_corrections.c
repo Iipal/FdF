@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:10:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/25 10:56:48 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/25 14:02:58 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ bool	fdf_add_check_valid_perspective(t_env *env)
 
 void	fdf_add_print_usage(void)
 {
-	_MSG("USAGE:");
-	_MSG("\t[W | A | S | D] or Arrows for moving.");
-	_MSG("\t[+] & [-] on [numpad | keyboard] for zooming.");
-	_MSG("\t[T | G] - x rotate\n\t[Y | H] - y rotate\n\t[U | J] - z rotate.");
-	_MSG("\t[I | O | P] - projections switch.");
-	_MSG("\t\t[I] - Isometric.");
-	_MSG("\t\t[O] - Original(RAW), without any projections.");
-	_MSG("\t\t[P] - Perspective.");
-	_MSG("\t[ESC] - exit.");
-	_MSG("\t[C] - bonus.");
+	_MSGN("USAGE:");
+	_MSGN("\t[W | A | S | D] or Arrows for moving.");
+	_MSGN("\t[+] & [-] on [numpad | keyboard] for zooming.");
+	_MSGN("\t[T | G] - x rotate\n\t[Y | H] - y rotate\n\t[U | J] - z rotate.");
+	_MSGN("\t[I | O | P] - projections switch.");
+	_MSGN("\t\t[I] - Isometric.");
+	_MSGN("\t\t[O] - Original(RAW), without any projections.");
+	_MSGN("\t\t[P] - Perspective.");
+	_MSGN("\t[ESC] - exit.");
+	_MSGN("\t[C] - bonus.");
 }

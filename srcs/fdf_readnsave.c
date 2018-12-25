@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 18:16:40 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/25 14:20:57 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ static int		add_numbers_inline(string line)
 	out = ZERO;
 	while (*line)
 	{
-		if (ft_isdigit(*line) || *line == '-')
+		if (ft_isdigit(*line) || *line == V_NEGS)
 		{
 			temp_digits = ft_itoa(ft_atoi(line));
 			digits = ft_strlen(temp_digits);
 			ft_strdel(&temp_digits);
 			(line[digits] != '\0') ? (line += digits) : (line += --digits);
-			if (*line == ',')
+			if (*line == V_HEXS)
 			{
-				_NOTIS_F(ft_strnstr(line, ",0x", 3));
+				_NOTIS_F(ft_strnstr(line, V_HEX, 3));
 				while (*line && !ft_isblank(*line))
 					++line;
 			}
@@ -68,17 +68,16 @@ static bool		add_line_tomatrix(string line, t_matrix *matrix,
 	x = NEG;
 	while (*line && x < matrix_x)
 	{
-		if ((ft_isdigit(*line) || *line == '-') && (++x > -1))
+		if ((ft_isdigit(*line) || *line == V_NEGS) && (++x > -1))
 		{
 			matrix[x] = (t_matrix){y, x, ft_atoi(line), IRGB_WHITE};
 			temp_digits = ft_itoa(matrix[x].z);
 			digits = ft_strlen(temp_digits);
 			ft_strdel(&temp_digits);
 			(line[digits] != '\0') ? (line += digits) : (line += --digits);
-			if (*line == ',')
+			if (*line == V_HEXS)
 			{
-				_NOTIS_MSG("Invalid HEX code or you put black color.",
-					matrix[x].rgb = ft_atoi_base(line + 3, HEX));
+				_NOTIS_MSG(E_HEX, matrix[x].rgb = ft_atoi_base(line + 3, HEX));
 				while (*line && !ft_isblank(*line))
 					++line;
 			}
@@ -103,7 +102,7 @@ static bool		add_save_tomatrix(strtab file, t_env *env)
 		line_len = add_numbers_inline(file[y]);
 		if (line_len != env->mx || !line_len)
 		{
-			ft_putstr("Invalid map \\ ");
+			ft_putstr(E_IMAP);
 			fdf_free_file(&file, env->my);
 			fdf_free_matrix(&(env->raw), y + 1);
 			fdf_free_env(&env);
@@ -138,7 +137,7 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
 	while (ft_gnl(fd, &gnl_temp) > ZERO && ++(env->my))
 		ft_strdel(&gnl_temp);
 	close(fd);
-	_NOTIS_MSG("Empty map.", env->my);
+	_NOTIS_MSG(E_IMAP, env->my);
 	_NOTIS_F(file = (strtab)malloc(sizeof(string) * env->my));
 	_NOTIS_F(fd = open(file_name, O_RDONLY));
 	i = ZERO;

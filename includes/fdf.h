@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/25 12:08:37 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/25 14:21:44 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 **		'NEG', 'ZERO' & 'HEX' is just simple values.
 */
 
-# define WIN_X			1000
-# define WIN_Y			500
+# define WIN_X			1280
+# define WIN_Y			640
 
 # define PI				3.141592
 
@@ -64,13 +64,28 @@
 # define ZOOM_DEF		15
 # define ZOOM_MAX		255
 
+# define E_USAGE	"Usage: ./fdf <map_name>"
+# define E_ALLOC	"Where is memory, pal ?"
+# define E_FILER	"File reading error"
+
+# define E_IPER	"\tWarning: Perspective doesn't work with < 0 values Z."
+# define E_EMAP	"\tERROR: Empty map \\"
+# define E_IMAP	"\tERROR: Invalid map \\"
+# define E_HEX	"\tERROR: Invalid HEX code or you put black color \\"
+
+# define V_HEX	",0x"
+# define V_HEXS	','
+# define V_NEGS	'-'
+
 /*
 **	Macroses:
 **	\____ Info include in README.md
 */
 
-# define _MSG(msg) ft_putendl(msg);
+# define _MSG(msg) ft_putstr(msg);
+# define _MSGN(msg) ft_putendl(msg);
 # define _NOTIS_MSG(msg, ex) if (!(ex)) { _MSG(msg); return (false); }
+# define _NOTIS_MSGN(msg, ex) if (!(ex)) { _MSGN(msg); return (false); }
 # define _NOTIS_MPE(msg, ex) if (!(ex)) { perror(msg); return (false); }
 # define _NOTIS_N(ex) if (!(ex)) return (NULL)
 # define _NOTIS_F(ex) if (!(ex)) return (false)

@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/25 11:10:39 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/25 14:11:31 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 			fdf_perspective(env);
 		else
 		{
-			_MSG("\tERROR: Perspective didn't work with negative values of Z.");
+			_MSG(E_IPER);
 			env->project = P_RAW;
 		}
 	}
