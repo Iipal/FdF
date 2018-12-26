@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/25 14:13:00 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/26 22:58:16 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static bool	add_save_to_frog(int *frog, string line)
 		if (ft_isdigit(*line))
 		{
 			frog[x] = IRGB_WHITE;
-			if (*(++line) == V_NEGS)
+			if (*(++line) == V_HEXS)
 				_NOTIS_F(frog[x] = ft_atoi_base(line + 3, HEX));
 			while (*line && !ft_isblank(*line))
 				++line;
