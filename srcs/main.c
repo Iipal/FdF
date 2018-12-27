@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/25 20:46:21 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/27 15:44:27 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int				main(int argc, char const *argv[])
 	_NOTIS_MPE(E_ALLOC, env = add_alloc_env((string)*argv));
 	_NOTIS_MPE(E_FILER, fdf_file_readnsave_env(*argv, env));
 	fdf_rendering(env);
-	mlx_hook(env->win, KEY_PRESS, KEY_MASK, fdf_keys_hook, env);
+	mlx_hook(env->win, KEY_PRESS, KEY_RELEASE, fdf_keys_hook, env);
 	env ? mlx_loop(env->mlx) : false;
 }

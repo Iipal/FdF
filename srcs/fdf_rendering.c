@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/25 11:09:33 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/27 15:48:23 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,15 @@
 static void	add_init_centralize(t_env *env)
 {
 	point	p;
-	float	shift_y;
-	float	shift_x;
 
 	p.y = NEG;
-	shift_y = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2);
-	shift_x = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2);
+	env->sy = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2);
+	env->sx = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2);
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
 		{
-			env->render[p.y][p.x].y += shift_y;
-			env->render[p.y][p.x].x += shift_x;
+			env->render[p.y][p.x].y += env->sy;
+			env->render[p.y][p.x].x += env->sx;
 		}
 }
 
@@ -123,6 +121,8 @@ void		fdf_rendering(t_env *env)
 		mlx_clear_window(env->mlx, env->win);
 		fdf_bdrawing(env->render, (t_p){env->my, env->mx},
 					(t_mlx){env->mlx, env->win, env->img});
+		printf("%d - %d | %d - %d\n", env->render[0][0].y, env->render[0][0].x,
+			env->render[1][0].y, env->render[1][0].x);
 		// mlx_put_image_to_window(env->mlx, env->win, env->img, ZERO, ZERO);
 		if (env->is_frog_render)
 			fdf_print_fucking_frog(env);

@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:57:22 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/26 23:58:38 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define MACOS_KEYS_H
 
 # define KEY_PRESS		2
-# define KEY_MASK		2
+# define KEY_RELEASE	2
+# define MOUSE_PRESS	5
+# define MOUSE_RELEASE	6
+
 
 # define ESC			53
 

@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:50 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:56:07 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/27 15:44:22 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LINUX_KEYS_H
 
 # define KEY_PRESS		2
-# define KEY_MASK		5
+# define KEY_RELEASE	3
 
 # define ESC			65307
 

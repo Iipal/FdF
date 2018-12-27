@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 18:14:04 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/27 16:12:16 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	add_hook_zoom_projectnrot(int key, t_env *env)
 	key == KEY_H ? (env->roty -= ROT_INC) : ZERO;
 	key == KEY_U ? (env->rotz += ROT_INC) : ZERO;
 	key == KEY_J ? (env->rotz -= ROT_INC) : ZERO;
-	key == KEY_I ? (env->project = P_ISO) : ZERO;
-	key == KEY_O ? (env->project = P_RAW) : ZERO;
-	key == KEY_P ? (env->project = P_PER) : ZERO;
+	key == KEY_I && (env->project = P_ISO);
+	key == KEY_O && (env->project = P_RAW);
+	key == KEY_P && (env->project = P_PER);
 }
 
 int			fdf_keys_hook(int key, t_env *env)

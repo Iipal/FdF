@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/25 20:45:49 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/27 15:44:54 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # define SHIFT_INC		15
 
 # define ROT_MIN		0.0
-# define ROT_INC		5.0
+# define ROT_INC		10.0
 # define ROT_MAX		360.0
 
 # define ZOOM_INC		2
@@ -127,10 +127,10 @@ _ITAB;
 
 typedef struct	s_matrix
 {
-	int	y:16;
-	int	x:16;
-	int	z;
-	int	rgb;
+	short	y;
+	short	x;
+	int		z;
+	int		rgb;
 }				t_matrix;
 
 typedef struct	s_fdf_environment
@@ -145,8 +145,8 @@ typedef struct	s_fdf_environment
 	int			color;
 	int			my;
 	int			mx;
-	int			dy:16;
-	int			dx:16;
+	short		dy;
+	short		dx;
 	float		sy;
 	float		sx;
 	float		roty;
@@ -158,25 +158,25 @@ typedef struct	s_fdf_environment
 
 typedef struct	s_isrender
 {
-	uchar	is_zoomed;
-	uchar	is_project;
+	int		is_color;
 	float	is_roty;
 	float	is_rotx;
 	float	is_rotz;
+	uchar	is_zoomed;
+	uchar	is_project;
+	short	is_shifty;
+	short	is_shiftx;
 	bool	is_isr_init:1;
 	bool	is_perspective:1;
 	bool	is_render:1;
 	bool	is_center:1;
 	bool	is_frog:1;
-	int		is_shiftx:16;
-	int		is_shifty:16;
-	int		is_color;
 }				t_isrender;
 
 typedef struct	s_point
 {
-	int	y:16;
-	int	x:16;
+	short	y;
+	short	x;
 }				t_p;
 
 # define _POINT typedef t_p	point
