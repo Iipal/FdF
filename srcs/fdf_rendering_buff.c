@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_rendering_buff.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/27 16:01:21 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/28 23:54:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void		fdf_zooming(t_env *env)
 
 static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 {
+	fdf_zooming(env);
 	env->sy = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2.0) + env->dy;
 	env->sx = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2.0) + env->dx;
-	fdf_zooming(env);
 	if (env->project == P_PER)
 	{
 		if (isr->is_perspective)
@@ -79,9 +79,7 @@ static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 void		fdf_refresh_buff(t_env *env, t_isrender *isr)
 {
 	fdf_refresh_zoom(env, isr);
-	fdf_xrotare(env, env->rotx);
-	fdf_yrotare(env, env->roty);
-	fdf_zrotare(env, env->rotz);
+	fdf_rotare(env);
 	fdf_xmove(env, env->sx);
 	fdf_ymove(env, env->sy);
 	isr->is_roty = env->roty;

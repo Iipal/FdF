@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/27 15:44:54 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/28 23:36:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,6 @@
 # ifdef __linux__
 #  include "linux_keys.h"
 # endif
-
-/*
-**	Main constantes for ease of use:
-**
-**		'WIN_X' & 'WIN_Y' is window size constantes. (2:1 Aspect ratio)
-**
-**		'IRGB_WHITE' is Int RGB WHITE color.
-**
-**		'PI' is just Pi value.
-**
-**		'NEG', 'ZERO' & 'HEX' is just simple values.
-*/
 
 # define WIN_X			1280
 # define WIN_Y			640
@@ -77,11 +65,6 @@
 # define V_HEXS	','
 # define V_NEGS	'-'
 
-/*
-**	Macroses:
-**	\____ Info include in README.md
-*/
-
 # define _MSG(msg) ft_putstr(msg);
 # define _MSGN(msg) ft_putendl(msg);
 # define _NOTIS_MSG(msg, ex) if (!(ex)) { _MSG(msg); return (false); }
@@ -92,10 +75,9 @@
 # define _ABS(var) ((var) < 0) ? -(var) : (var)
 # define _RAD(deg) (((deg) * PI) / 180.0)
 
-/*
-**	Additional code functional for program:
-**	\____ For boolean data type in C.
-*/
+# define _Y env->render[p.y][p.x].y
+# define _X env->render[p.y][p.x].x
+# define _Z env->render[p.y][p.x].z
 
 enum	e_bool
 {
@@ -105,32 +87,18 @@ enum	e_bool
 
 # define _BOOL	typedef enum e_bool	bool
 # define _ITAB	typedef int**		itab
+# define _IARR	typedef int*		iarr
 
 _BOOL;
 _ITAB;
-
-/*
-**	Bonus part:
-**	\____ 5 Colors constantes for changing grid default color.
-*/
-
-/*
-**	Main struct's definitions and functions prototypes
-**	\____ main struct definitions:
-**		| 'my' - counter Y-positions. (max Y-positions)
-**		| 'mx' - counter X-positions. (max X-positions)
-**		| 'color' - default grid color. (bonus)
-**		| 'zoom' - current zoom value.
-**		| 'mlx' && 'win' - for init mlx and mlx_window.
-**		| 'm' - raw matrix with data from file.
-*/
+_IARR;
 
 typedef struct	s_matrix
 {
-	short	y;
-	short	x;
-	int		z;
-	int		rgb;
+	int	y;
+	int	x;
+	int	z;
+	int	rgb;
 }				t_matrix;
 
 typedef struct	s_fdf_environment
@@ -152,6 +120,7 @@ typedef struct	s_fdf_environment
 	float		roty;
 	float		rotx;
 	float		rotz;
+	iarr		screen;
 	bool		is_frog_render:1;
 	uchar		project:8;
 }				t_env;
@@ -206,38 +175,37 @@ typedef struct	s_mlx
 {
 	pvoid	mlx;
 	pvoid	win;
-	pvoid	img;
+	iarr	img;
 }				t_mlx;
 
-bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
-void			fdf_rendering(t_env *env);
+bool			fdf_file_readnsave_env(cstring, t_env*);
+void			fdf_rendering(t_env*);
 
-bool			fdf_init_render_buff(t_env *env);
-void			fdf_refresh_buff(t_env *env, t_isrender *isr);
+bool			fdf_init_render_buff(t_env*);
+void			fdf_refresh_buff(t_env*, t_isrender*);
+void			fdf_set_image_pixel(point, int, t_mlx*);
+void			fdf_refresh_image(t_env*);
+void			fdf_zooming(t_env*);
 
-void			fdf_isometric(t_env *env);
-void			fdf_perspective(t_env *env);
+void			fdf_isometric(t_env*);
+void			fdf_perspective(t_env*);
 
-void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
-void			fdf_zooming(t_env *env);
-int				*fdf_gradient(t_g *gradient, int line_len);
-int				fdf_glen(int delta, int point, int xy);
+void			fdf_bdrawing(t_matrix**, t_p, t_mlx);
+iarr			fdf_gradient(t_g*, int);
+int				fdf_glen(int, int, int);
 
-int				fdf_keys_hook(int key, t_env *env);
+int				fdf_keys_hook(int, t_env*);
 
-void			fdf_xmove(t_env *env, float inc);
-void			fdf_ymove(t_env *env, float inc);
+void			fdf_xmove(t_env*, float);
+void			fdf_ymove(t_env*, float);
+void			fdf_rotare(t_env*);
 
-void			fdf_xrotare(t_env *env, int inc);
-void			fdf_yrotare(t_env *env, int inc);
-void			fdf_zrotare(t_env *env, int inc);
-
-void			fdf_add_valid_zoom(t_env *env);
+void			fdf_add_valid_zoom(t_env*);
 void			fdf_add_print_usage(void);
-bool			fdf_add_check_valid_perspective(t_env *env);
+bool			fdf_add_check_valid_perspective(t_env*);
 
-void			fdf_free_env(t_env **env);
-void			fdf_free_matrix(t_matrix ***m, int matrix_y);
-void			fdf_free_file(strtab *file, int lines);
+void			fdf_free_env(t_env**);
+void			fdf_free_matrix(t_matrix***, int);
+void			fdf_free_file(strtab*, int);
 
 #endif

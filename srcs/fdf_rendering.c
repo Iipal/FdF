@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_rendering.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/27 15:48:23 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/28 23:39:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,7 @@ void		fdf_rendering(t_env *env)
 {
 	static t_isrender	isr;
 
-	if (env->frog)
-		isr.is_frog = true;
+	env->frog ? (isr.is_frog = true) : false;
 	if (!env->render)
 		if (!fdf_init_render_buff(env))
 		{
@@ -118,12 +117,7 @@ void		fdf_rendering(t_env *env)
 	fdf_is_render_frog(&isr, env);
 	if (isr.is_render)
 	{
-		mlx_clear_window(env->mlx, env->win);
-		fdf_bdrawing(env->render, (t_p){env->my, env->mx},
-					(t_mlx){env->mlx, env->win, env->img});
-		printf("%d - %d | %d - %d\n", env->render[0][0].y, env->render[0][0].x,
-			env->render[1][0].y, env->render[1][0].x);
-		// mlx_put_image_to_window(env->mlx, env->win, env->img, ZERO, ZERO);
+		fdf_refresh_image(env);
 		if (env->is_frog_render)
 			fdf_print_fucking_frog(env);
 	}

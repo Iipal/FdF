@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_movenrot.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/25 12:37:54 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/29 00:19:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	fdf_xmove(t_env *env, float inc)
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
-			inc < ZERO ? (env->render[p.y][p.x].x -= _ABS(inc))
-						: (env->render[p.y][p.x].x += inc);
+			inc < ZERO ? (_X -= _ABS(inc)) : (_X += inc);
 }
 
 void	fdf_ymove(t_env *env, float inc)
@@ -30,58 +29,28 @@ void	fdf_ymove(t_env *env, float inc)
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
-			inc < ZERO ? (env->render[p.y][p.x].y -= _ABS(inc))
-						: (env->render[p.y][p.x].y += inc);
+			inc < ZERO ? (_Y -= _ABS(inc)) : (_Y += inc);
 }
 
-void	fdf_xrotare(t_env *env, int inc)
+void	fdf_rotare(t_env *env)
 {
-	int	oy;
-	int	y;
-	int	x;
-
-	y = NEG;
-	while (++y < env->my && (x = NEG))
-		while (++x < env->mx)
-		{
-			oy = env->render[y][x].y;
-			env->render[y][x].y = oy * cos(_RAD(inc)) +
-							env->render[y][x].z * sin(_RAD(inc));
-			env->render[y][x].z = -oy * sin(_RAD(inc)) +
-							env->render[y][x].z * cos(_RAD(inc));
-		}
-}
-
-void	fdf_yrotare(t_env *env, int inc)
-{
-	point	p;
-	int		ox;
+	point		p;
+	point		half;
+	t_matrix	m;
 
 	p.y = NEG;
+	half = (point){(env->my / 2) * env->zoom, (env->mx / 2) * env->zoom};
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
 		{
-			ox = env->render[p.y][p.x].x;
-			env->render[p.y][p.x].x = ox * cos(_RAD(inc)) +
-							env->render[p.y][p.x].z * sin(_RAD(inc));
-			env->render[p.y][p.x].z = -ox * sin(_RAD(inc)) +
-							env->render[p.y][p.x].z * cos(_RAD(inc));
-		}
-}
-
-void	fdf_zrotare(t_env *env, int inc)
-{
-	point	p;
-	int		ox;
-
-	p.y = NEG;
-	while (++(p.y) < env->my && (p.x = NEG))
-		while (++(p.x) < env->mx)
-		{
-			ox = env->render[p.y][p.x].x;
-			env->render[p.y][p.x].x = ox * cos(_RAD(inc)) -
-							env->render[p.y][p.x].y * sin(_RAD(inc));
-			env->render[p.y][p.x].y = -ox * sin(_RAD(inc)) +
-							env->render[p.y][p.x].y * cos(_RAD(inc));
+			m = (t_matrix){_Y, _X, _Z, ZERO};
+			_X = half.x + (m.x - half.x) * cos(_RAD(env->rotz))
+				+ (half.y - m.y) * sin(_RAD(env->rotz));
+			_Y = half.x + (m.x - half.x) * sin(_RAD(env->rotz))
+				+ (m.y - half.y) * cos(_RAD(env->rotz));
+			_Y = m.y * cos(_RAD(env->rotx)) + m.z * sin(_RAD(env->rotx));
+			_Z = -(m.y) * sin(_RAD(env->rotx)) + m.z * sin(_RAD(env->rotx));
+			_X = m.x * cos(_RAD(env->roty)) + m.z * sin(_RAD(env->roty));
+			_Z = -(m.x) * sin(_RAD(env->roty) + m.z * cos(_RAD(env->roty)));
 		}
 }

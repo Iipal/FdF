@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_brasenham_drawing.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:09:31 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 17:35:36 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/28 22:05:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 {
 	point	p;
+	iarr	rgb;
 	int		dir;
 	int		increase;
-	int		*rgb;
 	int		i;
 
 	i = ZERO;
@@ -30,8 +30,7 @@ static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 		dir = delta.p1.y > 0 ? 1 : -1;
 	while (((delta.p1.x > 0) ? (p.x <= points.p2.x) : (p.x >= points.p2.x)))
 	{
-		((int*)mlx->img)[0] = IRGB_WHITE;
-		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, rgb[i++]);
+		fdf_set_image_pixel(p, rgb[i++], mlx);
 		increase += delta.p2.y;
 		if (increase >= delta.p2.x)
 		{
@@ -46,9 +45,9 @@ static void	add_bdraw_xline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 {
 	point	p;
+	iarr	rgb;
 	int		dir;
 	int		increase;
-	int		*rgb;
 	int		i;
 
 	i = ZERO;
@@ -60,7 +59,7 @@ static void	add_bdraw_yline(t_dp delta, t_dp points, t_mlx *mlx, t_g *gradient)
 		dir = (delta.p1.x > 0 ? 1 : -1);
 	while (((delta.p1.y > 0) ? (p.y <= points.p2.y) : (p.y >= points.p2.y)))
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, p.x, p.y, rgb[i++]);
+		fdf_set_image_pixel(p, rgb[i++], mlx);
 		increase += delta.p2.x;
 		if (increase >= delta.p2.y)
 		{

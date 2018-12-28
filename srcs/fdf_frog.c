@@ -6,7 +6,7 @@
 /*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/26 22:58:16 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/28 13:28:18 by ipal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		fdf_is_render_frog(t_isrender *isr, t_env *env)
 	}
 }
 
-static bool	add_save_to_frog(int *frog, string line)
+static bool	add_save_to_frog(iarr frog, string line)
 {
 	int	x;
 
