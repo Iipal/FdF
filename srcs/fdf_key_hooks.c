@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_key_hooks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/27 16:12:16 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/29 19:22:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ static void	add_hook_zoom_projectnrot(int key, t_env *env)
 	key == KEY_U ? (env->rotz += ROT_INC) : ZERO;
 	key == KEY_J ? (env->rotz -= ROT_INC) : ZERO;
 	key == KEY_I && (env->project = P_ISO);
-	key == KEY_O && (env->project = P_RAW);
-	key == KEY_P && (env->project = P_PER);
+	key == KEY_P && (env->project = P_PAR);
 }
 
 int			fdf_keys_hook(int key, t_env *env)

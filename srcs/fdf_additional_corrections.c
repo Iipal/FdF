@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_additional_corrections.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:10:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/28 13:30:23 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/29 19:23:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/frog.h"
 
 void	fdf_add_valid_zoom(t_env *env)
 {
@@ -29,17 +30,6 @@ void	fdf_add_valid_zoom(t_env *env)
 		--(env->zoom);
 	}
 }
-bool	fdf_add_check_valid_perspective(t_env *env)
-{
-	point	p;
-
-	p.y = NEG;
-	while (++(p.y) < env->my && (p.x = NEG))
-		while (++(p.x) < env->mx)
-			if (env->raw[p.y][p.x].z < ZERO)
-				return (false);
-	return (true);
-}
 
 void	fdf_add_print_usage(void)
 {
@@ -49,7 +39,6 @@ void	fdf_add_print_usage(void)
 	_MSGN("\t[T | G] - x rotate\n\t[Y | H] - y rotate\n\t[U | J] - z rotate.");
 	_MSGN("\t[I | O | P] - projections switch.");
 	_MSGN("\t\t[I] - Isometric.");
-	_MSGN("\t\t[O] - Original(RAW), without any projections.");
 	_MSGN("\t\t[P] - Perspective.");
 	_MSGN("\t[ESC] - exit.");
 	_MSGN("\t[C] - bonus.");

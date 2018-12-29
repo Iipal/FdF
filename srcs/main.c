@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/28 23:36:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/29 19:26:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_env	*add_alloc_env(string tittle)
 	_NOTIS_N(out_env = (t_env*)malloc(sizeof(t_env)));
 	*out_env = (t_env){NULL, NULL, NULL, NULL, NULL, NULL,
 		ZOOM_DEF, IRGB_WHITE, ZERO, ZERO, ZERO, ZERO, ZERO,
-		ZERO, ZERO, ZERO, ZERO, NULL, false, P_RAW};
+		ZERO, ZERO, ZERO, ZERO, NULL, false, P_PAR};
 	_NOTIS_N(out_env->mlx = mlx_init());
 	_NOTIS_N(out_env->win = mlx_new_window(out_env->mlx, WIN_X, WIN_Y, tittle));
 	_NOTIS_N(out_env->img = mlx_new_image(out_env->mlx, WIN_X, WIN_Y));

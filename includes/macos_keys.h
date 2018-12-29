@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macos_keys.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/26 23:58:38 by ipal             ###   ########.fr       */
+/*   Updated: 2018/12/29 02:20:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # define KEY_PRESS		2
 # define KEY_RELEASE	2
-# define MOUSE_PRESS	5
-# define MOUSE_RELEASE	6
-
 
 # define ESC			53
 
@@ -36,7 +33,6 @@
 # define KEY_J			38
 
 # define KEY_I			34
-# define KEY_O			31
 # define KEY_P			35
 
 # define ARROW_UP		126

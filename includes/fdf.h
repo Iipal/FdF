@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/28 23:36:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/29 19:24:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,14 @@
 # define ZERO			0
 
 # define P_ISO			1
-# define P_PER			2
-# define P_RAW			3
+# define P_PAR			2
 
 # define HEX			16
 
 # define SHIFT_INC		15
 
 # define ROT_MIN		0.0
-# define ROT_INC		10.0
+# define ROT_INC		5.0
 # define ROT_MAX		360.0
 
 # define ZOOM_INC		2
@@ -56,10 +55,9 @@
 # define E_ALLOC	"Where is memory, pal ?"
 # define E_FILER	"File reading error"
 
-# define E_IPER	"\tWarning: Perspective doesn't work with < 0 values Z."
-# define E_EMAP	"\tERROR: Empty map \\"
-# define E_IMAP	"\tERROR: Invalid map \\"
-# define E_HEX	"\tERROR: Invalid HEX code or you put black color \\"
+# define E_EMAP	"\tERROR: Empty map \\ "
+# define E_IMAP	"\tERROR: Invalid map \\ "
+# define E_HEX	"\tERROR: Invalid HEX code or you put black color \\ "
 
 # define V_HEX	",0x"
 # define V_HEXS	','
@@ -75,9 +73,15 @@
 # define _ABS(var) ((var) < 0) ? -(var) : (var)
 # define _RAD(deg) (((deg) * PI) / 180.0)
 
+# define _COS(angle) cos(_RAD(angle))
+# define _SIN(angle) sin(_RAD(angle))
+
 # define _Y env->render[p.y][p.x].y
 # define _X env->render[p.y][p.x].x
 # define _Z env->render[p.y][p.x].z
+# define _YP env->render[p->y][p->x].y
+# define _XP env->render[p->y][p->x].x
+# define _ZP env->render[p->y][p->x].z
 
 enum	e_bool
 {
@@ -135,8 +139,7 @@ typedef struct	s_isrender
 	uchar	is_project;
 	short	is_shifty;
 	short	is_shiftx;
-	bool	is_isr_init:1;
-	bool	is_perspective:1;
+	bool	is_init:1;
 	bool	is_render:1;
 	bool	is_center:1;
 	bool	is_frog:1;
@@ -188,7 +191,6 @@ void			fdf_refresh_image(t_env*);
 void			fdf_zooming(t_env*);
 
 void			fdf_isometric(t_env*);
-void			fdf_perspective(t_env*);
 
 void			fdf_bdrawing(t_matrix**, t_p, t_mlx);
 iarr			fdf_gradient(t_g*, int);
@@ -202,7 +204,6 @@ void			fdf_rotare(t_env*);
 
 void			fdf_add_valid_zoom(t_env*);
 void			fdf_add_print_usage(void);
-bool			fdf_add_check_valid_perspective(t_env*);
 
 void			fdf_free_env(t_env**);
 void			fdf_free_matrix(t_matrix***, int);
