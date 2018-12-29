@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _gnl.c                                             :+:      :+:    :+:   */
+/*   ft_gnl.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 12:31:02 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/11/03 12:32:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2018/12/30 00:35:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft.h"
 #include "../../includes/lft_str.h"
 
-int		catline_recursive(int fd, string *data, string *line, int nbytes)
+static int	catline_recursive(int fd, string *data, string *line, int nbytes)
 {
 	int		to_nl;
 	string	temp_nl;
@@ -41,7 +41,7 @@ int		catline_recursive(int fd, string *data, string *line, int nbytes)
 	return (1);
 }
 
-int		ft_gnl(const int fd, string *line)
+int			ft_gnl(const int fd, string *line)
 {
 	static string	data[255];
 	string			temp;
