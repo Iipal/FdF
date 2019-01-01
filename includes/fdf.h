@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/29 19:24:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/02 01:42:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 
 # define WIN_X			1280
 # define WIN_Y			640
+
+# define WIN_EXIT		17
+# define WIN_EXIT_MASK	(1L << 17)
 
 # define PI				3.141592
 
@@ -197,6 +200,7 @@ iarr			fdf_gradient(t_g*, int);
 int				fdf_glen(int, int, int);
 
 int				fdf_keys_hook(int, t_env*);
+int				fdf_khook_close_window(t_env *env);
 
 void			fdf_xmove(t_env*, float);
 void			fdf_ymove(t_env*, float);

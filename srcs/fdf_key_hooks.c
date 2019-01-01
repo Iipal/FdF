@@ -6,12 +6,19 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/29 19:22:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/02 00:50:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include "../includes/frog.h"
+
+int			fdf_khook_close_window(t_env *env)
+{
+	fdf_free_env(&env);
+	exit(1);
+	return (0);
+}
 
 static void	add_change_color(int *color)
 {

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/29 19:26:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/02 01:42:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int				main(int argc, char const *argv[])
 	_NOTIS_MPE(E_ALLOC, env = add_alloc_env((string)*argv));
 	_NOTIS_MPE(E_FILER, fdf_file_readnsave_env(*argv, env));
 	fdf_rendering(env);
+	mlx_hook(env->win, WIN_EXIT, WIN_EXIT_MASK, fdf_khook_close_window, env);
 	mlx_hook(env->win, KEY_PRESS, KEY_RELEASE, fdf_keys_hook, env);
 	env ? mlx_loop(env->mlx) : false;
 }

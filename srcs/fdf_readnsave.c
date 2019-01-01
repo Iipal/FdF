@@ -6,29 +6,12 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/29 02:12:16 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/02 01:42:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include "../includes/frog.h"
-
-/*
-**	The 'fdf_file_readnsave_env' function is at the bottom.
-**
-**		'fdf_file_readnsave_env' - Function for file reading and
-**									saving data from it to
-**									main environmnet structure.
-**
-**		'add_numbers_inline' - Function for find how much is numbers
-**								and colors in one line of "file".
-**
-**		'add_save_tomatrix' - Save data from "file" in environment
-**								two-dimensioanl matrix.
-**
-**		'add_line_tomatrix' - Function for saving all numbers and colors
-**								to environment two-dimensioanl matrix.
-*/
 
 static int		add_numbers_inline(string line)
 {
