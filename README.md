@@ -12,7 +12,7 @@ For correct work program & project need install MLX library. (Use this [MLX](htt
 
 When you have already installed MLX library you can use this simple rules:
 - **make**: Compile all.
-- **make clean**: Delete temporal files.
+- **make clean**: Delete temporary files.
 - **make fclean**: Delete executable FdF file & libft library.
 - **make re**: It's rules - **make fclean** & **make** in one.
 
