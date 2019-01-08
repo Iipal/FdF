@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/02 01:42:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/08 18:51:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 #  include "linux_keys.h"
 # endif
 
-# define WIN_X			1280
-# define WIN_Y			640
+# define WIN_X			2000
+# define WIN_Y			1000
 
 # define WIN_EXIT		17
 # define WIN_EXIT_MASK	(1L << 17)
@@ -54,17 +54,17 @@
 # define ZOOM_DEF		15
 # define ZOOM_MAX		255
 
-# define E_USAGE	"Usage: ./fdf <map_name>"
-# define E_ALLOC	"Where is memory, pal ?"
-# define E_FILER	"File reading error"
+# define E_USAGE		"Usage: ./fdf <map_name>"
+# define E_ALLOC		"Where is memory, pal ?"
+# define E_FILER		"File reading error"
 
-# define E_EMAP	"\tERROR: Empty map \\ "
-# define E_IMAP	"\tERROR: Invalid map \\ "
-# define E_HEX	"\tERROR: Invalid HEX code or you put black color \\ "
+# define E_EMAP			"\tERROR: Empty map \\ "
+# define E_IMAP			"\tERROR: Invalid map \\ "
+# define E_HEX			"\tERROR: Invalid HEX code or you put black color \\ "
 
-# define V_HEX	",0x"
-# define V_HEXS	','
-# define V_NEGS	'-'
+# define V_HEX			",0x"
+# define V_HEXS			','
+# define V_NEGS			'-'
 
 # define _MSG(msg) ft_putstr(msg);
 # define _MSGN(msg) ft_putendl(msg);
@@ -184,33 +184,32 @@ typedef struct	s_mlx
 	iarr	img;
 }				t_mlx;
 
-bool			fdf_file_readnsave_env(cstring, t_env*);
-void			fdf_rendering(t_env*);
+bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
+void			fdf_rendering(t_env *env);
 
-bool			fdf_init_render_buff(t_env*);
-void			fdf_refresh_buff(t_env*, t_isrender*);
-void			fdf_set_image_pixel(point, int, t_mlx*);
-void			fdf_refresh_image(t_env*);
-void			fdf_zooming(t_env*);
+bool			fdf_init_render_buff(t_env *env);
+void			fdf_refresh_buff(t_env *env, t_isrender *isr);
+void			fdf_set_image_pixel(point p, int color, t_mlx *mlx);
+void			fdf_refresh_image(t_env *env);
+void			fdf_zooming(t_env *env);
 
-void			fdf_isometric(t_env*);
+void			fdf_isometric(t_env *env);
 
-void			fdf_bdrawing(t_matrix**, t_p, t_mlx);
-iarr			fdf_gradient(t_g*, int);
-int				fdf_glen(int, int, int);
+void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
+iarr			fdf_gradient(t_g *g, int glen);
+int				fdf_glen(int delta, int p, int xy);
 
-int				fdf_keys_hook(int, t_env*);
+int				fdf_keys_hook(int key, t_env *env);
 int				fdf_khook_close_window(t_env *env);
 
-void			fdf_xmove(t_env*, float);
-void			fdf_ymove(t_env*, float);
-void			fdf_rotare(t_env*);
+void			fdf_xmove(t_env *env, float inc);
+void			fdf_ymove(t_env *env, float inc);
+void			fdf_rotare(t_env *env);
 
-void			fdf_add_valid_zoom(t_env*);
 void			fdf_add_print_usage(void);
 
-void			fdf_free_env(t_env**);
-void			fdf_free_matrix(t_matrix***, int);
-void			fdf_free_file(strtab*, int);
+void			fdf_free_env(t_env **env);
+void			fdf_free_matrix(t_matrix ***m, int matrix_y);
+void			fdf_free_file(strtab *file, int lines);
 
 #endif

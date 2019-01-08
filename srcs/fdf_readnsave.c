@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/02 01:42:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/08 18:54:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static bool		add_save_tomatrix(strtab file, t_env *env)
 			ft_putstr(E_IMAP);
 			fdf_free_file(&file, env->my);
 			fdf_free_matrix(&(env->raw), y + 1);
-			fdf_free_env(&env);
 			return (false);
 		}
 		_NOTIS_F(add_line_tomatrix(file[y], env->raw[y], env->mx, y));

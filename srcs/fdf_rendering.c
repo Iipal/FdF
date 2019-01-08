@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/29 19:23:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/08 18:53:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static void	add_is_render_rot(t_isrender *isr, t_env *env)
 static void	add_is_render(t_isrender *isr, t_env *env)
 {
 	isr->is_render = false;
-	if (isr->is_init)
-			add_is_render_init(isr, env);
+	if (!isr->is_init)
+		add_is_render_init(isr, env);
 	if (isr->is_zoomed != env->zoom && (isr->is_render = true))
 		fdf_refresh_buff(env, isr);
 	if (isr->is_project != env->project && (isr->is_render = true))

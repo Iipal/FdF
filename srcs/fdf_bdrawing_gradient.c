@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_bdrawing_gradient.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 20:12:15 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/28 13:30:15 by ipal             ###   ########.fr       */
+/*   Updated: 2019/01/08 18:49:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int		fdf_glen(int delta, int point, int xy)
+int		fdf_glen(int delta, int p, int xy)
 {
 	int	gradient_len;
 
 	gradient_len = ZERO;
-	while (((delta > 0) ? (xy <= point) : (xy >= point)))
+	while (((delta > 0) ? (xy <= p) : (xy >= p)))
 	{
 		++gradient_len;
 		(delta > 0) ? ++xy : --xy;
