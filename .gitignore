@@ -3,3 +3,4 @@ srcs/*.o
 libft/srcs/*/*.o
 libft/libft.a
 fdf
+.VScode

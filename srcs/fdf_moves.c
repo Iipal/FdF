@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_additional.c                                   :+:      :+:    :+:   */
+/*   fdf_moves.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/21 17:10:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/10 18:11:28 by tmaluh           ###   ########.fr       */
+/*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/01/10 18:08:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include "../includes/frog.h"
 
-void	fdf_add_print_usage(void)
+void		fdf_xmove(t_env *env, float inc)
 {
-	_MSGN("\t[W | A | S | D] or Arrows for moving.");
-	_MSGN("\t[+] & [-] on [numpad | keyboard] for zooming.");
-	_MSGN("\t[I | P] - projections switch.");
-	_MSGN("\t\t[I] - Isometric.");
-	_MSGN("\t\t[P] - Perspective.");
-	_MSGN("\t[ESC] - exit.");
-	_MSGN("\t[C] - bonus.");
+	point	p;
+
+	p.y = NEG;
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+			inc < ZERO ? (_X -= _ABS(inc)) : (_X += inc);
+}
+
+void		fdf_ymove(t_env *env, float inc)
+{
+	point	p;
+
+	p.y = NEG;
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+			inc < ZERO ? (_Y -= _ABS(inc)) : (_Y += inc);
 }

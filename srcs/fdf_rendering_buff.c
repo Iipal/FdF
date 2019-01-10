@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/29 18:55:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:17:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 	env->sy = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2.0) + env->dy;
 	env->sx = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2.0) + env->dx;
 	env->project == P_ISO ? fdf_isometric(env) : false;
-	env->project == P_PAR && (env->project = P_PAR);
+	env->project == P_PAR ? fdf_project(env) : false; //&& (env->project = P_PAR);
 	isr->is_shifty = env->dy;
 	isr->is_shiftx = env->dx;
 	isr->is_zoomed = env->zoom;
@@ -69,10 +69,6 @@ static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 void		fdf_refresh_buff(t_env *env, t_isrender *isr)
 {
 	fdf_refresh_zoom(env, isr);
-	fdf_rotare(env);
 	fdf_xmove(env, env->sx);
 	fdf_ymove(env, env->sy);
-	isr->is_roty = env->roty;
-	isr->is_rotx = env->rotx;
-	isr->is_rotz = env->rotz;
 }

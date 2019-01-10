@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/08 18:51:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:11:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,20 +124,14 @@ typedef struct	s_fdf_environment
 	short		dx;
 	float		sy;
 	float		sx;
-	float		roty;
-	float		rotx;
-	float		rotz;
 	iarr		screen;
 	bool		is_frog_render:1;
-	uchar		project:8;
+	uchar		project;
 }				t_env;
 
 typedef struct	s_isrender
 {
 	int		is_color;
-	float	is_roty;
-	float	is_rotx;
-	float	is_rotz;
 	uchar	is_zoomed;
 	uchar	is_project;
 	short	is_shifty;
@@ -194,6 +188,7 @@ void			fdf_refresh_image(t_env *env);
 void			fdf_zooming(t_env *env);
 
 void			fdf_isometric(t_env *env);
+void			fdf_project(t_env *env);
 
 void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
 iarr			fdf_gradient(t_g *g, int glen);
@@ -204,7 +199,6 @@ int				fdf_khook_close_window(t_env *env);
 
 void			fdf_xmove(t_env *env, float inc);
 void			fdf_ymove(t_env *env, float inc);
-void			fdf_rotare(t_env *env);
 
 void			fdf_add_print_usage(void);
 

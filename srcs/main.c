@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/02 01:42:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:06:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,21 @@
 
 static t_env	*add_alloc_env(string tittle)
 {
-	t_env	*out_env;
+	t_env	*env;
 	int		bps;
-	int		size;
+	int		sz;
 	int		end;
 
-	_NOTIS_N(out_env = (t_env*)malloc(sizeof(t_env)));
-	*out_env = (t_env){NULL, NULL, NULL, NULL, NULL, NULL,
+	_NOTIS_N(env = (t_env*)malloc(sizeof(t_env)));
+	*env = (t_env){NULL, NULL, NULL, NULL, NULL, NULL,
 		ZOOM_DEF, IRGB_WHITE, ZERO, ZERO, ZERO, ZERO, ZERO,
-		ZERO, ZERO, ZERO, ZERO, NULL, false, P_PAR};
-	_NOTIS_N(out_env->mlx = mlx_init());
-	_NOTIS_N(out_env->win = mlx_new_window(out_env->mlx, WIN_X, WIN_Y, tittle));
-	_NOTIS_N(out_env->img = mlx_new_image(out_env->mlx, WIN_X, WIN_Y));
-	_NOTIS_N(out_env->screen = (iarr)mlx_get_data_addr(out_env->img,
-														&bps, &size, &end));
-	out_env->frog = fdf_bonus_init_frog();
-	return (out_env);
+		ZERO, NULL, false, P_PAR};
+	_NOTIS_N(env->mlx = mlx_init());
+	_NOTIS_N(env->win = mlx_new_window(env->mlx, WIN_X, WIN_Y, tittle));
+	_NOTIS_N(env->img = mlx_new_image(env->mlx, WIN_X, WIN_Y));
+	_NOTIS_N(env->screen = (iarr)mlx_get_data_addr(env->img, &bps, &sz, &end));
+	env->frog = fdf_bonus_init_frog();
+	return (env);
 }
 
 int				main(int argc, char const *argv[])

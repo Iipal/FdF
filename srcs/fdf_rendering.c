@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/08 18:53:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/10 19:13:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,10 @@ static void	add_init_centralize(t_env *env)
 static void	add_is_render_init(t_isrender *isr, t_env *env)
 {
 	fdf_add_print_usage();
-	*isr = (t_isrender){isr->is_color, env->roty, env->rotx, env->rotz,
-						env->zoom, P_PAR, env->dy, env->dx, true, true,
+	*isr = (t_isrender){isr->is_color, env->zoom, ZERO, env->dy, env->dx, true, true,
 						isr->is_center, isr->is_frog};
 	fdf_zooming(env);
 	add_init_centralize(env);
-}
-
-static void	add_is_render_rot(t_isrender *isr, t_env *env)
-{
-	if (isr->is_rotx != env->rotx && (isr->is_render = true))
-	{
-		(env->rotx == ROT_MAX) ? (env->rotx = ROT_MIN) : ZERO;
-		(env->rotx > ROT_MAX) ? (env->rotx -= ROT_MAX) : ZERO;
-		(env->rotx < ROT_MIN) ? (env->rotx += ROT_MAX) : ZERO;
-		fdf_refresh_buff(env, isr);
-	}
-	if (isr->is_roty != env->roty && (isr->is_render = true))
-	{
-		(env->roty == ROT_MAX) ? (env->roty = ROT_MIN) : ZERO;
-		(env->roty > ROT_MAX) ? (env->roty -= ROT_MAX) : ZERO;
-		(env->roty < ROT_MIN) ? (env->roty += ROT_MAX) : ZERO;
-		fdf_refresh_buff(env, isr);
-	}
-	if (isr->is_rotz != env->rotz && (isr->is_render = true))
-	{
-		(env->rotz == ROT_MAX) ? (env->rotz = ROT_MIN) : ZERO;
-		(env->rotz > ROT_MAX) ? (env->rotz -= ROT_MAX) : ZERO;
-		(env->rotz < ROT_MIN) ? (env->rotz += ROT_MAX) : ZERO;
-		fdf_refresh_buff(env, isr);
-	}
 }
 
 static void	add_is_render(t_isrender *isr, t_env *env)
@@ -100,7 +74,6 @@ void		fdf_rendering(t_env *env)
 			exit(EXIT_SUCCESS);
 		}
 	add_is_render(&isr, env);
-	add_is_render_rot(&isr, env);
 	fdf_is_render_frog(&isr, env);
 	if (isr.is_render)
 	{
