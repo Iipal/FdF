@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 13:30:08 by tmaluh            #+#    #+#              #
-#    Updated: 2019/01/10 18:08:16 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/01/11 14:22:42 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ ifeq ($(UNAME_S),Darwin)
 endif
 
 CC = gcc -march=native
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = srcs/main.c srcs/fdf_readnsave.c srcs/fdf_free.c srcs/fdf_rendering.c \
 srcs/fdf_brasenham_drawing.c srcs/fdf_key_hooks.c srcs/fdf_moves.c srcs/fdf_frog.c \
