@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/10 19:13:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/11 11:02:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	add_init_centralize(t_env *env)
 static void	add_is_render_init(t_isrender *isr, t_env *env)
 {
 	fdf_add_print_usage();
-	*isr = (t_isrender){isr->is_color, env->zoom, ZERO, env->dy, env->dx, true, true,
-						isr->is_center, isr->is_frog};
+	*isr = (t_isrender){isr->is_color, env->zoom, ZERO, env->dy, env->dx,
+						true, true, isr->is_center, isr->is_frog};
 	fdf_zooming(env);
 	add_init_centralize(env);
 }
