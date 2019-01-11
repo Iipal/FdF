@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/10 18:11:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/11 11:27:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,6 @@ void			fdf_refresh_image(t_env *env);
 void			fdf_zooming(t_env *env);
 
 void			fdf_isometric(t_env *env);
-void			fdf_project(t_env *env);
 
 void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
 iarr			fdf_gradient(t_g *g, int glen);
