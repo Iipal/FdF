@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/11 11:27:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/11 14:50:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ void			fdf_xmove(t_env *env, float inc);
 void			fdf_ymove(t_env *env, float inc);
 
 void			fdf_add_print_usage(void);
+void			fdf_add_colored_map(t_env *env);
 
 void			fdf_free_env(t_env **env);
 void			fdf_free_matrix(t_matrix ***m, int matrix_y);

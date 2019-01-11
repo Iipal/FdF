@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frog.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:23:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/24 10:24:21 by ipal             ###   ########.fr       */
+/*   Updated: 2019/01/11 15:03:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 # define FFILE_NAME	"test_maps/frog_bonus.fdf"
 
-# define FBG_COLOR	197379
+# define IRGB_MAPDOWN_GRASS_GREEN	8309032
+# define IRGB_MAPMIDDLE_LAND_BROWN	14257456
+
+# define FBG_COLOR		197379
 
 # define IRGB_GRAY		3355443
 # define IRGB_WHITE		16777215
