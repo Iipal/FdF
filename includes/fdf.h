@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 20:33:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 20:35:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,6 @@
 # define ZOOM_MIN		1
 # define ZOOM_DEF		15
 # define ZOOM_MAX		255
-
-# define ZINC_STEP		0.02
-# define ZINC_MIN		-5.0
-# define ZINC_DEFAULT	1.0
-# define ZINC_MAX		5.0
 
 # define E_USAGE		"Usage: ./fdf <map_name>"
 # define E_ALLOC		"Where is memory, pal ?"
