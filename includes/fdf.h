@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 11:53:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 12:37:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,16 @@ typedef struct	s_point
 # define _POINT typedef t_p	point
 
 _POINT;
+
+typedef struct	s_fpoint
+{
+	float	y;
+	float	x;
+}				t_fp;
+
+# define _FPOINT typedef t_fp	fpoint
+
+_FPOINT;
 
 typedef struct	s_gradient
 {
