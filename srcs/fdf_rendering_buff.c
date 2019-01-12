@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/11 11:28:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 10:21:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		fdf_zooming(t_env *env)
 			{
 				env->raw[p.y][p.x].y * env->zoom,
 				env->raw[p.y][p.x].x * env->zoom,
-				env->raw[p.y][p.x].z * env->zoom,
+				env->raw[p.y][p.x].z * env->zoom  * env->zinc,
 				env->render[p.y][p.x].rgb
 			};
 }

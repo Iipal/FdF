@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:23:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/11 15:03:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 09:53:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # define FFILE_NAME	"test_maps/frog_bonus.fdf"
 
-# define IRGB_MAPDOWN_GRASS_GREEN	8309032
+# define IRGB_MAPUNDERWORLD_WATER	3240388
+# define IRGB_MAPBOTTOM_GRASS_GREEN	8309032
 # define IRGB_MAPMIDDLE_LAND_BROWN	14257456
 
 # define FBG_COLOR		197379

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/11 11:02:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 11:56:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	add_init_centralize(t_env *env)
 static void	add_is_render_init(t_isrender *isr, t_env *env)
 {
 	fdf_add_print_usage();
-	*isr = (t_isrender){isr->is_color, env->zoom, ZERO, env->dy, env->dx,
-						true, true, isr->is_center, isr->is_frog};
+	*isr = (t_isrender){isr->is_color, ZERO, env->zoom, ZERO,
+			env->dy, env->dx, true, true, isr->is_center, isr->is_frog};
 	fdf_zooming(env);
 	add_init_centralize(env);
 }
@@ -40,8 +40,7 @@ static void	add_is_render_init(t_isrender *isr, t_env *env)
 static void	add_is_render(t_isrender *isr, t_env *env)
 {
 	isr->is_render = false;
-	if (!isr->is_init)
-		add_is_render_init(isr, env);
+	(!isr->is_init) ? add_is_render_init(isr, env) : NULL;
 	if (isr->is_zoomed != env->zoom && (isr->is_render = true))
 		fdf_refresh_buff(env, isr);
 	if (isr->is_project != env->project && (isr->is_render = true))
@@ -59,6 +58,11 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 	{
 		fdf_ymove(env, ((env->dy > isr->is_shifty) ? SHIFT_INC : -SHIFT_INC));
 		isr->is_shifty = env->dy;
+	}
+	if (isr->is_zinc != env->zinc && (isr->is_render = true))
+	{
+		isr->is_zinc = env->zinc;
+		fdf_refresh_buff(env, isr);
 	}
 }
 

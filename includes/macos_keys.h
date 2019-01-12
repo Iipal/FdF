@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/10 18:07:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 11:49:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # define ESC			53
 
 # define KEY_C			8
+
+# define KEY_R			15
+# define KEY_F			3
 
 # define KEY_W			13
 # define KEY_A			0

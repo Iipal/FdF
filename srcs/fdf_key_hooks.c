@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/10 18:07:30 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 10:26:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	add_change_color(int *color)
 		*color = IRGB_WHITE;
 }
 
-static void	add_hook_zoom_projectnrot(int key, t_env *env)
+static void	add_hook_zoom_projectnzinc(int key, t_env *env)
 {
 	if (key == PLUS_NUMPAD || key == PLUS_KEYBOARD)
 		env->zoom + ZOOM_INC <= ZOOM_MAX ? (env->zoom += ZOOM_INC) : false;
@@ -48,6 +48,10 @@ static void	add_hook_zoom_projectnrot(int key, t_env *env)
 		env->zoom - ZOOM_INC >= ZOOM_MIN ? (env->zoom -= ZOOM_INC) : false;
 	key == KEY_I && (env->project = P_ISO);
 	key == KEY_P && (env->project = P_PAR);
+	if (key == KEY_R)
+		env->zinc + ZINC_STEP <= ZINC_MAX ? (env->zinc += ZINC_STEP) : false;
+	if (key == KEY_F)
+		env->zinc - ZINC_STEP >= ZINC_MIN ? (env->zinc -= ZINC_STEP) : false;
 }
 
 int			fdf_keys_hook(int key, t_env *env)
@@ -72,7 +76,7 @@ int			fdf_keys_hook(int key, t_env *env)
 	}
 	else
 		env->is_frog_render = false;
-	add_hook_zoom_projectnrot(key, env);
+	add_hook_zoom_projectnzinc(key, env);
 	fdf_rendering(env);
 	return (0);
 }
