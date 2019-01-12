@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 10:21:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 20:32:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		fdf_zooming(t_env *env)
 			{
 				env->raw[p.y][p.x].y * env->zoom,
 				env->raw[p.y][p.x].x * env->zoom,
-				env->raw[p.y][p.x].z * env->zoom  * env->zinc,
+				env->raw[p.y][p.x].z * env->zoom,
 				env->render[p.y][p.x].rgb
 			};
 }
@@ -58,7 +58,9 @@ static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 	fdf_zooming(env);
 	env->sy = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2.0) + env->dy;
 	env->sx = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2.0) + env->dx;
+	ft_putnbr(env->sy); ft_putchar(' '); ft_putnbr(env->sx); ft_putchar('\n');
 	env->project == P_ISO ? fdf_isometric(env) : false;
+	ft_putnbr(env->sy); ft_putchar(' '); ft_putnbr(env->sx); ft_putchar('\n');
 	env->project == P_PAR && (env->project = P_PAR);
 	isr->is_shifty = env->dy;
 	isr->is_shiftx = env->dx;

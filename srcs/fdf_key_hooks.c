@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 10:26:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 20:34:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ static void	add_hook_zoom_projectnzinc(int key, t_env *env)
 		env->zoom - ZOOM_INC >= ZOOM_MIN ? (env->zoom -= ZOOM_INC) : false;
 	key == KEY_I && (env->project = P_ISO);
 	key == KEY_P && (env->project = P_PAR);
-	if (key == KEY_R)
-		env->zinc + ZINC_STEP <= ZINC_MAX ? (env->zinc += ZINC_STEP) : false;
-	if (key == KEY_F)
-		env->zinc - ZINC_STEP >= ZINC_MIN ? (env->zinc -= ZINC_STEP) : false;
 }
 
 int			fdf_keys_hook(int key, t_env *env)

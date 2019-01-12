@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 15:57:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 20:33:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	add_init_centralize(t_env *env)
 static void	add_is_render_init(t_isrender *isr, t_env *env)
 {
 	fdf_add_print_usage();
-	*isr = (t_isrender){isr->is_color, ZERO, env->zoom, ZERO,
+	*isr = (t_isrender){isr->is_color, env->zoom, ZERO,
 			env->dy, env->dx, true, true, isr->is_center, isr->is_frog};
 	fdf_zooming(env);
 	add_init_centralize(env);
@@ -58,11 +58,6 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 	{
 		fdf_ymove(env, ((env->dy > isr->is_shifty) ? SHIFT_INC : -SHIFT_INC));
 		isr->is_shifty = env->dy;
-	}
-	if (isr->is_zinc != env->zinc && (isr->is_render = true))
-	{
-		isr->is_zinc = env->zinc;
-		fdf_refresh_buff(env, isr);
 	}
 }
 

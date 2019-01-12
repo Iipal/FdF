@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 14:52:22 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 16:15:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 20:32:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,9 @@ static void	add_isometric_center(t_env *env)
 			(max.y < _Y) ? (max.y = _Y) : ZERO;
 		}
 	center.x = (max.x - min.x) / 2.0;
-	center.y = (max.y - min.y) / 2.0;
-	env->sx = (WIN_X / 2) - center.x;
-	env->sy = (WIN_Y / 2) - center.y;
-	ft_putnbr(env->sx);
-	write(1, " ", 1);
-	ft_putnbr(env->sy);
-	write(1, "\n", 1);
+	center.y = (max.y + min.y) / 2.0;
+	env->sx = (WIN_X / 2) - center.x + env->dx;
+	env->sy = (WIN_Y / 2) - center.y + env->dy;
 }
 
 void		fdf_isometric(t_env *env)
