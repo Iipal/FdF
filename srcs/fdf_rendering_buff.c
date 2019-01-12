@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 20:35:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 20:40:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ void		fdf_zooming(t_env *env)
 static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 {
 	fdf_zooming(env);
-	env->sy = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2.0) + env->dy;
-	env->sx = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2.0) + env->dx;
+	if (env->project == P_PAR)
+	{
+		env->sx = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2.0) + env->dx;
+		env->sy = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2.0) + env->dy;
+	}
 	env->project == P_ISO ? fdf_isometric(env) : false;
-	env->project == P_PAR && (env->project = P_PAR);
 	isr->is_shifty = env->dy;
 	isr->is_shiftx = env->dx;
 	isr->is_zoomed = env->zoom;

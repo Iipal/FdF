@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 20:15:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/08 18:53:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 21:01:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	fdf_set_image_pixel(point p, int color, t_mlx *mlx)
 {
-	if ((p.x >= 0 && p.x < WIN_X) && (p.y >= 0 && p.y < WIN_Y))
+	if ((p.x >= ZERO && p.x < WIN_X) && (p.y >= ZERO && p.y < WIN_Y))
 		mlx->img[p.y * WIN_X + p.x] = color;
 }
 

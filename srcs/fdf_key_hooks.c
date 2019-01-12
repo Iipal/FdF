@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 20:34:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 21:01:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 int			fdf_khook_close_window(t_env *env)
 {
 	fdf_free_env(&env);
-	exit(1);
-	return (0);
+	exit(EXIT_SUCCESS);
+	return (false);
 }
 
 static void	add_change_color(int *color)
@@ -74,5 +74,5 @@ int			fdf_keys_hook(int key, t_env *env)
 		env->is_frog_render = false;
 	add_hook_zoom_projectnzinc(key, env);
 	fdf_rendering(env);
-	return (0);
+	return (false);
 }

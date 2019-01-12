@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 14:52:22 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 20:32:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 20:50:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ static void	add_isometric_center(t_env *env)
 	fpoint		center;
 
 	p.y = ZERO;
-	min = (fpoint) {env->render[ZERO][ZERO].y, env->render[ZERO][ZERO].x};
-	max = (fpoint) {env->render[env->my - 1][env->mx - 1].y,
-					env->render[env->my - 1][env->mx - 1].x};
+	min = (fpoint) {(**(env->render)).y, (**(env->render)).x};
+	max = (fpoint) {(**(env->render)).y, (**(env->render)).x};
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
 		{

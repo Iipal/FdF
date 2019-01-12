@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 20:12:15 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/08 18:49:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 20:55:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int		fdf_glen(int delta, int p, int xy)
 	int	gradient_len;
 
 	gradient_len = ZERO;
-	while (((delta > 0) ? (xy <= p) : (xy >= p)))
+	while (((delta > ZERO) ? (xy <= p) : (xy >= p)))
 	{
 		++gradient_len;
-		(delta > 0) ? ++xy : --xy;
+		(delta > ZERO) ? ++xy : --xy;
 	}
 	return (gradient_len);
 }

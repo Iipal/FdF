@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_frog.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipal <ipal@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2018/12/28 13:28:18 by ipal             ###   ########.fr       */
+/*   Updated: 2019/01/12 21:00:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void		fdf_print_fucking_frog(t_env *env)
 				mlx_pixel_put(env->mlx, env->win,
 						p.x, p.y, env->frog[p.y][p.x]);
 }
+
+/*
+**	'add_change_grid_color':
+**		There are several while loops for two different objects.
+*/
 
 static void	add_change_grid_color(t_env *env, int old, int new)
 {
