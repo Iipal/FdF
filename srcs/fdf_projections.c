@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 14:52:22 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 12:46:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/12 16:15:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ static void	add_isometric_center(t_env *env)
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
 		{
-			(max.x < _X * env->zoom) ? (max.x = _X * env->zoom) : ZERO;
-			(min.x > _X * env->zoom) ? (min.x = _X * env->zoom) : ZERO;
-			(min.y > _Y * env->zoom) ? (min.y = _Y * env->zoom) : ZERO;
-			(max.y < _Y * env->zoom) ? (max.y = _Y * env->zoom) : ZERO;
+			(max.x < _X) ? (max.x = _X) : ZERO;
+			(min.x > _X) ? (min.x = _X) : ZERO;
+			(min.y > _Y) ? (min.y = _Y) : ZERO;
+			(max.y < _Y) ? (max.y = _Y) : ZERO;
 		}
 	center.x = (max.x - min.x) / 2.0;
 	center.y = (max.y - min.y) / 2.0;
-	env->sx = -((WIN_X - center.x) / 2);
-	env->sy = -((WIN_Y - center.y) / 2);
+	env->sx = (WIN_X / 2) - center.x;
+	env->sy = (WIN_Y / 2) - center.y;
 	ft_putnbr(env->sx);
 	write(1, " ", 1);
 	ft_putnbr(env->sy);
