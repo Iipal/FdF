@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 17:49:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 17:51:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,7 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 	if (isr->is_zoomed != env->zoom)
 		isr->is_render = true;
 	if (isr->is_project != env->project && (isr->is_render = true))
-	{
 		isr->is_project = env->project;
-		// env->project == P_ISO ? fdf_refresh_buff(env, isr) : false;
-		// env->project == P_PAR ? fdf_refresh_buff(env, isr) : false;
-	}
 	if (isr->is_shiftx != env->dx && (isr->is_render = true))
 	{
 		fdf_xmove(env, ((env->dx > isr->is_shiftx) ? SHIFT_INC : -SHIFT_INC));
