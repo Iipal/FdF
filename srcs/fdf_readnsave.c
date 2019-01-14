@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/08 18:54:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 14:47:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,6 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
 		ft_strdel(&gnl_temp);
 	}
 	_NOTIS_F(add_save_tomatrix(file, env));
+	_NOTIS_MSG(E_IMAP, fdf_add_valid_values_on_map(env));
 	return (true);
 }
