@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 18:03:33 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 20:29:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		fdf_ymove(t_env *env, float inc)
 			inc < ZERO ? (_Y -= _ABS(inc)) : (_Y += inc);
 }
 
-static void	add_xyzrot_formula(t_env *env, t_matrix *m, point *p, point *c)
+static void	add_xyzrot_formula(t_env *env, t_matrix *m, point *p, fpoint *c)
 {
 	*m = (t_matrix){_YP, _XP, _ZP, m->rgb};
 	_YP = c->y + (m->y - c->y) * _COS(env->rotx)
@@ -54,11 +54,11 @@ static void	add_xyzrot_formula(t_env *env, t_matrix *m, point *p, point *c)
 void		fdf_rotare(t_env *env)
 {
 	point		p;
-	point		c;
+	fpoint		c;
 	t_matrix	m;
 
-	c = (point){(env->sy - ((env->my - 1.0) * env->zoom)) / 2,
-				(env->sx - ((env->mx - 1.0) * env->zoom)) / 2};
+	c = (fpoint){env->sy - (((env->my - 1.0) * env->zoom) / 2),
+				env->sx - (((env->mx - 1.0) * env->zoom) / 2)};
 	m.rgb = env->render[env->my / 2][env->mx / 2].z;
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
