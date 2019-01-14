@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 14:40:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 15:41:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@
 # define WIN_EXIT_MASK	(1L << 17)
 
 # define PI				3.141592
+
+	long	res;
+
+# define INT_MAX		2147483647
+# define INT_MIN		(-INT_MAX-1)
 
 # define NEG			-1
 # define ZERO			0
@@ -65,6 +70,11 @@
 # define V_HEX			",0x"
 # define V_HEXS			','
 # define V_NEGS			'-'
+
+# define ISMAX(n) if (((long)(n) * ZOOM_MAX) > INT_MAX) { return (false); }
+# define ISMIN(n) else if (((long)(n) * ZOOM_MAX) < INT_MIN) { return (false); }
+
+# define ISVALIDZ(n) ISMAX(n) ISMIN(n)
 
 # define _MSG(msg) ft_putstr(msg);
 # define _MSGN(msg) ft_putendl(msg);
@@ -211,7 +221,6 @@ void			fdf_ymove(t_env *env, float inc);
 
 void			fdf_add_print_usage(void);
 void			fdf_add_colored_map(t_env *env);
-bool			fdf_add_valid_values_on_map(t_env *env);
 
 void			fdf_free_env(t_env **env);
 void			fdf_free_matrix(t_matrix ***m, int matrix_y);

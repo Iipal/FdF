@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 17:01:19 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 14:47:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 15:41:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static bool		add_line_tomatrix(string line, t_matrix *matrix,
 		if ((ft_isdigit(*line) || *line == V_NEGS) && (++x > -1))
 		{
 			matrix[x] = (t_matrix){y, x, ft_atoi(line), IRGB_WHITE};
+			ISVALIDZ(matrix[x].z);
 			temp_digits = ft_itoa(matrix[x].z);
 			digits = ft_strlen(temp_digits);
 			ft_strdel(&temp_digits);
@@ -130,6 +131,5 @@ bool			fdf_file_readnsave_env(cstring file_name, t_env *env)
 		ft_strdel(&gnl_temp);
 	}
 	_NOTIS_F(add_save_tomatrix(file, env));
-	_NOTIS_MSG(E_IMAP, fdf_add_valid_values_on_map(env));
 	return (true);
 }
