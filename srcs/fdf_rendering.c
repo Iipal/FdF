@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 20:33:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 17:49:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 {
 	isr->is_render = false;
 	(!isr->is_init) ? add_is_render_init(isr, env) : NULL;
-	if (isr->is_zoomed != env->zoom && (isr->is_render = true))
-		fdf_refresh_buff(env, isr);
+	if (isr->is_zoomed != env->zoom)
+		isr->is_render = true;
 	if (isr->is_project != env->project && (isr->is_render = true))
 	{
 		isr->is_project = env->project;
-		env->project == P_ISO ? fdf_refresh_buff(env, isr) : false;
-		env->project == P_PAR ? fdf_refresh_buff(env, isr) : false;
+		// env->project == P_ISO ? fdf_refresh_buff(env, isr) : false;
+		// env->project == P_PAR ? fdf_refresh_buff(env, isr) : false;
 	}
 	if (isr->is_shiftx != env->dx && (isr->is_render = true))
 	{
@@ -76,6 +76,7 @@ void		fdf_rendering(t_env *env)
 	fdf_is_render_frog(&isr, env);
 	if (isr.is_render)
 	{
+		fdf_refresh_buff(env, &isr);
 		fdf_refresh_image(env);
 		if (env->is_frog_render)
 			fdf_print_fucking_frog(env);
