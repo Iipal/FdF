@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 20:40:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 18:02:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ static void	fdf_refresh_zoom(t_env *env, t_isrender *isr)
 void		fdf_refresh_buff(t_env *env, t_isrender *isr)
 {
 	fdf_refresh_zoom(env, isr);
+	fdf_rotare(env);
 	fdf_xmove(env, env->sx);
 	fdf_ymove(env, env->sy);
+	isr->is_roty = env->roty;
+	isr->is_rotx = env->rotx;
+	isr->is_rotz = env->rotz;
 }

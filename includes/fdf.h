@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 15:41:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 18:01:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,9 @@ typedef struct	s_fdf_environment
 	short		dx;
 	float		sy;
 	float		sx;
+	float		roty;
+	float		rotx;
+	float		rotz;
 	iarr		screen;
 	bool		is_frog_render;
 	uchar		project;
@@ -142,6 +145,9 @@ typedef struct	s_fdf_environment
 typedef struct	s_isrender
 {
 	int		is_color;
+	float	is_roty;
+	float	is_rotx;
+	float	is_rotz;
 	uchar	is_zoomed;
 	uchar	is_project;
 	short	is_shifty;
@@ -218,6 +224,7 @@ int				fdf_khook_close_window(t_env *env);
 
 void			fdf_xmove(t_env *env, float inc);
 void			fdf_ymove(t_env *env, float inc);
+void			fdf_rotare(t_env *env);
 
 void			fdf_add_print_usage(void);
 void			fdf_add_colored_map(t_env *env);

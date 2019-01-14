@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:50 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 10:14:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 17:56:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 # define KEY_A			97
 # define KEY_S			115
 # define KEY_D			100
+
+# define KEY_T			116
+# define KEY_G			103
+# define KEY_Y			121
+# define KEY_H			104
+# define KEY_U			117
+# define KEY_J			106
 
 # define KEY_I			105
 # define KEY_P			112
