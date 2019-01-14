@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 18:01:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 18:11:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ typedef struct	s_isrender
 	short	is_shiftx;
 	bool	is_init:1;
 	bool	is_render:1;
-	bool	is_center:1;
 	bool	is_frog:1;
 }				t_isrender;
 
