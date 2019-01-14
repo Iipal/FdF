@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 18:11:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/14 20:18:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@
 # define WIN_EXIT_MASK	(1L << 17)
 
 # define PI				3.141592
-
-	long	res;
 
 # define INT_MAX		2147483647
 # define INT_MIN		(-INT_MAX-1)
