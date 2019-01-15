@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/15 19:39:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/15 19:44:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include "../includes/frog.h"
 
-static void	add_init_centralize(t_env *env)
+/* static void	add_init_centralize(t_env *env)
 {
 	point	p;
 
@@ -26,7 +26,7 @@ static void	add_init_centralize(t_env *env)
 			env->render[p.y][p.x].y += env->sy;
 			env->render[p.y][p.x].x += env->sx;
 		}
-}
+} */
 
 static void	add_is_render_init(t_isrender *isr, t_env *env)
 {
@@ -34,7 +34,7 @@ static void	add_is_render_init(t_isrender *isr, t_env *env)
 	*isr = (t_isrender){isr->is_color, env->roty, env->rotx, env->rotz,
 				env->zoom, P_PAR, env->dy, env->dx, true, true, isr->is_frog};
 	fdf_zooming_buff(env);
-	add_init_centralize(env);
+	fdf_center_of_buff(env);
 }
 
 static void	add_is_render_rot(t_isrender *isr, t_env *env)

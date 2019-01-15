@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/15 19:41:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/15 19:47:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ bool	fdf_init_render_buff(t_env *env)
 		}
 		else
 			while (++(p.x) < env->mx)
-				env->render[p.y][p.x] = (t_matrix)
-				{
+				env->render[p.y][p.x] = (t_matrix) {
 					env->raw[p.y][p.x].y,
 					env->raw[p.y][p.x].x,
 					env->raw[p.y][p.x].z,
-					env->raw[p.y][p.x].rgb
-				};
+					env->raw[p.y][p.x].rgb };
 	return (true);
 }
 
