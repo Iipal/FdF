@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/15 19:41:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/15 20:31:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,12 @@
 # define _ABS(var) ((var) < 0) ? -(var) : (var)
 # define _RAD(deg) (((deg) * PI) / 180.0)
 
-# define _COS(angle) cos(_RAD(angle))
-# define _SIN(angle) sin(_RAD(angle))
+# define _COSR(angle) cos(_RAD(angle))
+# define _SINR(angle) sin(_RAD(angle))
 
 # define _Y env->render[p.y][p.x].y
 # define _X env->render[p.y][p.x].x
 # define _Z env->render[p.y][p.x].z
-# define _YP env->render[p->y][p->x].y
-# define _XP env->render[p->y][p->x].x
-# define _ZP env->render[p->y][p->x].z
 
 enum	e_bool
 {
