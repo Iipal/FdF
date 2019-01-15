@@ -6,30 +6,23 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 20:29:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/15 19:40:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void		fdf_xmove(t_env *env, float inc)
+void		fdf_move_buff(t_env *env, float xinc, float yinc)
 {
 	point	p;
 
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
-			inc < ZERO ? (_X -= _ABS(inc)) : (_X += inc);
-}
-
-void		fdf_ymove(t_env *env, float inc)
-{
-	point	p;
-
-	p.y = NEG;
-	while (++(p.y) < env->my && (p.x = NEG))
-		while (++(p.x) < env->mx)
-			inc < ZERO ? (_Y -= _ABS(inc)) : (_Y += inc);
+		{
+			xinc < ZERO ? (_X -= _ABS(xinc)) : (_X += xinc);
+			yinc < ZERO ? (_Y -= _ABS(yinc)) : (_Y += yinc);
+		}
 }
 
 static void	add_xyzrot_formula(t_env *env, t_matrix *m, point *p, fpoint *c)
@@ -51,7 +44,7 @@ static void	add_xyzrot_formula(t_env *env, t_matrix *m, point *p, fpoint *c)
 		+ (m->y - c->y) * _COS(env->rotz);
 }
 
-void		fdf_rotare(t_env *env)
+void		fdf_rotare_buff(t_env *env)
 {
 	point		p;
 	fpoint		c;

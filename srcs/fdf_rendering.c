@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 18:13:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/15 19:39:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	add_is_render_init(t_isrender *isr, t_env *env)
 	fdf_add_print_usage();
 	*isr = (t_isrender){isr->is_color, env->roty, env->rotx, env->rotz,
 				env->zoom, P_PAR, env->dy, env->dx, true, true, isr->is_frog};
-	fdf_zooming(env);
+	fdf_zooming_buff(env);
 	add_init_centralize(env);
 }
 
@@ -69,12 +69,12 @@ static void	add_is_render(t_isrender *isr, t_env *env)
 		isr->is_project = env->project;
 	if (isr->is_shiftx != env->dx && (isr->is_render = true))
 	{
-		fdf_xmove(env, ((env->dx > isr->is_shiftx) ? SHIFT_INC : -SHIFT_INC));
+		fdf_move_buff(env, ((env->dx > isr->is_shiftx) ? SHIFT_INC : -SHIFT_INC), ZERO);
 		isr->is_shiftx = env->dx;
 	}
 	if (isr->is_shifty != env->dy && (isr->is_render = true))
 	{
-		fdf_ymove(env, ((env->dy > isr->is_shifty) ? SHIFT_INC : -SHIFT_INC));
+		fdf_move_buff(env, ZERO, ((env->dy > isr->is_shifty) ? SHIFT_INC : -SHIFT_INC));
 		isr->is_shifty = env->dy;
 	}
 }

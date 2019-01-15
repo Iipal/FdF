@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 20:29:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/15 19:41:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,10 @@ bool			fdf_init_render_buff(t_env *env);
 void			fdf_refresh_buff(t_env *env, t_isrender *isr);
 void			fdf_set_image_pixel(point p, int color, t_mlx *mlx);
 void			fdf_refresh_image(t_env *env);
-void			fdf_zooming(t_env *env);
+void			fdf_zooming_buff(t_env *env);
+void			fdf_move_buff(t_env *env, float xinc, float yinc);
+void			fdf_center_of_buff(t_env *env);
+void			fdf_rotare_buff(t_env *env);
 
 void			fdf_isometric(t_env *env);
 
@@ -218,10 +221,6 @@ int				fdf_glen(int delta, int p, int xy);
 
 int				fdf_keys_hook(int key, t_env *env);
 int				fdf_khook_close_window(t_env *env);
-
-void			fdf_xmove(t_env *env, float inc);
-void			fdf_ymove(t_env *env, float inc);
-void			fdf_rotare(t_env *env);
 
 void			fdf_add_print_usage(void);
 void			fdf_add_colored_map(t_env *env);

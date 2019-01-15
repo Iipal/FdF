@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 19:31:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/15 19:41:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-bool		fdf_init_render_buff(t_env *env)
+bool	fdf_init_render_buff(t_env *env)
 {
 	point	p;
 
@@ -37,7 +37,31 @@ bool		fdf_init_render_buff(t_env *env)
 	return (true);
 }
 
-void		fdf_zooming(t_env *env)
+void	fdf_center_of_buff(t_env *env)
+{
+	point		p;
+	fpoint		min;
+	fpoint		max;
+	fpoint		center;
+
+	p.y = ZERO;
+	min = (fpoint) {(**(env->render)).y, (**(env->render)).x};
+	max = (fpoint) {(**(env->render)).y, (**(env->render)).x};
+	while (++(p.y) < env->my && (p.x = NEG))
+		while (++(p.x) < env->mx)
+		{
+			(max.x < _X) ? (max.x = _X) : ZERO;
+			(min.x > _X) ? (min.x = _X) : ZERO;
+			(min.y > _Y) ? (min.y = _Y) : ZERO;
+			(max.y < _Y) ? (max.y = _Y) : ZERO;
+		}
+	center.x = (max.x - min.x) / 2.0;
+	center.y = (max.y + min.y) / 2.0;
+	env->sx = (WIN_X / 2) - center.x + env->dx;
+	env->sy = (WIN_Y / 2) - center.y + env->dy;
+}
+
+void	fdf_zooming_buff(t_env *env)
 {
 	point	p;
 
@@ -53,18 +77,13 @@ void		fdf_zooming(t_env *env)
 			};
 }
 
-void		fdf_refresh_buff(t_env *env, t_isrender *isr)
+void	fdf_refresh_buff(t_env *env, t_isrender *isr)
 {
-	fdf_zooming(env);
-	if (env->project == P_PAR)
-	{
-		env->sx = ((WIN_X - ((env->mx - 1.0) * env->zoom)) / 2.0) + env->dx;
-		env->sy = ((WIN_Y - ((env->my - 1.0) * env->zoom)) / 2.0) + env->dy;
-	}
+	fdf_zooming_buff(env);
 	env->project == P_ISO ? fdf_isometric(env) : false;
-	fdf_rotare(env);
-	fdf_xmove(env, env->sx);
-	fdf_ymove(env, env->sy);
+	fdf_center_of_buff(env);
+	fdf_rotare_buff(env);
+	fdf_move_buff(env, env->sx, env->sy);
 	*isr = (t_isrender) {isr->is_color, env->roty, env->rotx, env->rotz,
 		env->zoom, env->project, env->dy, env->dx, true, true, isr->is_frog};
 }
