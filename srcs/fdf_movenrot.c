@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/15 20:37:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 11:43:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,19 @@ void	fdf_move_buff(t_env *env, float xinc, float yinc)
 		}
 }
 
-/* x'=x;
-y':=y*cos(L)+z*sin(L) ;
-z':=-y*sin(L)+z*cos(L) ;
-
-x'=x*cos(L)+z*sin(L);
-y'=y;
-z'=-x*sin(L)+z*cos(L);
-
-x'=x*cos(L)-y*sin(L);
-y'=-x*sin(L)+y*cos(L);
-z'=z; */
+/*
+*	x' = x;
+*	y' := y * cos(L)+ z * sin(L);
+*	z' := -y * sin(L)+ z * cos(L);
+*
+*	x' = x * cos(L) + z * sin(L);
+*	y' = y;
+*	z' = -x * sin(L) + z * cos(L);
+*
+*	x' = x * cos(L) - y * sin(L);
+*	y' = -x * sin(L) + y * cos(L);
+*	z' = z;
+**/
 
 void	fdf_rotare_buff(t_env *env)
 {

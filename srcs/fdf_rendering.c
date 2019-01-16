@@ -6,27 +6,12 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 11:34:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 11:50:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include "../includes/frog.h"
-
-/* static void	add_init_centralize(t_env *env)
-{
-	point	p;
-
-	p.y = NEG;
-	env->sy = (WIN_Y - ((env->my - 1.0) * env->zoom)) / 2;
-	env->sx = (WIN_X - ((env->mx - 1.0) * env->zoom)) / 2;
-	while (++(p.y) < env->my && (p.x = NEG))
-		while (++(p.x) < env->mx)
-		{
-			env->render[p.y][p.x].y += env->sy;
-			env->render[p.y][p.x].x += env->sx;
-		}
-} */
 
 static void	add_is_render_init(t_isrender *isr, t_env *env)
 {
@@ -37,10 +22,8 @@ static void	add_is_render_init(t_isrender *isr, t_env *env)
 	fdf_center_of_buff(env);
 }
 
-static void	add_is_render(t_isrender *isr, t_env *env)
+static void	add_is_refresh_rendering_buff(t_isrender *isr, t_env *env)
 {
-	isr->is_refresh_buff = false;
-	(!isr->is_init) ? add_is_render_init(isr, env) : NULL;
 	if (isr->is_zoom != env->zoom)
 		isr->is_refresh_buff = true;
 	if (isr->is_project != env->project)
@@ -70,18 +53,17 @@ void		fdf_rendering(t_env *env)
 {
 	static t_isrender	isr;
 
-	env->frog ? (isr.is_frog = true) : false;
+	printf("%lu\n", sizeof(t_isrender));
+	isr.is_refresh_buff = false;
 	if (!env->render)
 		if (!fdf_init_render_buff(env))
-		{
-			fdf_free_env(&env);
 			exit(EXIT_SUCCESS);
-		}
-	add_is_render(&isr, env);
+	env->frog ? (isr.is_frog = true) : false;
+	(!isr.is_init) ? add_is_render_init(&isr, env) : NULL;
+	add_is_refresh_rendering_buff(&isr, env);
 	fdf_is_render_frog(&isr, env);
 	if (isr.is_refresh_buff)
 	{
-		printf("refresh \n");
 		fdf_refresh_buff(env, &isr);
 		fdf_refresh_image(env);
 		if (env->is_frog_render)

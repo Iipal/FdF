@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 11:33:50 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 11:48:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ typedef struct	s_fdf_environment
 	float		rotx;
 	float		rotz;
 	iarr		screen;
-	bool		is_frog_render;
-	uchar		project;
+	bool		is_frog_render:1;
+	uchar		project:2;
 }				t_env;
 
 typedef struct	s_isrender
