@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:44:34 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/15 19:46:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 11:03:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	add_change_grid_color(t_env *env, int old, int new)
 void		fdf_is_render_frog(t_isrender *isr, t_env *env)
 {
 	if (isr->is_frog && env->is_frog_render)
-		if (isr->is_color != env->color && (isr->is_render = true))
+		if (isr->is_color != env->color && (isr->is_refresh_buff = true))
 		{
 			add_change_grid_color(env, isr->is_color, env->color);
 			isr->is_color = env->color;

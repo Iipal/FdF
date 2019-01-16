@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/15 20:31:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 11:33:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 
 # define SHIFT_INC		15
 
-# define ROT_MIN		0.0
+# define ROT_MIN		-360.0
 # define ROT_INC		5.0
 # define ROT_MAX		360.0
 
@@ -143,12 +143,12 @@ typedef struct	s_isrender
 	float	is_roty;
 	float	is_rotx;
 	float	is_rotz;
-	uchar	is_zoomed;
+	uchar	is_zoom;
 	uchar	is_project;
 	short	is_shifty;
 	short	is_shiftx;
 	bool	is_init:1;
-	bool	is_render:1;
+	bool	is_refresh_buff:1;
 	bool	is_frog:1;
 }				t_isrender;
 

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/15 20:36:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 11:03:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ void	fdf_refresh_buff(t_env *env, t_isrender *isr)
 	fdf_center_of_buff(env);
 	fdf_move_buff(env, env->sx, env->sy);
 	*isr = (t_isrender) {isr->is_color, env->roty, env->rotx, env->rotz,
-		env->zoom, env->project, env->dy, env->dx, true, true, isr->is_frog};
+		env->zoom, env->project, env->dy, env->dx, true, false, isr->is_frog};
 }
