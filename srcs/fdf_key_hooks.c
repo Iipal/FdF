@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 18:02:32 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 20:03:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ static void	add_hook_zoom_projectnzinc(int key, t_env *env)
 	key == KEY_G ? (env->rotx -= ROT_INC) : ZERO;
 	key == KEY_Y ? (env->roty += ROT_INC) : ZERO;
 	key == KEY_H ? (env->roty -= ROT_INC) : ZERO;
-	key == KEY_U ? (env->rotz += ROT_INC) : ZERO;
-	key == KEY_J ? (env->rotz -= ROT_INC) : ZERO;
 	key == KEY_I && (env->project = P_ISO);
 	key == KEY_P && (env->project = P_PAR);
 }

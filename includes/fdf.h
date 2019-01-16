@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 11:48:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 20:03:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@
 
 # define SHIFT_INC		15
 
-# define ROT_MIN		-360.0
+# define ROT_MIN		0.0
 # define ROT_INC		5.0
 # define ROT_MAX		360.0
 
 # define ZOOM_INC		1.5
 # define ZOOM_MIN		1
 # define ZOOM_DEF		15
-# define ZOOM_MAX		255
+# define ZOOM_MAX		128
 
 # define E_USAGE		"Usage: ./fdf <map_name>"
 # define E_ALLOC		"Where is memory, pal ?"
@@ -91,11 +91,7 @@
 # define _X env->render[p.y][p.x].x
 # define _Z env->render[p.y][p.x].z
 
-enum	e_bool
-{
-	false,
-	true
-};
+enum	e_bool { false, true };
 
 # define _BOOL	typedef enum e_bool	bool
 # define _ITAB	typedef int**		itab
@@ -107,11 +103,18 @@ _IARR;
 
 typedef struct	s_matrix
 {
-	int	y;
-	int	x;
-	int	z;
-	int	rgb;
+	float	y;
+	float	x;
+	float	z;
+	int		rgb;
 }				t_matrix;
+
+typedef struct	s_3d_point
+{
+	float	y;
+	float	x;
+	float	z;
+}				t_3d_p;
 
 typedef struct	s_fdf_environment
 {
@@ -121,7 +124,7 @@ typedef struct	s_fdf_environment
 	pvoid		win;
 	pvoid		img;
 	itab		frog;
-	uchar		zoom;
+	uchar		zoom:7;
 	int			color;
 	int			my;
 	int			mx;
@@ -131,7 +134,7 @@ typedef struct	s_fdf_environment
 	float		sx;
 	float		roty;
 	float		rotx;
-	float		rotz;
+	t_3d_p		fcenter;
 	iarr		screen;
 	bool		is_frog_render:1;
 	uchar		project:2;
@@ -142,7 +145,6 @@ typedef struct	s_isrender
 	int		is_color;
 	float	is_roty;
 	float	is_rotx;
-	float	is_rotz;
 	uchar	is_zoom;
 	uchar	is_project;
 	short	is_shifty;
@@ -150,6 +152,7 @@ typedef struct	s_isrender
 	bool	is_init:1;
 	bool	is_refresh_buff:1;
 	bool	is_frog:1;
+	bool	is_center:1;
 }				t_isrender;
 
 typedef struct	s_point
@@ -221,6 +224,8 @@ int				fdf_khook_close_window(t_env *env);
 
 void			fdf_add_print_usage(void);
 void			fdf_add_colored_map(t_env *env);
+
+void			add_print_matrix(t_env *env);
 
 void			fdf_free_env(t_env **env);
 void			fdf_free_matrix(t_matrix ***m, int matrix_y);
