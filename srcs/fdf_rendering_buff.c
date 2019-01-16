@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 20:29:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 22:59:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ bool	fdf_init_render_buff(t_env *env)
 		else
 			while (++(p.x) < env->mx)
 				env->render[p.y][p.x] = (t_matrix) { env->raw[p.y][p.x].y,
-								env->raw[p.y][p.x].x, env->raw[p.y][p.x].z,
-								env->raw[p.y][p.x].rgb};
+					env->raw[p.y][p.x].x, env->raw[p.y][p.x].z,
+					env->raw[p.y][p.x].rgb};
 	return (true);
 }
 
@@ -68,24 +68,9 @@ void	fdf_zooming_buff(t_env *env)
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
-			env->render[p.y][p.x] = (t_matrix){
-				env->raw[p.y][p.x].y * env->zoom,
+			env->render[p.y][p.x] = (t_matrix){ env->raw[p.y][p.x].y * env->zoom,
 				env->raw[p.y][p.x].x * env->zoom,
-				env->raw[p.y][p.x].z * env->zoom,
-				env->render[p.y][p.x].rgb};
-}
-
-void	add_print_matrix(t_env *env)
-{
-	point	p;
-
-	p.y = NEG;
-	while (++(p.y) < env->my && (p.x = NEG))
-	{
-		while (++(p.x) < env->mx)
-			printf("%lf - %lf - %lf | ", _Y, _X, _Z);
-		printf("\n");
-	}
+				env->raw[p.y][p.x].z * env->zoom, env->render[p.y][p.x].rgb};
 }
 
 void	fdf_refresh_buff(t_env *env, t_isrender *isr)
@@ -95,6 +80,6 @@ void	fdf_refresh_buff(t_env *env, t_isrender *isr)
 	fdf_rotare_buff(env);
 	env->project == P_ISO ? fdf_isometric(isr, env) : false;
 	fdf_move_buff(env, env->sx, env->sy);
-	*isr = (t_isrender) {isr->is_color, env->roty, env->rotx, env->zoom,
+	*isr = (t_isrender) {env->color, env->roty, env->rotx, env->zoom,
 		env->project, env->dy, env->dx, true, false, isr->is_frog};
 }

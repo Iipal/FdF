@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 20:29:24 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 22:54:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@
 # define V_HEXS			','
 # define V_NEGS			'-'
 
-# define ISMAX(n) if (((long)(n) * ZOOM_MAX) > INT_MAX) { return (false); }
-# define ISMIN(n) else if (((long)(n) * ZOOM_MAX) < INT_MIN) { return (false); }
+# define _ERR _MSGN(E_IMAP);
+# define ISMAX(n) if (((long)(n)*ZOOM_MAX)>INT_MAX){_ERR;return (false);}
+# define ISMIN(n) else if (((long)(n)*ZOOM_MAX)<INT_MIN){_ERR;return (false);}
 
 # define ISVALIDZ(n) ISMAX(n) ISMIN(n)
 
