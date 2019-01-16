@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 14:52:22 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 19:53:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 20:30:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void		fdf_isometric(t_env *env)
+void		fdf_isometric(t_isrender *isr, t_env *env)
 {
 	point	p;
 	t_3d_p	o;
@@ -28,4 +28,6 @@ void		fdf_isometric(t_env *env)
 				(1 / sqrt(6)) * (sqrt(2) * o.x - sqrt(2) * o.y + sqrt(2) * o.z),
 				env->render[p.y][p.x].rgb };
 		}
+	if (env->project != isr->is_project)
+		fdf_center_of_buff(env);
 }

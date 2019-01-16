@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 20:03:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 20:29:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ typedef struct	s_isrender
 	bool	is_init:1;
 	bool	is_refresh_buff:1;
 	bool	is_frog:1;
-	bool	is_center:1;
 }				t_isrender;
 
 typedef struct	s_point
@@ -213,7 +212,7 @@ void			fdf_move_buff(t_env *env, float xinc, float yinc);
 void			fdf_center_of_buff(t_env *env);
 void			fdf_rotare_buff(t_env *env);
 
-void			fdf_isometric(t_env *env);
+void			fdf_isometric(t_isrender *isr, t_env *env);
 
 void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
 iarr			fdf_gradient(t_g *g, int glen);

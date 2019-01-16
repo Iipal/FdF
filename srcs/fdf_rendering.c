@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 20:05:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 20:29:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 static void	add_is_render_init(t_isrender *isr, t_env *env)
 {
 	fdf_add_print_usage();
-	*isr = (t_isrender){isr->is_color, env->roty, env->rotx,
-				env->zoom, P_PAR, env->dy, env->dx, true, true,
-				isr->is_frog, true};
+	*isr = (t_isrender){isr->is_color, env->roty, env->rotx, env->zoom, P_PAR,
+		env->dy, env->dx, true, true, isr->is_frog};
 }
 
 static void	add_is_refresh_rendering_buff(t_isrender *isr, t_env *env)
@@ -32,16 +31,14 @@ static void	add_is_refresh_rendering_buff(t_isrender *isr, t_env *env)
 							? SHIFT_INC : -SHIFT_INC), ZERO);
 	if (isr->is_shifty != env->dy && (isr->is_refresh_buff = true))
 		fdf_move_buff(env, ZERO, ((env->dy > isr->is_shifty)
-							? SHIFT_INC : -SHIFT_INC));
+								? SHIFT_INC : -SHIFT_INC));
 	if (isr->is_rotx != env->rotx && (isr->is_refresh_buff = true))
 	{
-		isr->is_center = false;
 		(env->rotx >= ROT_MAX) ? (env->rotx -= ROT_MAX) : ZERO;
 		(env->rotx <= ROT_MIN) ? (env->rotx += ROT_MAX) : ZERO;
 	}
 	if (isr->is_roty != env->roty && (isr->is_refresh_buff = true))
 	{
-		isr->is_center = false;
 		(env->roty >= ROT_MAX) ? (env->roty -= ROT_MAX) : ZERO;
 		(env->roty <= ROT_MIN) ? (env->roty += ROT_MAX) : ZERO;
 	}

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 20:04:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/16 20:29:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,10 @@ void	add_print_matrix(t_env *env)
 void	fdf_refresh_buff(t_env *env, t_isrender *isr)
 {
 	fdf_zooming_buff(env);
+	fdf_center_of_buff(env);
 	fdf_rotare_buff(env);
-	env->project == P_ISO ? fdf_isometric(env) : false;
-	isr->is_center ? fdf_center_of_buff(env) : false;
+	env->project == P_ISO ? fdf_isometric(isr, env) : false;
 	fdf_move_buff(env, env->sx, env->sy);
-	*isr = (t_isrender) {isr->is_color, env->roty, env->rotx,
-		env->zoom, env->project, env->dy, env->dx, true, false,
-		isr->is_frog, true};
+	*isr = (t_isrender) {isr->is_color, env->roty, env->rotx, env->zoom,
+		env->project, env->dy, env->dx, true, false, isr->is_frog};
 }
