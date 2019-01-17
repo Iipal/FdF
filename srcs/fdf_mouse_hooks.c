@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 16:40:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 17:31:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 17:52:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int		fdf_mouse_moves(int x, int y, t_env *env)
 	env->mouse.curr.y = y;
 	if (env->mouse.pres)
 	{
-		env->rotx += (y - env->mouse.last.y) * 0.2;
-		env->roty -= (x - env->mouse.last.x) * 0.2;
+		env->rotx -= (y - env->mouse.last.y) * 0.2;
+		env->roty += (x - env->mouse.last.x) * 0.2;
 		fdf_rendering(env);
 	}
 	return (false);

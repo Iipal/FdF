@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 17:30:20 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 17:49:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@
 # define SHIFT_INC	15
 
 # define ROT_MIN	0.0
-# define ROT_INC	5.0
+# define ROT_INC	6.66
 # define ROT_MAX	360.0
 
-# define ZOOM_INC	1.5
+# define ZOOM_INC	1
 # define ZOOM_MIN	1
 # define ZOOM_DEF	15
 # define ZOOM_MAX	128

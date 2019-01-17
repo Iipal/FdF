@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 17:24:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 17:48:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void		add_settings_and_hooks(t_env *env)
 	mlx_hook(env->win, MOUSE_MOVE, MOUSE_MASK, fdf_mouse_moves, env);
 	mlx_hook(env->win, WIN_EXT, WIN_EXTM, fdf_khook_killwindow, env);
 	mlx_hook(env->win, KEY_PRESSED, KEY_RELEASE, fdf_keys_hook, env);
+	fdf_rendering(env);
 }
 
 int				main(int argc, char const *argv[])
@@ -58,6 +59,5 @@ int				main(int argc, char const *argv[])
 	_NOTIS_MPE(E_ALLOC, env = add_alloc_env((string)*argv));
 	_NOTIS_MPE(E_FILER, fdf_file_readnsave_env(*argv, env));
 	add_settings_and_hooks(env);
-	fdf_rendering(env);
-	env ? mlx_loop(env->mlx) : false;
+	mlx_loop(env->mlx);
 }
