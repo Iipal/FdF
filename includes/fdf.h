@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 10:51:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:56:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@
 # define ISMIN(n) else if (((long)(n)*ZOOM_MAX)<INT_MIN){_ERR;return (false);}
 # define ISVALIDZ(n) ISMAX(n) ISMIN(n)
 
-# define _Y env->render[p.y][p.x].y
-# define _X env->render[p.y][p.x].x
-# define _Z env->render[p.y][p.x].z
+# define _Y env->buff[p.y][p.x].y
+# define _X env->buff[p.y][p.x].x
+# define _Z env->buff[p.y][p.x].z
 
 enum	e_bool { false, true };
 
@@ -134,7 +134,7 @@ typedef struct	s_isrender
 typedef struct	s_fdf_environment
 {
 	t_matrix	**raw;
-	t_matrix	**render;
+	t_matrix	**buff;
 	pvoid		mlx;
 	pvoid		win;
 	pvoid		img;

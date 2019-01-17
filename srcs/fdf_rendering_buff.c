@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 10:45:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:56:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ bool	fdf_init_render_buff(t_env *env)
 	point	p;
 
 	p.y = NEG;
-	_NOTIS_F(env->render = (t_matrix**)malloc(sizeof(t_matrix*) * env->my));
+	_NOTIS_F(env->buff = (t_matrix**)malloc(sizeof(t_matrix*) * env->my));
 	while (++(p.y) < env->my && (p.x = NEG))
-		if (!(env->render[p.y] = (t_matrix*)malloc(sizeof(t_matrix) * env->mx)))
+		if (!(env->buff[p.y] = (t_matrix*)malloc(sizeof(t_matrix) * env->mx)))
 		{
-			fdf_free_matrix(&(env->render), p.y);
+			fdf_free_matrix(&(env->buff), p.y);
 			fdf_free_env(&env);
 			return (false);
 		}
 		else
 			while (++(p.x) < env->mx)
-				env->render[p.y][p.x] = (t_matrix) { env->raw[p.y][p.x].y,
+				env->buff[p.y][p.x] = (t_matrix) { env->raw[p.y][p.x].y,
 					env->raw[p.y][p.x].x, env->raw[p.y][p.x].z,
 					env->raw[p.y][p.x].rgb};
 	return (true);
@@ -40,10 +40,10 @@ void	fdf_center_of_buff(t_env *env)
 	t_3d_p		max;
 
 	p.y = ZERO;
-	min = (t_3d_p){(**(env->render)).y,
-		(**(env->render)).x, (**(env->render)).z};
-	max = (t_3d_p){(**(env->render)).y,
-		(**(env->render)).x, (**(env->render)).z};
+	min = (t_3d_p){(**(env->buff)).y,
+		(**(env->buff)).x, (**(env->buff)).z};
+	max = (t_3d_p){(**(env->buff)).y,
+		(**(env->buff)).x, (**(env->buff)).z};
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
 		{
@@ -67,9 +67,9 @@ void	fdf_zooming_buff(t_env *env)
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
-			env->render[p.y][p.x] = (t_matrix){env->raw[p.y][p.x].y * env->zoom,
+			env->buff[p.y][p.x] = (t_matrix){env->raw[p.y][p.x].y * env->zoom,
 				env->raw[p.y][p.x].x * env->zoom,
-				env->raw[p.y][p.x].z * env->zoom, env->render[p.y][p.x].rgb};
+				env->raw[p.y][p.x].z * env->zoom, env->buff[p.y][p.x].rgb};
 }
 
 void	fdf_refresh_buff(t_env *env)

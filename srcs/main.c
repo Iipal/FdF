@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:47:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 10:51:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:59:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void		fdf_init_hooks(t_env *env)
 
 static void		fdf_settings(t_env *env)
 {
-	if (!env->render)
+	if (!env->buff)
 		if (!fdf_init_render_buff(env))
 			exit(EXIT_SUCCESS);
 	env->frog ? (env->isr.is_frog = true) : false;

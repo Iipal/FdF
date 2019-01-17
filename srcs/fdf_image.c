@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 20:15:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 21:01:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:57:19 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	fdf_set_image_pixel(point p, int color, t_mlx *mlx)
 void	fdf_refresh_image(t_env *env)
 {
 	ft_bzero(env->screen, sizeof(int) * WIN_X * WIN_Y);
-	fdf_bdrawing(env->render, (t_p){env->my, env->mx},
+	fdf_bdrawing(env->buff, (t_p){env->my, env->mx},
 				(t_mlx){env->mlx, env->win, env->screen});
 	mlx_put_image_to_window(env->mlx, env->win, env->img, ZERO, ZERO);
 }
