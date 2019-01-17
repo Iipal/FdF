@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 17:33:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 18:42:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	fdf_zooming_buff(t_env *env)
 		while (++(p.x) < env->mx)
 			env->buff[p.y][p.x] = (t_matrix){
 			env->raw[p.y][p.x].y * env->zoom, env->raw[p.y][p.x].x * env->zoom,
-			env->raw[p.y][p.x].z * env->zoom, env->buff[p.y][p.x].rgb};
+			env->raw[p.y][p.x].z * env->zoom, env->raw[p.y][p.x].rgb};
 }
 
 void	add_printff(t_env *env)

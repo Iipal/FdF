@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:10:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 11:04:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 18:59:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		fdf_add_colored_map(t_env *env)
 	if (!add_is_valid_to_colorize(env, &max_zvalue))
 		return ;
 	*colors_values = max_zvalue / 3;
-	colors_values[1] = *colors_values + *colors_values;
+	colors_values[1] = *colors_values * 2;
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
