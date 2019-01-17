@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/14 17:59:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:07:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 
 # define KEY_C			8
 
-# define KEY_R			15
-# define KEY_F			3
-
 # define KEY_W			13
 # define KEY_A			0
 # define KEY_S			1
@@ -32,8 +29,6 @@
 # define KEY_G			5
 # define KEY_Y			16
 # define KEY_H			4
-# define KEY_U			32
-# define KEY_J			38
 
 # define KEY_I			34
 # define KEY_P			35
