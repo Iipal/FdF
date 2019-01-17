@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 10:56:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 15:25:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	fdf_center_of_buff(t_env *env)
 			(min.z > _Z) ? (min.z = _Z) : ZERO;
 		}
 	env->fcenter = (t_3d_p) {(max.y + min.y) / 2,
-		(max.x + min.x) / 2, (max.z + min.z) / 2};
+		(max.x - min.x) / 2, (max.z - min.z) / 2};
 	env->sy = (WIN_Y / 2) - env->fcenter.y + env->dy;
 	env->sx = (WIN_X / 2) - env->fcenter.x + env->dx;
 }
@@ -67,18 +67,35 @@ void	fdf_zooming_buff(t_env *env)
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
-			env->buff[p.y][p.x] = (t_matrix){env->raw[p.y][p.x].y * env->zoom,
-				env->raw[p.y][p.x].x * env->zoom,
-				env->raw[p.y][p.x].z * env->zoom, env->buff[p.y][p.x].rgb};
+			env->buff[p.y][p.x] = (t_matrix){
+			env->raw[p.y][p.x].y * env->zoom, env->raw[p.y][p.x].x * env->zoom,
+			env->raw[p.y][p.x].z * env->zoom, env->buff[p.y][p.x].rgb};
+}
+
+void	add_printff(t_env *env)
+{
+	int	i = 0;
+	while (i++ == 0)
+	{
+		printf("%.3f - %.3f", env->sy, env->sx);
+		printf("   %.3f %.3f %.3f | ", env->fcenter.y, env->fcenter.x, env->fcenter.z);
+		printf("%.1f %.1f\n", env->roty, env->rotx);
+	}
 }
 
 void	fdf_refresh_buff(t_env *env)
 {
+	add_printff(env);
 	fdf_zooming_buff(env);
 	fdf_center_of_buff(env);
 	fdf_rotare_buff(env);
-	env->project == P_ISO ? fdf_isometric(env) : false;
+	if (env->project == P_ISO)
+	{
+		fdf_isometric(env);
+		fdf_center_of_buff(env);
+	}
 	fdf_move_buff(env, env->sx, env->sy);
+	add_printff(env);
 	env->isr = (t_isrender) {env->color, env->roty, env->rotx, env->zoom,
 		env->project, env->dy, env->dx, false, env->isr.is_frog};
 }

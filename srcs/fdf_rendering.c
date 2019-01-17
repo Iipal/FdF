@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 10:56:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 15:23:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ static void	add_is_refresh_rendering_buff(t_env *env)
 							? SHIFT_INC : -SHIFT_INC));
 	if (env->isr.is_rotx != env->rotx && (env->isr.is_refresh_buff = true))
 	{
-		(env->rotx >= ROT_MAX) ? (env->rotx -= ROT_MAX) : ZERO;
-		(env->rotx <= ROT_MIN) ? (env->rotx += ROT_MAX) : ZERO;
+		(env->rotx > ROT_MAX || env->rotx == ROT_MAX)
+			? (env->rotx -= ROT_MAX) : ZERO;
+		(env->rotx < ROT_MIN) ? (env->rotx += ROT_MAX) : ZERO;
 	}
 	if (env->isr.is_roty != env->roty && (env->isr.is_refresh_buff = true))
 	{
-		(env->roty >= ROT_MAX) ? (env->roty -= ROT_MAX) : ZERO;
-		(env->roty <= ROT_MIN) ? (env->roty += ROT_MAX) : ZERO;
+		(env->roty > ROT_MAX || env->roty == ROT_MAX)
+			? (env->roty -= ROT_MAX) : ZERO;
+		(env->roty < ROT_MIN) ? (env->roty += ROT_MAX) : ZERO;
 	}
 }
 

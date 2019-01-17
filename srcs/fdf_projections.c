@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 14:52:22 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 10:58:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 13:21:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,4 @@ void		fdf_isometric(t_env *env)
 				(1 / sqrt(6)) * (sqrt(2) * o.x - sqrt(2) * o.y + sqrt(2) * o.z),
 				env->buff[p.y][p.x].rgb };
 		}
-	if (env->project != env->isr.is_project)
-		fdf_center_of_buff(env);
 }

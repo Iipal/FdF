@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 10:56:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 14:03:42 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,47 +27,47 @@
 #  include "linux_keys.h"
 # endif
 
-# define WIN_X			2000
-# define WIN_Y			1000
+# define WIN_X		2000
+# define WIN_Y		1000
 
-# define WIN_EXIT		17
-# define WIN_EXIT_MASK	(1L << 17)
+# define WIN_EXT	17
+# define WIN_EXTM	(1L << 17)
 
-# define PI				3.141592
+# define PI			3.141592
 
-# define INT_MAX		2147483647
-# define INT_MIN		(-INT_MAX-1)
+# define INT_MAX	2147483647
+# define INT_MIN	(-INT_MAX-1)
 
-# define NEG			-1
-# define ZERO			0
+# define NEG		-1
+# define ZERO		0
 
-# define P_ISO			1
-# define P_PAR			2
+# define P_ISO		1
+# define P_PAR		2
 
-# define HEX			16
+# define HEX		16
 
-# define SHIFT_INC		15
+# define SHIFT_INC	15
 
-# define ROT_MIN		0.0
-# define ROT_INC		5.0
-# define ROT_MAX		360.0
+# define ROT_MIN	0.0
+# define ROT_INC	5.0
+# define ROT_MAX	360.0
 
-# define ZOOM_INC		1.5
-# define ZOOM_MIN		1
-# define ZOOM_DEF		15
-# define ZOOM_MAX		128
+# define ZOOM_INC	1.5
+# define ZOOM_MIN	1
+# define ZOOM_DEF	15
+# define ZOOM_MAX	128
 
-# define E_USAGE		"Usage: ./fdf <map_name>"
-# define E_ALLOC		"Where is memory, pal ?"
-# define E_FILER		"File reading error"
+# define E_USAGE	"Usage: ./fdf <map_name>"
+# define E_ALLOC	"Where is memory, pal ?"
+# define E_FILER	"File reading error"
 
-# define E_EMAP			"\tERROR: Empty map \\ "
-# define E_IMAP			"\tERROR: Invalid map \\ "
-# define E_HEX			"\tERROR: Invalid HEX code or you put black color \\ "
+# define E_EMAP		"\tERROR: Empty map \\ "
+# define E_IMAP		"\tERROR: Invalid map \\ "
+# define E_HEX		"\tERROR: Invalid HEX code or you put black color \\ "
 
-# define V_HEX			",0x"
-# define V_HEXS			','
-# define V_NEGS			'-'
+# define V_HEX		",0x"
+# define V_HEXS		','
+# define V_NEGS		'-'
 
 # define _MSG(msg) ft_putstr(msg);
 # define _MSGN(msg) ft_putendl(msg);
