@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 17:15:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 22:04:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ static void	add_change_color(int *color)
 static void	add_hook_zoom_projectnzinc(int key, t_env *env)
 {
 	if (key == PLUS_NUMPAD || key == PLUS_KEYBOARD)
-		env->zoom + ZOOM_INC <= ZOOM_MAX ? (env->zoom += ZOOM_INC) : false;
+		if ((env->zoom += ZOOM_INC) >= ZOOM_MAX)
+			env->zoom = ZOOM_MAX;
 	if (key == MINUS_NUMPAD || key == MINUS_KEYBOARD)
-		env->zoom - ZOOM_INC >= ZOOM_MIN ? (env->zoom -= ZOOM_INC) : false;
+		if ((env->zoom -= ZOOM_INC) <= ZOOM_MIN)
+			env->zoom = ZOOM_MIN;
 	key == KEY_T ? (env->rotx += ROT_INC) : ZERO;
 	key == KEY_G ? (env->rotx -= ROT_INC) : ZERO;
 	key == KEY_Y ? (env->roty += ROT_INC) : ZERO;

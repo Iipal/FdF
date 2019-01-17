@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 16:40:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 17:55:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 22:06:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@ int		fdf_mouse_press(int button, int x, int y, t_env *env)
 	(void)x;
 	(void)y;
 	if (button == MSCROLL_UPS)
-		env->zoom + ZOOM_INC <= ZOOM_MAX ? (env->zoom += ZOOM_INC) : false;
+	{
+		if ((env->zoom += ZOOM_INC) >= ZOOM_MAX)
+			env->zoom = ZOOM_MAX;
+	}
 	else if (button == MSCROLL_DOWN)
-		env->zoom - ZOOM_INC >= ZOOM_MIN ? (env->zoom -= ZOOM_INC) : false;
+	{
+		if ((env->zoom -= ZOOM_INC) <= ZOOM_MIN)
+			env->zoom = ZOOM_MIN;
+	}
 	else if (button == MLEFT_BUTTON)
 		env->mouse.pres = true;
 	fdf_rendering(env);

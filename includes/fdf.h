@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 17:49:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 22:07:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # endif
 
 
-# define WIN_X		2000
-# define WIN_Y		1000
+# define WIN_X		1000
+# define WIN_Y		500
 
 # define WIN_EXT	17
 # define WIN_EXTM	(1L << 17)
@@ -69,7 +69,7 @@
 # define ZOOM_INC	1
 # define ZOOM_MIN	1
 # define ZOOM_DEF	15
-# define ZOOM_MAX	128
+# define ZOOM_MAX	127
 
 # define E_USAGE	"Usage: ./fdf <map_name>"
 # define E_ALLOC	"Where is memory, pal ?"
