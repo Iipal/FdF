@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 18:20:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 20:30:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:30:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,14 @@ void	fdf_rotare_buff(t_env *env)
 		while (++(p.x) < env->mx)
 		{
 			m = (t_3d_p){_Y, _X, _Z};
-			_Y = env->fcenter.y + (m.y - env->fcenter.y) * _COSR(env->rotx) + (env->fcenter.z - m.z) * _SINR(env->rotx);
-			_Z = env->fcenter.z + (m.y - env->fcenter.y) * _SINR(env->rotx) + (m.z - env->fcenter.z) * _COSR(env->rotx);
+			_Y = env->fcenter.y + (m.y - env->fcenter.y) * _COSR(env->rotx)
+				+ (env->fcenter.z - m.z) * _SINR(env->rotx);
+			_Z = env->fcenter.z + (m.y - env->fcenter.y) * _SINR(env->rotx)
+				+ (m.z - env->fcenter.z) * _COSR(env->rotx);
 			m = (t_3d_p){_Y, _X, _Z};
-			_X = env->fcenter.x + (m.x - env->fcenter.x) * _COSR(env->roty) + (m.z - env->fcenter.z) * _SINR(env->roty);
-			_Z = env->fcenter.z + (env->fcenter.x - m.x) * _SINR(env->roty) + (m.z - env->fcenter.z) * _COSR(env->roty);
+			_X = env->fcenter.x + (m.x - env->fcenter.x) * _COSR(env->roty)
+				+ (m.z - env->fcenter.z) * _SINR(env->roty);
+			_Z = env->fcenter.z + (env->fcenter.x - m.x) * _SINR(env->roty)
+				+ (m.z - env->fcenter.z) * _COSR(env->roty);
 		}
 }

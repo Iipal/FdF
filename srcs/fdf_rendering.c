@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 10:05:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 22:58:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:31:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void		fdf_rendering(t_env *env)
 		if (!fdf_init_render_buff(env))
 			exit(EXIT_SUCCESS);
 	env->frog ? (isr.is_frog = true) : false;
-	
 	(!isr.is_init) ? add_is_render_init(&isr, env) : NULL;
 	add_is_refresh_rendering_buff(&isr, env);
 	fdf_is_render_frog(&isr, env);

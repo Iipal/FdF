@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 22:59:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:30:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	fdf_center_of_buff(t_env *env)
 	env->sx = (WIN_X / 2) - env->fcenter.x + env->dx;
 }
 
-
 void	fdf_zooming_buff(t_env *env)
 {
 	point	p;
@@ -68,7 +67,7 @@ void	fdf_zooming_buff(t_env *env)
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
-			env->render[p.y][p.x] = (t_matrix){ env->raw[p.y][p.x].y * env->zoom,
+			env->render[p.y][p.x] = (t_matrix){env->raw[p.y][p.x].y * env->zoom,
 				env->raw[p.y][p.x].x * env->zoom,
 				env->raw[p.y][p.x].z * env->zoom, env->render[p.y][p.x].rgb};
 }
