@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 17:23:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/12 09:53:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:46:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@
 
 itab	fdf_bonus_init_frog(void);
 void	fdf_print_fucking_frog(t_env *env);
-void	fdf_is_render_frog(t_isrender *isr, t_env *env);
+void	fdf_is_render_frog(t_env *env);
 
 #endif

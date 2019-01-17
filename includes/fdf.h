@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/16 22:54:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:51:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,6 @@
 # define V_HEXS			','
 # define V_NEGS			'-'
 
-# define _ERR _MSGN(E_IMAP);
-# define ISMAX(n) if (((long)(n)*ZOOM_MAX)>INT_MAX){_ERR;return (false);}
-# define ISMIN(n) else if (((long)(n)*ZOOM_MAX)<INT_MIN){_ERR;return (false);}
-
-# define ISVALIDZ(n) ISMAX(n) ISMIN(n)
-
 # define _MSG(msg) ft_putstr(msg);
 # define _MSGN(msg) ft_putendl(msg);
 # define _NOTIS_MSG(msg, ex) if (!(ex)) { _MSG(msg); return (false); }
@@ -82,11 +76,18 @@
 # define _NOTIS_MPE(msg, ex) if (!(ex)) { perror(msg); return (false); }
 # define _NOTIS_N(ex) if (!(ex)) return (NULL)
 # define _NOTIS_F(ex) if (!(ex)) return (false)
+
+# define _ISARGS(ac, av) {--ac;++av;_NOTIS_MSGN(E_USAGE,!(!ac || ac > 1));}
+
 # define _ABS(var) ((var) < 0) ? -(var) : (var)
 # define _RAD(deg) (((deg) * PI) / 180.0)
-
 # define _COSR(angle) cos(_RAD(angle))
 # define _SINR(angle) sin(_RAD(angle))
+
+# define _ERR _MSGN(E_IMAP);
+# define ISMAX(n) if (((long)(n)*ZOOM_MAX)>INT_MAX){_ERR;return (false);}
+# define ISMIN(n) else if (((long)(n)*ZOOM_MAX)<INT_MIN){_ERR;return (false);}
+# define ISVALIDZ(n) ISMAX(n) ISMIN(n)
 
 # define _Y env->render[p.y][p.x].y
 # define _X env->render[p.y][p.x].x
@@ -117,6 +118,19 @@ typedef struct	s_3d_point
 	float	z;
 }				t_3d_p;
 
+typedef struct	s_isrender
+{
+	int		is_color;
+	float	is_roty;
+	float	is_rotx;
+	uchar	is_zoom;
+	uchar	is_project;
+	short	is_shifty;
+	short	is_shiftx;
+	bool	is_refresh_buff:1;
+	bool	is_frog:1;
+}				t_isrender;
+
 typedef struct	s_fdf_environment
 {
 	t_matrix	**raw;
@@ -139,21 +153,8 @@ typedef struct	s_fdf_environment
 	iarr		screen;
 	bool		is_frog_render:1;
 	uchar		project:2;
+	t_isrender	isr;
 }				t_env;
-
-typedef struct	s_isrender
-{
-	int		is_color;
-	float	is_roty;
-	float	is_rotx;
-	uchar	is_zoom;
-	uchar	is_project;
-	short	is_shifty;
-	short	is_shiftx;
-	bool	is_init:1;
-	bool	is_refresh_buff:1;
-	bool	is_frog:1;
-}				t_isrender;
 
 typedef struct	s_point
 {
@@ -202,10 +203,11 @@ typedef struct	s_mlx
 }				t_mlx;
 
 bool			fdf_file_readnsave_env(cstring file_name, t_env *env);
+
 void			fdf_rendering(t_env *env);
 
 bool			fdf_init_render_buff(t_env *env);
-void			fdf_refresh_buff(t_env *env, t_isrender *isr);
+void			fdf_refresh_buff(t_env *env);
 void			fdf_set_image_pixel(point p, int color, t_mlx *mlx);
 void			fdf_refresh_image(t_env *env);
 void			fdf_zooming_buff(t_env *env);
@@ -213,7 +215,7 @@ void			fdf_move_buff(t_env *env, float xinc, float yinc);
 void			fdf_center_of_buff(t_env *env);
 void			fdf_rotare_buff(t_env *env);
 
-void			fdf_isometric(t_isrender *isr, t_env *env);
+void			fdf_isometric(t_env *env);
 
 void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
 iarr			fdf_gradient(t_g *g, int glen);
@@ -224,8 +226,6 @@ int				fdf_khook_close_window(t_env *env);
 
 void			fdf_add_print_usage(void);
 void			fdf_add_colored_map(t_env *env);
-
-void			add_print_matrix(t_env *env);
 
 void			fdf_free_env(t_env **env);
 void			fdf_free_matrix(t_matrix ***m, int matrix_y);

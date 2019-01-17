@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 10:30:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 10:45:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	fdf_zooming_buff(t_env *env)
 				env->raw[p.y][p.x].z * env->zoom, env->render[p.y][p.x].rgb};
 }
 
-void	fdf_refresh_buff(t_env *env, t_isrender *isr)
+void	fdf_refresh_buff(t_env *env)
 {
 	fdf_zooming_buff(env);
 	fdf_center_of_buff(env);
 	fdf_rotare_buff(env);
-	env->project == P_ISO ? fdf_isometric(isr, env) : false;
+	env->project == P_ISO ? fdf_isometric(env) : false;
 	fdf_move_buff(env, env->sx, env->sy);
-	*isr = (t_isrender) {env->color, env->roty, env->rotx, env->zoom,
-		env->project, env->dy, env->dx, true, false, isr->is_frog};
+	env->isr = (t_isrender) {env->color, env->roty, env->rotx, env->zoom,
+		env->project, env->dy, env->dx, false, env->isr.is_frog};
 }
