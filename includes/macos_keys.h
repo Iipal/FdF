@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 12:46:42 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 10:08:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 17:15:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MACOS_KEYS_H
 # define MACOS_KEYS_H
 
-# define KEY_PRESS		2
+# define KEY_PRESSED	2
 # define KEY_RELEASE	2
 
 # define ESC			53

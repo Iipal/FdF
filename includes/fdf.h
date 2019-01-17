@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 14:03:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 17:30:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,25 @@
 #  include "linux_keys.h"
 # endif
 
+
 # define WIN_X		2000
 # define WIN_Y		1000
 
 # define WIN_EXT	17
 # define WIN_EXTM	(1L << 17)
+
+# define MOUSE_MASK	0
+# define MOUSE_DOWN	4
+# define MOUSE_UP	5
+# define MOUSE_MOVE	6
+
+# define MLEFT_BUTTON	1
+# define MRIGHT_BUTTON	2
+# define MTHIRD_BUTTON	3
+# define MSCROLL_DOWN	4
+# define MSCROLL_UPS	5
+# define MSCROLL_LEFT	6
+# define MSCROLL_RIGHT	7
 
 # define PI			3.141592
 
@@ -111,6 +125,26 @@ typedef struct	s_matrix
 	int		rgb;
 }				t_matrix;
 
+typedef struct	s_point
+{
+	short	y;
+	short	x;
+}				t_p;
+
+# define _POINT typedef t_p	point
+
+_POINT;
+
+typedef struct	s_fpoint
+{
+	float	y;
+	float	x;
+}				t_fp;
+
+# define _FPOINT typedef t_fp	fpoint
+
+_FPOINT;
+
 typedef struct	s_3d_point
 {
 	float	y;
@@ -130,6 +164,13 @@ typedef struct	s_isrender
 	bool	is_refresh_buff:1;
 	bool	is_frog:1;
 }				t_isrender;
+
+typedef struct	s_mouse
+{
+	bool	pres;
+	fpoint	last;
+	fpoint	curr;
+}				t_mouse;
 
 typedef struct	s_fdf_environment
 {
@@ -154,27 +195,8 @@ typedef struct	s_fdf_environment
 	bool		is_frog_render:1;
 	uchar		project:2;
 	t_isrender	isr;
+	t_mouse		mouse;
 }				t_env;
-
-typedef struct	s_point
-{
-	short	y;
-	short	x;
-}				t_p;
-
-# define _POINT typedef t_p	point
-
-_POINT;
-
-typedef struct	s_fpoint
-{
-	float	y;
-	float	x;
-}				t_fp;
-
-# define _FPOINT typedef t_fp	fpoint
-
-_FPOINT;
 
 typedef struct	s_gradient
 {
@@ -221,8 +243,12 @@ void			fdf_bdrawing(t_matrix **m, t_p mxy, t_mlx mlx);
 iarr			fdf_gradient(t_g *g, int glen);
 int				fdf_glen(int delta, int p, int xy);
 
+int				fdf_mouse_press(int button, int x, int y, t_env *env);
+int				fdf_mouse_release(int button, int x, int y, t_env *env);
+int				fdf_mouse_moves(int x, int y, t_env *env);
+
 int				fdf_keys_hook(int key, t_env *env);
-int				fdf_khook_close_window(t_env *env);
+int				fdf_khook_killwindow(t_env *env);
 
 void			fdf_add_print_usage(void);
 void			fdf_add_colored_map(t_env *env);

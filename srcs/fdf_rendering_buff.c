@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 15:25:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 16:28:31 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	fdf_refresh_buff(t_env *env)
 	if (env->project == P_ISO)
 	{
 		fdf_isometric(env);
-		fdf_center_of_buff(env);
+		if (env->project != env->isr.is_project)
+			fdf_center_of_buff(env);
 	}
 	fdf_move_buff(env, env->sx, env->sy);
 	add_printff(env);

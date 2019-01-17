@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:01:59 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 11:12:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/17 17:15:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include "../includes/frog.h"
 
-int			fdf_khook_close_window(t_env *env)
+int			fdf_khook_killwindow(t_env *env)
 {
 	fdf_free_env(&env);
 	exit(EXIT_SUCCESS);
