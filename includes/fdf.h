@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 22:07:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/18 12:45:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@
 #  include "linux_keys.h"
 # endif
 
-
-# define WIN_X		1000
-# define WIN_Y		500
+# define WIN_X		2000
+# define WIN_Y		1000
 
 # define WIN_EXT	17
 # define WIN_EXTM	(1L << 17)
@@ -63,7 +62,7 @@
 # define SHIFT_INC	15
 
 # define ROT_MIN	0.0
-# define ROT_INC	6.66
+# define ROT_INC	5.0
 # define ROT_MAX	360.0
 
 # define ZOOM_INC	1

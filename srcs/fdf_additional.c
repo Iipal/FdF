@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 17:10:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 22:11:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/18 11:22:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void		fdf_add_colored_map(t_env *env)
 	p.y = NEG;
 	while (++(p.y) < env->my && (p.x = NEG))
 		while (++(p.x) < env->mx)
-			if (env->raw[p.y][p.x].z < ZERO)
+			if (env->raw[p.y][p.x].z <= MAP_UNDER_UNDERWORLD)
+				env->raw[p.y][p.x].rgb = IRGB_MAPUNDERWORLD_SPACE;
+			else if (env->raw[p.y][p.x].z <= ZERO)
 				env->raw[p.y][p.x].rgb = IRGB_MAPUNDERWORLD_WATER;
 			else if (env->raw[p.y][p.x].z <= *colors_values)
 				env->raw[p.y][p.x].rgb = IRGB_MAPBOTTOM_GRASS_GREEN;

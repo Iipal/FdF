@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 18:42:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/18 12:51:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,31 +72,30 @@ void	fdf_zooming_buff(t_env *env)
 			env->raw[p.y][p.x].z * env->zoom, env->raw[p.y][p.x].rgb};
 }
 
-void	add_printff(t_env *env)
-{
-	int	i = 0;
-	while (i++ == 0)
-	{
-		printf("%.3f - %.3f", env->sy, env->sx);
-		printf("   %.3f %.3f %.3f | ", env->fcenter.y, env->fcenter.x, env->fcenter.z);
-		printf("%.1f %.1f\n", env->roty, env->rotx);
-	}
-}
-
 void	fdf_refresh_buff(t_env *env)
 {
-	// add_printff(env);
+	fpoint	temp_shift;
+
+	temp_shift = (fpoint){env->sy, env->sx};
 	fdf_zooming_buff(env);
 	fdf_center_of_buff(env);
 	fdf_rotare_buff(env);
 	if (env->project == P_ISO)
 	{
 		fdf_isometric(env);
-		if (env->project != env->isr.is_project)
+		if (env->rotx == env->isr.is_rotx && env->roty == env->isr.is_roty)
 			fdf_center_of_buff(env);
+		else
+		{
+			fdf_center_of_buff(env);
+			if (env->rotx != env->isr.is_rotx || env->roty != env->isr.is_roty)
+			{
+				env->sx = temp_shift.x;
+				env->sy = temp_shift.y;
+			}
+		}
 	}
 	fdf_move_buff(env, env->sx, env->sy);
-	// add_printff(env);
 	env->isr = (t_isrender) {env->color, env->roty, env->rotx, env->zoom,
 		env->project, env->dy, env->dx, false, env->isr.is_frog};
 }
