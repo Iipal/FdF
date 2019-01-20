@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:45:57 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/18 13:32:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/20 12:55:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,34 +72,21 @@ void		fdf_zooming_buff(t_env *env)
 			env->raw[p.y][p.x].z * env->zoom, env->raw[p.y][p.x].rgb};
 }
 
-static void	fdf_iso_refresh(t_env *env)
-{
-	fpoint	temp_shifts;
-	t_3d_p	temp_center;
-
-	temp_shifts = (fpoint){env->sy, env->sx};
-	temp_center = (t_3d_p){env->fcenter.y, env->fcenter.x, env->fcenter.z};
-	fdf_center_of_buff(env);
-	fdf_rotare_buff(env);
-	fdf_isometric(env);
-	if (env->project != env->isr.is_project)
-		fdf_center_of_buff(env);
-	else
-	{
-		fdf_center_of_buff(env);
-		if (env->rotx != env->isr.is_rotx || env->roty != env->isr.is_roty)
-		{
-			env->sx += (temp_shifts.x - env->sx);
-			env->sy += (temp_shifts.y - env->sy);
-		}
-	}
-}
-
 void		fdf_refresh_buff(t_env *env)
 {
+	fpoint	temp_shifts;
+
 	fdf_zooming_buff(env);
+	temp_shifts = (fpoint){env->sy, env->sx};
 	if (env->project == P_ISO)
-		fdf_iso_refresh(env);
+	{
+		fdf_center_of_buff(env);
+		fdf_rotare_buff(env);
+		fdf_isometric(env);
+		fdf_center_of_buff(env);
+		(env->rotx != env->isr.is_rotx) ? (env->sx = temp_shifts.x) : false;
+		(env->roty != env->isr.is_roty) ? (env->sy = temp_shifts.y) : false;
+	}
 	else
 	{
 		fdf_center_of_buff(env);
