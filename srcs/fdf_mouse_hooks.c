@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 16:40:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/17 22:06:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/01/21 18:28:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ int		fdf_mouse_release(int button, int x, int y, t_env *env)
 
 int		fdf_mouse_moves(int x, int y, t_env *env)
 {
-	env->mouse.last.x = env->mouse.curr.x;
-	env->mouse.last.y = env->mouse.curr.y;
-	env->mouse.curr.x = x;
-	env->mouse.curr.y = y;
+	env->mouse.last = env->mouse.curr;
+	env->mouse.curr = (fpoint){y, x};
 	if (env->mouse.pres)
 	{
 		env->rotx -= (y - env->mouse.last.y) * 0.2;
