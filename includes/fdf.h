@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/01/20 12:41:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/02/08 18:41:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 #  include "linux_keys.h"
 # endif
 
-# define WIN_X		1000
-# define WIN_Y		500
+# define WIN_X		2000
+# define WIN_Y		1000
 
 # define WIN_EXT	17
 # define WIN_EXTM	(1L << 17)

@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 13:30:08 by tmaluh            #+#    #+#              #
-#    Updated: 2019/01/20 12:46:54 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/02/08 18:41:26 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 	@echo "> $(GREEN)FdF$(WHITE)"
 
-dfd:
+del:
 	@$(DEL) $(OBJ)
 
 clean:
