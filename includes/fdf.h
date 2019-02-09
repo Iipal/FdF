@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:48:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/02/08 18:41:39 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/02/09 22:20:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,19 @@
 # include <mlx.h>
 
 # ifdef __APPLE__
+#  define WIN_X		2000
+#  define WIN_Y		1000
+
 #  include "macos_keys.h"
 # endif
 
 # ifdef __linux__
+#  define WIN_X		1280
+#  define WIN_Y		720
+
 #  include "linux_keys.h"
 # endif
 
-# define WIN_X		2000
-# define WIN_Y		1000
 
 # define WIN_EXT	17
 # define WIN_EXTM	(1L << 17)
