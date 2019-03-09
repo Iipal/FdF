@@ -1,7 +1,7 @@
 # FdF
 > "Fil de Fer"
 
-###### made by tmaluh __(\_ipal)__
+###### made by tmaluh
 
 [![Video preview](https://raw.githubusercontent.com/Iipal/FdF/master/screen.png)](https://www.youtube.com/watch?v=hGdsDJowX3s)
 
